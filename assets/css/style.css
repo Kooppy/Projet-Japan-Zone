@@ -184,7 +184,7 @@ header {
 .title-img-gallery {
   position: relative;
   top: 250px;
-  left: 30px;
+  padding-left: 30px;
   color: #fff; }
 
 /************************************* */
