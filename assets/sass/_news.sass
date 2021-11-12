@@ -2,26 +2,51 @@
 /***************MAIN NEWS**************/
 /**************************************/
 
-.news-box
-    height: 550px
-    overflow: hidden
-    box-shadow: 0 0 20px 1px #b3a7a7
-
-.news-box-list
-    float: left
-    width: 50%
-    height: 100%
+.scrollspy-list-news
+    position: relative
+    max-height: 500px
+    overflow: auto
 
 .news-box-list-item
     padding: 10px
 
-.btn-news
+.news-box-list-item-img
+    float: left
+    width: 100px
+    margin-right: 20px
+    border-radius: 10px
+    overflow: hidden
+
+.news-box-list-item-text p
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap 
+      
+.news-box-view
+    padding: 10px
+
+.btn-news-view
     display: inline-block
     text-decoration: none
     border-radius: 30px
     transition: background-color 0.5s, color 0.7s, border 0.8s
-    color: $black
+    padding: 5px
+    color: $white
     background-color: $gray-800
+
+.btn-news-view:hover
+    color: $white
+    background-color: $gray-600
+
+.news-box-view-img
+    border-radius: 20px
+    padding: 10px
+
+.news-box-view-text
+    padding: 10px
+
+.float-r
+    float: right
 
 
 .news-icons
