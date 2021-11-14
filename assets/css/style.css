@@ -65,7 +65,7 @@ ul {
 /*****************HEADER************** */
 /************************************* */
 .header {
-  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(220, 20, 60, 0.6)), no-repeat center/cover url(../images/header.png);
+
   height: 80vh; }
 
 .head-title {
