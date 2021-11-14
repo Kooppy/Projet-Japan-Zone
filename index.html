@@ -31,7 +31,7 @@
                             <a class="nav-item nav-link" href="#">Qui sommes-nous</a>
                             <a class="nav-item nav-link" href="#">Photos</a>
                             <a class="nav-item nav-link" href="#contact">Contact</a>
-                            <a class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#login">Login/Register</a>
+                            <a class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#login-register">Login/Register</a>
                         </div>
                     </div>
                 </div>
@@ -193,15 +193,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Title Agenda -->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h2>Notre Agenda</h2>
-                            </div>
-                        </div>
-                        <div class="row">
-
-                        </div>
                     </div>
                     <!-- Right Menu -->
                     <div class="col-md-3">
@@ -359,69 +350,96 @@
                 </div>
             </div>
         </div>
-        <!-- Modal Connexion -->
-        <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- Modal Login / Register -->
+        <div class="modal fade" id="login-register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
+                <div class="modal-content">                    
                     <div class="modal-header">
-                        <h3 class="modal-title" id="exampleModalLabel">Connectez-vous</h3>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#login" aria-expanded="false" aria-controls="login">Connexion</button>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#register" aria-expanded="false" aria-controls="register">Inscription</button>
+                        <!-- Nav Tabs -->
+                        <ul class="nav nav-tabs" id="#myTab" role="tablist">
+                            <li class="nav-item" role="login">
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#login" aria-controls="login" aria-selected="true" type="button">Connexion</button>
+                            </li>
+                            <li class="nav-item" role="register">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#register" aria-controls="register" aria-selected="false" type="button">Inscription</button>
+                            </li>
+                        </ul>  
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
-                        </button>                                        
+                        </button>                                                              
                     </div>
-                    <div class="collapse multi-collapse modal-body" id="login">
-                        <form>
-                            <!-- Username & Password Input :-->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Identifiant">
+                    <!-- Tab Content Login / Register -->
+                    <div class="tab-content" id="myTabContent">
+                        <!-- Tab Panel Login -->
+                        <div class="tab-pane show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                            <div class="modal-body">
+                                <form>
+                                    <!-- Username & Password Input :-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="contact-form">
+                                                <input class="input-form" type="text" placeholder="Identifiant">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="contact-form">
+                                                <input class="input-form" type="text" placeholder="Mot de passe">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Mot de passe">
+                                    <!-- Forget Password -->
+                                    <div class="row">
+                                        <div class="col-md-12 text-end">
+                                            <a href="">Mot de passe oublié ?</a>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
-                            <!-- Forget Password -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <a href="">Mot de passe oublié ?</a>
-                                </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-full">Save changes</button>                                            
                             </div>
-                        </form>
-                    </div>
-                    <div class="collapse multi-collapse modal-body" id="register">
-                        <form>
-                            <!-- Name & Email Input -->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Identifiant">
+                        </div>
+                        <!-- Tab Panel Register -->
+                        <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                            <div class="modal-body">
+                                <form>
+                                    <!-- Id & Email Input -->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="contact-form">
+                                                <input class="input-form" type="text" placeholder="Identifiant">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="contact-form">
+                                                <input class="input-form" type="email" placeholder="Email">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="contact-form">
-                                        <input class="input-form" type="email" placeholder="Email">
+                                    <!-- Password Input -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="contact-form">
+                                                <input class="input-form" type="text" placeholder="Mot de passe">
+                                            </div>    
+                                        </div>
                                     </div>
-                                </div>
+                                    <!-- Password Confirmation -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="contact-form">
+                                                <input class="input-form" type="text" placeholder="Confirmer Votre Mot de passe">
+                                            </div>    
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                            <!-- Message Input -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Mot de passe">
-                                    </div>    
-                                </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-full">Save changes</button>                                            
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-full">Save changes</button>                                            
+                        </div>
                     </div>
                 </div>
             </div>
