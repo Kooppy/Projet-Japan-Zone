@@ -65,7 +65,8 @@ ul {
 /*****************HEADER************** */
 /************************************* */
 .header {
-
+  display: flex;
+  align-items: center;
   height: 80vh; }
 
 .head-title {
@@ -84,8 +85,7 @@ ul {
   padding: 10px 30px;
   text-decoration: none;
   border-radius: 30px;
-  transition: background-color 0.5s, color 0.7s, border 0.8s;
-  margin-bottom: 20px; }
+  transition: background-color 0.5s, color 0.7s, border 0.8s; }
 
 .btn-full {
   background-color: #fff;
@@ -110,10 +110,46 @@ ul {
 /************************************* */
 .right-menu-social {
   display: block;
-  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(220, 20, 60, 0.6)); }
+  box-shadow: 0px 5px 0px #343a40;
+  margin-bottom: 20px; }
 
 .right-menu-social-title {
-  background-color: #0d6efd; }
+  position: relative;
+  top: 8px;
+  background-color: #0d6efd;
+  box-shadow: 0px 5px 0px #343a40; }
+
+.right-menu-social-list {
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  background: #495057;
+  border: 2px solid #343a40; }
+
+.right-menu-social-list > li {
+  width: 33%;
+  height: 50px;
+  padding-top: 10px; }
+
+.right-menu-social-list > li > a {
+  color: #fff; }
+
+.right-menu-social-list-facebook:hover {
+  background-color: #3b5998; }
+
+.right-menu-social-list-twitter:hover {
+  background-color: #1da1f2; }
+
+.right-menu-social-list-youtube:hover {
+  background-color: #c4302b; }
+
+.right-menu-facebook {
+  width: 100%; }
+
+.right-menu-facebook-list {
+  text-align: center;
+  background: #495057;
+  border: 2px solid #343a40; }
 
 /************************************* */
 /***************MAIN NEWS************* */
@@ -247,9 +283,47 @@ footer {
   text-align: center; }
 
 .copyright {
+  display: flex;
+  justify-content: space-around;
   background-color: #343a40;
   height: 35px;
   text-align: center;
   box-shadow: 0px 0px 20px #000; }
+
+.social-footer {
+  display: flex;
+  flex-direction: row; }
+
+.social-footer-block {
+  display: block;
+  width: 25px;
+  height: 25px;
+  margin: 3px;
+  line-height: 26px;
+  border-radius: 15px;
+  text-align: center;
+  color: #fff;
+  background-color: #dee2e6; }
+
+.social-facebook {
+  color: #3b5998; }
+
+.social-twitter {
+  color: #1da1f2; }
+
+.social-youtube {
+  color: #c4302b; }
+
+.social-facebook:hover {
+  color: #fff;
+  background-color: #3b5998; }
+
+.social-twitter:hover {
+  color: #fff;
+  background-color: #1da1f2; }
+
+.social-youtube:hover {
+  color: #fff;
+  background-color: #c4302b; }
 
 /*# sourceMappingURL=style.css.map */
