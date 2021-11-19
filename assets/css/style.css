@@ -8683,10 +8683,6 @@ textarea.form-control-lg {
 /************************************* */
 /**************INITIALIZER************ */
 /************************************* */
-html, body {
-  height: 100vh;
-  min-height: 100vh; }
-
 h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
   font-family: "Lato", "Arial", sans-serif;
   letter-spacing: -1px;
@@ -8716,8 +8712,7 @@ p {
   line-height: 24px; }
 
 section {
-  margin: 56px 0px;
-  min-height: auto; }
+  min-height: 35vh; }
 
 img {
   width: 100%;
@@ -8819,7 +8814,7 @@ ul {
 .right-menu-social-list > li {
   width: 33%;
   height: 50px;
-  padding-top: 10px; }
+  padding-top: 15px; }
 
 .right-menu-social-list > li > a {
   color: #fff; }
@@ -8860,7 +8855,7 @@ ul {
   text-decoration: none;
   border-radius: 25%;
   transition: background-color 0.5s, color 0.7s, border 0.8s;
-  padding: 10px;
+  padding: 5px;
   color: #fff;
   background-color: #343a40; }
 
@@ -8907,12 +8902,10 @@ ul {
 .actu-list:hover {
   background-color: #f1aeb5; }
 
-/************************************* */
-/**************MAIN ITEM ************* */
-/************************************* */
-.author img {
-  height: 50px;
-  width: 50px;
+/**** Item Part *** */
+.author {
+  height: 35px;
+  width: 35px;
   border-radius: 50%; }
 
 /************************************* */

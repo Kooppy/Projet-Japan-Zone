@@ -15,16 +15,17 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <!-- STYLES -->
-    <link rel="stylesheet" href="assets/vendors/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- JS -->
+    <script src="assets/js/test.js"></script>
 
     <title>Document</title>
 </head>
 
 <body>
-    <!-- Header -->
+    <!-- Header Nav -->
     <header>
-        <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+        <nav class="navbar navbar-expand-md navbar-light bg-light" id="nav">
             <div class="container">
                 <a class="navbar-brand" href="#">Japan Zone</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#monmenu"
@@ -33,517 +34,531 @@
                 </button>
                 <div class="collapse navbar-collapse" id="monmenu">
                     <div class="navbar-nav ms-auto">
-                        <a class="nav-item nav-link" href="#"><span class="fas fa-home"></span></a>
-                        <a class="nav-item nav-link" href="#">Qui sommes-nous</a>
-                        <a class="nav-item nav-link" href="#">Photos</a>
-                        <a class="nav-item nav-link" href="#contact">Contact</a>
+                        <a class="nav-item nav-link" href="index.html"><span class="fas fa-home"></span></a>
+                        <a class="nav-item nav-link" href="">Article</a>
+                        <a class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#contact">Contact</a>
+                        <div class="nav-item dropdown">
+                            <a class="nav-item nav-link dropdown-toggle" href="" id="userDrop" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">Compte</a>
+                            <ul class="dropdown-menu" aria-labelledby="userDrop">
+                                <li><span class="nav-item nav-link text-center"><img class="author" src="assets/images/Kooppy.png" alt="kooppy"></span></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>                                
+                                <li><a href="" class="dropdown-item">Profils</a></li>
+                                <li><a href="" class="dropdown-item">Message</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a href="" class="dropdown-item" data-bs-toggle="modal"
+                                        data-bs-target="#disconnect">Déconnexion</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
     <!-- Main User & Blog & Message & Gallery -->
-    <section class="m-1">
-        <div class="container m-2">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="accordion" id="accordion">
-                        <!-- User Part -->
-                        <div class="accordion-item">
-                            <h3 class="accordion-header" id="user">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseUser" aria-expanded="true"
-                                    aria-controls="collapseUser">Utilisateur</button>
-                            </h3>
-                            <div id="collapseUser" class="accordion-collapse collapse show" aria-labelledby="user"
-                                data-bs-parent="#accordion">
-                                <div class="accordion-body text-center">
-                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
-                                            class="fas fa-user-plus"></span>Créer un
-                                        Utilisateur</button>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><img
-                                                    class="avatar" src="assets/images/Kooppy.png"></a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Kooppy</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Melvin</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Mezerette</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p class="user-text">melvin.mezerette72@outlook.fr</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#privateMessage"><span
-                                                    class="far fa-envelope"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+    <section class="container my-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="accordion" id="accordion">
+                    <!-- User Part -->
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="user">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseUser" aria-expanded="true"
+                                aria-controls="collapseUser">Utilisateur</button>
+                        </h3>
+                        <div id="collapseUser" class="accordion-collapse collapse show" aria-labelledby="user"
+                            data-bs-parent="#accordion">
+                            <div class="accordion-body text-center">
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
+                                        class="fas fa-user-plus"></span>Créer un
+                                    Utilisateur</button>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><img
+                                                class="avatar" src="assets/images/Kooppy.png"></a>
                                     </div>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><img
-                                                    class="avatar" src="assets/images/Kooppy.png"></a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Kooppy</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Melvin</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Mezerette</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p class="user-text">melvin.mezerette72@outlook.fr</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#privateMessage"><span
-                                                    class="far fa-envelope"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                                    <div class="col-md-2">
+                                        <p>Kooppy</p>
                                     </div>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><img
-                                                    class="avatar" src="assets/images/Kooppy.png"></a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Kooppy</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Melvin</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Mezerette</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p class="user-text">melvin.mezerette72@outlook.fr</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#privateMessage"><span
-                                                    class="far fa-envelope"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                                    <div class="col-md-2">
+                                        <p>Melvin</p>
                                     </div>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><img
-                                                    class="avatar" src="assets/images/Kooppy.png"></a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Kooppy</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Melvin</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Mezerette</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p class="user-text">melvin.mezerette72@outlook.fr</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#privateMessage"><span
-                                                    class="far fa-envelope"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                                    <div class="col-md-2">
+                                        <p>Mezerette</p>
                                     </div>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><img
-                                                    class="avatar" src="assets/images/Kooppy.png"></a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Kooppy</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Melvin</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Mezerette</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p class="user-text">melvin.mezerette72@outlook.fr</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#privateMessage"><span
-                                                    class="far fa-envelope"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                                    <div class="col-md-2">
+                                        <p class="user-text">melvin.mezerette72@outlook.fr</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><span
+                                                class="far fa-envelope"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
+                                    </div>
+                                </div>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><img
+                                                class="avatar" src="assets/images/Kooppy.png"></a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Kooppy</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Melvin</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Mezerette</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p class="user-text">melvin.mezerette72@outlook.fr</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><span
+                                                class="far fa-envelope"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
+                                    </div>
+                                </div>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><img
+                                                class="avatar" src="assets/images/Kooppy.png"></a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Kooppy</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Melvin</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Mezerette</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p class="user-text">melvin.mezerette72@outlook.fr</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><span
+                                                class="far fa-envelope"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
+                                    </div>
+                                </div>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><img
+                                                class="avatar" src="assets/images/Kooppy.png"></a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Kooppy</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Melvin</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Mezerette</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p class="user-text">melvin.mezerette72@outlook.fr</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><span
+                                                class="far fa-envelope"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
+                                    </div>
+                                </div>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><img
+                                                class="avatar" src="assets/images/Kooppy.png"></a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Kooppy</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Melvin</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Mezerette</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p class="user-text">melvin.mezerette72@outlook.fr</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><span
+                                                class="far fa-envelope"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- News Part -->
-                        <div class="accordion-item">
-                            <h3 class="accordion-header" id="blog">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseBlog" aria-expanded="false"
-                                    aria-controls="collapseBlog">Blog</button>
-                            </h3>
-                            <div id="collapseBlog" class="accordion-collapse collapse" aria-labelledby="blog"
-                                data-bs-parent="#accordion">
-                                <div class="accordion-body text-center">
-                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
-                                            class="fas fa-user-plus"></span>Créer un
-                                        Article</button>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog">
-                                                <img class="avatar" src="assets/images/Kooppy.png">
-                                            </a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Author</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Titre</p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p>Descriptif</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                    </div>
+                    <!-- News Part -->
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="blog">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseBlog" aria-expanded="false"
+                                aria-controls="collapseBlog">Blog</button>
+                        </h3>
+                        <div id="collapseBlog" class="accordion-collapse collapse" aria-labelledby="blog"
+                            data-bs-parent="#accordion">
+                            <div class="accordion-body text-center">
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
+                                        class="fas fa-user-plus"></span>Créer un
+                                    Article</button>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog">
+                                            <img class="avatar" src="assets/images/Kooppy.png">
+                                        </a>
                                     </div>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><img
-                                                    class="avatar" src="assets/images/Kooppy.png"></a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Author</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Titre</p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p>Descriptif</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                                    <div class="col-md-2">
+                                        <p>Author</p>
                                     </div>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><img
-                                                    class="avatar" src="assets/images/Kooppy.png"></a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Author</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Titre</p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p>Descriptif</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                                    <div class="col-md-2">
+                                        <p>Titre</p>
                                     </div>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><img
-                                                    class="avatar" src="assets/images/Kooppy.png"></a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Author</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Titre</p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p>Descriptif</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                                    <div class="col-md-4">
+                                        <p>Descriptif</p>
                                     </div>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser"><img
-                                                    class="avatar" src="assets/images/Kooppy.png"></a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Author</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Titre</p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p>Descriptif</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
+                                    </div>
+                                </div>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog"><img
+                                                class="avatar" src="assets/images/Kooppy.png"></a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Author</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Titre</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p>Descriptif</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
+                                    </div>
+                                </div>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog"><img
+                                                class="avatar" src="assets/images/Kooppy.png"></a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Author</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Titre</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p>Descriptif</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
+                                    </div>
+                                </div>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog"><img
+                                                class="avatar" src="assets/images/Kooppy.png"></a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Author</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Titre</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p>Descriptif</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
+                                    </div>
+                                </div>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog"><img
+                                                class="avatar" src="assets/images/Kooppy.png"></a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Author</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Titre</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p>Descriptif</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Message Part -->
-                        <div class="accordion-item">
-                            <h3 class="accordion-header" id="message">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseMessage" aria-expanded="false"
-                                    aria-controls="collapseMessage">Message</button>
-                            </h3>
-                            <div id="collapseMessage" class="accordion-collapse collapse" aria-labelledby="message"
-                                data-bs-parent="#accordion">
-                                <div class="accordion-body text-center">
-                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
-                                            class="fas fa-user-plus"></span>Ajouter un
-                                        Message</button>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewMessage">
-                                                <img class="avatar" src="assets/images/Kooppy.png">
-                                            </a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Kooppy</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla </p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#privateMessage"><span
-                                                    class="far fa-envelope"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                    </div>
+                    <!-- Message Part -->
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="message">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseMessage" aria-expanded="false"
+                                aria-controls="collapseMessage">Message</button>
+                        </h3>
+                        <div id="collapseMessage" class="accordion-collapse collapse" aria-labelledby="message"
+                            data-bs-parent="#accordion">
+                            <div class="accordion-body text-center">
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
+                                        class="fas fa-user-plus"></span>Ajouter un
+                                    Message</button>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewMessage">
+                                            <img class="avatar" src="assets/images/Kooppy.png">
+                                        </a>
                                     </div>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
-                                                <img class="avatar" src="assets/images/Kooppy.png">
-                                            </a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Kooppy</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla </p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#privateMessage"><span
-                                                    class="far fa-envelope"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                                    <div class="col-md-2">
+                                        <p>Kooppy</p>
                                     </div>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
-                                                <img class="avatar" src="assets/images/Kooppy.png">
-                                            </a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Kooppy</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla </p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#privateMessage"><span
-                                                    class="far fa-envelope"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                                    <div class="col-md-6">
+                                        <p>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla </p>
                                     </div>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
-                                                <img class="avatar" src="assets/images/Kooppy.png">
-                                            </a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Kooppy</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla </p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#privateMessage"><span
-                                                    class="far fa-envelope"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#privateMessage"><span
+                                                class="far fa-envelope"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
                                     </div>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
-                                                <img class="avatar" src="assets/images/Kooppy.png">
-                                            </a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Kooppy</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla </p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#privateMessage"><span
-                                                    class="far fa-envelope"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                                </div>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
+                                            <img class="avatar" src="assets/images/Kooppy.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Kooppy</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla </p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#privateMessage"><span
+                                                class="far fa-envelope"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
+                                    </div>
+                                </div>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
+                                            <img class="avatar" src="assets/images/Kooppy.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Kooppy</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla </p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#privateMessage"><span
+                                                class="far fa-envelope"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
+                                    </div>
+                                </div>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
+                                            <img class="avatar" src="assets/images/Kooppy.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Kooppy</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla </p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#privateMessage"><span
+                                                class="far fa-envelope"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
+                                    </div>
+                                </div>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
+                                            <img class="avatar" src="assets/images/Kooppy.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Kooppy</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla </p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#privateMessage"><span
+                                                class="far fa-envelope"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Gallery Part -->
-                        <div class="accordion-item">
-                            <h3 class="accordion-header" id="gallery">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseGallery" aria-expanded="false"
-                                    aria-controls="collapseMessage">Galeries</button>
-                            </h3>
-                            <div id="collapseGallery" class="accordion-collapse collapse" aria-labelledby="gallery"
-                                data-bs-parent="#accordion">
-                                <div class="accordion-body text-center">
-                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
-                                            class="fas fa-user-plus"></span>Ajouter une
-                                        Image</button>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
-                                                <img class="avatar" src="assets/images/Kooppy.png">
-                                            </a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Titre</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Descriptif</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                    </div>
+                    <!-- Gallery Part -->
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="gallery">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseGallery" aria-expanded="false"
+                                aria-controls="collapseMessage">Galeries</button>
+                        </h3>
+                        <div id="collapseGallery" class="accordion-collapse collapse" aria-labelledby="gallery"
+                            data-bs-parent="#accordion">
+                            <div class="accordion-body text-center">
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
+                                        class="fas fa-user-plus"></span>Ajouter une
+                                    Image</button>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
+                                            <img class="avatar" src="assets/images/Kooppy.png">
+                                        </a>
                                     </div>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
-                                                <img class="avatar" src="assets/images/Kooppy.png">
-                                            </a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Titre</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Descriptif</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                                    <div class="col-md-2">
+                                        <p>Titre</p>
                                     </div>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
-                                                <img class="avatar" src="assets/images/Kooppy.png">
-                                            </a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Titre</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Descriptif</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                                    <div class="col-md-6">
+                                        <p>Descriptif</p>
                                     </div>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
-                                                <img class="avatar" src="assets/images/Kooppy.png">
-                                            </a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Titre</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Descriptif</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
                                     </div>
-                                    <div class="row user">
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
-                                                <img class="avatar" src="assets/images/Kooppy.png">
-                                            </a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <p>Titre</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Descriptif</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
-                                                    class="far fa-edit"></span></a>
-                                            <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
-                                                    class="far fa-trash-alt"></span></a>
-                                        </div>
+                                </div>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
+                                            <img class="avatar" src="assets/images/Kooppy.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Titre</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Descriptif</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
+                                    </div>
+                                </div>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
+                                            <img class="avatar" src="assets/images/Kooppy.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Titre</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Descriptif</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
+                                    </div>
+                                </div>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
+                                            <img class="avatar" src="assets/images/Kooppy.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Titre</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Descriptif</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
+                                    </div>
+                                </div>
+                                <div class="row user">
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
+                                            <img class="avatar" src="assets/images/Kooppy.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Titre</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Descriptif</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
+                                                class="far fa-edit"></span></a>
+                                        <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                                class="far fa-trash-alt"></span></a>
                                     </div>
                                 </div>
                             </div>
@@ -1095,6 +1110,105 @@
             </div>
         </div>
     </div>
+    <!-- Modal Delete -->
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- Nav Tabs -->
+                    <ul class="nav nav-tabs" id="#myTab" role="tablist">
+                        <li class="nav-item" role="del">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#del"
+                                aria-controls="del" aria-selected="true" type="button">Delete</button>
+                        </li>
+                    </ul>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- Tab Content Delete -->
+                <div class="tab-content" id="myTabContent">
+                    <!-- Tab Panel Create User -->
+                    <div class="tab-pane show active" id="del" role="tabpanel" aria-labelledby="delete-tab">
+                        <div class="modal-body text-center">
+                            <!-- Delete Button -->
+                            <p>Voulez-vous vraiment supprimer ?</p>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-secondary">Oui</button>
+                                    <button type="button" class="btn btn-secondary">Annuler</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal Footer Social -->
+                        <div class="modal-footer justify-content-center">
+                            <p>Suivez-nous : </p>
+                            <ul class="social-footer">
+                                <li><a class="social-footer-block social-facebook" href=""><span
+                                            class="fab fa-facebook-square"></span></a></li>
+                                <li><a class="social-footer-block social-twitter" href=""><span
+                                            class="fab fa-twitter"></span></a></li>
+                                <li><a class="social-footer-block social-youtube" href=""><span
+                                            class="fab fa-youtube"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Disconnect -->
+    <div class="modal fade" id="disconnect" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- Nav Tabs -->
+                    <ul class="nav nav-tabs" id="#myTab" role="tablist">
+                        <li class="nav-item" role="dis">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#dis"
+                                aria-controls="dis" aria-selected="true" type="button">Déconnexion</button>
+                        </li>
+                    </ul>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- Tab Content Delete -->
+                <div class="tab-content" id="myTabContent">
+                    <!-- Tab Panel Create User -->
+                    <div class="tab-pane show active" id="dis" role="tabpanel" aria-labelledby="disconnected-tab">
+                        <div class="modal-body text-center">
+                            <!-- Delete Button -->
+                            <p>Voulez-vous vraiment vous déconnecter ?</p>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-secondary">Oui</button>
+                                    <button type="button" class="btn btn-secondary">Non</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal Footer Social -->
+                        <div class="modal-footer justify-content-center">
+                            <p>Suivez-nous : </p>
+                            <ul class="social-footer">
+                                <li><a class="social-footer-block social-facebook" href=""><span
+                                            class="fab fa-facebook-square"></span></a></li>
+                                <li><a class="social-footer-block social-twitter" href=""><span
+                                            class="fab fa-twitter"></span></a></li>
+                                <li><a class="social-footer-block social-youtube" href=""><span
+                                            class="fab fa-youtube"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- JS -->
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src="assets/js/test.js"></script>
     <script src="assets/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 

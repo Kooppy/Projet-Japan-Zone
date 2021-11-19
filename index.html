@@ -15,17 +15,15 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <!-- STYLES -->
-    <!-- <link rel="stylesheet" href="assets/vendors/bootstrap/dist/css/bootstrap.css"> -->
     <link rel="stylesheet" href="assets/css/style.css">
 
     <title>Document</title>
 </head>
 
 <body>
-    <!-- Header -->
+    <!-- Header Nav -->
     <header>
-        <!-- Nav -->
-        <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top" id="nav">
+        <nav class="navbar navbar-expand-md navbar-light bg-light" id="nav">
             <div class="container">
                 <a class="navbar-brand" href="#">Japan Zone</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#monmenu"
@@ -35,7 +33,7 @@
                 <div class="collapse navbar-collapse" id="monmenu">
                     <div class="navbar-nav ms-auto">
                         <a class="nav-item nav-link" href="index.html"><span class="fas fa-home"></span></a>
-                        <a class="nav-item nav-link" href="">Article</a>
+                        <a class="nav-item nav-link" href="actuality.html">Article</a>
                         <a class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#contact">Contact</a>
                         <a class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#login-register">Connexion /
                             Inscription</a>
@@ -43,21 +41,8 @@
                 </div>
             </div>
         </nav>
-
-        <!--<div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="head-title">
-                            <h1>Japan <span>Zone</span></h1>
-                            <p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla  bla bla bla bla bla bla bla bla bla bla bla bla bla bla</p>
-                            <a href="#" class="btn btn-full">En Savoir Plus</a>
-                            <button type="button" class="btn btn-ghost" data-bs-toggle="modal" data-bs-target="#contact"><span class="far fa-envelope"></span> Contactez-Nous</button>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
     </header>
-    <section class="carousel slide carousel-fade header" data-bs-ride="carousel" id="carouselIndicators">
+    <section class="carousel slide carousel-fade header mb-5" data-bs-ride="carousel" id="carouselIndicators">
         <!-- Carousel Header-->
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="0" class="active"
@@ -100,7 +85,7 @@
             data-bs-slide="next"></button>
     </section>
     <!-- Main News -->
-    <section class="container shadow-lg">
+    <section class="container shadow-lg my-5">
         <!-- Title Main News -->
         <div class="row">
             <div class="col-md-12">
@@ -170,7 +155,7 @@
         </div>
     </section>
     <!-- Main Gallery & Right Menu -->
-    <section class="container">
+    <section class="container my-5">
         <div class="row">
             <div class="col-md-8">
                 <!-- Title Gallery -->
@@ -222,6 +207,23 @@
                                 <h3>Image 5</h3>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Vidéo</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-6 mb-5">
+                        <div class="ratio ratio-16x9">
+                            <iframe width="1280" height="720" src="https://www.youtube.com/embed/mBrVtbkZlt8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                          </div>
+                    </div>
+                    <div class="col-12 col-lg-6 mb-5">
+                        <div class="ratio ratio-16x9">
+                            <iframe width="1280" height="720" src="https://www.youtube.com/embed/By66V_GhDM8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                          </div>
                     </div>
                 </div>
             </div>
@@ -530,10 +532,11 @@
             </div>
         </div>
     </div>
+    <!-- JS -->
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src="assets/js/test.js"></script>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+    <script src="assets/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v12.0"
         nonce="WKbwgctE"></script>
 </body>
