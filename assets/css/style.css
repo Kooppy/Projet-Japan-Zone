@@ -8698,7 +8698,7 @@ h2, .h2 {
 h2:after, .h2:after {
   display: block;
   height: 3px;
-  background: linear-gradient(to bottom right, rgba(153, 255, 153, 0.5), rgba(153, 51, 255, 0.6));
+  background: linear-gradient(to left, rgba(250, 174, 229, 0.8), rgba(220, 20, 60, 0.5), rgba(255, 197, 0, 0.4));
   width: 200px;
   content: " ";
   margin: 0 auto; }
@@ -8793,55 +8793,62 @@ ul {
 /************************************* */
 /************MAIN RIGHT MENU********** */
 /************************************* */
-.right-menu-social {
+.right-menu {
   display: block;
-  box-shadow: 0px 5px 0px #343a40;
+  box-shadow: 0px 10px 10px #343a40;
   margin-bottom: 20px; }
 
-.right-menu-social-title {
+.right-menu-title {
   position: relative;
-  top: 8px;
-  background-color: #0d6efd;
-  box-shadow: 0px 5px 0px #343a40; }
+  color: #fff;
+  box-shadow: 0px 10px 10px #343a40;
+  padding: 0.5rem 1rem;
+  margin: 0; }
 
-.right-menu-social-list {
+.right-menu-body {
   display: flex;
   text-align: center;
   justify-content: space-around;
   background: #495057;
   border: 2px solid #343a40; }
 
-.right-menu-social-list > li {
+.right-menu-body > a {
   width: 33%;
-  height: 50px;
-  padding-top: 15px; }
+  height: 60px;
+  padding-top: 20px;
+  color: #fff;
+  transition: background-color 0.5s, color 0.7s, border 0.8s; }
 
-.right-menu-social-list > li > a {
-  color: #fff; }
+.general {
+  background: linear-gradient(to right, #3b5998c7, #1da1f2b5, #c4302b9e); }
 
-.right-menu-social-list-facebook:hover {
+.facebook {
   background-color: #3b5998; }
 
-.right-menu-social-list-twitter:hover {
+.twitter {
   background-color: #1da1f2; }
 
-.right-menu-social-list-youtube:hover {
+.facebook-bd {
+  border: 2px solid #3b5998; }
+
+.twitter-bd {
+  border: 2px solid #1da1f2; }
+
+.right-menu-body-social-facebook:hover {
+  background-color: #3b5998; }
+
+.right-menu-body-social-twitter:hover {
+  background-color: #1da1f2; }
+
+.right-menu-body-social-youtube:hover {
   background-color: #c4302b; }
-
-.right-menu-facebook {
-  width: 100%; }
-
-.right-menu-facebook-list {
-  text-align: center;
-  background: #495057;
-  border: 2px solid #343a40; }
 
 /************************************* */
 /***************MAIN NEWS************* */
 /************************************* */
 .scrollspy-list-news {
   position: relative;
-  max-height: 500px;
+  max-height: 450px;
   overflow: auto; }
 
 .news-box-list-item-img {
@@ -8862,10 +8869,6 @@ ul {
 .btn-news-view:hover {
   color: #fff;
   background-color: #6c757d; }
-
-.news-box-view-img {
-  border-radius: 20px;
-  padding: 10px; }
 
 .news-icons {
   font-size: 35px;
@@ -8890,7 +8893,7 @@ ul {
 .actu-view-img {
   display: block;
   margin: 0 auto;
-  width: 75%;
+  width: 80%;
   border-radius: 20px; }
 
 .actu-list {
