@@ -1,0 +1,25 @@
+<header>
+    <nav class="navbar navbar-expand-md navbar-light bg-light" id="nav">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img class="author" src="assets/images/logo.png">Japan Zone</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#monmenu"
+                aria-controls="monmenu" aria-label="Menu pour mobile">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="monmenu">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-item nav-link" href="/"><span class="fas fa-home"></span></a>
+                    <a class="nav-item nav-link" href="/blog">Article</a>
+                    <a class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#contact">Contact</a>
+                    <a class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#login-register">Connexion /
+                        Inscription</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+{{> modals/modal-lr }}
+
+{{> modals/modal-disconnect }}

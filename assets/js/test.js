@@ -47,3 +47,15 @@ $(function(){
         }
     })
 })();
+
+const lrModal = document.querySelector('#login-register'),
+      diconnectModal = document.querySelector('#disconnect'),
+      createModal = document.querySelector('#add'),
+      profilModal = document.querySelector('#viewUser'),
+      deleteModal = document.querySelector('#delete ');
+
+
+function editModal() {
+
+    
+}

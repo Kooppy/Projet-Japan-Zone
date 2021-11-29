@@ -1,0 +1,33 @@
+{
+    "users": [{
+            "id": 0,
+            "pseudo": "Kooppy",
+            "name": "Bruno 0",
+            "lastName": "Bruno 0",
+            "birth": "01/01/2010",
+            "email": "Bruno@grgezf",
+            "createDate": "02/02/2012",
+            "tags": "Utilisateur"
+        },
+        {
+            "id": 1,
+            "pseudo": "Jack",
+            "name": "Bruno 1",
+            "lastName": "Bruno 1",
+            "birth": "01/01/2010",
+            "email": "Bruno@grgezf",
+            "createDate": "02/02/2012",
+            "tags": "Utilisateur"
+        },
+        {
+            "id": 2,
+            "pseudo": "Bille",
+            "name": "Bruno 2",
+            "lastName": "Bruno 2",
+            "birth": "01/01/2010",
+            "email": "Bruno@grgezf",
+            "createDate": "02/02/2012",
+            "tags": "Utilisateur"
+        }
+    ]
+}

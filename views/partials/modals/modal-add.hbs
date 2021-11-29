@@ -1,0 +1,234 @@
+<!-- Modal Add User & News & Message & Gallery -->
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- Nav Tabs -->
+                <ul class="nav nav-tabs" id="#myTab" role="tablist">
+                    <li class="nav-item" role="addUser">
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#addUser"
+                            aria-controls="addUser" aria-selected="true" type="button">User</button>
+                    </li>
+                    <li class="nav-item" role="addNews">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#addNews" aria-controls="addNews"
+                            aria-selected="false" type="button">News</button>
+                    </li>
+                    <li class="nav-item" role="addMessage">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#addMessage"
+                            aria-controls="addMessage" aria-selected="false" type="button">Message</button>
+                    </li>
+                    <li class="nav-item" role="addGallery">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#addGallery"
+                            aria-controls="addGallery" aria-selected="false" type="button">Gallery</button>
+                    </li>
+                </ul>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- Tab Content User / Blog / Message / Gallery -->
+            <div class="tab-content" id="myTabContent">
+                <!-- Tab Panel Create User -->
+                <div class="tab-pane show active" id="addUser" role="tabpanel" aria-labelledby="add-user-tab">
+                    <div class="modal-body">
+                        <form>
+                            <!-- Id & Avatar Input -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Identifiant">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="email" placeholder="Email">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Last Name & First Name Input -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Nom">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Prénom">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Date of the Birth & Email Input -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Date de Naissance">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="email" placeholder="Email">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Password & Confirm Password Input -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Mot de passe">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Confirmer le Mot de Passe">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Button Input-->
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <button type="button" class="btn btn-secondary">Envoyer</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Tab Panel Create News -->
+                <div class="tab-pane fade" id="addNews" role="tabpanel" aria-labelledby="add-news-tab">
+                    <div class="modal-body">
+                        <form>
+                            <!-- Title & Image Input -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Title">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Image">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Description & Content Input -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Description">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Contenue">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Tags Input -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="contact-form">
+                                        <input class="form-control" list="datalistOptions" id="select-tags"
+                                            placeholder="Selectionner...">
+                                        <datalist id="datalistOptions">
+                                            <option value="blo">
+                                            <option value="ble">
+                                            <option value="bla">
+                                        </datalist>
+                                    </div>
+                                    <div class="row">
+                                        <div class="d-flex mx-1 rounded-pill bg-primary col-auto text-white">
+                                            <p class="m-0"><span class="text-danger">#</span>bla</p>
+                                        </div>
+                                        <div class="d-flex mx-1 rounded-pill bg-primary col-auto text-white">
+                                            <p class="m-0"><span class="text-danger">#</span>bla</p>
+                                        </div>
+                                        <div class="d-flex mx-1 rounded-pill bg-primary col-auto text-white">
+                                            <p class="m-0"><span class="text-danger">#</span>bla</p>
+                                        </div>
+                                        <div class="d-flex mx-1 rounded-pill bg-primary col-auto text-white">
+                                            <p class="m-0"><span class="text-danger">#</span>bla</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Button Input-->
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <button type="button" class="btn btn-secondary">Envoyer</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Tab Create Private Message -->
+                <div class="tab-pane fade" id="addMessage" role="tabpanel" aria-labelledby="add-message-tab">
+                    <div class="modal-body">
+                        <form>
+                            <!-- Sujet & Message Input -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Sujet">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="contact-form">
+                                        <textarea class="input-form" name="message" placeholder="Message"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Button Input-->
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <button type="button" class="btn btn-secondary">Envoyer</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Tab Add Picture -->
+                <div class="tab-pane fade" id="addGallery" role="tabpanel" aria-labelledby="add-gallery-tab">
+                    <div class="modal-body">
+                        <form>
+                            <!-- Sujet & Message Input -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Sujet">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="contact-form">
+                                        <textarea class="input-form" name="message" placeholder="Message"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Button Input-->
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <button type="button" class="btn btn-secondary">Envoyer</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Modal Footer Social -->
+                <div class="modal-footer justify-content-center">
+                    <p>Suivez-nous : </p>
+                    <ul class="social-footer">
+                        <li><a class="social-footer-block social-facebook" href=""><span
+                                    class="fab fa-facebook-square"></span></a></li>
+                        <li><a class="social-footer-block social-twitter" href=""><span
+                                    class="fab fa-twitter"></span></a></li>
+                        <li><a class="social-footer-block social-youtube" href=""><span
+                                    class="fab fa-youtube"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
