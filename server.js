@@ -13,18 +13,22 @@ app.engine('hbs', handlebars.engine({
 */
 app.use('/assets', express.static('assets'));
 
-const fakeDB = require('./fakedb.json')
+const fakeDB = require('./fakedb.json');
 
 app.get('/', function(req, res) {
     res.render('index');
 })
 
 app.get('/admin', function(req, res) {
-    res.render('admin', { kakawait: fakeDB.users});
+    res.render('admin', { user: fakeDB.users, blog: fakeDB.blogs, message: fakeDB.messages, galerie: fakeDB.galeries });
 })
 
 app.get('/blog', function(req, res) {
     res.render('blog');
+})
+
+app.get('/blog/item1', function(req, res){
+    res.render('item1');
 })
 
 app.listen (3000, function() {

@@ -41,6 +41,16 @@ ul
     list-style: none
     padding-inline-start: 0px
 
+.scrollTop
+    display: none 
+    position: fixed 
+    bottom: 25px 
+    right: 35px 
+
+.iconScrollTop
+    width: 40px !important
+    height: 40px
+
 @each $name, $rgba in $list_color_rgba
     .bg-rgba-gradient-#{$name}
         background: #{$rgba}

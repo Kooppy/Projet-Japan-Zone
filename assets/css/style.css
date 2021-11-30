@@ -42,6 +42,16 @@ ul {
   list-style: none;
   padding-inline-start: 0px; }
 
+.scrollTop {
+  display: none;
+  position: fixed;
+  bottom: 25px;
+  right: 35px; }
+
+.iconScrollTop {
+  width: 40px !important;
+  height: 40px; }
+
 .bg-rgba-gradient-basic {
   background: linear-gradient(to bottom right, rgba(153, 255, 153, 0.5), rgba(153, 51, 255, 0.6)); }
 

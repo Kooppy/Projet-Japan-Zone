@@ -26,7 +26,7 @@ $(function(){
 
 // version JQUERY --> $(function(){})
 // version JS DOM --> (function(){})();
-
+// fonction scroll
 (function () {
     // JQUERY
     // let position_top_raccourci = $("#nav").offset().top;
@@ -37,25 +37,27 @@ $(function(){
         if (window.scrollY > position_top_raccourci) {
             //JQUERY
             //$("#nav").addClass("fixed-top");
-            // JS DOM
+            // JS DOM Fixation Nav
             document.getElementById("nav").classList.add("fixed-top");
+
+            // Affichage Scroll Top
+            document.querySelector(".scrollTop").classList.add("d-block");
+            // Remonter la Fenêtre en Haut de Page
+            document.querySelector(".scrollTop").addEventListener('click', function (){
+                window.scrollTo(0, 0);
+            })
         } else {
             //JQUERY
             //$("#nav").removeClass("fixed-top")
             // JS DOM
             document.getElementById("nav").classList.remove("fixed-top");
+            document.querySelector(".scrollTop").classList.remove("d-block")
         }
     })
+
+    document.getElementById("mod").addEventListener('click', function(){
+        
+    })
+
+
 })();
-
-const lrModal = document.querySelector('#login-register'),
-      diconnectModal = document.querySelector('#disconnect'),
-      createModal = document.querySelector('#add'),
-      profilModal = document.querySelector('#viewUser'),
-      deleteModal = document.querySelector('#delete ');
-
-
-function editModal() {
-
-    
-}
