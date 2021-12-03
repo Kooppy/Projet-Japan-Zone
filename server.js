@@ -2,6 +2,7 @@ const express = require('express'),
       app = express(),
       handlebars = require('express-handlebars');
 
+// Config Handlebars et Définis le moteur de mon app
 app.set('view engine', 'hbs');
 app.engine('hbs', handlebars.engine({
     extname: 'hbs',
