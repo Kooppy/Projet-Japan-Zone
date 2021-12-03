@@ -9,7 +9,7 @@ $(function(){
     //Au scroll dans la fenetre on déclenche la fonction
     $(window).scroll(function () {
     
-    //si on a defile de plus de 150px du haut vers le bas
+    //si on a defile de plus de 1px du haut vers le bas
     if ($(this).scrollTop() > position_top_raccourci) {
     
     //on ajoute la classe "fixNavigation" a <div id="navigation">
@@ -42,6 +42,7 @@ $(function(){
 
             // Affichage Scroll Top
             document.querySelector(".scrollTop").classList.add("d-block");
+            
             // Remonter la Fenêtre en Haut de Page
             document.querySelector(".scrollTop").addEventListener('click', function (){
                 window.scrollTo(0, 0);
@@ -55,8 +56,21 @@ $(function(){
         }
     })
 
-    document.getElementById("mod").addEventListener('click', function(){
-        
+    let mod = document.getElementById("mod");
+
+    mod.addEventListener('click', function(){
+        let news = document.querySelector('.my-5');
+        console.log(document.querySelectorAll("section"));
+        console.log("check", mod.checked);
+        if (mod.checked) {
+            //console.log(document.getElementById("mod"));
+            document.body.setAttribute('style', 'background-color: #171e26; color: white; transition: all 0.4s;');
+            news.setAttribute('style', 'background-color: rgba(32,40,51, 0.8); transition: all 1s;');
+            
+        } else {
+            document.body.removeAttribute('style');
+            news.removeAttribute('style');
+        }
     })
 
 
