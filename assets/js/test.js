@@ -60,8 +60,7 @@ $(function(){
 
     mod.addEventListener('click', function(){
         let news = document.querySelector('.my-5');
-        console.log(document.querySelectorAll("section"));
-        console.log("check", mod.checked);
+
         if (mod.checked) {
             //console.log(document.getElementById("mod"));
             document.body.setAttribute('style', 'background-color: #171e26; color: white; transition: all 0.4s;');
@@ -72,6 +71,4 @@ $(function(){
             news.removeAttribute('style');
         }
     })
-
-
 })();
