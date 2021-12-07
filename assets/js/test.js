@@ -1,5 +1,3 @@
-
-
 /* version JQUERY
 
 $(function(){
@@ -33,7 +31,7 @@ $(function(){
     // JS DOM 
     let position_top_raccourci = document.getElementById("nav").offsetTop;
 
-    window.addEventListener ('scroll', function () {
+    window.addEventListener('scroll', function () {
         if (window.scrollY > position_top_raccourci) {
             //JQUERY
             //$("#nav").addClass("fixed-top");
@@ -42,9 +40,9 @@ $(function(){
 
             // Affichage Scroll Top
             document.querySelector(".scrollTop").classList.add("d-block");
-            
+
             // Remonter la Fenêtre en Haut de Page
-            document.querySelector(".scrollTop").addEventListener('click', function (){
+            document.querySelector(".scrollTop").addEventListener('click', function () {
                 window.scrollTo(0, 0);
             })
         } else {
@@ -57,18 +55,42 @@ $(function(){
     })
 
     let mod = document.getElementById("mod");
+    let html = document.querySelector('html');
 
-    mod.addEventListener('click', function(){
-        let news = document.querySelector('.my-5');
+    mod.addEventListener('change', setLocal);
 
-        if (mod.checked) {
-            //console.log(document.getElementById("mod"));
-            document.body.setAttribute('style', 'background-color: #171e26; color: white; transition: all 0.4s;');
-            news.setAttribute('style', 'background-color: rgba(32,40,51, 0.8); transition: all 1s;');
-            
+    // Local Part Verify
+    if (localStorage.getItem('check')) {
+        updateLocal();
+    } else {
+        setLocal();
+    }
+
+    // LocalStorage Create
+    function setLocal() {
+        localStorage.setItem('check', mod.checked);
+        updateLocal();
+    }
+
+    // LocalStorage Update
+    function updateLocal() {
+        // Dark Mod Update
+        let check = localStorage.getItem('check');
+
+        if (check === "false") {
+            html.classList.remove('darkMod');
+            mod.checked = mod.defaultCheck;
         } else {
-            document.body.removeAttribute('style');
-            news.removeAttribute('style');
+            html.classList.add('darkMod');
+            mod.checked = true;
         }
-    })
+    }
+
+    //localStorage.removeItem('dm');
+    //localStorage.clear();
+
+    // Delete Cookie
+    function deleteLocal() {
+        localStorage.clear();
+    }
 })();

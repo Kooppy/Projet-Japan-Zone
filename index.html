@@ -40,9 +40,9 @@
                         <a class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#contact">Contact</a>
                         <a class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#login-register">Connexion /
                             Inscription</a>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="mod">
-                        </div>
+                        <a class="nav-item nav-link" data-bs-toggle="offcanvas" data-bs-target="#setting" role="button"
+                            aria-controls="setting"><span class="fas fa-cogs"></span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -90,6 +90,28 @@
         <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators"
             data-bs-slide="next"></button>
     </section>
+    <!-- OffCanvas -->
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="setting" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="setting">Paramétrage</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body">
+            
+            <div class="content">
+                <div class="circle">
+                    <div class="crescent"></div>
+                </div>
+                
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="mod">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Main News -->
     <section class="container shadow-lg my-5" id="news">
         <!-- Title Main News -->
