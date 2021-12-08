@@ -31,6 +31,8 @@ $(function(){
     // JS DOM 
     let position_top_raccourci = document.getElementById("nav").offsetTop;
 
+    //document.querySelector('#night').checked = true;
+
     window.addEventListener('scroll', function () {
         if (window.scrollY > position_top_raccourci) {
             //JQUERY
@@ -55,10 +57,11 @@ $(function(){
     })
 
     let mod = document.getElementById("mod");
+    let test = document.querySelectorAll('input[name="test"]')
     let html = document.querySelector('html');
-
+    
+    console.log(test);
     mod.addEventListener('change', setLocal);
-
     // Local Part Verify
     if (localStorage.getItem('check')) {
         updateLocal();
@@ -68,6 +71,13 @@ $(function(){
 
     // LocalStorage Create
     function setLocal() {
+        /*if (test[0].checked) {
+            localStorage.setItem('theme', test[0].value);
+        } else if (test[1].checked) {
+            localStorage.setItem('theme', test[1].value);
+        } else {
+            localStorage.setItem('theme', test[2].value);
+        }*/
         localStorage.setItem('check', mod.checked);
         updateLocal();
     }
@@ -76,6 +86,10 @@ $(function(){
     function updateLocal() {
         // Dark Mod Update
         let check = localStorage.getItem('check');
+
+        //let theme = localStorage.getItem('theme');
+
+        //html.classList.add(theme)
 
         if (check === "false") {
             html.classList.remove('darkMod');

@@ -7,17 +7,17 @@
     color: white
     transition: all 0.4s
 
-.darkMod > body
+.darkMod body
     background: none
     color: white
 
-.darkMod > body > #news
+.darkMod #news
     background-color: rgba(32,40,51, 0.8)
     transition: all 1s
 
 /*******************************************************/
 
-.content 
+.content
     display: flex
     flex-direction: column
     margin: auto
@@ -25,7 +25,7 @@
     width: 70%
     transform: translateY(5%)
 
-.circle 
+.circle
     position: relative
     border-radius: 100%
     width: 8rem
@@ -33,7 +33,7 @@
     background: linear-gradient(40deg, #FF0080,#FF8C00 70%)
     margin: auto
 
-.crescent 
+.crescent
     position: absolute
     border-radius: 100%
     right: 0
@@ -44,18 +44,13 @@
     transform-origin: top right
     transition: transform .6s cubic-bezier(0.645, 0.045, 0.355, 1)
 
-/* App */
-.darkMod > body > #setting 
-    background-color:  #26242E
+.darkMod #setting
+    background-color: #26242E
     color: white
 
-/* Circle */
-[type="checkbox"]:checked + .crescent
+.darkMod .crescent
     transform: scale(1)
     background: #26242E
 
-[type="checkbox"]:checked + .circle
-    background: linear-gradient(40deg, #8983F7, #A3DAFB 70%)
-
-[type="checkbox"]:checked + .main-circle
+.darkMod .circle
     background: linear-gradient(40deg, #8983F7, #A3DAFB 70%)
