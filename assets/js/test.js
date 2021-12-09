@@ -57,24 +57,10 @@ $(function(){
     })
 
     //localStorage.clear();
-    //let mod = document.getElementById("mod");
-    let test = document.querySelector('.btn-primary')
     let html = document.querySelector('html');
-    console.log(test);
-    
-    /*document.getElementsByClassName('btn-check')[0].onclick = function () {console.log(this.value);}*/
 
-    /*$(".btn-check").on("click", function() {
-        console.log(this.value);
-    });*/
+    $(".btn-check").on("click", setLocal);
 
-    /*document.getElementsByClassName('btn-primary').addEventListener('click', function () {
-        console.log(this.value);
-    });*/
-
-    test[0].addEventListener('change', setLocal);
-    test[1].addEventListener('change', setLocal);
-    test[2].addEventListener('change', setLocal);
     // Local Part Verify
     if (localStorage.getItem('theme')) {
         updateLocal();
@@ -85,42 +71,24 @@ $(function(){
     
     // LocalStorage Create
     function setLocal() {
-        localStorage.setItem('old', localStorage.getItem('theme'))
+        let old = localStorage.getItem('theme');
+        localStorage.setItem('theme', this.value);
 
-        if (test[0].checked) {
-            localStorage.setItem('theme', test[0].value);
-        } else if (test[1].checked) {
-            localStorage.setItem('theme', test[1].value);
-        } else if (test[2].checked){
-            localStorage.setItem('theme', test[2].value);
-        }
-        //localStorage.setItem('check', mod.checked);
-        updateLocal();
+        updateLocal(old);
     }
 
     // LocalStorage Update
-    function updateLocal() {
-        // Dark Mod Update
-        //let check = localStorage.getItem('check');
-
+    function updateLocal(old) {
+        // theme Mod Update
         let theme = localStorage.getItem('theme');
-        let old = localStorage.getItem('old');
 
-        if (localStorage.getItem('theme') && localStorage.getItem('old') != "") {
-            html.classList.replace(old, theme)
+        if (localStorage.getItem('theme') && old === undefined || old === "") {
+            html.classList.add(theme)
         } else if (localStorage.getItem('theme') == "") {
             html.classList.remove(old)
-        } else {
-            html.classList.add(theme)
+        } else if (old != undefined) {
+            html.classList.replace(old, theme)
         }
-        
-        /*if (check === "false") {
-            html.classList.remove('darkMod');
-            mod.checked = mod.defaultCheck;
-        } else {
-            html.classList.add('darkMod');
-            mod.checked = true;
-        }*/
     }
 
     //localStorage.removeItem('theme');

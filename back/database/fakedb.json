@@ -7,7 +7,7 @@
             "birth": "01/01/2010",
             "email": "Bruno@grgezf",
             "createDate": "02/02/2012",
-            "tags": "Utilisateur"
+            "tags": "admin"
         },
         {
             "id": 1,
@@ -17,7 +17,7 @@
             "birth": "01/01/2010",
             "email": "Bruno@grgezf",
             "createDate": "02/02/2012",
-            "tags": "Utilisateur"
+            "tags": "utilisateur"
         },
         {
             "id": 2,
@@ -27,7 +27,7 @@
             "birth": "01/01/2010",
             "email": "Bruno@grgezf",
             "createDate": "02/02/2012",
-            "tags": "Utilisateur"
+            "tags": "utilisateur"
         }
     ],
 
