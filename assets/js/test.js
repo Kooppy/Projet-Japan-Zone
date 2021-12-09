@@ -56,51 +56,75 @@ $(function(){
         }
     })
 
-    let mod = document.getElementById("mod");
-    let test = document.querySelectorAll('input[name="test"]')
+    //localStorage.clear();
+    //let mod = document.getElementById("mod");
+    let test = document.querySelector('.btn-primary')
     let html = document.querySelector('html');
-    
     console.log(test);
-    mod.addEventListener('change', setLocal);
+    
+    /*document.getElementsByClassName('btn-check')[0].onclick = function () {console.log(this.value);}*/
+
+    /*$(".btn-check").on("click", function() {
+        console.log(this.value);
+    });*/
+
+    /*document.getElementsByClassName('btn-primary').addEventListener('click', function () {
+        console.log(this.value);
+    });*/
+
+    test[0].addEventListener('change', setLocal);
+    test[1].addEventListener('change', setLocal);
+    test[2].addEventListener('change', setLocal);
     // Local Part Verify
-    if (localStorage.getItem('check')) {
+    if (localStorage.getItem('theme')) {
         updateLocal();
     } else {
         setLocal();
+        console.log("testNon");
     }
-
+    
     // LocalStorage Create
     function setLocal() {
-        /*if (test[0].checked) {
+        localStorage.setItem('old', localStorage.getItem('theme'))
+
+        if (test[0].checked) {
             localStorage.setItem('theme', test[0].value);
         } else if (test[1].checked) {
             localStorage.setItem('theme', test[1].value);
-        } else {
+        } else if (test[2].checked){
             localStorage.setItem('theme', test[2].value);
-        }*/
-        localStorage.setItem('check', mod.checked);
+        }
+        //localStorage.setItem('check', mod.checked);
         updateLocal();
     }
 
     // LocalStorage Update
     function updateLocal() {
         // Dark Mod Update
-        let check = localStorage.getItem('check');
+        //let check = localStorage.getItem('check');
 
-        //let theme = localStorage.getItem('theme');
+        let theme = localStorage.getItem('theme');
+        let old = localStorage.getItem('old');
 
-        //html.classList.add(theme)
-
-        if (check === "false") {
+        if (localStorage.getItem('theme') && localStorage.getItem('old') != "") {
+            html.classList.replace(old, theme)
+        } else if (localStorage.getItem('theme') == "") {
+            html.classList.remove(old)
+        } else {
+            html.classList.add(theme)
+        }
+        
+        /*if (check === "false") {
             html.classList.remove('darkMod');
             mod.checked = mod.defaultCheck;
         } else {
             html.classList.add('darkMod');
             mod.checked = true;
-        }
+        }*/
     }
 
-    //localStorage.removeItem('dm');
+    //localStorage.removeItem('theme');
+    //localStorage.removeItem('old');
     //localStorage.clear();
 
     // Delete Cookie
