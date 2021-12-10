@@ -2,7 +2,7 @@
  * Controller: Admin (Admin)
  * ************************ */ 
 
-const fakeDB = require('../database/fakedb.json')
+const fakeDB = require('../database/fakedb.json');
 
 exports.admin = (req, res) => {
     res.render('admin', {

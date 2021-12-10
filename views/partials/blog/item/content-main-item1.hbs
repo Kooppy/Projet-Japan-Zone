@@ -8,34 +8,22 @@
         <div class="col-md-8">
             <div class="actu-view">
                 <img class="actu-view-img" src="../assets/images/news/item1.png" alt="item1">
-                <h3 class="mt-1 text-center">Title</h3>
+                <h3 class="mt-1 text-center">{{ blog.title }}</h3>
                 <div class="row justify-content-between align-items-center">
                     <div class="col-auto">
                         <p><img class="author" src="../assets/images/Kooppy.png" alt="author">
-                            par Kooppy le 12/12/2000</p>
+                            par {{ blog.pseudo }} le 12/12/2000</p>
                     </div>
                     <div class="col-auto rounded bg-primary text-white text-end">
                         <p class="m-0"><span class="text-danger">#</span>bla</p>
                     </div>
                 </div>
                 <h3 class="mt-1">Paragraphe</h3>
-                <p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-                    bla bla bla bla bla bla bla bla bla bla bla bla bla blabla bla bla bla bla bla bla bla bla bla
-                    bla bla bla bla bla bla bla bla blabla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-                    bla bla bla blabla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla blabla
-                    bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla</p>
+                <p>{{ blog.description }}</p>
                 <h3 class="mt-1">Paragraphe</h3>
-                <p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-                    bla bla bla bla bla bla bla bla bla bla bla bla bla blabla bla bla bla bla bla bla bla bla bla
-                    bla bla bla bla bla bla bla bla blabla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-                    bla bla bla blabla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla blabla
-                    bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla</p>
+                <p>{{ blog.description }}</p>
                 <h3 class="mt-1">Paragraphe</h3>
-                <p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-                    bla bla bla bla bla bla bla bla bla bla bla bla bla blabla bla bla bla bla bla bla bla bla bla
-                    bla bla bla bla bla bla bla bla blabla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-                    bla bla bla blabla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla blabla
-                    bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla</p>
+                <p>{{ blog.description }}</p>
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -56,5 +44,6 @@
                 </div>
             </div>
         </div>
+        {{> right-menu }}
     </div>
 </section>

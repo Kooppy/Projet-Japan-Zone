@@ -34,19 +34,19 @@
     "blogs": [{
             "id": 0,
             "pseudo": "Kooppy",
-            "title": "Mon Titre",
+            "title": "MonTitre",
             "description": "Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla"
         },
         {
             "id": 1,
             "pseudo": "Jack",
-            "title": "Mon Titre",
+            "title": "oui",
             "description": "Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla"
         },
         {
             "id": 2,
             "pseudo": "Jule",
-            "title": "Mon Titre",
+            "title": "non",
             "description": "Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla"
         }
     ],
