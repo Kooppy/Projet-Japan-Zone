@@ -1,0 +1,174 @@
+{{!-- 
+    Partial: Admin Main
+ --}}
+
+<!-- Main Admin User & Blog & Message & Gallery -->
+<section class="container my-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="accordion" id="accordion">
+                <!-- User Part -->
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="user">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseUser" aria-expanded="true"
+                            aria-controls="collapseUser">Utilisateur</button>
+                    </h3>
+                    <div id="collapseUser" class="accordion-collapse collapse show" aria-labelledby="user"
+                        data-bs-parent="#accordion">
+                        <div class="accordion-body text-center">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
+                                    class="fas fa-user-plus"></span>Créer un
+                                Utilisateur </button>
+                            {{#each user }}
+                            <div class="row user">
+                                <div class="col-md-2">
+                                    <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.id }}">
+                                        <img class="avatar" src="assets/images/Kooppy.png">
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <p>{{ this.pseudo }} </p>
+                                </div>
+                                <div class="col-md-2">
+                                    <p>{{ this.name }}</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <p>{{ this.lastName }}</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <p class="user-text">{{ this.email }}</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.id }}"><span
+                                            class="far fa-edit"></span></a>
+                                    <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.id }}"><span
+                                            class="far fa-envelope"></span></a>
+                                    <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                            class="far fa-trash-alt"></span></a>
+                                </div>
+                            </div>
+                            {{> modals/modal-viewUser user=this }}
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- News Part -->
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="blog">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseBlog" aria-expanded="false" aria-controls="collapseBlog">Blog</button>
+                </h3>
+                <div id="collapseBlog" class="accordion-collapse collapse" aria-labelledby="blog"
+                    data-bs-parent="#accordion">
+                    <div class="accordion-body text-center">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
+                                class="fas fa-user-plus"></span>Créer un
+                            Article</button>
+                        {{#each blog }}
+                        <div class="row user">
+                            <div class="col-md-2">
+                                <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog">
+                                    <img class="avatar" src="assets/images/Kooppy.png">
+                                </a>
+                            </div>
+                            <div class="col-md-2">
+                                <p>{{ this.pseudo }}</p>
+                            </div>
+                            <div class="col-md-2">
+                                <p>{{ this.title }}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>{{ this.description }}</p>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog"><span
+                                        class="far fa-edit"></span></a>
+                                <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                        class="far fa-trash-alt"></span></a>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <!-- Message Part -->
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="message">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseMessage" aria-expanded="false"
+                        aria-controls="collapseMessage">Message</button>
+                </h3>
+                <div id="collapseMessage" class="accordion-collapse collapse" aria-labelledby="message"
+                    data-bs-parent="#accordion">
+                    <div class="accordion-body text-center">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
+                                class="fas fa-user-plus"></span>Ajouter un
+                            Message</button>
+                        {{#each message }}
+                        <div class="row user">
+                            <div class="col-md-2">
+                                <a class="" data-bs-toggle="modal" data-bs-target="#viewMessage">
+                                    <img class="avatar" src="assets/images/Kooppy.png">
+                                </a>
+                            </div>
+                            <div class="col-md-2">
+                                <p>{{ this.pseudo }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{ this.content }}</p>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
+                                        class="far fa-edit"></span></a>
+                                <a class="" data-bs-toggle="modal" data-bs-target="#privateMessage"><span
+                                        class="far fa-envelope"></span></a>
+                                <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                        class="far fa-trash-alt"></span></a>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <!-- Gallery Part -->
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="gallery">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseGallery" aria-expanded="false"
+                        aria-controls="collapseGallery">Galeries</button>
+                </h3>
+                <div id="collapseGallery" class="accordion-collapse collapse" aria-labelledby="gallery"
+                    data-bs-parent="#accordion">
+                    <div class="accordion-body text-center">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
+                                class="fas fa-user-plus"></span>Ajouter une
+                            Image</button>
+                        {{#each galerie }}
+                        <div class="row user">
+                            <div class="col-md-2">
+                                <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
+                                    <img class="avatar" src="assets/images/Kooppy.png">
+                                </a>
+                            </div>
+                            <div class="col-md-2">
+                                <p>{{ this.title }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{ this.description }}</p>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
+                                        class="far fa-edit"></span></a>
+                                <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                        class="far fa-trash-alt"></span></a>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,58 @@
+/**************************************/
+/**************INITIALIZER*************/
+/**************************************/
+
+h1, h2, h3, h4
+    font-family: 'Lato', 'Arial', sans-serif
+    letter-spacing: -1px
+    text-transform: uppercase
+    font-weight: 300
+    word-spacing: 8px
+
+h2
+    font-size: 250%
+    text-align: center
+    margin: 30px 0px
+
+h2:after
+    display: block
+    height: 3px
+    background: $japan
+    width: 200px
+    content: " "
+    margin: 0 auto
+
+h3
+    font-size: 160%
+
+p
+    font-size: 12px
+    font-weight: 300
+    line-height: 24px
+
+section
+    min-height: 35vh
+
+img
+    width: 100%
+    height: auto
+
+ul
+    list-style: none
+    padding-inline-start: 0px
+
+.scrollTop
+    display: none
+    position: fixed
+    bottom: 25px
+    right: 35px
+
+.iconScrollTop
+    width: 40px !important
+    height: 40px
+
+
+    
+@each $name, $rgba in $list_color_rgba
+    .bg-rgba-gradient-#{$name}
+        background: #{$rgba}

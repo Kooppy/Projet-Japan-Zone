@@ -1,0 +1,167 @@
+{{!-- 
+    Partial: Modal Admin View User
+ --}}
+
+<!-- Modal User & Create & Edit & Delete -->
+<div class="modal fade" id="viewUser{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- Nav Tabs -->
+                <ul class="nav nav-tabs" id="#myTab" role="tablist">
+                    <li class="nav-item" role="viewUser">
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profilUser"
+                            aria-controls="profilUser" aria-selected="true" type="button">Profil</button>
+                    </li>
+                    <li class="nav-item" role="editUser">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#editUser"
+                            aria-controls="editUser" aria-selected="false" type="button">Editer</button>
+                    </li>
+                    <li class="nav-item" role="privateMessageUser">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#privateMessageUser"
+                            aria-controls="privateMessageUser" aria-selected="false" type="button">MP</button>
+                    </li>
+                </ul>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- Tab Content Login / Register -->
+            <div class="tab-content" id="myTabContent">
+                <!-- Tab Panel View User -->
+                <div class="tab-pane show active" id="profilUser" role="tabpanel" aria-labelledby="profil-user-tab">
+                    <div class="modal-body">
+                        <form>
+                            <!-- Username & Password Input :-->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="">
+                                        <img src="assets/images/Kooppy.png" alt="Kooppy">
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="">
+                                        <p>Pseudo: {{ user.pseudo }}</p>
+                                        <p>Nom: {{ user.lastName }}</p>
+                                        <p>Prénom: {{ user.name }}</p>
+                                        <p>Date de Naissance: {{ user.birth }}</p>
+                                        <p>Email: {{ user.email }}</p>
+                                        <p>Date de Création de Compte : {{ user.createDate }}</p>
+                                        <p>Tags: {{ user.tags }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Tab Panel Edit User -->
+                <div class="tab-pane fade" id="editUser" role="tabpanel" aria-labelledby="edit-user-tab">
+                    <div class="modal-body">
+                        <form>
+                            <!-- Id & Avatar Input -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Identifiant">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="email" placeholder="Email">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Last Name & First Name Input -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Nom">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Prénom">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Date of the Birth & Email Input -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Date de Naissance">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="email" placeholder="Email">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Password & Confirm Password Input -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Mot de passe">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Confirmer le Mot de Passe">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Button Input-->
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <button type="button" class="btn btn-secondary">Envoyer</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Tab Panel Private Message -->
+                <div class="tab-pane fade" id="privateMessageUser" role="tabpanel"
+                    aria-labelledby="private-message-tab">
+                    <div class="modal-body">
+                        <form>
+                            <!-- Sujet & Message Input -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="text" placeholder="Sujet">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="contact-form">
+                                        <textarea class="input-form" name="message" placeholder="Message"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Button Input-->
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <button type="button" class="btn btn-secondary">Envoyer</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Modal Footer Social -->
+                <div class="modal-footer justify-content-center">
+                    <p>Suivez-nous : </p>
+                    <ul class="social-footer">
+                        <li><a class="social-footer-block social-facebook" href=""><span
+                                    class="fab fa-facebook-square"></span></a></li>
+                        <li><a class="social-footer-block social-twitter" href=""><span
+                                    class="fab fa-twitter"></span></a></li>
+                        <li><a class="social-footer-block social-youtube" href=""><span
+                                    class="fab fa-youtube"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
