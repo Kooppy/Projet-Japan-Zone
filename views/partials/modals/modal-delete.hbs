@@ -3,7 +3,7 @@
  --}}
 
 <!-- Modal Delete -->
-<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="delete{{ user.num_user }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -27,7 +27,11 @@
                         <p>Voulez-vous vraiment supprimer ?</p>
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="button" class="btn btn-secondary">Oui</button>
+                                <!--<a href="/admin/{{ user.num_user }}?_method=DELETE" class="btn btn-secondary">Oui</a>-->
+                                <form action="/admin/{{ user.num_user }}?_method=DELETE" method="post">
+                                    <button type="submit" class="btn btn-secondary">Oui</button>
+                                </form>
+                                
                                 <button type="button" class="btn btn-secondary">Annuler</button>
                             </div>
                         </div>

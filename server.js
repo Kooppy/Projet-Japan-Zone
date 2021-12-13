@@ -10,10 +10,43 @@ require('dotenv').config();
 const express = require('express'),
   app = express(),
   port = process.env.PORT || 3003,
+  bodyParser = require('body-parser'),
+  methodOverride = require('method-override'),
+  mysql = require('mysql'),
   ROUTER = require('./back/router.js'),
-  expressSession = require('express-session'),
-  fakeDB = require('./back/database/fakedb.json')
-handlebars = require('express-handlebars');
+  expressSession = require('express-session')
+  handlebars = require('express-handlebars');
+
+// Method-Override
+app.use(methodOverride('_method'));
+
+// Config Database
+db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'rfn2K22$',
+  database: 'db_local_test'
+})
+
+// Connect Database
+db.connect((err) => {
+  if (err) console.error('error connect:' + err.stack);
+  db.query("SHOW TABLES", function (err, result) {
+    if (err) console.error('error connect:' + err.stack);
+    console.log(result);
+  });
+  db.query("SELECT * FROM user", function (err, result) {
+    if (err) console.error('error connect:' + err.stack);
+    console.log(result);
+  });
+  console.log('connected' + db.threadId);
+})
+
+// Body-Parser, parser mes data d'une req
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 // Config Handlebars et Définis le moteur de mon app
 app.set('view engine', 'hbs');

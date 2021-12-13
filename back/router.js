@@ -14,10 +14,21 @@ const IndexController = require('./controllers/IndexController'),
       AdminController = require('./controllers/AdminController');
 
 // Routes
-router.route('/').get(IndexController.index);
-router.route('/blog').get(BlogController.blog);
-router.route('/blog/:id').get(BlogController.blogID);
-router.route('/admin').get(AdminController.admin);
+router.route('/')
+      .get(IndexController.index)
+      .post(IndexController.createUser);
+
+router.route('/blog')
+      .get(BlogController.blog);
+
+router.route('/blog/:id')
+      .get(BlogController.blogID);
+
+router.route('/admin')
+      .get(AdminController.admin);
+
+router.route('/admin/:id')
+      .delete(AdminController.delete);
 // /Routes
 
 // Export de notre router

@@ -1,6 +1,6 @@
-{{!-- 
-    Partial: Modal Login / Register
- --}}
+{{!--
+Partial: Modal Login / Register
+--}}
 
 <!-- Modal Login / Register -->
 <div class="modal fade" id="login-register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -28,17 +28,18 @@
                 <!-- Tab Panel Login -->
                 <div class="tab-pane show active" id="login" role="tabpanel" aria-labelledby="login-tab">
                     <div class="modal-body">
-                        <form>
+                        <form method="post" action="/">
                             <!-- Username & Password Input :-->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Identifiant">
+                                        <input class="input-form" name="pseudo" type="text" placeholder="Identifiant">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Mot de passe">
+                                        <input class="input-form" name="password" type="text"
+                                            placeholder="Mot de passe">
                                     </div>
                                 </div>
                             </div>
@@ -60,17 +61,26 @@
                 <!-- Tab Panel Register -->
                 <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
                     <div class="modal-body">
-                        <form>
+                        <form method="post" action="/">
                             <!-- Id & Email Input -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Identifiant">
+                                        <input class="input-form" name="pseudo" type="text" placeholder="Identifiant">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="contact-form">
-                                        <input class="input-form" type="email" placeholder="Email">
+                                        <input class="input-form" name="email" type="email" placeholder="Email">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Avatar Input -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="contact-form">
+                                        <input class="input-form" name="avatar" type="text"
+                                            placeholder="avatar">
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +88,8 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Mot de passe">
+                                        <input class="input-form" name="password" type="text"
+                                            placeholder="Mot de passe">
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +97,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="contact-form">
-                                        <input class="input-form" type="text"
+                                        <input class="input-form" name="cPassword" type="text"
                                             placeholder="Confirmer Votre Mot de passe">
                                     </div>
                                 </div>
@@ -94,7 +105,7 @@
                             <!-- Button Input-->
                             <div class="row">
                                 <div class="col-md-12 text-center">
-                                    <button type="button" class="btn btn-secondary">Envoyer</button>
+                                    <button type="submit" class="btn btn-secondary">Envoyer</button>
                                 </div>
                             </div>
                         </form>

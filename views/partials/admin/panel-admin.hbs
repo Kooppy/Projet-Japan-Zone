@@ -23,7 +23,7 @@
                             {{#each user }}
                             <div class="row user">
                                 <div class="col-md-2">
-                                    <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.id }}">
+                                    <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.num_user }}">
                                         <img class="avatar" src="assets/images/Kooppy.png">
                                     </a>
                                 </div>
@@ -40,15 +40,16 @@
                                     <p class="user-text">{{ this.email }}</p>
                                 </div>
                                 <div class="col-md-2">
-                                    <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.id }}"><span
+                                    <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.num_user }}"><span
                                             class="far fa-edit"></span></a>
-                                    <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.id }}"><span
+                                    <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.num_user }}"><span
                                             class="far fa-envelope"></span></a>
-                                    <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                    <a class="" data-bs-toggle="modal" data-bs-target="#delete{{ this.num_user }}"><span
                                             class="far fa-trash-alt"></span></a>
                                 </div>
                             </div>
                             {{> modals/modal-viewUser user=this }}
+                            {{> modals/modal-delete user=this }}
                             {{/each}}
                         </div>
                     </div>
