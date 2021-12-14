@@ -25,6 +25,6 @@ exports.delete = (req, res) => {
 
     db.query(sql, req.params.id, (err) => {
         if (err) console.log('errors : ' + err.stack);
-        res.redirect('/admin');
+        res.redirect('back');
     })
 }

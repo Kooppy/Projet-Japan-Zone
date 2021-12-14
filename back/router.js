@@ -10,13 +10,17 @@ const express = require('express'),
 
       // Import des controllers
 const IndexController = require('./controllers/IndexController'),
+      AuthController = require('./controllers/AuthController'),
       BlogController = require('./controllers/BlogController'),
       AdminController = require('./controllers/AdminController');
 
 // Routes
 router.route('/')
-      .get(IndexController.index)
-      .post(IndexController.createUser);
+      .get(IndexController.index);
+
+router.route('/auth')
+      .get(AuthController.loginUser)
+      .post(AuthController.createUser)
 
 router.route('/blog')
       .get(BlogController.blog);

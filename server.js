@@ -13,12 +13,38 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   methodOverride = require('method-override'),
   mysql = require('mysql'),
+  crypto = require('crypto'),
   ROUTER = require('./back/router.js'),
   expressSession = require('express-session')
   handlebars = require('express-handlebars');
 
 // Method-Override
 app.use(methodOverride('_method'));
+
+/* ******** */
+
+let hash = crypto.createHash('sha256');
+hash.update('oui')
+console.log("Ma clé crypt :", `${hash.digest('hex')}`);
+
+let password = '123456789'
+//let key = crypto.scryptSync(password, 'tuto', 24);
+let key = crypto.randomBytes(32);
+console.log("ouiouioui",key);
+let iv = crypto.randomBytes(16);
+
+console.log("ouiouioui", iv);
+let cipher = crypto.createCipheriv('aes-256-cbc', key, iv)
+let crypted = cipher.update('bonjour', 'utf8', 'hex')
+crypted += cipher.final('hex')
+console.log("encrypt :", crypted);
+
+let decipher = crypto.createDecipheriv('aes-256-cbc', key, iv)
+let dec = decipher.update(crypted, 'hex', 'utf8')
+dec += decipher.final('utf8')
+console.log("decrypt :", dec);
+
+/* ******** */
 
 // Config Database
 db = mysql.createConnection({
