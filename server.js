@@ -23,9 +23,11 @@ app.use(methodOverride('_method'));
 
 /* ******** */
 
-let hash = crypto.createHash('sha256');
-hash.update('oui')
-console.log("Ma clé crypt :", `${hash.digest('hex')}`);
+/*let hash = crypto.createHash('sha256');
+hash.update('test')
+console.log("Ma clé crypt :", `${hash}`);
+console.log("Ma clé crypt :", `${hash.digest('hex')}`);*/
+
 
 let password = '123456789'
 //let key = crypto.scryptSync(password, 'tuto', 24);
