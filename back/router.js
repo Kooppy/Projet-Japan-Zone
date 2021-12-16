@@ -6,6 +6,7 @@
 const express = require('express'), 
       router = express.Router(),
       auth = require('./middleware/auth.js'),
+      upload = require('./config/multer.js')
       fakeDB = require('./database/fakedb.json');
 
       // Import des controllers
@@ -20,7 +21,7 @@ router.route('/')
 
 router.route('/auth')
       .get(AuthController.loginUser)
-      .post(AuthController.createUser)
+      .post(upload.single('avatar'), AuthController.createUser)
 
 router.route('/blog')
       .get(BlogController.blog);
