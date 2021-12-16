@@ -1,12 +1,17 @@
+const upload = require('../config/multer.js');
+
 exports.createUser = (req, res) => {
+
+    const file = req.file.filename; 
+
     let sql = `INSERT INTO user SET email= ?, avatar= ?, pseudo= ?, mot_de_passe= ?`;
     let values = [
         req.body.email,
-        req.body.avatar,
+        file,
         req.body.pseudo,
         req.body.password
     ];
-    
+
     db.query(sql, values, function (err) {
         if (err) console.error('error :' + err.stack);
         res.redirect('back');
