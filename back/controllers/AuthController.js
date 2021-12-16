@@ -1,21 +1,22 @@
-const upload = require('../config/multer.js');
+const upload = require('../config/multer.js'),
+      crypto = require('crypto');
 
 exports.createUser = (req, res) => {
-
-    const file = req.file.filename; 
+    let hash = crypto.createHash('sha256');
+    hash.update(req.body.password);
 
     let sql = `INSERT INTO user SET email= ?, avatar= ?, pseudo= ?, mot_de_passe= ?`;
     let values = [
         req.body.email,
-        file,
+        req.file.filename,
         req.body.pseudo,
-        req.body.password
+        hash.digest('hex')
     ];
 
     db.query(sql, values, function (err) {
         if (err) console.error('error :' + err.stack);
         res.redirect('back');
-    }); 
+    });
 }
 
 exports.loginUser = (req, res) => {
