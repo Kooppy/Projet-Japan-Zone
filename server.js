@@ -15,7 +15,8 @@ const express = require('express'),
   mysql = require('mysql'),
   crypto = require('crypto'),
   ROUTER = require('./back/router.js'),
-  expressSession = require('express-session')
+  expressSession = require('express-session'),
+  MySQLStore = require("express-mysql-session")(expressSession)
   handlebars = require('express-handlebars');
 
 // Method-Override
@@ -48,13 +49,18 @@ console.log("decrypt :", dec);
 
 /* ******** */
 
+ 
+
 // Config Database
-db = mysql.createConnection({
+let configDB = {
   host: 'localhost',
   user: 'root',
   password: 'rfn2K22$',
   database: 'db_local_test'
-})
+}
+
+// Create Connection
+db = mysql.createConnection(configDB);
 
 // Connect Database
 db.connect((err) => {
@@ -64,6 +70,10 @@ db.connect((err) => {
     console.log(result);
   });
   db.query("SELECT * FROM user", function (err, result) {
+    if (err) console.error('error connect:' + err.stack);
+    console.log(result);
+  });
+  db.query("SELECT * FROM sessions", function (err, result) {
     if (err) console.error('error connect:' + err.stack);
     console.log(result);
   });
@@ -89,13 +99,16 @@ app.engine('hbs', handlebars.engine({
 */
 app.use('/assets', express.static('assets'));
 
+let sessionStore = new MySQLStore(configDB);
+
 // Gestion de la session
 app.use(expressSession({
   secret: 'keyboard cat',
   name: 'sessionID',
   saveUninitialized: true,
-  resave: false
-}))
+  resave: false,
+  store: sessionStore
+}));
 
 // Router.js
 app.use('/', ROUTER);
