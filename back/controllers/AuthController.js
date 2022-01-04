@@ -21,29 +21,39 @@ exports.createUser = (req, res) => {
 
 exports.loginUser = (req, res) => {
     /*let sql = `SELECT * FROM user WHERE (pseudo = :pseudo OR email = :pseudo) AND confirmation_date IS NULL`;*/
-    //let user = db.query(`SELECT * FROM user WHERE pseudo= ?`, req.body.pseudo, function (result){console.log(result);});
+    let sql = `SELECT * FROM user WHERE (pseudo= ? OR email= ?) AND confirmation_date IS NULL`;
+    
     let values = [
         req.body.pseudo,
         req.body.pseudo
     ];
     console.log("testestestes", req.session);
-    /*console.log("test :", user);*/
-    db.query(`SELECT * FROM user WHERE (pseudo= ? OR email= ?) AND confirmation_date IS NULL`, values, function (err, data) {
+
+    db.query(sql, values, function (err, data) {
         if (err) console.error('error : ' + err.stack);
 
         let hash = crypto.createHash('sha256');
         hash.update(req.body.password);
 
         if (hash.digest('hex') === data[0].mot_de_passe) {
+            let sess = req.session
             console.log("cela fonctionne");
-            req.session.user = {email: data[0].email, pseudo: data[0].pseudo};
-            console.log("TEST :",req.session.user);
+            sess.views = {email: data[0].email, pseudo: data[0].pseudo};
+            console.log("TEST :",sess.views);
+
         } else {
             console.log("cela fonction pas du tout");
         }
-        //console.log("Mon mot de passe crypt : ", data[0].mot_de_passe);
-
     })
     console.log(req.body);
     res.redirect('back');
+}
+
+exports.logOut = (req, res) => {
+    req.session.destroy(() => {
+        req.session = null;
+        res.clearCookie('sessionID');
+        console.log(req.session);
+        res.redirect('back');
+    })
 }

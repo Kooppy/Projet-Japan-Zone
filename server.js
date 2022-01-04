@@ -49,10 +49,8 @@ console.log("decrypt :", dec);
 
 /* ******** */
 
- 
-
 // Config Database
-let configDB = {
+let config = {
   host: 'localhost',
   user: 'root',
   password: 'rfn2K22$',
@@ -60,7 +58,7 @@ let configDB = {
 }
 
 // Create Connection
-db = mysql.createConnection(configDB);
+db = mysql.createConnection(config);
 
 // Connect Database
 db.connect((err) => {
@@ -99,15 +97,13 @@ app.engine('hbs', handlebars.engine({
 */
 app.use('/assets', express.static('assets'));
 
-let sessionStore = new MySQLStore(configDB);
-
 // Gestion de la session
 app.use(expressSession({
   secret: 'keyboard cat',
   name: 'sessionID',
   saveUninitialized: true,
   resave: false,
-  store: sessionStore
+  store: new MySQLStore(config)
 }));
 
 // Router.js

@@ -22,6 +22,7 @@ router.route('/')
 router.route('/auth')
       .get(AuthController.loginUser)
       .post(upload.single('avatar'), AuthController.createUser)
+      .delete(AuthController.logOut);
 
 router.route('/blog')
       .get(BlogController.blog);

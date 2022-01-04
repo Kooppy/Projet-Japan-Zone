@@ -1,6 +1,6 @@
-{{!-- 
-    Partial: Nav
- --}}
+{{!--
+Partial: Nav
+--}}
 
 <header>
     <nav class="navbar navbar-expand-md navbar-light bg-light" id="nav">
@@ -17,8 +17,23 @@
                     <a class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#contact">Contact</a>
                     <a class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#login-register">Connexion /
                         Inscription</a>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="mod">
+                    <div class="nav-item dropdown">
+                        <a class="nav-item nav-link dropdown-toggle" href="" id="userDrop" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Compte</a>
+                        <ul class="dropdown-menu" aria-labelledby="userDrop">
+                            <li><span class="nav-item nav-link text-center"><img class="author"
+                                        src="assets/images/Kooppy.png" alt="kooppy"></span></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a href="" class="dropdown-item">Profils</a></li>
+                            <li><a href="" class="dropdown-item">Message</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a href="" class="dropdown-item" data-bs-toggle="modal"
+                                    data-bs-target="#disconnect">Déconnexion</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
