@@ -12,7 +12,7 @@ const express = require('express'),
   port = process.env.PORT || 3003,
   bodyParser = require('body-parser'),
   methodOverride = require('method-override'),
-  mysql = require('mysql'),
+  mysql = require('mysql2'),
   crypto = require('crypto'),
   ROUTER = require('./back/router.js'),
   expressSession = require('express-session'),
@@ -51,10 +51,10 @@ console.log("decrypt :", dec);
 
 // Config Database
 let config = {
-  host: 'localhost',
+  host: process.env.DB_HOST,
   user: 'root',
   password: 'rfn2K22$',
-  database: 'db_local_test'
+  database: process.env.DB_DATABASE
 }
 
 // Create Connection
@@ -105,6 +105,13 @@ app.use(expressSession({
   resave: false,
   store: new MySQLStore(config)
 }));
+
+// Session Connexion for use HBS
+app.use('*', (req, res, next) => {
+  res.locals.user = req.session.user;
+  console.log("Session côter server.js :", req.session);
+  next();
+})
 
 // Router.js
 app.use('/', ROUTER);

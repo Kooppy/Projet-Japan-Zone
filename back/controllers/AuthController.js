@@ -36,24 +36,24 @@ exports.loginUser = (req, res) => {
         hash.update(req.body.password);
 
         if (hash.digest('hex') === data[0].mot_de_passe) {
-            let sess = req.session
-            console.log("cela fonctionne");
-            sess.views = {email: data[0].email, pseudo: data[0].pseudo};
-            console.log("TEST :",sess.views);
+            
+            req.session.user = {id: data[0].num_user, email: data[0].email, avatar: data[0].avatar, pseudo: data[0].pseudo};
+            //res.render('index', { success: "HEYHEYHEY " + data[0].pseudo })
+            res.redirect('back');
+            console.log("TEST :",req.session.user);
 
         } else {
             console.log("cela fonction pas du tout");
         }
+        
     })
-    console.log(req.body);
-    res.redirect('back');
+    
 }
 
 exports.logOut = (req, res) => {
     req.session.destroy(() => {
-        req.session = null;
         res.clearCookie('sessionID');
-        console.log(req.session);
+        console.log("Clear Cookie session log :", req.session);
         res.redirect('back');
     })
 }
