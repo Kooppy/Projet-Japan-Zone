@@ -34,14 +34,20 @@ Partial: Nav
                                     data-bs-target="#disconnect">Déconnexion</a></li>
                         </ul>
                     </div>
-                    {{> modals/modal-disconnect }}
+                    
                     {{else }}
                     <a class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#login-register">Connexion /
                         Inscription</a>
-                    {{> modals/modal-lr }}
+                    
                     {{/if }}
                 </div>
             </div>
         </div>
     </nav>
 </header>
+
+{{#if user }}
+{{> modals/modal-disconnect }}
+{{else }}
+{{> modals/modal-lr }}
+{{/if }}
