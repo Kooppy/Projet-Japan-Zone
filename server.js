@@ -12,7 +12,7 @@ const express = require('express'),
   port = process.env.PORT || 3003,
   bodyParser = require('body-parser'),
   methodOverride = require('method-override'),
-  mysql = require('mysql2'),
+  mysql = require('mysql'),
   crypto = require('crypto'),
   ROUTER = require('./back/router.js'),
   expressSession = require('express-session'),
@@ -49,15 +49,17 @@ console.log("decrypt :", dec);
 
 /* ******** */
 
+
 // Config Database
 let config = {
   host: process.env.DB_HOST,
-  user: 'root',
-  password: 'rfn2K22$',
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE
 }
 
-// Create Connection
+// Create Connection //
 db = mysql.createConnection(config);
 
 // Connect Database
