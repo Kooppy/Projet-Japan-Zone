@@ -1,11 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.9.7
--- https://www.phpmyadmin.net/
---
--- Hôte : db5000066081.hosting-data.io
--- Généré le : mar. 07 déc. 2021 à 13:39
--- Version du serveur :  5.7.33-log
--- Version de PHP : 7.0.33-0+deb9u12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +11,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `dbs60807`
+-- Base de données : `test`
 --
 
 -- --------------------------------------------------------
@@ -163,13 +155,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `num_blog` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT;
+  MODIFY `num_blog` int(2) NOT NULL AUTO_INCREMENT AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `pictureBanque`
 --
 ALTER TABLE `pictureBanque`
-  MODIFY `num_picture` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT;
+  MODIFY `num_picture` int(2) NOT NULL AUTO_INCREMENT AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `user`
