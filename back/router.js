@@ -19,6 +19,9 @@ const IndexController = require('./controllers/IndexController'),
 router.route('/')
       .get(IndexController.index);
 
+router.route('/contact')
+      .post(ContactController.sendMail);
+
 router.route('/auth')
       .get(AuthController.loginUser)
       .post(upload.single('avatar'), AuthController.createUser)
