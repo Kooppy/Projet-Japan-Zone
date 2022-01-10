@@ -11,6 +11,7 @@ const express = require('express'),
 
       // Import des controllers
 const IndexController = require('./controllers/IndexController'),
+      ContactController = require('./controllers/ContactController'),
       AuthController = require('./controllers/AuthController'),
       BlogController = require('./controllers/BlogController'),
       AdminController = require('./controllers/AdminController');
