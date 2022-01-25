@@ -5,10 +5,10 @@ exports.createUser = (req, res) => {
     let hash = crypto.createHash('sha256');
     hash.update(req.body.password);
 
-    let sql = `INSERT INTO user SET email= ?, avatar= ?, pseudo= ?, mot_de_passe= ?`;
+    let sql = `INSERT INTO user SET email= ?, avatar= ?, pseudo= ?, password= ? `;
     let values = [
         req.body.email,
-        req.file.filename,
+        'avatar.jpg',
         req.body.pseudo,
         hash.digest('hex')
     ];
@@ -35,7 +35,7 @@ exports.loginUser = (req, res) => {
         let hash = crypto.createHash('sha256');
         hash.update(req.body.password);
 
-        if (hash.digest('hex') === data[0].mot_de_passe) {
+        if (hash.digest('hex') === data[0].password) {
             
             req.session.user = {id: data[0].num_user, email: data[0].email, avatar: data[0].avatar, pseudo: data[0].pseudo};
             //res.render('index', { success: "HEYHEYHEY " + data[0].pseudo })
