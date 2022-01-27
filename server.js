@@ -118,21 +118,6 @@ app.use('*', (req, res, next) => {
 // Router.js
 app.use('/', ROUTER);
 
-/*app.get('/', function(req, res, next) {
-    if (req.session.views) {
-      req.session.views++
-      console.log(req.sessionID);
-      res.setHeader('Content-Type', 'text/html')
-      res.write('<p>views: ' + req.sessionID+ '</p>')
-      res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>')
-      res.end()
-    } else {
-      req.session.views = true
-      res.end('welcome to the session demo. refresh!')
-      console.log(req.session); 
-    }
-  })*/
-
 // Lancement de l'application
 app.listen(port, function () {
   console.log('App disponible sur localhost:3000 !');
