@@ -12,7 +12,9 @@ const express = require('express'),
   port = process.env.PORT || 3003,
   bodyParser = require('body-parser'),
   methodOverride = require('method-override'),
-  mysql = require('mysql'),
+  //mysql = require('mysql'),
+  dbOption = require('./back/config/dbOption'),
+  connectDB = require ('./back/config/connectDB')
   crypto = require('crypto'),
   ROUTER = require('./back/router.js'),
   expressSession = require('express-session'),
@@ -49,36 +51,8 @@ console.log("decrypt :", dec);
 
 /* ******** */
 
-
-// Config Database
-let config = {
-  host: process.env.DB_HOST,
-  //port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE
-}
-
-// Create Connection //
-db = mysql.createConnection(config);
-
-// Connect Database
-db.connect((err) => {
-  if (err) console.error('error connect:' + err.stack);
-  db.query("SHOW TABLES", function (err, result) {
-    if (err) console.error('error connect:' + err.stack);
-    console.log(result);
-  });
-  db.query("SELECT * FROM user", function (err, result) {
-    if (err) console.error('error connect:' + err.stack);
-    console.log(result);
-  });
-  db.query("SELECT * FROM sessions", function (err, result) {
-    if (err) console.error('error connect:' + err.stack);
-    console.log(result);
-  });
-  console.log('connected' + db.threadId);
-})
+// Connexion DB
+connectDB.connect();
 
 // Body-Parser, parser mes data d'une req
 app.use(bodyParser.json());
@@ -105,7 +79,7 @@ app.use(expressSession({
   name: 'sessionID',
   saveUninitialized: true,
   resave: false,
-  store: new MySQLStore(config)
+  store: new MySQLStore(dbOption)
 }));
 
 // Session Connexion for use HBS

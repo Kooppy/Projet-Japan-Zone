@@ -1,7 +1,8 @@
 const crypto = require('crypto');
+const connectDB = require('../config/connectDB');
 
 exports.createUser = async (req, res) => {
-    const { email, pseudo, password} = req.body;
+    const {email, pseudo, password} = req.body;
 
     let hash = crypto.createHash('sha256');
     hash.update(password);
@@ -14,26 +15,29 @@ exports.createUser = async (req, res) => {
     .then( () => db.end());*/
 
     try {
-        const user_insert = await db.query(`INSERT INTO user SET email= '${ email }', avatar= 'avatar.jpg', pseudo= '${ pseudo }', password= '${ hash.digest('hex') }' `);
+        const user_insert = await db.query(`INSERT INTO user SET email= '${email}', avatar= 'avatar.jpg', pseudo= '${pseudo}', password= '${ hash.digest('hex') }' `);
+        console.log(user_insert);
     } catch (err) {
         throw err;
-    } finally {
+    } /*finally {
         await db.end();
-    }
+    }*/
     
     res.redirect('back');
 }
 
 exports.loginUser = async (req, res) => {
-    const { pseudo, password } = req.body;
+    const {pseudo, password} = req.body;
     console.log(pseudo);
 
     try {
-        const user_connect = await db.query(`SELECT * FROM user WHERE (pseudo= '${ pseudo }' OR email= '${ pseudo }') AND confirmation_date IS NULL`);
+        const user_connect = await db.query(`SELECT num_user, email, avatar, pseudo, password FROM user WHERE (pseudo= '${ pseudo }' OR email= '${ pseudo }') AND confirmation_date IS NULL;`);
 
         if(user_connect) {
             let hash = crypto.createHash('sha256');
             hash.update(password);
+
+            console.log(user_connect);
 
             if (hash.digest('hex') === user_connect[0].password) {
 
@@ -48,9 +52,9 @@ exports.loginUser = async (req, res) => {
         }
     } catch (err) {
         throw err;
-    } finally {
+    } /*finally {
         await db.end();
-    }
+    }*/
 
     /*let sql = `SELECT * FROM user WHERE (pseudo= ? OR email= ?) AND confirmation_date IS NULL`;
     

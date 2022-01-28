@@ -20,7 +20,7 @@ exports.admin = (req, res) => {
 
 }
 
-exports.delete = (req, res) => {
+exports.deleteUser = (req, res) => {
     let sql = `DELETE FROM user WHERE num_user = ?`
 
     db.query(sql, req.params.id, (err) => {
