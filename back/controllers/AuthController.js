@@ -33,11 +33,11 @@ exports.loginUser = async (req, res) => {
     try {
         const user_connect = await db.query(`SELECT num_user, email, avatar, pseudo, password FROM user WHERE (pseudo= '${ pseudo }' OR email= '${ pseudo }') AND confirmation_date IS NULL;`);
 
-        if("test",user_connect) {
+        if(user_connect) {
             let hash = crypto.createHash('sha256');
             hash.update(password);
 
-            console.log(user_connect);
+            console.log("test ouioui :",user_connect);
 
             if (hash.digest('hex') === user_connect[0].password) {
 
