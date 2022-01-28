@@ -33,7 +33,7 @@ exports.loginUser = async (req, res) => {
     try {
         const user_connect = await db.query(`SELECT num_user, email, avatar, pseudo, password FROM user WHERE (pseudo= '${ pseudo }' OR email= '${ pseudo }') AND confirmation_date IS NULL;`);
 
-        if(user_connect) {
+        if("test",user_connect) {
             let hash = crypto.createHash('sha256');
             hash.update(password);
 
@@ -52,9 +52,9 @@ exports.loginUser = async (req, res) => {
         }
     } catch (err) {
         throw err;
-    } /*finally {
+    } finally {
         await db.end();
-    }*/
+    }
 
     /*let sql = `SELECT * FROM user WHERE (pseudo= ? OR email= ?) AND confirmation_date IS NULL`;
     

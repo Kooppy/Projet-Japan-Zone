@@ -5,8 +5,8 @@ const mysql = require('mysql'),
 db = mysql.createConnection({
     ...dbOption
 });
-/*const util = require("util");
-db.query = util.promisify(db.query).bind(db);*/
+const util = require("util");
+db.query = util.promisify(db.query).bind(db);
 
 // Export Module Connect Database
 exports.connect = () => {
