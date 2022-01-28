@@ -16,7 +16,7 @@ exports.createUser = async (req, res) => {
 
     try {
         const user_insert = await db.query(`INSERT INTO user SET email= '${email}', avatar= 'avatar.jpg', pseudo= '${pseudo}', password= '${ hash.digest('hex') }' `);
-        console.log(user_insert);
+        console.log("test nonononon :", user_insert.insertId);
     } catch (err) {
         throw err;
     } /*finally {
