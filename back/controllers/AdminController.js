@@ -23,7 +23,7 @@ exports.admin = async (req, res) => {
 }
 
 exports.banUser = async (req, res) => {
-    
+
 }
 
 exports.deleteUser = async (req, res) => {
@@ -35,4 +35,16 @@ exports.deleteUser = async (req, res) => {
     } catch (err) {
         throw err;
     }
+}
+
+exports.addBlog = async (req, res) => {
+
+}
+
+exports.editBlog = async (req, res) => {
+
+}
+
+exports.deleteBlog = async (req, res) => {
+
 }
