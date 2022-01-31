@@ -6,7 +6,7 @@
 const express = require('express'),
       router = express.Router(),
       auth = require('./middleware/auth.js'),
-      upload = require('./config/multer.js')
+      upload = require('./config/multer/multer.js'),
 fakeDB = require('./database/fakedb.json');
 
 // Import des modules dans les controllers
@@ -38,7 +38,7 @@ router.route('/blog').get(blog);
 
 router.route('/blog/:id').get(blogID);
 
-router.route('/admin').get(admin);
+router.route('/admin').get(auth.isAdmin, admin);
 
 router.route('/admin/:id').delete(deleteUser);
 

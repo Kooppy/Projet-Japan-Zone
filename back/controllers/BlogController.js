@@ -8,21 +8,10 @@ exports.blog = (req, res) => {
     res.render('blog');
 }
 
-exports.blogID = (req, res) => {
-    let blog = {}
-    /*let n = 0;
-    let b = false*/
+exports.blogID = async (req, res) => {
 
-    /*while (n < fakeDB.blogs.length && b == false) {
-        if (fakeDB.blogs[n].title == req.params.id) {
-            res.render('item1', { blog: fakeDB.blogs[n] })
-            b = true;
-        } 
-        n++;
-    }
-    if (b==false) {
-        res.redirect('/')
-    }*/
+   
+    let blog = {}
 
     fakeDB_blog.forEach(bl => {
         if (bl.title === req.params.id) {

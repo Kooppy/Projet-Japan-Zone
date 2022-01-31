@@ -35,43 +35,17 @@
                 <!-- Tab Panel Create User -->
                 <div class="tab-pane show active" id="addUser" role="tabpanel" aria-labelledby="add-user-tab">
                     <div class="modal-body">
-                        <form>
+                        <form method="post" action="/register">
                             <!-- Id & Avatar Input -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Identifiant">
+                                        <input class="input-form" type="text" name="pseudo" placeholder="Pseudo">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="contact-form">
-                                        <input class="input-form" type="email" placeholder="Email">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Last Name & First Name Input -->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Nom">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Prénom">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Date of the Birth & Email Input -->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Date de Naissance">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="contact-form">
-                                        <input class="input-form" type="email" placeholder="Email">
+                                        <input class="input-form" type="email" name="email" placeholder="Email">
                                     </div>
                                 </div>
                             </div>
@@ -79,19 +53,19 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Mot de passe">
+                                        <input class="input-form" type="password" name="password" placeholder="Mot de passe">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Confirmer le Mot de Passe">
+                                        <input class="input-form" type="password" name="cPassword" placeholder="Confirmer le Mot de Passe">
                                     </div>
                                 </div>
                             </div>
                             <!-- Button Input-->
                             <div class="row">
                                 <div class="col-md-12 text-center">
-                                    <button type="button" class="btn btn-secondary">Envoyer</button>
+                                    <button class="btn btn-secondary">Envoyer</button>
                                 </div>
                             </div>
                         </form>
