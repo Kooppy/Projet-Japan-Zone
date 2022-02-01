@@ -7,7 +7,7 @@ const express = require('express'),
       router = express.Router(),
       auth = require('./middleware/auth.js'),
       upload = require('./config/multer/multer.js'),
-fakeDB = require('./database/fakedb.json');
+      fakeDB = require('./database/fakedb.json');
 
 // Import des modules dans les controllers
 const {
@@ -16,7 +16,19 @@ const {
       loginUser,
       logOut,
       admin,
+      editUser,
+      banUser,
+      archivingUser,
       deleteUser,
+      addBlog,
+      editBlog,
+      deleteBlog,
+      addGallery,
+      editGallery,
+      deleteGallery,
+      addDiary,
+      editDiary,
+      deleteDiary,
       sendMail,
       blog,
       blogID
@@ -40,7 +52,25 @@ router.route('/blog/:id').get(blogID);
 
 router.route('/admin').get(auth.isAdmin, admin);
 
-router.route('/admin/:id').delete(deleteUser);
+router.route('/admin/user/:id').put(upload.single('picUser'), editUser).delete(deleteUser);
+
+router.route('/admin/user/ban/:id').put(banUser);
+
+router.route('/admin/user/archiving/:id').put(archivingUser);
+
+router.route('/admin/blog').post(upload.single('picBlog'), addBlog);
+
+router.route('/admin/blog/:id').put(editBlog).delete(deleteBlog);
+
+router.route('/admin/gallery').post(addGallery);
+
+router.route('/admin/gallery/:id').put(editGallery).delete(deleteGallery);
+
+router.route('/admin/diary').post(addDiary);
+
+router.route('/admin/diary/:id').put(editDiary).delete(deleteDiary);
+
+
 
 // /Routes
 

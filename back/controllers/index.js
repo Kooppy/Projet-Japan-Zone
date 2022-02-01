@@ -1,5 +1,5 @@
 const { index } = require("./IndexController"),
-      { admin, deleteUser } = require("./AdminController"),
+      { admin, editUser, banUser, archivingUser, deleteUser, addBlog, editBlog, deleteBlog, addGallery, editGallery, deleteGallery, addDiary, editDiary, deleteDiary } = require("./AdminController"),
       { createUser, loginUser, logOut } = require("./AuthController"),
       { sendMail } = require("./ContactController"),
       { blog, blogID } = require("./BlogController");
@@ -12,7 +12,7 @@ module.exports = {
     createUser, loginUser, logOut, 
 
     //Admin
-    admin, deleteUser,
+    admin, editUser, banUser, archivingUser, deleteUser, addBlog, editBlog, deleteBlog, addGallery, editGallery, deleteGallery, addDiary, editDiary, deleteDiary,
 
     //Contact
     sendMail,

@@ -30,11 +30,11 @@ exports.loginUser = async (req, res) => {
         hash.update(password);
 
         if(user_connect && hash.digest('hex') === user_connect[0].password) {
+            const session = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${user_connect[0].num_user}%'`);
             req.session.user = {id: user_connect[0].num_user, email: user_connect[0].email, avatar: user_connect[0].avatar, pseudo: user_connect[0].pseudo, isVerify: user_connect[0].isVerify, isBan: user_connect[0].isBan, isAdmin: user_connect[0].isAdmin};
             //res.render('index', { success: "HEYHEYHEY " + data[0].pseudo })
             res.redirect('back');
             console.log("TEST :",req.session.user);
-    
         } else {
             console.log("cela fonction pas du tout");
             res.render('index', { error: "votre pseudo / email ou votre mot de passe est faux " })

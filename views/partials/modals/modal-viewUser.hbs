@@ -1,6 +1,6 @@
-{{!-- 
-    Partial: Modal Admin View User
- --}}
+{{!--
+Partial: Modal Admin View User
+--}}
 
 <!-- Modal User & Create & Edit & Delete -->
 <div class="modal fade" id="viewUser{{ user.num_user }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -58,8 +58,15 @@
                 <!-- Tab Panel Edit User -->
                 <div class="tab-pane fade" id="editUser" role="tabpanel" aria-labelledby="edit-user-tab">
                     <div class="modal-body">
-                        <form>
+                        <form method="post" action="/admin/user/{{ user.num_user }}?_method=PUT" enctype="multipart/form-data">
                             <!-- Id & Avatar Input -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" type="file" name="picUser" placeholder="Image">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="contact-form">
@@ -114,7 +121,7 @@
                             <!-- Button Input-->
                             <div class="row">
                                 <div class="col-md-12 text-center">
-                                    <button type="button" class="btn btn-secondary">Envoyer</button>
+                                    <button class="btn btn-secondary">Envoyer</button>
                                 </div>
                             </div>
                         </form>
