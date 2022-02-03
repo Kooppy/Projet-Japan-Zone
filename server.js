@@ -17,7 +17,7 @@ const express = require('express'),
   crypto = require('crypto'),
   ROUTER = require('./back/router.js'),
   expressSession = require('express-session'),
-  MySQLStore = require("express-mysql-session")(expressSession)
+  MySQLStore = require("express-mysql-session")(expressSession),
   handlebars = require('express-handlebars');
 
 // Method-Override

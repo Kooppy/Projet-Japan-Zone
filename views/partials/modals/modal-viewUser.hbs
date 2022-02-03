@@ -3,7 +3,7 @@ Partial: Modal Admin View User
 --}}
 
 <!-- Modal User & Create & Edit & Delete -->
-<div class="modal fade" id="viewUser{{ user.num_user }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="viewUser{{ this.num_user }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -17,10 +17,6 @@ Partial: Modal Admin View User
                     <li class="nav-item" role="editUser">
                         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#editUser"
                             aria-controls="editUser" aria-selected="false" type="button">Editer</button>
-                    </li>
-                    <li class="nav-item" role="privateMessageUser">
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#privateMessageUser"
-                            aria-controls="privateMessageUser" aria-selected="false" type="button">MP</button>
                     </li>
                 </ul>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -37,18 +33,26 @@ Partial: Modal Admin View User
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="">
-                                        <img src="assets/images/{{user.avatar}}" alt="Kooppy">
+                                        <img src="assets/images/avatar/{{this.link}}" alt="Kooppy">
                                     </div>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="">
-                                        <p>Pseudo: {{ user.pseudo }}</p>
-                                        <p>Nom: {{ user.lastName }}</p>
-                                        <p>Prénom: {{ user.name }}</p>
-                                        <p>Date de Naissance: {{ user.birth }}</p>
-                                        <p>Email: {{ user.email }}</p>
-                                        <p>Date de Création de Compte : {{ user.createDate }}</p>
-                                        <p>Tags: {{ user.tags }}</p>
+                                        <p>Pseudo: {{ this.pseudo }}</p>
+                                        <p>Email: {{ this.email }}</p>
+                                        <p>Nom: {{ this.name }}</p>
+                                        <p>Prénom: {{ this.first_name }}</p>
+                                        <p>Adresse: {{ this.address }}</p>
+                                        <p>Code Postale: {{ this.postal_code }}</p>
+                                        <p>Ville: {{ this.city }}</p>
+                                        <p>Téléphone: {{ this.phone }}</p>
+                                        <p>Civilité: {{ this.civility }}</p>
+                                        <p>Description: {{ this.description }}</p>
+                                        <p>isVerify: {{ this.isVerify }}</p>
+                                        <p>isAdmin: {{ this.isAdmin }}</p>
+                                        <p>isBan: {{ this.isBan }}</p>
+                                        <p>isArchiving: {{ this.isArchiving }}</p>
+                                        <p>Date de Création de Compte : {{ this.confirmation_date }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +62,8 @@ Partial: Modal Admin View User
                 <!-- Tab Panel Edit User -->
                 <div class="tab-pane fade" id="editUser" role="tabpanel" aria-labelledby="edit-user-tab">
                     <div class="modal-body">
-                        <form method="post" action="/admin/user/{{ user.num_user }}?_method=PUT" enctype="multipart/form-data">
+                        <form method="post" action="/admin/user/{{ this.num_user }}?_method=PUT"
+                            enctype="multipart/form-data">
                             <!-- Id & Avatar Input -->
                             <div class="row">
                                 <div class="col-md-6">
@@ -70,12 +75,12 @@ Partial: Modal Admin View User
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Identifiant">
+                                        <input class="input-form" name="pseudo" type="text" placeholder="Pseudo">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="contact-form">
-                                        <input class="input-form" type="email" placeholder="Email">
+                                        <input class="input-form" name="email" type="email" placeholder="Email">
                                     </div>
                                 </div>
                             </div>
@@ -83,38 +88,89 @@ Partial: Modal Admin View User
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Nom">
+                                        <input class="input-form" name="name" type="text" placeholder="Nom">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Prénom">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Date of the Birth & Email Input -->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Date de Naissance">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="contact-form">
-                                        <input class="input-form" type="email" placeholder="Email">
+                                        <input class="input-form" name="first_name" type="text" placeholder="Prénom">
                                     </div>
                                 </div>
                             </div>
-                            <!-- Password & Confirm Password Input -->
+                            <!-- Address & Postal Code Input -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Mot de passe">
+                                        <input class="input-form" name="address" type="text" placeholder="Adresse">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Confirmer le Mot de Passe">
+                                        <input class="input-form" name="postal_code" type="text"
+                                            placeholder="Code Postale">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- City & Phone Input -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" name="city" type="text" placeholder="Ville">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" name="phone" type="text" placeholder="Téléphone">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Civility & Description Input -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" name="civility" type="text" placeholder="Civilité">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" name="description" type="text"
+                                            placeholder="Description">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- New Password Input -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" name="password" type="text"
+                                            placeholder="Nouveau Mot de Passe">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- isAdmin & isVerify Input -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" name="isAdmin" type="text" placeholder="isAdmin">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" name="isVerify" type="text" placeholder="isVerify">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- isBan & isArchiving Input -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" name="isBan" type="text" placeholder="isBan">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="contact-form">
+                                        <input class="input-form" name="isArchiving" type="text"
+                                            placeholder="isArchiving">
                                     </div>
                                 </div>
                             </div>
@@ -122,35 +178,6 @@ Partial: Modal Admin View User
                             <div class="row">
                                 <div class="col-md-12 text-center">
                                     <button class="btn btn-secondary">Envoyer</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <!-- Tab Panel Private Message -->
-                <div class="tab-pane fade" id="privateMessageUser" role="tabpanel"
-                    aria-labelledby="private-message-tab">
-                    <div class="modal-body">
-                        <form>
-                            <!-- Sujet & Message Input -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="contact-form">
-                                        <input class="input-form" type="text" placeholder="Sujet">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="contact-form">
-                                        <textarea class="input-form" name="message" placeholder="Message"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Button Input-->
-                            <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <button type="button" class="btn btn-secondary">Envoyer</button>
                                 </div>
                             </div>
                         </form>
