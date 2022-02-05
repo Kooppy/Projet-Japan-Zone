@@ -69,7 +69,7 @@ exports.banUser = async (req, res) => {
     } = req.params;
 
     try {
-        const user_ban = await db.query(`UPDATE user_role SET isBan = true WHERE num_user = '${id}';`);
+        const user_ban = await db.query(`UPDATE user_role SET isBan= true WHERE num_user = '${id}';`);
         const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${id}%';`);
         res.redirect('back');
     } catch (err) {
@@ -83,7 +83,7 @@ exports.archivingUser = async (req, res) => {
     } = req.params;
 
     try {
-        const user_ban = await db.query(`UPDATE user_role SET isArchiving = true WHERE num_user = '${id}';`);
+        const user_archiving = await db.query(`UPDATE user_role SET isArchiving = true WHERE num_user = '${id}';`);
         const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${id}%';`);
         res.redirect('back');
     } catch (err) {
@@ -143,9 +143,9 @@ exports.deleteBlog = async (req, res) => {
     } = req.params;
 
     try {
-        const tag = await db.query(`UPDATE tags INNER JOIN blog ON blog.num_blog = tags.num_blog SET tags.num_blog = NULL WHERE blog.num_blog = '${id}';`);
+        const tag = await db.query(`UPDATE tags INNER JOIN blog ON blog.num_blog = tags.num_blog SET tags.num_blog= NULL WHERE blog.num_blog = '${id}';`);
         const picture = await db.query(`UPDATE pictureBank INNER JOIN blog ON blog.num_blog = pictureBank.num_blog SET pictureBank.num_blog = NULL WHERE blog.num_blog = '${id}';`);
-        const blog = await db.query(`DELETE FROM blog WHERE num_blog = '${id}';`);
+        const blog = await db.query(`DELETE FROM blog WHERE num_blog= '${id}';`);
     } catch (err) {
         throw err;
     }
