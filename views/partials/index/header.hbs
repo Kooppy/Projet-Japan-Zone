@@ -2,6 +2,14 @@
     Partial: Header
  --}}
 
+    {{#if errors}}
+        {{!-- On parcours le tableau des errors --}}
+        {{#each errors}}
+            {{!-- On affiche la variable que l'on veux afficher --}}
+            <h4>{{msg}}</h4>
+        {{/each}}
+    {{/if}}
+
 <!-- Carousel -->
 <section class="carousel slide carousel-fade header mb-5" data-bs-ride="carousel" id="carouselIndicators">
     <div class="carousel-indicators">

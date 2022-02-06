@@ -20,7 +20,7 @@
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
                                     class="fas fa-user-plus"></span>Créer un
                                 Utilisateur </button>
-                            {{#each user }}
+                            {{#each users }}
                             <div class="row user">
                                 <div class="col-md-2">
                                     <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.num_user }}">
@@ -42,8 +42,8 @@
                                             class="far fa-trash-alt"></span></a>
                                 </div>
                             </div>
-                            {{> modals/modal-viewUser user=this }}
-                            {{> modals/modal-delete user=this }}
+                            {{> modals/modal-viewUser users=this }}
+                            {{> modals/modal-delete users=this }}
                             {{/each}}
                         </div>
                     </div>
@@ -64,8 +64,8 @@
                         {{#each blog }}
                         <div class="row user">
                             <div class="col-md-2">
-                                <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog">
-                                    <img class="avatar" src="assets/images/Kooppy.png">
+                                <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog{{ this.num_blog }}">
+                                    <img class="avatar" src="./assets/images/blog/{{ this.link }}">
                                 </a>
                             </div>
                             <div class="col-md-2">
@@ -167,3 +167,4 @@
         </div>
     </div>
 </section>
+{{> modals/modal-add }}

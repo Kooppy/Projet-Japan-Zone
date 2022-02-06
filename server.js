@@ -64,6 +64,7 @@ app.set('view engine', 'hbs');
 app.engine('hbs', handlebars.engine({
   extname: 'hbs',
   defaultLayout: 'main',
+  admin: 'adminLayout'
 }));
 
 /* 
@@ -90,6 +91,10 @@ app.use('*', (req, res, next) => {
 
 // Router.js
 app.use('/', ROUTER);
+
+app.use('*', (req, res) => {
+  res.status(404).render('err404');
+});
 
 // Lancement de l'application
 app.listen(port, function () {

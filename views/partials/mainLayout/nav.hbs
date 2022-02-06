@@ -1,0 +1,54 @@
+{{!--
+Partial: Nav - Main Layout
+--}}
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-light bg-light" id="nav">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img class="author" src="/assets/images/logo.png">Japan Zone</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#monmenu"
+                aria-controls="monmenu" aria-label="Menu pour mobile">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="monmenu">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-item nav-link" href="/"><span class="fas fa-home"></span></a>
+                    <a class="nav-item nav-link" href="/blog">Article</a>
+                    <a class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#contact">Contact</a>
+                    {{#if user }}
+                        <div class="nav-item dropdown">
+                            <a class="nav-item nav-link dropdown-toggle" href="" id="userDrop" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">Compte</a>
+                            <ul class="dropdown-menu" aria-labelledby="userDrop">
+                                <li><span class="nav-item nav-link text-center"><img class="author"
+                                            src="../assets/images/avatar/{{ user.avatar }}" alt="kooppy"></span></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a href="" class="dropdown-item">Profils</a></li>
+                                {{#if user.isAdmin }}
+                                    <li><a href="" class="dropdown-item">Messagerie</a></li>
+                                    <li><a href="/admin" class="dropdown-item">Panel Admin</a></li>
+                                {{/if }}
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a href="" class="dropdown-item" data-bs-toggle="modal"
+                                        data-bs-target="#disconnect">Déconnexion</a></li>
+                            </ul>
+                        </div>
+                    {{else }}
+                        <a class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#login-register">Connexion /
+                            Inscription</a>
+                    {{/if }}
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+{{#if user }}
+{{> modals/modal-disconnect }}
+{{else }}
+{{> modals/modal-lr }}
+{{/if }}

@@ -45,103 +45,26 @@
             </div>
             <!-- Article List -->
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="actu-list">
-                        <img class="actu-view-img" src="assets/images/news/item1.png" alt="item1">
-                        <h3 class="mt-1">Item 1</h3>
-                        <p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla </p>
-                        <div class="row justify-content-between">
-                            <div class="col-auto">
-                                <a href="article/article1.html" class="btn-news-view">Lire</a>
-                            </div>
-                            <div class="col-auto">
-                                <p class="mt-1"><span class="fas fa-calendar-day"></span> 12/12/2000
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="actu-list">
-                        <img class="actu-view-img" src="assets/images/news/item1.png" alt="item1">
-                        <h3 class="mt-1">Item 1</h3>
-                        <p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla </p>
-                        <div class="row justify-content-between">
-                            <div class="col-auto">
-                                <a href="article/article1.html" class="btn-news-view">Lire</a>
-                            </div>
-                            <div class="col-auto">
-                                <p class="mt-1"><span class="fas fa-calendar-day"></span> 12/12/2000
-                                </p>
+                {{#each blog }}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="actu-list">
+                            <img class="actu-view-img" src="./assets/images/blog/{{ blog.link }}" alt="item">
+                            <h3 class="mt-1">{{ blog.title }}</h3>
+                            <p>{{ blog.description }} </p>
+                            <div class="row justify-content-between">
+                                <div class="col-auto">
+                                    <a href="/{{ blog.title }}" class="btn-news-view">Lire</a>
+                                </div>
+                                <div class="col-auto">
+                                    <p class="mt-1"><span class="fas fa-calendar-day"></span> {{ blog.date }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="actu-list">
-                        <img class="actu-view-img" src="assets/images/news/item1.png" alt="item1">
-                        <h3 class="mt-1">Item 1</h3>
-                        <p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla </p>
-                        <div class="row justify-content-between">
-                            <div class="col-auto">
-                                <a href="article/article1.html" class="btn-news-view">Lire</a>
-                            </div>
-                            <div class="col-auto">
-                                <p class="mt-1"><span class="fas fa-calendar-day"></span> 12/12/2000
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="actu-list">
-                        <img class="actu-view-img" src="assets/images/news/item1.png" alt="item1">
-                        <h3 class="mt-1">Item 1</h3>
-                        <p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla </p>
-                        <div class="row justify-content-between">
-                            <div class="col-auto">
-                                <a href="article/article1.html" class="btn-news-view">Lire</a>
-                            </div>
-                            <div class="col-auto">
-                                <p class="mt-1"><span class="fas fa-calendar-day"></span> 12/12/2000
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="actu-list">
-                        <img class="actu-view-img" src="assets/images/news/item1.png" alt="item1">
-                        <h3 class="mt-1">Item 1</h3>
-                        <p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla </p>
-                        <div class="row justify-content-between">
-                            <div class="col-auto">
-                                <a href="article/article1.html" class="btn-news-view">Lire</a>
-                            </div>
-                            <div class="col-auto">
-                                <p class="mt-1"><span class="fas fa-calendar-day"></span> 12/12/2000
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="actu-list">
-                        <img class="actu-view-img" src="assets/images/news/item1.png" alt="item1">
-                        <h3 class="mt-1">Item 1</h3>
-                        <p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla </p>
-                        <div class="row justify-content-between">
-                            <div class="col-auto">
-                                <a href="article/article1.html" class="btn-news-view">Lire</a>
-                            </div>
-                            <div class="col-auto">
-                                <p class="mt-1"><span class="fas fa-calendar-day"></span> 12/12/2000
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {{/each }}
             </div>
+
             <div class="row">
                 <div class="col-md-12">
                     <div aria-label="Page">

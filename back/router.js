@@ -42,7 +42,9 @@ router.route('/').get(index);
 router.route('/contact').post(sendMail);
 
 router.route('/register').post(
-      [check('password')
+      [check('pesudo'),
+      check('email'),
+      check('password')
       .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\%\@])[0-9a-zA-Z\%\@]{8,}$/)
       .withMessage('Votre mot de passe doit contenir 1 Majuscule, 1 Minuscule, 1 Chiffre, 1 Caractère Spéciale et doit comporter au minimum 8 caractères.'),
       check('password').custom((value, { req }) => {
@@ -60,9 +62,9 @@ router.route('/blog').get(blog);
 
 router.route('/blog/:id').get(blogID);
 
-// router.use(auth.isAdmin)
+router.use(auth.isAdmin)
 
-router.route('/admin').get(auth.isAdmin, admin);
+router.route('/admin').get(admin);
 
 router.route('/admin/user/:id').put(upload.single('picUser'), editUser).delete(deleteUser);
 

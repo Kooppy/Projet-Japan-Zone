@@ -3,18 +3,18 @@
  * ************************ */
 exports.admin = async (req, res) => {
     try {
-        const user = await db.query(`SELECT user.num_user, user.email, user.pseudo, user.password, user.confirmation_date, pictureBank.link, user_role.isVerify, user_role.isAdmin, user_role.isBan, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
+        const users = await db.query(`SELECT user.num_user, user.email, user.pseudo, user.password, user.confirmation_date, pictureBank.link, user_role.isVerify, user_role.isAdmin, user_role.isBan, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
                                       FROM user
                                       INNER JOIN pictureBank ON pictureBank.num_user = user.num_user
                                       INNER JOIN user_role ON user_role.num_user = user.num_user
                                       INNER JOIN user_address ON user_address.num_user = user.num_user
                                       INNER JOIN user_profil ON user_profil.num_user = user.num_user;`);
 
-        // const blog = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, blog.article_date, user.pseudo, pictureBank.link, pictureBank.title, pictureBank.description, tags.name
-        //                              FROM blog 
-        //                              INNER JOIN user ON user.num_user = blog.num_user
-        //                              INNER JOIN pictureBank ON pictureBank.num_blog = blog.num_blog
-        //                              INNER JOIN tags ON tags.num_blog = blog.num_blog;`);
+        const blog = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, blog.date, user.pseudo, pictureBank.link, pictureBank.title, pictureBank.description, tags.name
+                                     FROM blog 
+                                     INNER JOIN user ON user.num_user = blog.num_user
+                                     INNER JOIN pictureBank ON pictureBank.num_blog = blog.num_blog
+                                     INNER JOIN tags ON tags.num_blog = blog.num_blog;`);
 
         // const gallery = await db.query(`SELECT pictureBank.num_picture, pictureBank.link, pictureBank.title, pictureBank.description, user.pseudo, blog.title, tags.name
         //                                 FROM pictureBank
@@ -24,10 +24,11 @@ exports.admin = async (req, res) => {
 
         // const diary = await db.query(`SELECT diary.num_diary, diary.date, diary.contents, user.pseudo
         //                               INNER JOIN user ON user.num_user = diary.num_user;`);
-
+console.log(blog);
         res.render('admin', {
-            user
-            // blog,
+            layout: 'adminLayout',
+            users,
+            blog,
             // gallery,
             // diary
         });
@@ -119,13 +120,13 @@ exports.addBlog = async (req, res) => {
         title,
         description,
         content,
-        name
+        categorie
     } = req.body;
 
     try {
-        const blog = await db.query(`INSERT INTO blog SET title= '${title}', description= '${description}', contents= '${content}', article_date= NOW(), num_user= '${req.session.user.id}';`);
-        const picture = await db.query(`INSERT INTO pictureBank SET link_picture= '${req.file.filename}', num_user= '${req.session.user.id}', num_blog= '${blog.insertID}';`);
-        const tags = await db.query(`INSERT INTO tags SET name= '${name}', num_blog= '${blog.insertID}', num_picture= '${picture.insertID}';`)
+        const blog = await db.query(`INSERT INTO blog SET title= '${title}', description= '${description}', contents= '${content}', date= NOW(), num_user= '${req.session.user.id}';`);
+        const picture = await db.query(`INSERT INTO pictureBank SET link= '${req.file.filename}', num_user= '${req.session.user.id}', num_blog= '${blog.insertId}';`);
+        const tags = await db.query(`INSERT INTO tags SET name= '${categorie}', num_blog= '${blog.insertId}', num_picture= '${picture.insertId}';`)
 
         res.redirect('back');
     } catch (err) {
@@ -158,7 +159,7 @@ exports.addGallery = async (req, res) => {
 
     try {
         const picture = await db.query(`INSERT INTO pictureBank SET link_picture= '${req.file.filename}', num_user= '${req.session.user.id}';`);
-        const tags = await db.query(`INSERT INTO tags SET name= '${name}', num_blog= '${blog.insertID}', num_picture= '${picture.insertID}';`);
+        const tags = await db.query(`INSERT INTO tags SET name= '${name}', num_picture= '${picture.insertId}';`);
         res.redirect('back');
     } catch (err) {
         throw err;
