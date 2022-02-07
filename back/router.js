@@ -42,7 +42,7 @@ router.route('/').get(index);
 router.route('/contact').post(sendMail);
 
 router.route('/register').post(
-      [check('pesudo'),
+      /*[check('pesudo'),
       check('email'),
       check('password')
       .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\%\@])[0-9a-zA-Z\%\@]{8,}$/)
@@ -52,7 +52,7 @@ router.route('/register').post(
               throw new Error('La confirmation de mot de passe est incorrecte !');
             }
       }),
-], createUser);
+],*/ createUser);
 
 router.route('/login').post(loginUser);
 

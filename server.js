@@ -18,7 +18,8 @@ const express = require('express'),
   ROUTER = require('./back/router.js'),
   expressSession = require('express-session'),
   MySQLStore = require("express-mysql-session")(expressSession),
-  handlebars = require('express-handlebars');
+  handlebars = require('express-handlebars'),
+  Handlebars = require('handlebars');
 
 // Method-Override
 app.use(methodOverride('_method'));
@@ -87,6 +88,17 @@ app.use('*', (req, res, next) => {
   res.locals.user = req.session.user;
   console.log("Session côter server.js :", req.session);
   next();
+})
+
+Handlebars.registerHelper('ifpaginate', function (a, b, opts) {
+  console.log("opts : ", opts);
+  if (a == b) {
+    console.log("opts22222 : ", opts.fn(this));
+    return opts.fn(this);
+  } else {
+    console.log("opts33333 : ", opts.inverse(this));
+    return opts.inverse(this);
+  }
 })
 
 // Router.js

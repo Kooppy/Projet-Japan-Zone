@@ -1,6 +1,6 @@
-{{!-- 
-    Partial: Admin Main
- --}}
+{{!--
+Partial: Admin Main
+--}}
 
 <!-- Main Admin User & Blog & Gallery & Diary -->
 <section class="container my-5">
@@ -34,9 +34,11 @@
                                     <p class="user-text">{{ this.email }}</p>
                                 </div>
                                 <div class="col-md-3">
-                                    <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.num_user }}"><span
+                                    <a class="" data-bs-toggle="modal"
+                                        data-bs-target="#viewUser{{ this.num_user }}"><span
                                             class="far fa-edit"></span></a>
-                                    <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.num_user }}"><span
+                                    <a class="" data-bs-toggle="modal"
+                                        data-bs-target="#viewUser{{ this.num_user }}"><span
                                             class="far fa-envelope"></span></a>
                                     <a class="" data-bs-toggle="modal" data-bs-target="#delete{{ this.num_user }}"><span
                                             class="far fa-trash-alt"></span></a>
@@ -45,6 +47,42 @@
                             {{> modals/modal-viewUser users=this }}
                             {{> modals/modal-delete users=this }}
                             {{/each}}
+                            {{#if page_disable}}
+                            {{else}}
+                            <nav aria-label="Page navigation example">
+                                <ul class="justify-content-center pagination">
+
+                                    {{#ifpaginate page.current 1}}
+                                    {{else}}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{page.previous}}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link"
+                                            href="?page={{page.previous}}">{{page.previous}}</a>
+                                    </li>
+                                    {{/ifpaginate}}
+
+                                    <li class="page-item active"><a class="page-link"
+                                            href="?page={{page.current}}">{{page.current}}</a>
+                                    </li>
+
+                                    {{#ifpaginate page.next undefined}}
+                                    {{else}}
+                                    <li class="page-item"><a class="page-link"
+                                            href="?page={{page.next}}">{{page.next}}</a></li>
+                                    {{!-- <li class="page-item"><a class="page-link">...</a>
+                                    </li> --}}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{page.next}}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                    {{/ifpaginate}}
+                                </ul>
+                            </nav>
+                            {{/if}}
                         </div>
                     </div>
                 </div>

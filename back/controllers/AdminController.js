@@ -1,20 +1,32 @@
 /*
  * Controller: Admin (Admin)
  * ************************ */
+const {
+    pagination
+} = require('../util/pagination');
+
 exports.admin = async (req, res) => {
+    let paginateUser = await pagination({
+        numItem: 5,
+        page: req.query.page,
+        table: 'user'
+    });
+
     try {
         const users = await db.query(`SELECT user.num_user, user.email, user.pseudo, user.password, user.confirmation_date, pictureBank.link, user_role.isVerify, user_role.isAdmin, user_role.isBan, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
                                       FROM user
                                       INNER JOIN pictureBank ON pictureBank.num_user = user.num_user
                                       INNER JOIN user_role ON user_role.num_user = user.num_user
                                       INNER JOIN user_address ON user_address.num_user = user.num_user
-                                      INNER JOIN user_profil ON user_profil.num_user = user.num_user;`);
+                                      INNER JOIN user_profil ON user_profil.num_user = user.num_user
+                                      ORDER BY user.num_user
+                                      DESC LIMIT ${paginateUser.limit};`);
 
-        const blog = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, blog.date, user.pseudo, pictureBank.link, pictureBank.title, pictureBank.description, tags.name
-                                     FROM blog 
-                                     INNER JOIN user ON user.num_user = blog.num_user
-                                     INNER JOIN pictureBank ON pictureBank.num_blog = blog.num_blog
-                                     INNER JOIN tags ON tags.num_blog = blog.num_blog;`);
+        // const blog = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, blog.date, user.pseudo, pictureBank.link, pictureBank.title, pictureBank.description, tags.name
+        //                              FROM blog 
+        //                              INNER JOIN user ON user.num_user = blog.num_user
+        //                              INNER JOIN pictureBank ON pictureBank.num_blog = blog.num_blog
+        //                              INNER JOIN tags ON tags.num_blog = blog.num_blog;`);
 
         // const gallery = await db.query(`SELECT pictureBank.num_picture, pictureBank.link, pictureBank.title, pictureBank.description, user.pseudo, blog.title, tags.name
         //                                 FROM pictureBank
@@ -24,14 +36,22 @@ exports.admin = async (req, res) => {
 
         // const diary = await db.query(`SELECT diary.num_diary, diary.date, diary.contents, user.pseudo
         //                               INNER JOIN user ON user.num_user = diary.num_user;`);
-console.log(blog);
-        res.render('admin', {
-            layout: 'adminLayout',
-            users,
-            blog,
-            // gallery,
-            // diary
-        });
+
+        if (paginateUser.page.current <= paginateUser.page.total) {
+            res.render('admin', {
+                layout: 'adminLayout',
+                users,
+                page: paginateUser.page,
+                //blog,
+                // gallery,
+                // diary
+            });
+        } else {
+            res.redirect('/admin');
+        }
+
+
+
     } catch (err) {
         throw err;
     }
@@ -102,9 +122,9 @@ exports.deleteUser = async (req, res) => {
         const user = await db.query(`
             DELETE user_role, user_profil, user_address, user 
             FROM user
-                right JOIN user_role 
+                RIGHT JOIN user_role 
                     ON user_role.num_user = user.num_user 
-                right JOIN user_profil 
+                RIGHT JOIN user_profil 
                     ON user_profil.num_user = user.num_user 
                 right JOIN user_address 
                     ON user_address.num_user = user.num_user 
