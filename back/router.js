@@ -7,7 +7,8 @@ const express = require('express'),
       router = express.Router(),
       auth = require('./middleware/auth.js'),
       upload = require('./config/multer/multer.js'),
-      { check } = require('express-validator');
+      { check } = require('express-validator'),
+      { validate } = require('./middleware/validate.js');
 
 //"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\%\@])[0-9a-zA-Z\%\@]{8,}$"
 // Import des modules dans les controllers
@@ -41,9 +42,9 @@ router.route('/').get(index);
 
 router.route('/contact').post(sendMail);
 
-router.route('/register').post(
-      /*[check('pesudo'),
-      check('email'),
+router.route('/register').post(validate(
+      [//check('pseudo').isLength({min: 5}),
+      //check('email').isEmail(),
       check('password')
       .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\%\@])[0-9a-zA-Z\%\@]{8,}$/)
       .withMessage('Votre mot de passe doit contenir 1 Majuscule, 1 Minuscule, 1 Chiffre, 1 Caractère Spéciale et doit comporter au minimum 8 caractères.'),
@@ -51,8 +52,9 @@ router.route('/register').post(
             if (value !== req.body.cPassword) {
               throw new Error('La confirmation de mot de passe est incorrecte !');
             }
-      }),
-],*/ createUser);
+            return true;
+      })
+]), createUser);
 
 router.route('/login').post(loginUser);
 

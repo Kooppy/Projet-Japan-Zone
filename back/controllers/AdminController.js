@@ -12,39 +12,68 @@ exports.admin = async (req, res) => {
         table: 'user'
     });
 
+    let paginateBlog = await pagination({
+        numItem: 5,
+        page: req.query.page,
+        table: 'blog'
+    });
+
+    let paginateGallery = await pagination({
+        numItem: 5,
+        page: req.query.page,
+        table: 'pictureBank'
+    });
+
+    let paginateDiary = await pagination({
+        numItem: 5,
+        page: req.query.page,
+        table: 'diary'
+    });
+
     try {
-        const users = await db.query(`SELECT user.num_user, user.email, user.pseudo, user.password, user.confirmation_date, pictureBank.link, user_role.isVerify, user_role.isAdmin, user_role.isBan, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
+        const users = await db.query(`SELECT user.num_user, user.email, user.pseudo, user.password, user.confirmation_date, pictureBank.link_picture, user_role.isVerify, user_role.isAdmin, user_role.isBan, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
                                       FROM user
-                                      INNER JOIN pictureBank ON pictureBank.num_user = user.num_user
+                                      INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%user%'
                                       INNER JOIN user_role ON user_role.num_user = user.num_user
                                       INNER JOIN user_address ON user_address.num_user = user.num_user
                                       INNER JOIN user_profil ON user_profil.num_user = user.num_user
                                       ORDER BY user.num_user
                                       DESC LIMIT ${paginateUser.limit};`);
 
-        // const blog = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, blog.date, user.pseudo, pictureBank.link, pictureBank.title, pictureBank.description, tags.name
-        //                              FROM blog 
-        //                              INNER JOIN user ON user.num_user = blog.num_user
-        //                              INNER JOIN pictureBank ON pictureBank.num_blog = blog.num_blog
-        //                              INNER JOIN tags ON tags.num_blog = blog.num_blog;`);
+        const blog = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, blog.date, user.pseudo, pictureBank.link_picture, category.name
+                                     FROM blog 
+                                     INNER JOIN user ON user.num_user = blog.num_user
+                                     INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%blog%'
+                                     INNER JOIN category ON category.num_blog = blog.num_blog
+                                     ORDER BY blog.num_blog
+                                     DESC LIMIT ${paginateBlog.limit};`);
 
-        // const gallery = await db.query(`SELECT pictureBank.num_picture, pictureBank.link, pictureBank.title, pictureBank.description, user.pseudo, blog.title, tags.name
-        //                                 FROM pictureBank
-        //                                 INNER JOIN user ON user.num_user = pictureBank.num_user
-        //                                 INNER JOIN blog ON blog.num_blog = pictureBank.num_blog
-        //                                 INNER JOIN tags ON tags.num_picture = pictureBank.num_picture;`);
+        const gallery = await db.query(`SELECT pictureBank.num_picture, pictureBank.link_picture, pictureBank.title_picture, pictureBank.description_picture, user.pseudo, blog.title, category.name
+                                        FROM pictureBank
+                                        INNER JOIN user ON user.num_user = pictureBank.num_user
+                                        INNER JOIN blog ON blog.num_blog = pictureBank.num_blog
+                                        INNER JOIN category ON category.num_picture = pictureBank.num_picture
+                                        ORDER BY pictureBank.num_picture
+                                        DESC LIMIT ${paginateGallery.limit};`);
 
-        // const diary = await db.query(`SELECT diary.num_diary, diary.date, diary.contents, user.pseudo
-        //                               INNER JOIN user ON user.num_user = diary.num_user;`);
+        const diary = await db.query(`SELECT diary.num_diary, diary.date, diary.contents, user.pseudo
+                                      FROM diary
+                                      INNER JOIN user ON user.num_user = diary.num_user
+                                      ORDER BY diary.num_diary
+                                      DESC LIMIT ${paginateDiary.limit};`);
 
+                                      console.log(paginateDiary);
         if (paginateUser.page.current <= paginateUser.page.total) {
             res.render('admin', {
                 layout: 'adminLayout',
                 users,
-                page: paginateUser.page,
-                //blog,
-                // gallery,
-                // diary
+                pageUser: paginateUser.page,
+                blog,
+                pageBlog: paginateBlog.page,
+                gallery,
+                pageGallery: paginateGallery.page,
+                diary,
+                pageDiary: paginateDiary.page
             });
         } else {
             res.redirect('/admin');
@@ -58,7 +87,7 @@ exports.admin = async (req, res) => {
 }
 
 exports.editUser = async (req, res) => {
-    const {
+    let {
         pseudo,
         email,
         name,
@@ -77,7 +106,32 @@ exports.editUser = async (req, res) => {
     } = req.body;
 
     try {
-        const user = await db.query(`UPDATE user SET isBan = true WHERE num_user = '${id}';`);
+        const selectUser = await db.query(`SELECT user.num_user, user.email, user.pseudo, user.password, user.confirmation_date, pictureBank.link_picture, user_role.isVerify, user_role.isAdmin, user_role.isBan, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
+                                           FROM user
+                                           INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%user%'
+                                           INNER JOIN user_role ON user_role.num_user = user.num_user
+                                           INNER JOIN user_address ON user_address.num_user = user.num_user
+                                           INNER JOIN user_profil ON user_profil.num_user = user.num_user
+                                           WHERE user.num_user = ${req.params.id};`)
+
+        pseudo = !pseudo ? selectUser[0].pseudo : pseudo;
+        email = !email ? selectUser[0].email : email;
+        name = !name ? selectUser[0].name : name;
+        first_name = !first_name ? selectUser[0].first_name : first_name;
+        address = !address ? selectUser[0].address : address;
+        postal_code = !postal_code ? selectUser[0].postal_code : postal_code;
+        city = !city ? selectUser[0].city : city;
+        phone = !phone ? selectUser[0].phone : phone;
+        civility = !civility ? selectUser[0].civility : civility;
+        description = !description ? selectUser[0].description : description;
+        password = !password ? selectUser[0].password : password;
+        isVerify = !isVerify ? selectUser[0].isVerify : isVerify;
+        isAdmin = !isAdmin ? selectUser[0].isAdmin : isAdmin;
+        isBan = !isBan ? selectUser[0].isBan : isBan;
+        isArchiving = !isArchiving ? selectUser[0].isArchiving : isArchiving;
+        
+        console.log(pseudo);
+        // const user = await db.query(`UPDATE user SET isBan = true WHERE num_user = '${req.params.id}';`);
         res.redirect('back');
     } catch (err) {
         throw err;
@@ -145,8 +199,8 @@ exports.addBlog = async (req, res) => {
 
     try {
         const blog = await db.query(`INSERT INTO blog SET title= '${title}', description= '${description}', contents= '${content}', date= NOW(), num_user= '${req.session.user.id}';`);
-        const picture = await db.query(`INSERT INTO pictureBank SET link= '${req.file.filename}', num_user= '${req.session.user.id}', num_blog= '${blog.insertId}';`);
-        const tags = await db.query(`INSERT INTO tags SET name= '${categorie}', num_blog= '${blog.insertId}', num_picture= '${picture.insertId}';`)
+        const picture = await db.query(`INSERT INTO pictureBank SET link_picture= '${req.file.filename}', num_user= '${req.session.user.id}', num_blog= '${blog.insertId}';`);
+        const category = await db.query(`INSERT INTO category SET name= '${categorie}', num_blog= '${blog.insertId}', num_picture= '${picture.insertId}';`)
 
         res.redirect('back');
     } catch (err) {
@@ -164,7 +218,7 @@ exports.deleteBlog = async (req, res) => {
     } = req.params;
 
     try {
-        const tag = await db.query(`UPDATE tags INNER JOIN blog ON blog.num_blog = tags.num_blog SET tags.num_blog= NULL WHERE blog.num_blog = '${id}';`);
+        const category = await db.query(`UPDATE category INNER JOIN blog ON blog.num_blog = category.num_blog SET category.num_blog= NULL WHERE blog.num_blog = '${id}';`);
         const picture = await db.query(`UPDATE pictureBank INNER JOIN blog ON blog.num_blog = pictureBank.num_blog SET pictureBank.num_blog = NULL WHERE blog.num_blog = '${id}';`);
         const blog = await db.query(`DELETE FROM blog WHERE num_blog= '${id}';`);
     } catch (err) {
@@ -179,7 +233,7 @@ exports.addGallery = async (req, res) => {
 
     try {
         const picture = await db.query(`INSERT INTO pictureBank SET link_picture= '${req.file.filename}', num_user= '${req.session.user.id}';`);
-        const tags = await db.query(`INSERT INTO tags SET name= '${name}', num_picture= '${picture.insertId}';`);
+        const category = await db.query(`INSERT INTO category SET name= '${name}', num_picture= '${picture.insertId}';`);
         res.redirect('back');
     } catch (err) {
         throw err;
@@ -196,7 +250,7 @@ exports.deleteGallery = async (req, res) => {
     } = req.params;
 
     try {
-        const picture_tag = await db.query(`DELETE tags,pictureBank FROM tags left join pictureBank ON tags.num_picture = pictureBank.num_picture WHERE tags.num_picture= '${id}';`);
+        const picture_category = await db.query(`DELETE category,pictureBank FROM category left join pictureBank ON category.num_picture = pictureBank.num_picture WHERE category.num_picture= '${id}';`);
         res.redirect('back');
     } catch (err) {
         throw err;

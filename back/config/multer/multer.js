@@ -20,7 +20,7 @@ let iscorrect = (data) => {
     let fieldName = '';
 
 
-    name.file.fieldname === 'picBlog' ? fieldName = `blog/${name.title.split(' ').join('_')}` : name.file.fieldname === 'picUser' ? fieldName = `avatar/${name.pseudo.split(' ').join('_')}` : name.file.fieldname === 'picGallery' ? fieldName = `gallery/${name.title.split(' ').join('_')}` : console.log("rdegre");;
+    name.file.fieldname === 'picBlog' ? fieldName = `blog/${name.title.split(' ').join('_')}` : name.file.fieldname === 'picUser' ? fieldName = `avatar/${name.pseudo.split(' ').join('_')}` : name.file.fieldname === 'picGallery' ? fieldName = `gallery/${name.title.split(' ').join('_')}` : console.log("rdegre");
 
     let dir = `./assets/images/${fieldName}`
     if (!existsSync(dir)) {
@@ -60,7 +60,9 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, callback) => {
         const name = file.originalname.split(' ').join('_');
-        callback(null, name);
+        let completed;
+        file.fieldname === 'picBlog' ? completed = Date.now()+"_blog_"+name : file.fieldname === 'picUser' ? fieldName = Date.now()+"_user_"+name : file.fieldname === 'picGallery' ? fieldName = Date.now()+"_gallery_"+name : console.log("rdegre");
+        callback(null, completed);
     }
 })
 

@@ -91,12 +91,9 @@ app.use('*', (req, res, next) => {
 })
 
 Handlebars.registerHelper('ifpaginate', function (a, b, opts) {
-  console.log("opts : ", opts);
   if (a == b) {
-    console.log("opts22222 : ", opts.fn(this));
     return opts.fn(this);
   } else {
-    console.log("opts33333 : ", opts.inverse(this));
     return opts.inverse(this);
   }
 })
