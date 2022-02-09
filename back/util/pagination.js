@@ -12,7 +12,6 @@ module.exports = {
             let limit = ((page - 1) * numItem) + ',' + numItem;
 
             try {
-
                 const numRows = await db.query(`SELECT count(*) as num FROM ${table};`);
 
                 let numPages = Math.ceil(numRows[0].num / numItem);

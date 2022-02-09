@@ -4,7 +4,7 @@
 
 const { validationResult, ValidationChain } = require('express-validator');
 
-exports.validate = validations => {
+exports.validate = (validations) => {
     return async (req, res, next) => {
       await Promise.all(validations.map(validation => validation.run(req)));
   
