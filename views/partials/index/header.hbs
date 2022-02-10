@@ -1,15 +1,23 @@
-{{!-- 
-    Partial: Header
- --}}
+{{!--
+Partial: Header
+--}}
 
-    {{#if errors}}
-        {{!-- On parcours le tableau des errors --}}
-        {{#each errors}}
-            {{!-- On affiche la variable que l'on veux afficher --}}
-            <h4>{{msg}}</h4>
-        {{/each}}
-    {{/if}}
+{{#if errors}}
+{{!-- On parcours le tableau des errors --}}
+<script>
+    document.getElementById('flash').innerText = `{{ error }}`
+    document.getElementById('flash').style.color = 'red'
+    setTimeout(() => {
+        document.getElementById('flash').style.display = 'none'
+    }, 3500)
+</script>
+{{#each errors}}
+{{!-- On affiche la variable que l'on veux afficher --}}
+<p class="red">{{msg}}</p>
+{{/each}}
+{{/if}}
 
+<div id='flash'></div>
 <!-- Carousel -->
 <section class="carousel slide carousel-fade header mb-5" data-bs-ride="carousel" id="carouselIndicators">
     <div class="carousel-indicators">

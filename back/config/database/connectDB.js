@@ -6,6 +6,18 @@ db = mysql.createConnection({
     ...dbOption
 });
 const util = require("util");
+
+// config custom query escapement 
+db.config.queryFormat = function (query, values) {
+    if (!values) return query;
+    return query.replace(/\:(\w+)/g, function (txt, key) {
+        if (values.hasOwnProperty(key)) {
+            return this.escape(values[key]);
+        }
+        return txt;
+    }.bind(this));
+};
+
 db.query = util.promisify(db.query).bind(db);
 
 // Export Module Connect Database

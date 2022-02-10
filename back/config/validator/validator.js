@@ -1,21 +1,20 @@
 const { check } = require('express-validator'), 
-      { validate } = require('../../middleware/validate'), 
+      //{ validate } = require('../../middleware/validate'), 
       { selectID } = require('../../util/select'),
       { hash } = require('../../util/hash');
 
 exports.methodValidate = (method) => {
     switch (method) {
         case 'register':
-            return validate(
-                [check('pseudo')
+            return [check('pseudo')
                     .isLength({
                         min: 8
                     })
                     .withMessage('Votre pseudo doit faire 8 caractère mini.'),
                     check('pseudo').custom((async value => {
-                        const userPseudo = await selectID('pseudo', 'user', value);
+                        const userPseudo = await selectID('count(*) as num', 'user', 'pseudo', value);
 
-                        if (userPseudo) {
+                        if (userPseudo. num === 1) {
                             throw new Error('Le pseudo est déjà prit !');
                         }
                         return true;
@@ -23,10 +22,10 @@ exports.methodValidate = (method) => {
                     check('email')
                     .isEmail()
                     .withMessage('Email invalide'),
-                    check('email').custom((async value => {
-                        const userEmail = await selectID('email', 'user', value);
+                    check('email').custom((async value  => {
+                        const userEmail = await selectID('count(*) as num', 'user', 'email', value);
 
-                        if (userEmail) {
+                        if (userEmail.num === 1) {
                             throw new Error('Un compte existe déjà avec cet email !');
                         }
                         return true;
@@ -39,7 +38,9 @@ exports.methodValidate = (method) => {
                     .matches(/^(?=.*[\%\@])[0-9a-zA-Z\%\@]{1,}$/)
                     .withMessage(' 1 caractère spéciale.')
                     .matches(/^(?=.*[A-Z])[0-9a-zA-Z\%\@]{1,}$/)
-                    .withMessage(' 1 Majuscule.'),
+                    .withMessage(' 1 Majuscule.')
+                    .isLength({ min: 8 })
+                    .withMessage('Doit faire 8 caractère minimum.'),
                     check('password').custom((value, {
                         req
                     }) => {
@@ -48,26 +49,15 @@ exports.methodValidate = (method) => {
                         }
                         return true;
                     })
-                ]);
+                ];
         case 'login':
-            return validate(
-                [check('pseudo').custom((async value => {
-                    const user = await db.query(`SELECT password FROM user WHERE (pseudo= '${ value }' OR email= '${ value }');`);
-
-                    if (!user[0] || hash(value) !== user[0].password) {
+            return [check('pseudo').custom((async (value, { req } ) => {
+                    const user = await selectID('password', 'user', 'pseudo= :value OR email= :value', value);
+                    if ( !user || user.password !== hash(req.body.password) ) {
                         throw new Error('Erreur de connexion login ou mot de passe faux !');
                     }
                     return true;
-                })),
-                check('password').custom((async value => {
-                    let test = hash(value)
-                    const userP = await db.query(`SELECT password FROM user WHERE  email= '${ test }';`);
-                    
-                    if (!userP[0]) {
-                        throw new Error('Erreur de connexion login ou mot de passe faux !');
-                    }
-                    return true;
-                }))]);
+                }))];
         default:
             break;
     }

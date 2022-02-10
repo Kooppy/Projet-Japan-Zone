@@ -1,8 +1,9 @@
-exports.selectID = (params, table, value) => {
+exports.selectID = (params, table, condition, value, test) => {
     return new Promise(async (resolved, rejected) => {
         try {
-            const userID = await db.query(`SELECT ${params} FROM ${table} WHERE ${params}= '${value}'`);
-            resolved(userID[0]);
+            const selectID = await db.query(`SELECT ${params} FROM ${table} WHERE ${condition}`, {value});
+
+            resolved(selectID[0])
         } catch (err) {
             rejected(err);
         }   

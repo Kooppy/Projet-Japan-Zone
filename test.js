@@ -78,3 +78,70 @@
 //         console.log("regregegreegergge", result[0]);
 //         resolved(result[0]);
 //     });
+
+
+
+// const { validationResult, ValidationChain } = require('express-validator');
+
+// exports.validate = (validations) => {
+//     return async (req, res, next) => {
+//       await Promise.all(validations.map(validation => validation.run(req)));
+  
+//       const errors = validationResult(req);
+//       if (errors.isEmpty()) {
+//         return next();
+//       }
+  
+//       res.status(400).json({ errors: errors.array() });
+//     };
+//   };
+
+
+
+
+
+
+
+
+
+
+
+// exports.loginUser = async (req, res) => {
+//     const {pseudo, password} = req.body;
+    
+//     try {
+//         const user = await db.query(`SELECT password FROM user WHERE (pseudo= '${ pseudo }' OR email= '${ pseudo }');`);
+
+//         if(user[0] && hash(password) === user[0].password) {
+//             const user_connect = await db.query(`SELECT user.num_user, user.email, user.pseudo, pictureBank.link_picture, user_role.isVerify, user_role.isAdmin, user_role.isBan FROM user INNER JOIN pictureBank ON pictureBank.num_user = user.num_user INNER JOIN user_role ON user_role.num_user = user.num_user WHERE (pseudo= '${ pseudo }' OR email= '${ pseudo }');`);
+//             const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${user_connect[0].num_user}%';`);
+//             req.session.user = {id: user_connect[0].num_user, email: user_connect[0].email, avatar: user_connect[0].link_picture, pseudo: user_connect[0].pseudo, isVerify: user_connect[0].isVerify, isAdmin: user_connect[0].isAdmin};
+            
+//             res.redirect('back');
+//         } else {
+//             res.render('index', { error: "votre pseudo / email ou votre mot de passe est faux" })
+//         }
+//     } catch (err) {
+//         throw err;
+//     }
+// }
+
+
+
+// case 'login':
+//     return [check('pseudo').custom((async (value, { req } ) => {
+//             const user = await selectID('password', 'user', `pseudo= '${ value }' OR email= '${ value }'`);
+//             if ( !user || user.password !== hash(req.body.password) ) {
+//                 throw new Error('Erreur de connexion login ou mot de passe faux !');
+//             }
+//             return true;
+//         }))];
+
+// case 'login':
+//     return [check('pseudo').custom((async (value, { req } ) => {
+//             const user = await db.query(`SELECT password FROM user WHERE pseudo= :value OR email= :value;`, {value});
+//             if ( !user[0] || user[0].password !== hash(req.body.password) ) {
+//                 throw new Error('Erreur de connexion login ou mot de passe faux !');
+//             }
+//             return true;
+//         }))];

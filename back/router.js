@@ -33,6 +33,7 @@ const {
       blog,
       blogID
 } = require('./controllers');
+const { validate } = require('./middleware/validate.js');
 
 // Routes
 
@@ -40,11 +41,11 @@ router.route('/').get(index);
 
 router.route('/contact').post(sendMail);
 
-router.route('/register').post(methodValidate('register'), createUser);
+router.route('/register').post(methodValidate('register'), validate, createUser);
 
-router.route('/login').post(methodValidate('login'), loginUser);
+router.route('/login').post(methodValidate('login'), validate, loginUser);
 
-router.route('/profil/:id').get().put();
+//router.route('/profil/:id').get().put();
 
 router.route('/logout').delete(logOut);
 
