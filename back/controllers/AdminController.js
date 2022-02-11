@@ -78,9 +78,6 @@ exports.admin = async (req, res) => {
         } else {
             res.redirect('/admin');
         }
-
-
-
     } catch (err) {
         throw err;
     }

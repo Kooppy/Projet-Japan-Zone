@@ -1,6 +1,8 @@
-const { index } = require("./IndexController"),
+const { index } = require("./IndexController"),  
+      { createUser, loginUser, forgot, logOut } = require("./AuthController"),
+      { resetPassword, reset } = require("./ResetPassword"),
+      //{  } = require("./UserController"),
       { admin, editUser, banUser, archivingUser, deleteUser, addBlog, editBlog, deleteBlog, addGallery, editGallery, deleteGallery, addDiary, editDiary, deleteDiary } = require("./AdminController"),
-      { createUser, loginUser, logOut } = require("./AuthController"),
       { sendMail } = require("./ContactController"),
       { blog, blogID } = require("./BlogController");
 
@@ -9,7 +11,14 @@ module.exports = {
     index,
 
     // Auth
-    createUser, loginUser, logOut, 
+    createUser, loginUser, forgot, logOut, 
+
+    // Reset Password
+
+    resetPassword, reset,
+
+    // User
+    
 
     //Admin
     admin, editUser, banUser, archivingUser, deleteUser, addBlog, editBlog, deleteBlog, addGallery, editGallery, deleteGallery, addDiary, editDiary, deleteDiary,

@@ -6,15 +6,19 @@
 const express = require('express'),
       router = express.Router(),
       auth = require('./middleware/auth.js'),
-      upload = require('./config/multer/multer.js'),
-      { methodValidate } = require('./config/validator/validator.js');
+      upload = require('./config/multer'),
+      {  configRegister, configLogin } = require('./config/validator'),
+      { validate } = require('./middleware/index.js');
 
 // Import des modules dans les controllers
 const {
       index,
       createUser,
       loginUser,
+      forgot,
       logOut,
+      resetPassword, 
+      reset,
       admin,
       editUser,
       banUser,
@@ -32,8 +36,7 @@ const {
       sendMail,
       blog,
       blogID
-} = require('./controllers');
-const { validate } = require('./middleware/validate.js');
+} = require('./controllers'); 
 
 // Routes
 
@@ -41,13 +44,17 @@ router.route('/').get(index);
 
 router.route('/contact').post(sendMail);
 
-router.route('/register').post(methodValidate('register'), validate, createUser);
+router.route('/register').post(validate(configRegister()), createUser);
 
-router.route('/login').post(methodValidate('login'), validate, loginUser);
+router.route('/login').post(validate(configLogin()), loginUser);
 
 //router.route('/profil/:id').get().put();
 
 router.route('/logout').delete(logOut);
+
+router.route('/forgot').post(forgot);
+
+router.route('/resetPassword/:id').get(resetPassword).post(reset);
 
 router.route('/blog').get(blog);
 

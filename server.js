@@ -13,7 +13,7 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   methodOverride = require('method-override'),
   dbOption = require('./back/config/database/dbOption'),
-  connectDB = require ('./back/config/database/connectDB')
+  connectDB = require ('./back/config/database')
   crypto = require('crypto'),
   ROUTER = require('./back/router.js'),
   expressSession = require('express-session'),
@@ -70,8 +70,6 @@ app.use('*', (req, res, next) => {
   console.log("Session côter server.js :", req.session);
   next();
 })
-
-
 
 // Router.js
 app.use('/', ROUTER);
