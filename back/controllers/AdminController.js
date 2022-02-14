@@ -6,32 +6,31 @@ const {
 } = require('../util/pagination');
 
 exports.admin = async (req, res) => {
+    let paginateUser = await pagination({
+        numItem: 5,
+        page: req.query.page,
+        table: 'user'
+    });
+
+    let paginateBlog = await pagination({
+        numItem: 5,
+        page: req.query.page,
+        table: 'blog'
+    });
+
+    let paginateGallery = await pagination({
+        numItem: 5,
+        page: req.query.page,
+        table: 'pictureBank'
+    });
+
+    let paginateDiary = await pagination({
+        numItem: 5,
+        page: req.query.page,
+        table: 'diary'
+    }); 
+
     try {
-
-        let paginateUser = await pagination({
-            numItem: 5,
-            page: req.query.page,
-            table: 'user'
-        });
-    
-        let paginateBlog = await pagination({
-            numItem: 5,
-            page: req.query.page,
-            table: 'blog'
-        });
-    
-        let paginateGallery = await pagination({
-            numItem: 5,
-            page: req.query.page,
-            table: 'pictureBank'
-        });
-    
-        let paginateDiary = await pagination({
-            numItem: 5,
-            page: req.query.page,
-            table: 'diary'
-        });    
-
         const users = await db.query(`SELECT user.num_user, user.email, user.pseudo, user.password, user.confirmation_date, pictureBank.link_picture, user_role.isVerify, user_role.isAdmin, user_role.isBan, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
                                       FROM user
                                       INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%user%'

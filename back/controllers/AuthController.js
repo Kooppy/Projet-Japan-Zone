@@ -2,7 +2,7 @@
  * Controller: Auth (Auth)
  * ************************ */
 
-const {hash} = require('../util/hash'), 
+const { hash } = require('../util/hash'), 
       { sendMail } = require('../util/nodemailer'),
       { selectID } = require('../util/select');
 
@@ -42,17 +42,18 @@ exports.forgot = async (req, res) => {
 
     const token = Math.floor(Math.random() * 10000000);
 
-    const user = await selectID('num_user', 'user', 'email= :value', email);
+    try {
+        const user = await selectID('num_user', 'user', 'email= :value', email);
 
-    if (user) {
-        req.session.forgot = {token: token, user: user};
-
-        let result = await sendMail({toEmail: email, subject: 'Mot de passe oublié', message: `Voici votre lien pour réinitialiser votre mot de passe : http://${req.get('host')}/resetPassword/${token}`});
-
+        req.session.forgot = {token: token, kiwi: user.num_user};
+    
+        let result = await sendMail({toEmail: email, subject: 'Mot de passe oublié', message: `Voici votre lien pour réinitialiser votre mot de passe : http://${req.get('host')}/resetPassword/${token}`, validate: 'Si votre email existe, un email sera envoyer.'});
+    
         console.log(result.flash);
         res.render('index', {flash: result.flash});
+    } catch (err) {
+        throw err;
     }
-    res.redirect('/');
 }
 
 exports.logOut = (req, res) => {

@@ -56,7 +56,7 @@ app.use(expressSession({
   store: new MySQLStore(dbOption)
 }));
 
-Handlebars.registerHelper('ifpaginate', function (a, b, opts) {
+Handlebars.registerHelper('ifstatus', function (a, b, opts) {
   if (a == b) {
     return opts.fn(this);
   } else {
@@ -67,6 +67,7 @@ Handlebars.registerHelper('ifpaginate', function (a, b, opts) {
 // Session Connexion for use HBS
 app.use('*', (req, res, next) => {
   res.locals.user = req.session.user;
+  res.locals.token = req.session.forgot;
   console.log("Session côter server.js :", req.session);
   next();
 })

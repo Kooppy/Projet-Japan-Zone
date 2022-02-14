@@ -17,7 +17,8 @@ exports.sendMail = (data) => {
         const {
             toEmail,
             subject,
-            message
+            message,
+            validate
         } = data;
 
         console.log(data);
@@ -35,7 +36,7 @@ exports.sendMail = (data) => {
             });
             else {
                 resolved({
-                    flash: `email send: ${info.response}`
+                    flash: validate
                 });
             }
         });

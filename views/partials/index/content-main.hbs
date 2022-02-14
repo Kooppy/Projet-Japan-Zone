@@ -13,38 +13,12 @@
                 </div>
             </div>
             <div class="row">
-                <!-- Picture 1 -->
-                <div class="col-md-5">
-                    <div class="img-gallery" style="background-image: url(assets/images/gallery/picture1.png);">
-                        <div class="title-img-gallery">
-                            <h3>Image 1</h3>
-                        </div>
+                {{#each gallery }}
+                    <!-- Picture -->
+                    <div class="col-md-6">
+                        <div class="img-gallery" style="background-image: url(assets/images/gallery/picture1.png);"></div>
                     </div>
-                </div>
-                <!-- Picture 2 -->
-                <div class="col-md-7">
-                    <div class="img-gallery" style="background-image: url(assets/images/gallery/picture2.png);">
-                        <div class="title-img-gallery">
-                            <h3>Image 2</h3>
-                        </div>
-                    </div>
-                </div>
-                <!-- Picture 3 -->
-                <div class="col-md-7">
-                    <div class="img-gallery" style="background-image: url(assets/images/gallery/picture3.png);">
-                        <div class="title-img-gallery">
-                            <h3>Image 3</h3>
-                        </div>
-                    </div>
-                </div>
-                <!-- Picture 4 -->
-                <div class="col-md-5">
-                    <div class="img-gallery" style="background-image: url(assets/images/gallery/picture5.png);">
-                        <div class="title-img-gallery">
-                            <h3>Image 4</h3>
-                        </div>
-                    </div>
-                </div>
+                {{/each }}    
             </div>
             <!-- Main Vidéo -->
             <div class="row">

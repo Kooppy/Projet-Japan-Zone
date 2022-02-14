@@ -47,12 +47,12 @@ Partial: Admin Main
                             {{> modals/modal-viewUser users=this }}
                             {{> modals/modal-delete users=this }}
                             {{/each}}
-                            {{#ifpaginate pageUser.total 0}}
+                            {{#ifstatus pageUser.total 0}}
                             {{else}}
                             <nav aria-label="Page navigation example">
                                 <ul class="justify-content-center pagination">
 
-                                    {{#ifpaginate pageUser.current 1}}
+                                    {{#ifstatus pageUser.current 1}}
                                     {{else}}
                                     <li class="page-item">
                                         <a class="page-link" href="?page={{pageUser.previous}}" aria-label="Previous">
@@ -62,13 +62,13 @@ Partial: Admin Main
                                     <li class="page-item"><a class="page-link"
                                             href="?page={{pageUser.previous}}">{{pageUser.previous}}</a>
                                     </li>
-                                    {{/ifpaginate}}
+                                    {{/ifstatus}}
 
                                     <li class="page-item active"><a class="page-link"
                                             href="?page={{pageUser.current}}">{{pageUser.current}}</a>
                                     </li>
 
-                                    {{#ifpaginate pageUser.next undefined}}
+                                    {{#ifstatus pageUser.next undefined}}
                                     {{else}}
                                     <li class="page-item"><a class="page-link"
                                             href="?page={{pageUser.next}}">{{pageUser.next}}</a></li>
@@ -79,10 +79,10 @@ Partial: Admin Main
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
-                                    {{/ifpaginate}}
+                                    {{/ifstatus}}
                                 </ul>
                             </nav>
-                            {{/ifpaginate}}
+                            {{/ifstatus}}
                         </div>
                     </div>
                 </div>
@@ -124,12 +124,12 @@ Partial: Admin Main
                             </div>
                         </div>
                         {{/each}}
-                        {{#ifpaginate pageBlog.total 0}}
+                        {{#ifstatus pageBlog.total 0}}
                         {{else}}
                         <nav aria-label="Page navigation example">
                             <ul class="justify-content-center pagination">
 
-                                {{#ifpaginate pageBlog.current 1}}
+                                {{#ifstatus pageBlog.current 1}}
                                 {{else}}
                                 <li class="page-item">
                                     <a class="page-link" href="?page={{pageBlog.previous}}" aria-label="Previous">
@@ -139,13 +139,13 @@ Partial: Admin Main
                                 <li class="page-item"><a class="page-link"
                                         href="?page={{pageBlog.previous}}">{{pageBlog.previous}}</a>
                                 </li>
-                                {{/ifpaginate}}
+                                {{/ifstatus}}
 
                                 <li class="page-item active"><a class="page-link"
                                         href="?page={{pageBlog.current}}">{{pageBlog.current}}</a>
                                 </li>
 
-                                {{#ifpaginate pageBlog.next undefined}}
+                                {{#ifstatus pageBlog.next undefined}}
                                 {{else}}
                                 <li class="page-item"><a class="page-link"
                                         href="?page={{pageBlog.next}}">{{pageBlog.next}}</a>
@@ -157,10 +157,10 @@ Partial: Admin Main
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
-                                {{/ifpaginate}}
+                                {{/ifstatus}}
                             </ul>
                         </nav>
-                        {{/ifpaginate}}
+                        {{/ifstatus}}
                     </div>
                 </div>
             </div>
@@ -199,12 +199,12 @@ Partial: Admin Main
                             </div>
                         </div>
                         {{/each}}
-                        {{#ifpaginate pageGallery.total 0}}
+                        {{#ifstatus pageGallery.total 0}}
                         {{else}}
                         <nav aria-label="Page navigation example">
                             <ul class="justify-content-center pagination">
 
-                                {{#ifpaginate pageGallery.current 1}}
+                                {{#ifstatus pageGallery.current 1}}
                                 {{else}}
                                 <li class="page-item">
                                     <a class="page-link" href="?page={{pageGallery.previous}}" aria-label="Previous">
@@ -214,13 +214,13 @@ Partial: Admin Main
                                 <li class="page-item"><a class="page-link"
                                         href="?page={{pageGallery.previous}}">{{pageGallery.previous}}</a>
                                 </li>
-                                {{/ifpaginate}}
+                                {{/ifstatus}}
 
                                 <li class="page-item active"><a class="page-link"
                                         href="?page={{pageGallery.current}}">{{pageGallery.current}}</a>
                                 </li>
 
-                                {{#ifpaginate pageGallery.next undefined}}
+                                {{#ifstatus pageGallery.next undefined}}
                                 {{else}}
                                 <li class="page-item"><a class="page-link" href="?page={{pageGallery.next}}">{{pageGallery.next}}</a>
                                 </li>
@@ -231,10 +231,10 @@ Partial: Admin Main
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
-                                {{/ifpaginate}}
+                                {{/ifstatus}}
                             </ul>
                         </nav>
-                        {{/ifpaginate}}
+                        {{/ifstatus}}
                     </div>
                 </div>
             </div>
@@ -271,12 +271,12 @@ Partial: Admin Main
                             </div>
                         </div>
                         {{/each}}
-                        {{#ifpaginate pageDiary.total 0}}
+                        {{#ifstatus pageDiary.total 0}}
                         {{else}}
                         <nav aria-label="Page navigation example">
                             <ul class="justify-content-center pagination">
 
-                                {{#ifpaginate pageDiary.current 1}}
+                                {{#ifstatus pageDiary.current 1}}
                                 {{else}}
                                 <li class="page-item">
                                     <a class="page-link" href="?page={{pageDiary.previous}}" aria-label="Previous">
@@ -286,13 +286,13 @@ Partial: Admin Main
                                 <li class="page-item"><a class="page-link"
                                         href="?page={{pageDiary.previous}}">{{pageDiary.previous}}</a>
                                 </li>
-                                {{/ifpaginate}}
+                                {{/ifstatus}}
 
                                 <li class="page-item active"><a class="page-link"
                                         href="?page={{pageDiary.current}}">{{pageDiary.current}}</a>
                                 </li>
 
-                                {{#ifpaginate pageDiary.next undefined}}
+                                {{#ifstatus pageDiary.next undefined}}
                                 {{else}}
                                 <li class="page-item"><a class="page-link" href="?page={{pageDiary.next}}">{{pageDiary.next}}</a>
                                 </li>
@@ -303,10 +303,10 @@ Partial: Admin Main
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
-                                {{/ifpaginate}}
+                                {{/ifstatus}}
                             </ul>
                         </nav>
-                        {{/ifpaginate}}
+                        {{/ifstatus}}
                     </div>
                 </div>
             </div>

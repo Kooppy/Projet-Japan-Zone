@@ -7,7 +7,7 @@ const express = require('express'),
       router = express.Router(),
       auth = require('./middleware/auth.js'),
       upload = require('./config/multer'),
-      {  configRegister, configLogin } = require('./config/validator'),
+      {  configRegister, configLogin, configForgot, configResetPassword } = require('./config/validator'),
       { validate } = require('./middleware/index.js');
 
 // Import des modules dans les controllers
@@ -44,17 +44,17 @@ router.route('/').get(index);
 
 router.route('/contact').post(sendMail);
 
-router.route('/register').post(validate(configRegister()), createUser);
+router.route('/register').post(validate(configRegister(), 'modalRegister'), createUser);
 
-router.route('/login').post(validate(configLogin()), loginUser);
+router.route('/login').post(validate(configLogin(), 'modalLogin'), loginUser);
 
 //router.route('/profil/:id').get().put();
 
 router.route('/logout').delete(logOut);
 
-router.route('/forgot').post(forgot);
+router.route('/forgot').post(validate(configForgot()), forgot);
 
-router.route('/resetPassword/:id').get(resetPassword).post(reset);
+router.route('/resetPassword/:id').get(auth.isForgot, resetPassword).post(validate(configResetPassword()), reset);
 
 router.route('/blog').get(blog);
 
