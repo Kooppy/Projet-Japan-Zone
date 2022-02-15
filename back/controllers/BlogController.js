@@ -47,8 +47,14 @@ exports.blogID = async (req, res) => {
                                      INNER JOIN category ON category.num_blog = blog.num_blog
                                      WHERE blog.title= '${id}';`);
 
+        const comment = await db.query(`SELECT comment.contents comment.date user.pseudo
+                                        FROM comment
+                                        INNER JOIN user ON user.num_user = comment.num_user
+                                        WHERE comment.num_blog = ${blog[0].num_blog}`)
+
         res.render('item1', {
-            blog
+            blog,
+            comment
         });
 
     } catch (err) {

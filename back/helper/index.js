@@ -11,7 +11,7 @@ module.exports = {
     formatDate: function(datetime, format) {
         if (moment) {
             moment.updateLocale('fr', frLocal);
-           var time1 = moment(datetime).tz("Europe/Paris").format(format)
+           let time1 = moment(datetime).tz("Europe/Paris").format(format)
            return time1
         }
         else {
@@ -23,7 +23,7 @@ module.exports = {
     formatDateCom: function(datetime, format) {
         if (moment) {
             moment.updateLocale('fr', frLocal);
-           var time2 = moment(datetime).fromNow()
+           let time2 = moment(datetime).fromNow()
            return time2
         }
         else {

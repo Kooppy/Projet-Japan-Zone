@@ -17,6 +17,9 @@ const {
       createUser,
       loginUser,
       forgot,
+      profilID,
+      editProfil,
+      comment,
       logOut,
       resetPassword, 
       reset,
@@ -40,6 +43,7 @@ const {
 } = require('./controllers'); 
 
 // Routes
+
 router.route('/').get(home);
 
 router.route('/contact').post(sendMail);
@@ -48,7 +52,7 @@ router.route('/register').post(validate(configRegister()), createUser);
 
 router.route('/login').post(validate(configLogin()), loginUser);
 
-//router.route('/profil/:id').get().put();
+router.route('/profil/:id').get(auth.isVerify, profilID).post(comment).put(editProfil);
 
 router.route('/logout').delete(logOut);
 

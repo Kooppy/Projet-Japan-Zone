@@ -102,9 +102,9 @@ exports.editUser = async (req, res) => {
     } = req.body;
 
     try {
-        const selectUser = await db.query(`SELECT user.num_user, user.email, user.pseudo, user.password, user.confirmation_date, pictureBank.link_picture, user_role.isVerify, user_role.isAdmin, user_role.isBan, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
+        const selectUser = await db.query(`SELECT user.num_user, user.email, user.pseudo, user.password, pictureBank.link_picture, user_role.isVerify, user_role.isAdmin, user_role.isBan, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
                                            FROM user
-                                           INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%user%'
+                                           INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%user%' AND pictureBank.num_user = user.num_user
                                            INNER JOIN user_role ON user_role.num_user = user.num_user
                                            INNER JOIN user_address ON user_address.num_user = user.num_user
                                            INNER JOIN user_profil ON user_profil.num_user = user.num_user
@@ -286,12 +286,9 @@ exports.editGallery = async (req, res) => {
                                         WHERE num_picture= ${req.params.id}`);;
 
         link_picture = !link_picture ? selectGallery[0].link_picture : link_picture;
-        description = !description ? selectGallery[0].description : description;
-        contents = !contents ? selectGallery[0].contents : contents;
-        date = !date ? selectGallery[0].date : date;
-        pseudo = !pseudo ? selectGallery[0].pseudo : pseudo;
-        link_picture = !link_picture ? selectBlog[0].link_picture : link_picture;
-        name = !name ? selectBlog[0].name : name;
+        title_picture = !title_picture ? selectGallery[0].title_picture : title_picture;
+        description_picture = !description_picture ? selectGallery[0].description_picture : description_picture;
+        name = !name ? selectGallery[0].name : name;
         
         // const blog = await db.query(`UPDATE user SET isBan = true WHERE num_user = '${req.params.id}';`);
         res.redirect('back');
