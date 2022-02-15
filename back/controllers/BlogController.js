@@ -13,7 +13,7 @@ exports.blog = async (req, res) => {
         page: req.query.page,
         table: 'blog'
     });
-
+    console.log("BLOG");
     try {
         const blog = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, blog.date, pictureBank.link_picture, category.name
                                      FROM blog 

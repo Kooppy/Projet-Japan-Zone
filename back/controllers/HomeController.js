@@ -2,6 +2,6 @@
  * Controller: Index (Home)
  * ************************ */
 
-exports.index = (req, res) => {
+exports.home = (req, res) => {
     res.render('index');
 }

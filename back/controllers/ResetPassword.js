@@ -18,11 +18,13 @@ exports.reset = async (req, res) => {
             password: hash(password)
         })
 
-        const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"token":${req.session.forgot.token}%';`);
+        //const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"token":${req.session.forgot.token}%';`);
 
-        res.redirect('/');
     } catch (err) {
         throw err;
     }
-
+    req.session.destroy(() => {
+        res.clearCookie('sessionID');
+        res.redirect('/');
+    })
 }

@@ -1,67 +1,78 @@
 /*
  * Config: Multer
  * ************** */
-
-const {
-    MulterError
-} = require('multer');
 const multer = require('multer'),
     {
-        mkdir,
         existsSync,
-        mkdirSync,
-        rmdirSync
+        mkdirSync
     } = require('fs');
-
-let iscorrect = (data) => {
-    const name = {
-        ...data
-    };
-    let fieldName = '';
-
-
-    name.file.fieldname === 'picBlog' ? fieldName = `blog/${name.title.split(' ').join('_')}` : name.file.fieldname === 'picUser' ? fieldName = `avatar/${name.pseudo.split(' ').join('_')}` : name.file.fieldname === 'picGallery' ? fieldName = `gallery/${name.title.split(' ').join('_')}` : console.log("rdegre");
-
-    let dir = `./assets/images/${fieldName}`
-    if (!existsSync(dir)) {
-        mkdirSync(dir);
-        return dir;
-    } else {
-        return dir;
-    }
-}
 
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
-        console.log('req multer', req.url)
-        // switch (req.url) {
-        //     case '/admin':
-        //         dir = req.url
+        const { id } = req.params,
+              { title } = req.body;
 
-        //         break;
+        let dir;
 
-        //     case '/admin':
+        switch (req.url) {
+            case `/admin/blog`:
+                dir = `./assets/images/blog/${title.split(' ').join('_')}`;
 
-        //         break;
+                break;
 
-        //     default:
-        //         break;
-        // }
-        let test = {
-            ...req.body,
-            file
+            case `/admin/gallery`:
+                dir = `./assets/images/gallery/${title.split(' ').join('_')}`;
+
+                break;
+
+            case `/admin/user/${id}`:
+                dir = `./assets/images/avatar/${title.split(' ').join('_')}`;
+
+                break;
+
+            case `/admin/blog/${id}`:
+                dir = `./assets/images/blog/${title.split(' ').join('_')}`;
+
+                break;
+
+            default:
+                break;
         }
-        // const name = { ...req.body};
-        // let fieldName = '';
+        
+        if (!existsSync(dir)) {
+            mkdirSync(dir);
+        }
 
-        // file.fieldname === 'picBlog' ? fieldName = `blog/${name.title.split(' ').join('_')}` : file.fieldname === 'picUser' ? fieldName = `avatar/${name.pseudo.split(' ').join('_')}` : file.fieldname === 'picGallery' ? fieldName = `gallery/${name.title.split(' ').join('_')}` : console.log("rdegre"); ;
-        req.kakawait = 'kakawait'
-        callback(null, iscorrect(test));
+        callback(null, dir);
     },
     filename: (req, file, callback) => {
         const name = file.originalname.split(' ').join('_');
         let completed;
-        file.fieldname === 'picBlog' ? completed = Date.now()+"_blog_"+name : file.fieldname === 'picUser' ? fieldName = Date.now()+"_user_"+name : file.fieldname === 'picGallery' ? fieldName = Date.now()+"_gallery_"+name : console.log("rdegre");
+
+        switch (req.url) {
+            case `/admin/blog`:
+                completed = Date.now()+"_blog_"+name
+
+                break;
+
+            case `/admin/gallery`:
+                completed = Date.now()+"_gallery_"+name
+
+                break;
+
+            case `/admin/user/${id}`:
+                completed = Date.now()+"_user_"+name
+
+                break;
+
+            case `/admin/blog/${id}`:
+                completed = Date.now()+"_blog_"+name
+
+                break;
+
+            default:
+                break;
+        }
         callback(null, completed);
     }
 })
@@ -79,5 +90,6 @@ const upload = multer({
         }
     }
 })
+
 
 module.exports = upload;

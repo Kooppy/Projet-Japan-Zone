@@ -10,9 +10,10 @@ const express = require('express'),
       {  configRegister, configLogin, configForgot, configResetPassword } = require('./config/validator'),
       { validate } = require('./middleware/index.js');
 
+
 // Import des modules dans les controllers
 const {
-      index,
+      home,
       createUser,
       loginUser,
       forgot,
@@ -39,14 +40,13 @@ const {
 } = require('./controllers'); 
 
 // Routes
-
-router.route('/').get(index);
+router.route('/').get(home);
 
 router.route('/contact').post(sendMail);
 
-router.route('/register').post(validate(configRegister(), 'modalRegister'), createUser);
+router.route('/register').post(validate(configRegister()), createUser);
 
-router.route('/login').post(validate(configLogin(), 'modalLogin'), loginUser);
+router.route('/login').post(validate(configLogin()), loginUser);
 
 //router.route('/profil/:id').get().put();
 
@@ -59,6 +59,7 @@ router.route('/resetPassword/:id').get(auth.isForgot, resetPassword).post(valida
 router.route('/blog').get(blog);
 
 router.route('/blog/:id').get(blogID);
+
 
 router.use(auth.isAdmin)
 

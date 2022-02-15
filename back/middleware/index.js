@@ -6,7 +6,7 @@ const {
   validationResult
 } = require('express-validator');
 
-exports.validate = (config, module) => {
+exports.validate = (config) => {
   return async (req, res, next) => {
     await Promise.all(config.map(validation => validation.run(req)));
 
@@ -14,14 +14,15 @@ exports.validate = (config, module) => {
     if (errors.isEmpty()) {
       next();
     } else {
-      switch (module) {
-        case 'modalLogin':
+
+      switch (req.url) {
+        case '/login':
           res.status(422).render('index', {
             modalLogin: errors.array()
           });
           break;
 
-        case 'modalRegister':
+        case '/register':
           res.status(422).render('index', {
             modalRegister: errors.array()
           });

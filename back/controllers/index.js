@@ -1,4 +1,4 @@
-const { index } = require("./IndexController"),  
+const { home } = require("./HomeController"),  
       { createUser, loginUser, forgot, logOut } = require("./AuthController"),
       { resetPassword, reset } = require("./ResetPassword"),
       //{  } = require("./UserController"),
@@ -8,7 +8,7 @@ const { index } = require("./IndexController"),
 
 module.exports = {
     // Home
-    index,
+    home,
 
     // Auth
     createUser, loginUser, forgot, logOut, 

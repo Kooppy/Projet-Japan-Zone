@@ -55,27 +55,25 @@ Partial: Admin Main
                                     {{#ifstatus pageUser.current 1}}
                                     {{else}}
                                     <li class="page-item">
-                                        <a class="page-link" href="?page={{pageUser.previous}}" aria-label="Previous">
+                                        <a class="page-link" href="?user={{pageUser.previous}}" aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
                                     <li class="page-item"><a class="page-link"
-                                            href="?page={{pageUser.previous}}">{{pageUser.previous}}</a>
+                                            href="?user={{pageUser.previous}}">{{pageUser.previous}}</a>
                                     </li>
                                     {{/ifstatus}}
 
                                     <li class="page-item active"><a class="page-link"
-                                            href="?page={{pageUser.current}}">{{pageUser.current}}</a>
+                                            href="?user={{pageUser.current}}">{{pageUser.current}}</a>
                                     </li>
 
                                     {{#ifstatus pageUser.next undefined}}
                                     {{else}}
                                     <li class="page-item"><a class="page-link"
-                                            href="?page={{pageUser.next}}">{{pageUser.next}}</a></li>
-                                    {{!-- <li class="page-item"><a class="page-link">...</a>
-                                    </li> --}}
+                                            href="?user={{pageUser.next}}">{{pageUser.next}}</a></li>
                                     <li class="page-item">
-                                        <a class="page-link" href="?page={{pageUser.next}}" aria-label="Next">
+                                        <a class="page-link" href="?user={{pageUser.next}}" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
@@ -132,28 +130,26 @@ Partial: Admin Main
                                 {{#ifstatus pageBlog.current 1}}
                                 {{else}}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{pageBlog.previous}}" aria-label="Previous">
+                                    <a class="page-link" href="?blog={{pageBlog.previous}}" aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <li class="page-item"><a class="page-link"
-                                        href="?page={{pageBlog.previous}}">{{pageBlog.previous}}</a>
+                                        href="?blog={{pageBlog.previous}}">{{pageBlog.previous}}</a>
                                 </li>
                                 {{/ifstatus}}
 
                                 <li class="page-item active"><a class="page-link"
-                                        href="?page={{pageBlog.current}}">{{pageBlog.current}}</a>
+                                        href="?blog={{pageBlog.current}}">{{pageBlog.current}}</a>
                                 </li>
 
                                 {{#ifstatus pageBlog.next undefined}}
                                 {{else}}
                                 <li class="page-item"><a class="page-link"
-                                        href="?page={{pageBlog.next}}">{{pageBlog.next}}</a>
+                                        href="?blog={{pageBlog.next}}">{{pageBlog.next}}</a>
                                 </li>
-                                {{!-- <li class="page-item"><a class="page-link">...</a>
-                                </li> --}}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{pageBlog.next}}" aria-label="Next">
+                                    <a class="page-link" href="?blog={{pageBlog.next}}" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
@@ -207,27 +203,27 @@ Partial: Admin Main
                                 {{#ifstatus pageGallery.current 1}}
                                 {{else}}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{pageGallery.previous}}" aria-label="Previous">
+                                    <a class="page-link" href="?gallery={{pageGallery.previous}}" aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <li class="page-item"><a class="page-link"
-                                        href="?page={{pageGallery.previous}}">{{pageGallery.previous}}</a>
+                                        href="?gallery={{pageGallery.previous}}">{{pageGallery.previous}}</a>
                                 </li>
                                 {{/ifstatus}}
 
                                 <li class="page-item active"><a class="page-link"
-                                        href="?page={{pageGallery.current}}">{{pageGallery.current}}</a>
+                                        href="?gallery={{pageGallery.current}}">{{pageGallery.current}}</a>
                                 </li>
 
                                 {{#ifstatus pageGallery.next undefined}}
                                 {{else}}
-                                <li class="page-item"><a class="page-link" href="?page={{pageGallery.next}}">{{pageGallery.next}}</a>
+                                <li class="page-item"><a class="page-link" href="?gallery={{pageGallery.next}}">{{pageGallery.next}}</a>
                                 </li>
                                 {{!-- <li class="page-item"><a class="page-link">...</a>
                                 </li> --}}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{pageGallery.next}}" aria-label="Next">
+                                    <a class="page-link" href="?gallery={{pageGallery.next}}" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
@@ -279,27 +275,25 @@ Partial: Admin Main
                                 {{#ifstatus pageDiary.current 1}}
                                 {{else}}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{pageDiary.previous}}" aria-label="Previous">
+                                    <a class="page-link" href="?diary={{pageDiary.previous}}" aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <li class="page-item"><a class="page-link"
-                                        href="?page={{pageDiary.previous}}">{{pageDiary.previous}}</a>
+                                        href="?diary={{pageDiary.previous}}">{{pageDiary.previous}}</a>
                                 </li>
                                 {{/ifstatus}}
 
                                 <li class="page-item active"><a class="page-link"
-                                        href="?page={{pageDiary.current}}">{{pageDiary.current}}</a>
+                                        href="?diary={{pageDiary.current}}">{{pageDiary.current}}</a>
                                 </li>
 
                                 {{#ifstatus pageDiary.next undefined}}
                                 {{else}}
-                                <li class="page-item"><a class="page-link" href="?page={{pageDiary.next}}">{{pageDiary.next}}</a>
+                                <li class="page-item"><a class="page-link" href="?diary={{pageDiary.next}}">{{pageDiary.next}}</a>
                                 </li>
-                                {{!-- <li class="page-item"><a class="page-link">...</a>
-                                </li> --}}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{pageDiary.next}}" aria-label="Next">
+                                    <a class="page-link" href="?diary={{pageDiary.next}}" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>

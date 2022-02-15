@@ -19,7 +19,7 @@ const express = require('express'),
   expressSession = require('express-session'),
   MySQLStore = require("express-mysql-session")(expressSession),
   handlebars = require('express-handlebars'),
-  Handlebars = require('handlebars');
+  { ifstatus } = require('./back/helper');
 
 // Method-Override
 app.use(methodOverride('_method'));
@@ -36,9 +36,11 @@ app.use(bodyParser.urlencoded({
 // Config Handlebars et Définis le moteur de mon app
 app.set('view engine', 'hbs');
 app.engine('hbs', handlebars.engine({
+  helpers: {
+    ifstatus
+  },
   extname: 'hbs',
-  defaultLayout: 'main',
-  admin: 'adminLayout'
+  defaultLayout: 'main'
 }));
 
 /* 
@@ -56,19 +58,13 @@ app.use(expressSession({
   store: new MySQLStore(dbOption)
 }));
 
-Handlebars.registerHelper('ifstatus', function (a, b, opts) {
-  if (a == b) {
-    return opts.fn(this);
-  } else {
-    return opts.inverse(this);
-  }
-});
-
 // Session Connexion for use HBS
 app.use('*', (req, res, next) => {
+
   res.locals.user = req.session.user;
+
   res.locals.token = req.session.forgot;
-  console.log("Session côter server.js :", req.session);
+
   next();
 })
 

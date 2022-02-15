@@ -8,32 +8,32 @@ const {
 exports.admin = async (req, res) => {
     let paginateUser = await pagination({
         numItem: 5,
-        page: req.query.page,
+        page: req.query.user,
         table: 'user'
     });
 
     let paginateBlog = await pagination({
         numItem: 5,
-        page: req.query.page,
+        page: req.query.blog,
         table: 'blog'
     });
 
     let paginateGallery = await pagination({
         numItem: 5,
-        page: req.query.page,
+        page: req.query.gallery,
         table: 'pictureBank'
     });
 
     let paginateDiary = await pagination({
         numItem: 5,
-        page: req.query.page,
+        page: req.query.diary,
         table: 'diary'
-    }); 
+    });
 
     try {
         const users = await db.query(`SELECT user.num_user, user.email, user.pseudo, user.password, user.confirmation_date, pictureBank.link_picture, user_role.isVerify, user_role.isAdmin, user_role.isBan, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
                                       FROM user
-                                      INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%user%'
+                                      INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%user%' AND pictureBank.num_user = user.num_user
                                       INNER JOIN user_role ON user_role.num_user = user.num_user
                                       INNER JOIN user_address ON user_address.num_user = user.num_user
                                       INNER JOIN user_profil ON user_profil.num_user = user.num_user
@@ -43,7 +43,7 @@ exports.admin = async (req, res) => {
         const blog = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, blog.date, user.pseudo, pictureBank.link_picture, category.name
                                      FROM blog 
                                      INNER JOIN user ON user.num_user = blog.num_user
-                                     INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%blog%'
+                                     INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%blog%' AND pictureBank.num_blog = blog.num_blog
                                      INNER JOIN category ON category.num_blog = blog.num_blog
                                      ORDER BY blog.num_blog
                                      DESC LIMIT ${paginateBlog.limit};`);
@@ -125,7 +125,7 @@ exports.editUser = async (req, res) => {
         isAdmin = !isAdmin ? selectUser[0].isAdmin : isAdmin;
         isBan = !isBan ? selectUser[0].isBan : isBan;
         isArchiving = !isArchiving ? selectUser[0].isArchiving : isArchiving;
-        
+
         console.log(pseudo);
         // const user = await db.query(`UPDATE user SET isBan = true WHERE num_user = '${req.params.id}';`);
         res.redirect('back');
@@ -169,6 +169,7 @@ exports.deleteUser = async (req, res) => {
     } = req.params;
 
     try {
+        const pictureUser = await db.query(`DELETE FROM pictureBank WHERE num_user= ${id}`)
         const user = await db.query(`
             DELETE user_role, user_profil, user_address, user 
             FROM user
@@ -176,13 +177,14 @@ exports.deleteUser = async (req, res) => {
                     ON user_role.num_user = user.num_user 
                 RIGHT JOIN user_profil 
                     ON user_profil.num_user = user.num_user 
-                right JOIN user_address 
+                RIGHT JOIN user_address 
                     ON user_address.num_user = user.num_user 
             WHERE user.num_user = '${id}';
         `);
     } catch (err) {
         throw err;
     }
+    res.redirect('back');
 }
 
 exports.addBlog = async (req, res) => {
@@ -194,18 +196,47 @@ exports.addBlog = async (req, res) => {
     } = req.body;
 
     try {
-        const blog = await db.query(`INSERT INTO blog SET title= '${title}', description= '${description}', contents= '${content}', date= NOW(), num_user= '${req.session.user.id}';`);
-        const picture = await db.query(`INSERT INTO pictureBank SET link_picture= '${req.file.filename}', num_user= '${req.session.user.id}', num_blog= '${blog.insertId}';`);
-        const category = await db.query(`INSERT INTO category SET name= '${categorie}', num_blog= '${blog.insertId}', num_picture= '${picture.insertId}';`)
+        const blog = await db.query(`INSERT INTO blog SET title= :title, description= :description, contents= :content, date= NOW(), num_user= '${req.session.user.id}';`, {title, description, content});
+        const picture = await db.query(`INSERT INTO pictureBank SET link_picture= :path, num_user= '${req.session.user.id}', num_blog= '${blog.insertId}';`, {path: req.file.path});
+        const category = await db.query(`INSERT INTO category SET name= :categorie, num_blog= '${blog.insertId}', num_picture= '${picture.insertId}';`, {categorie})
+    } catch (err) {
+        throw err;
+    }
+    res.redirect('back');
+}
 
+exports.editBlog = async (req, res) => {
+    let {
+        title,
+        description,
+        contents,
+        date,
+        pseudo,
+        link_picture,
+        name
+    } = req.body;
+
+    try {
+        const selectBlog = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, blog.date, user.pseudo, pictureBank.link_picture, category.name
+                                     FROM blog 
+                                     INNER JOIN user ON user.num_user = blog.num_user
+                                     INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%blog%' AND pictureBank.num_blog = blog.num_blog
+                                     INNER JOIN category ON category.num_blog = blog.num_blog
+                                     WHERE num_blog= ${req.params.id} ;`);
+
+        title = !title ? selectBlog[0].title : title;
+        description = !description ? selectBlog[0].description : description;
+        contents = !contents ? selectBlog[0].contents : contents;
+        date = !date ? selectBlog[0].date : date;
+        pseudo = !pseudo ? selectBlog[0].pseudo : pseudo;
+        link_picture = !link_picture ? selectBlog[0].link_picture : link_picture;
+        name = !name ? selectBlog[0].name : name;
+        
+        // const blog = await db.query(`UPDATE user SET isBan = true WHERE num_user = '${req.params.id}';`);
         res.redirect('back');
     } catch (err) {
         throw err;
     }
-}
-
-exports.editBlog = async (req, res) => {
-
 }
 
 exports.deleteBlog = async (req, res) => {
@@ -220,15 +251,17 @@ exports.deleteBlog = async (req, res) => {
     } catch (err) {
         throw err;
     }
+    res.redirect('back');
 }
 
 exports.addGallery = async (req, res) => {
     const {
-        name
+        title, 
+        description
     } = req.body;
 
     try {
-        const picture = await db.query(`INSERT INTO pictureBank SET link_picture= '${req.file.filename}', num_user= '${req.session.user.id}';`);
+        const picture = await db.query(`INSERT INTO pictureBank SET link_picture= :path, title_picture= :title, description_picture= :description num_user= '${req.session.user.id}';`, {path: req.file.path, title, description});
         const category = await db.query(`INSERT INTO category SET name= '${name}', num_picture= '${picture.insertId}';`);
         res.redirect('back');
     } catch (err) {
@@ -237,7 +270,34 @@ exports.addGallery = async (req, res) => {
 }
 
 exports.editGallery = async (req, res) => {
+    let {
+        link_picture,
+        title_picture,
+        description_picture,
+        name
+    } = req.body;
 
+    try {
+        const selectGallery = await db.query(`SELECT pictureBank.num_picture, pictureBank.link_picture, pictureBank.title_picture, pictureBank.description_picture, user.pseudo, category.name
+                                        FROM pictureBank
+                                        INNER JOIN user ON user.num_user = pictureBank.num_user
+                                        INNER JOIN blog ON blog.num_blog = pictureBank.num_blog
+                                        INNER JOIN category ON category.num_picture = pictureBank.num_picture
+                                        WHERE num_picture= ${req.params.id}`);;
+
+        link_picture = !link_picture ? selectGallery[0].link_picture : link_picture;
+        description = !description ? selectGallery[0].description : description;
+        contents = !contents ? selectGallery[0].contents : contents;
+        date = !date ? selectGallery[0].date : date;
+        pseudo = !pseudo ? selectGallery[0].pseudo : pseudo;
+        link_picture = !link_picture ? selectBlog[0].link_picture : link_picture;
+        name = !name ? selectBlog[0].name : name;
+        
+        // const blog = await db.query(`UPDATE user SET isBan = true WHERE num_user = '${req.params.id}';`);
+        res.redirect('back');
+    } catch (err) {
+        throw err;
+    }
 }
 
 exports.deleteGallery = async (req, res) => {
