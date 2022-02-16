@@ -13,8 +13,7 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   methodOverride = require('method-override'),
   dbOption = require('./back/config/database/dbOption'),
-  connectDB = require ('./back/config/database')
-  crypto = require('crypto'),
+  connectDB = require ('./back/config/database'),
   ROUTER = require('./back/router.js'),
   expressSession = require('express-session'),
   MySQLStore = require("express-mysql-session")(expressSession),
@@ -60,11 +59,8 @@ app.use(expressSession({
 
 // Session Connexion for use HBS
 app.use('*', (req, res, next) => {
-
   res.locals.user = req.session.user;
-
   res.locals.token = req.session.forgot;
-
   next();
 })
 
