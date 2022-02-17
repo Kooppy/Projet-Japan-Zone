@@ -19,13 +19,13 @@
                     <!-- List News -->
                     <div class="row me-0 p-2">
                         <div class="col-6 col-md-5 col-sm-4">
-                            <img src="./assets/images/blog/{{ this.title }}/{{ this.link_picture }}" alt="item">
+                            <img src="{{ this.link_picture }}" alt="item">
                         </div>
                         <div class="col-6 col-md-7 col-sm-8">
                             <h3>{{ this.title }}</h3>
                             <p class="text-truncate">{{ this.description }}</p>
                         </div>
-                        <p><span class="fas fa-calendar-day"></span>{{ this.date }}</p>
+                        <p><span class="fas fa-calendar-day"></span> {{ commentDateFormat this.date }}</p>
                     </div>
                 {{/each }}
             </div>
@@ -36,7 +36,7 @@
             <h3 class="text-center mt-2">{{ blog.title }}</h3>
             <p>{{ blog.description }}</p>
             <a href="/blog/{{ blog.title }}" class="btn-news-view">Lire la suite</a>
-            <p class="float-end"><span class="fas fa-calendar-day"></span> {{ blog.date }}</p>
+            <p class="float-end"><span class="fas fa-calendar-day"></span> {{ commentDateFormat blog.date }}</p>
         </div>
     </div>
 </section>

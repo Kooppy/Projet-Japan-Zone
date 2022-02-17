@@ -47,7 +47,7 @@ Partial: Admin Main
                             {{> modals/modal-viewUser users=this }}
                             {{> modals/modal-delete users=this }}
                             {{/each}}
-                            {{#ifstatus pageUser.total 0}}
+                            {{#ifstatus pageUser.total 1}}
                             {{else}}
                             <nav aria-label="Page navigation example">
                                 <ul class="justify-content-center pagination">
@@ -122,7 +122,7 @@ Partial: Admin Main
                             </div>
                         </div>
                         {{/each}}
-                        {{#ifstatus pageBlog.total 0}}
+                        {{#ifstatus pageBlog.total 1}}
                         {{else}}
                         <nav aria-label="Page navigation example">
                             <ul class="justify-content-center pagination">
@@ -160,7 +160,7 @@ Partial: Admin Main
                     </div>
                 </div>
             </div>
-            <!-- Message Part -->
+            <!-- Gallery Part -->
             <div class="accordion-item">
                 <h3 class="accordion-header" id="gallery">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -172,18 +172,18 @@ Partial: Admin Main
                     <div class="accordion-body text-center">
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
                                 class="fas fa-user-plus"></span>Ajouter une image</button>
-                        {{#each gallery }}
+                        {{#each galleryAll }}
                         <div class="row user">
                             <div class="col-md-2">
                                 <a class="" data-bs-toggle="modal" data-bs-target="#viewMessage">
-                                    <img class="avatar" src="assets/images/{{this.link_picture}}">
+                                    <img class="avatar" src="{{this.link_picture}}">
                                 </a>
                             </div>
                             <div class="col-md-2">
-                                <p>{{ this.title }}</p>
+                                <p>{{ galleryInfo.title }}</p>
                             </div>
                             <div class="col-md-6">
-                                <p>{{ this.description }}</p>
+                                <p>{{ galleryInfo.description }}</p>
                             </div>
                             <div class="col-md-2">
                                 <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
@@ -195,7 +195,7 @@ Partial: Admin Main
                             </div>
                         </div>
                         {{/each}}
-                        {{#ifstatus pageGallery.total 0}}
+                        {{#ifstatus pageGallery.total 1}}
                         {{else}}
                         <nav aria-label="Page navigation example">
                             <ul class="justify-content-center pagination">
@@ -267,7 +267,7 @@ Partial: Admin Main
                             </div>
                         </div>
                         {{/each}}
-                        {{#ifstatus pageDiary.total 0}}
+                        {{#ifstatus pageDiary.total 1}}
                         {{else}}
                         <nav aria-label="Page navigation example">
                             <ul class="justify-content-center pagination">

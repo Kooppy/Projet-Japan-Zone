@@ -28,9 +28,9 @@ exports.validate = (config) => {
           });
           break;
 
-        case 'modalForgot':
-          res.status(422).render('index', {
-            modalForgot: errors.array()
+        case `/blog/${req.params.id}`:
+          res.status(422).render('item1', {
+            commentFlash: errors.array()
           });
           break;
 

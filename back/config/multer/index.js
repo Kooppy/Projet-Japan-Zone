@@ -10,7 +10,7 @@ const multer = require('multer'),
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
         const { id } = req.params,
-              { title } = req.body;
+              { title, pseudo } = req.body;
 
         let dir;
 
@@ -21,12 +21,12 @@ const storage = multer.diskStorage({
                 break;
 
             case `/admin/gallery`:
-                dir = `./assets/images/gallery/${title.split(' ').join('_')}`;
+                dir = `./assets/images/gallery/${file.fieldname.split(' ').join('_')}`;
 
                 break;
 
             case `/admin/user/${id}`:
-                dir = `./assets/images/avatar/${title.split(' ').join('_')}`;
+                dir = `./assets/images/avatar/${pseudo.split(' ').join('_')}`;
 
                 break;
 
@@ -46,7 +46,8 @@ const storage = multer.diskStorage({
         callback(null, dir);
     },
     filename: (req, file, callback) => {
-        const name = file.originalname.split(' ').join('_');
+        const name = file.originalname.split(' ').join('_'),
+              { id } = req.params;
         let completed;
 
         switch (req.url) {

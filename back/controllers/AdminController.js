@@ -4,6 +4,7 @@
 const {
     pagination
 } = require('../util/pagination');
+const { selectID } = require('../util/select');
 
 exports.admin = async (req, res) => {
     let paginateUser = await pagination({
@@ -48,13 +49,13 @@ exports.admin = async (req, res) => {
                                      ORDER BY blog.num_blog
                                      DESC LIMIT ${paginateBlog.limit};`);
 
-        const gallery = await db.query(`SELECT pictureBank.num_picture, pictureBank.link_picture, pictureBank.title_picture, pictureBank.description_picture, user.pseudo, blog.title, category.name
+        const galleryAll = await db.query(`SELECT link_picture FROM pictureBank ORDER BY pictureBank.num_picture DESC LIMIT ${paginateGallery.limit};`)
+
+        const galleryInfo = await db.query(`SELECT pictureBank.num_picture, pictureBank.title_picture, pictureBank.description_picture, user.pseudo, blog.title, category.name
                                         FROM pictureBank
                                         INNER JOIN user ON user.num_user = pictureBank.num_user
                                         INNER JOIN blog ON blog.num_blog = pictureBank.num_blog
-                                        INNER JOIN category ON category.num_picture = pictureBank.num_picture
-                                        ORDER BY pictureBank.num_picture
-                                        DESC LIMIT ${paginateGallery.limit};`);
+                                        INNER JOIN category ON category.num_picture = pictureBank.num_picture;`);
 
         const diary = await db.query(`SELECT diary.num_diary, diary.date, diary.contents, user.pseudo
                                       FROM diary
@@ -69,7 +70,8 @@ exports.admin = async (req, res) => {
                 pageUser: paginateUser.page,
                 blog,
                 pageBlog: paginateBlog.page,
-                gallery,
+                galleryAll,
+                galleryInfo,
                 pageGallery: paginateGallery.page,
                 diary,
                 pageDiary: paginateDiary.page
@@ -257,11 +259,12 @@ exports.deleteBlog = async (req, res) => {
 exports.addGallery = async (req, res) => {
     const {
         title, 
-        description
+        description,
+        name
     } = req.body;
 
     try {
-        const picture = await db.query(`INSERT INTO pictureBank SET link_picture= :path, title_picture= :title, description_picture= :description num_user= '${req.session.user.id}';`, {path: req.file.path, title, description});
+        const picture = await db.query(`INSERT INTO pictureBank SET link_picture= :path, title_picture= :title, description_picture= :description, num_user= '${req.session.user.id}';`, {path: req.file.path, title, description});
         const category = await db.query(`INSERT INTO category SET name= '${name}', num_picture= '${picture.insertId}';`);
         res.redirect('back');
     } catch (err) {

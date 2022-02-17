@@ -98,5 +98,11 @@ module.exports = {
                 return true;
             })
         ]
+    },
+    configComment: () => {
+        return [
+            check('message').isLength({min: 10, max: 200})
+            .withMessage('Votre message doit comporter au minimun 10 caractère et doit comporter 200 caractère max.')
+        ]
     }
 }

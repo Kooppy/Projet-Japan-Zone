@@ -1,21 +1,22 @@
-{{!-- 
-    Partial: Blog (Item1) Main
- --}}
+{{!--
+Partial: Blog (Item1) Main
+--}}
 
 <!-- Main Article & Right Menu -->
 <section class="container my-5">
     <div class="row">
         <div class="col-md-8">
             <div class="actu-view">
-                <img class="actu-view-img" src="../assets/images/blog/{{blog.link}}" alt="item1">
-                <h3 class="mt-1 text-center">{{ blog.title }}</h3>
+                <p>{{ blog.description }}</p>
+                <img class="actu-view-img" src="../{{ blog.link_picture }}" alt="item1">
+                <h3 class="mt-1 text-center">{{ blog.title }} </h3>
                 <div class="row justify-content-between align-items-center">
                     <div class="col-auto">
-                        <p><img class="author" src="../assets/images/Kooppy.png" alt="author">
-                            par {{ blog.pseudo }} le 12/12/2000</p>
+                        <p><img class="author" src="../{{ blog.link_picture }}" alt="author">
+                            par {{ blog.pseudo }} {{ commentDateFormat blog.date }}</p>
                     </div>
                     <div class="col-auto rounded bg-primary text-white text-end">
-                        <p class="m-0"><span class="text-danger">#</span>bla</p>
+                        <p class="m-0"><span class="text-danger">#</span>{{ blog.name }}</p>
                     </div>
                 </div>
                 <h3 class="mt-1">Paragraphe</h3>
@@ -26,19 +27,85 @@
                     <h2>Espace Commentaire</h2>
                 </div>
             </div>
+            {{#if user }}
+            <!-- Comment -->
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-12">
+                    <!-- Comment Form -->
+                    <form action="/blog/{{ blog.title }}" method="post">
+                        <div class="d-flex align-items-center text-center">
+                            <div class="col-2">
+                                <img class="author" src="../{{ this.link_picture }}" alt="author">
+                            </div>
+                            <!-- Message Comment -->
+                            <div class="col-10">
+                                <textarea name="message" class="input-form"
+                                    placeholder="Entrez votre commentaire..."></textarea>
+                            </div>
+                        </div>
+                        <!-- Button Comment -->
+                        <div class="d-flex justify-content-end">
+                            <div class="col-12">
+                                <button class="btn btn-full">Envoyer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {{/if }}
+            {{#each comment}}
             <div class="row">
                 <div class="col-md-12">
-                    <div class="row border border-secondary align-items-center p-2 text-center">
+                    <div class="row border border-secondary align-items-center p-2 text-center m-1">
                         <div class="col-2">
-                            <img class="author" src="../assets/images/Kooppy.png" alt="author">
+                            <img class="author" src="../{{ this.link_picture }}" alt="author">
                         </div>
-                        <div class="col-10">
-                            <p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-                                bla bla bla bla bla bla bla bla bla bla bla </p>
+                        <div class="col-10 ">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <span>{{ this.pseudo }}</span>
+                                <small>{{commentDateFormat this.date }}</small>
+                            </div>
+                            <p>{{ this.contents }}</p>
                         </div>
                     </div>
                 </div>
             </div>
+            {{/each }}
+            {{#ifstatus pageComment.total 1}}
+            {{else}}
+            <nav aria-label="Page navigation example">
+                <ul class="justify-content-center pagination">
+
+                    {{#ifstatus pageComment.current 1}}
+                    {{else}}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{pageComment.previous}}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link"
+                            href="?page={{pageComment.previous}}">{{pageComment.previous}}</a>
+                    </li>
+                    {{/ifstatus}}
+
+                    <li class="page-item active"><a class="page-link"
+                            href="?page={{pageComment.current}}">{{pageComment.current}}</a>
+                    </li>
+
+                    {{#ifstatus pageComment.next undefined}}
+                    {{else}}
+                    <li class="page-item"><a class="page-link"
+                            href="?page={{pageComment.next}}">{{pageComment.next}}</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{pageComment.next}}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {{/ifstatus}}
+                </ul>
+            </nav>
+            {{/ifstatus}}
         </div>
         {{> right-menu }}
     </div>

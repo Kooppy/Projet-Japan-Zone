@@ -20,7 +20,7 @@ module.exports = {
       },
 
     // Fonction donnant le temps passé entre les post et maintenant
-    formatDateCom: function(datetime, format) {
+    commentDateFormat: function(datetime, format) {
         if (moment) {
             moment.updateLocale('fr', frLocal);
            let time2 = moment(datetime).fromNow()

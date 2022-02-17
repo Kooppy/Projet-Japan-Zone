@@ -7,7 +7,7 @@ const express = require('express'),
       router = express.Router(),
       auth = require('./middleware/auth.js'),
       upload = require('./config/multer'),
-      {  configRegister, configLogin, configForgot, configResetPassword } = require('./config/validator'),
+      {  configRegister, configLogin, configForgot, configResetPassword, configComment } = require('./config/validator'),
       { validate } = require('./middleware/index.js');
 
 
@@ -62,7 +62,7 @@ router.route('/resetPassword/:id').get(auth.isForgot, resetPassword).post(valida
 
 router.route('/blog').get(blog);
 
-router.route('/blog/:id').get(blogID);
+router.route('/blog/:id').get(blogID).post(validate(configComment()), comment);
 
 
 router.use(auth.isAdmin)
@@ -77,11 +77,11 @@ router.route('/admin/user/archiving/:id').put(archivingUser);
 
 router.route('/admin/blog').post(upload.single('picBlog'), addBlog);
 
-router.route('/admin/blog/:id').put(editBlog).delete(deleteBlog);
+router.route('/admin/blog/:id').put(upload.single('picBlog'), editBlog).delete(deleteBlog);
 
-router.route('/admin/gallery').post(addGallery);
+router.route('/admin/gallery').post(upload.single('picGallery'), addGallery);
 
-router.route('/admin/gallery/:id').put(editGallery).delete(deleteGallery);
+router.route('/admin/gallery/:id').put(upload.single('picGallery'), editGallery).delete(deleteGallery);
 
 router.route('/admin/diary').post(addDiary);
 

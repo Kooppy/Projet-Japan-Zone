@@ -18,7 +18,7 @@ const express = require('express'),
   expressSession = require('express-session'),
   MySQLStore = require("express-mysql-session")(expressSession),
   handlebars = require('express-handlebars'),
-  { ifstatus } = require('./back/helper');
+  { ifstatus, commentDateFormat } = require('./back/helper');
 
 // Method-Override
 app.use(methodOverride('_method'));
@@ -36,7 +36,8 @@ app.use(bodyParser.urlencoded({
 app.set('view engine', 'hbs');
 app.engine('hbs', handlebars.engine({
   helpers: {
-    ifstatus
+    ifstatus,
+    commentDateFormat
   },
   extname: 'hbs',
   defaultLayout: 'main'

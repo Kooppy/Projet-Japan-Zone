@@ -25,8 +25,8 @@ exports.loginUser = async (req, res) => {
     const { pseudo } = req.body;
     
     try {
-        const user_connect = await db.query(`SELECT user.session, user.email, user.pseudo, pictureBank.link_picture, user_role.isVerify, user_role.isAdmin, user_role.isBan FROM user INNER JOIN pictureBank ON pictureBank.num_user = user.num_user INNER JOIN user_role ON user_role.num_user = user.num_user WHERE (pseudo= :pseudo OR email= :pseudo);`, {pseudo});
-        const session_kill = await db.query(`DELETE FROM user WHERE data LIKE '%"id":${user_connect[0].num_user}%';`);
+        const user_connect = await db.query(`SELECT user.num_user, user.email, user.pseudo, pictureBank.link_picture, user_role.isVerify, user_role.isAdmin, user_role.isBan FROM user INNER JOIN pictureBank ON pictureBank.num_user = user.num_user INNER JOIN user_role ON user_role.num_user = user.num_user WHERE (pseudo= :pseudo OR email= :pseudo);`, {pseudo});
+        const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${user_connect[0].num_user}%';`);
         req.session.user = {id: user_connect[0].num_user, email: user_connect[0].email, avatar: user_connect[0].link_picture, pseudo: user_connect[0].pseudo, isVerify: user_connect[0].isVerify, isAdmin: user_connect[0].isAdmin};
             
     } catch (err) {

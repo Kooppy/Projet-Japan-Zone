@@ -2,6 +2,8 @@
  * Controller: User (User)
  * ************************ */
 
+const { selectID } = require("../util/select");
+
 exports.profilID = async (req, res) => {
     const { id } = req.params;
     
@@ -62,6 +64,15 @@ exports.editProfil = async (req, res) => {
 }
 
 exports.comment = async (req, res) => {
+    const { message } = req.body,
+          { id } = req.params;
 
+    try {
+        const blogId = await selectID('num_blog', 'blog', 'title= :value', id);
+        const comment = await db.query(`INSERT INTO comment SET contents= :message, date= NOW(), num_user= '${req.session.user.id}', num_blog= '${blogId.num_blog}';`, {message})
+        res.redirect('back');
+    } catch (err) {
+        throw err;
+    }
 }
 
