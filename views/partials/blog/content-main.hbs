@@ -48,15 +48,15 @@
                 {{#each blog }}
                     <div class="col-lg-4 col-md-6">
                         <div class="actu-list">
-                            <img class="actu-view-img" src="./assets/images/blog/{{ blog.link }}" alt="item">
-                            <h3 class="mt-1">{{ blog.title }}</h3>
-                            <p>{{ blog.description }} </p>
+                            <img class="actu-view-img" src="{{ this.link_picture }}" alt="item">
+                            <h3 class="mt-1">{{ this.title }}</h3>
+                            <p>{{ this.description }} </p>
                             <div class="row justify-content-between">
                                 <div class="col-auto">
-                                    <a href="/{{ blog.title }}" class="btn-news-view">Lire</a>
+                                    <a href="/blog/{{ this.title }}" class="btn-news-view">Lire</a>
                                 </div>
                                 <div class="col-auto">
-                                    <p class="mt-1"><span class="fas fa-calendar-day"></span> {{ blog.date }}
+                                    <p class="mt-1"><span class="fas fa-calendar-day"></span> {{ commentDateFormat this.date }}
                                     </p>
                                 </div>
                             </div>
@@ -64,8 +64,42 @@
                     </div>
                 {{/each }}
             </div>
+            {{#ifstatus paginate.total 1}}
+            {{else}}
+            <nav aria-label="Page navigation example">
+                <ul class="justify-content-center pagination">
 
-            <div class="row">
+                    {{#ifstatus paginate.current 1}}
+                    {{else}}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{paginate.previous}}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link"
+                            href="?page={{paginate.previous}}">{{paginate.previous}}</a>
+                    </li>
+                    {{/ifstatus}}
+
+                    <li class="page-item active"><a class="page-link"
+                            href="?page={{paginate.current}}">{{paginate.current}}</a>
+                    </li>
+
+                    {{#ifstatus paginate.next undefined}}
+                    {{else}}
+                    <li class="page-item"><a class="page-link"
+                            href="?page={{paginate.next}}">{{paginate.next}}</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{paginate.next}}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {{/ifstatus}}
+                </ul>
+            </nav>
+            {{/ifstatus}}
+            {{!-- <div class="row">
                 <div class="col-md-12">
                     <div aria-label="Page">
                         <ul class="pagination justify-content-end">
@@ -78,7 +112,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         {{> right-menu }}
     </div>

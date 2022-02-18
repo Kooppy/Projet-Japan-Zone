@@ -3,7 +3,7 @@
  --}}
 
 <!-- Modal Delete -->
-<div class="modal fade" id="delete{{ this.num_user }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="delete{{ data }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -28,11 +28,10 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <!--<a href="/admin/{{ user.num_user }}?_method=DELETE" class="btn btn-secondary">Oui</a>-->
-                                <form action="/admin/user/{{ this.num_user }}?_method=DELETE" method="post">
+                                <form action="{{ path }}/{{ data }}?_method=DELETE" method="post">
                                     <button type="submit" class="btn btn-secondary">Oui</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
                                 </form>
-                                
-                                <button type="button" class="btn btn-secondary">Annuler</button>
                             </div>
                         </div>
                     </div>

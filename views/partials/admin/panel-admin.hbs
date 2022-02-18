@@ -24,7 +24,7 @@ Partial: Admin Main
                             <div class="row user">
                                 <div class="col-md-2">
                                     <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.num_user }}">
-                                        <img class="avatar" src="./assets/images/avatar/{{ this.link_picture }}">
+                                        <img class="avatar" src="{{ this.link_picture }}">
                                     </a>
                                 </div>
                                 <div class="col-md-3">
@@ -45,7 +45,7 @@ Partial: Admin Main
                                 </div>
                             </div>
                             {{> modals/modal-viewUser users=this }}
-                            {{> modals/modal-delete users=this }}
+                            {{> modals/modal-delete data=this.num_user path="/admin/user"}}
                             {{/each}}
                             {{#ifstatus pageUser.total 1}}
                             {{else}}
@@ -102,7 +102,7 @@ Partial: Admin Main
                             <div class="col-md-2">
                                 <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog{{ this.num_blog }}">
                                     <img class="avatar"
-                                        src="./assets/images/blog/{{this.title}}/{{ this.link_picture }}">
+                                        src="{{ this.link_picture }}">
                                 </a>
                             </div>
                             <div class="col-md-2">
@@ -117,10 +117,11 @@ Partial: Admin Main
                             <div class="col-md-2">
                                 <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog"><span
                                         class="far fa-edit"></span></a>
-                                <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                <a class="" data-bs-toggle="modal" data-bs-target="#delete{{ this.num_blog }}"><span
                                         class="far fa-trash-alt"></span></a>
                             </div>
                         </div>
+                        {{> modals/modal-delete data=this.num_blog path="/admin/blog"}}
                         {{/each}}
                         {{#ifstatus pageBlog.total 1}}
                         {{else}}
@@ -172,7 +173,7 @@ Partial: Admin Main
                     <div class="accordion-body text-center">
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
                                 class="fas fa-user-plus"></span>Ajouter une image</button>
-                        {{#each galleryAll }}
+                        {{#each gallery }}
                         <div class="row user">
                             <div class="col-md-2">
                                 <a class="" data-bs-toggle="modal" data-bs-target="#viewMessage">
@@ -180,10 +181,10 @@ Partial: Admin Main
                                 </a>
                             </div>
                             <div class="col-md-2">
-                                <p>{{ galleryInfo.title }}</p>
+                                <p>{{ this.title }}</p>
                             </div>
                             <div class="col-md-6">
-                                <p>{{ galleryInfo.description }}</p>
+                                <p>{{ this.description }}</p>
                             </div>
                             <div class="col-md-2">
                                 <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
@@ -194,6 +195,7 @@ Partial: Admin Main
                                         class="far fa-trash-alt"></span></a>
                             </div>
                         </div>
+                        {{> modals/modal-delete data=this.num_user path="/admin/user"}}
                         {{/each}}
                         {{#ifstatus pageGallery.total 1}}
                         {{else}}

@@ -49,13 +49,13 @@ exports.admin = async (req, res) => {
                                      ORDER BY blog.num_blog
                                      DESC LIMIT ${paginateBlog.limit};`);
 
-        const galleryAll = await db.query(`SELECT link_picture FROM pictureBank ORDER BY pictureBank.num_picture DESC LIMIT ${paginateGallery.limit};`)
-
-        const galleryInfo = await db.query(`SELECT pictureBank.num_picture, pictureBank.title_picture, pictureBank.description_picture, user.pseudo, blog.title, category.name
+        const gallery = await db.query(`SELECT pictureBank.num_picture, pictureBank.link_picture, pictureBank.title_picture, pictureBank.description_picture, user.pseudo, blog.title, category.name
                                         FROM pictureBank
                                         INNER JOIN user ON user.num_user = pictureBank.num_user
-                                        INNER JOIN blog ON blog.num_blog = pictureBank.num_blog
-                                        INNER JOIN category ON category.num_picture = pictureBank.num_picture;`);
+                                        LEFT JOIN blog ON blog.num_blog = pictureBank.num_blog
+                                        LEFT JOIN category ON category.num_picture = pictureBank.num_picture
+                                        ORDER BY pictureBank.num_picture DESC 
+                                        LIMIT ${paginateGallery.limit};`);
 
         const diary = await db.query(`SELECT diary.num_diary, diary.date, diary.contents, user.pseudo
                                       FROM diary
@@ -70,8 +70,7 @@ exports.admin = async (req, res) => {
                 pageUser: paginateUser.page,
                 blog,
                 pageBlog: paginateBlog.page,
-                galleryAll,
-                galleryInfo,
+                gallery,
                 pageGallery: paginateGallery.page,
                 diary,
                 pageDiary: paginateDiary.page
@@ -249,7 +248,7 @@ exports.deleteBlog = async (req, res) => {
     try {
         const category = await db.query(`UPDATE category INNER JOIN blog ON blog.num_blog = category.num_blog SET category.num_blog= NULL WHERE blog.num_blog = '${id}';`);
         const picture = await db.query(`UPDATE pictureBank INNER JOIN blog ON blog.num_blog = pictureBank.num_blog SET pictureBank.num_blog = NULL WHERE blog.num_blog = '${id}';`);
-        const blog = await db.query(`DELETE FROM blog WHERE num_blog= '${id}';`);
+        const blog = await db.query(`DELETE comment, blog FROM blog RIGHT JOIN comment ON comment.num_blog = blog.num_blog WHERE comment.num_blog= '${id}';`);
     } catch (err) {
         throw err;
     }

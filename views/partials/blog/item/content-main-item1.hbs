@@ -63,13 +63,32 @@ Partial: Blog (Item1) Main
                         <div class="col-10 ">
                             <div class="d-flex align-items-center justify-content-between">
                                 <span>{{ this.pseudo }}</span>
-                                <small>{{commentDateFormat this.date }}</small>
+
+                                {{#if ../user.isAdmin}}
+                                <a class="" data-bs-toggle="modal" data-bs-target="#delete{{ this.num_comment }}"><span
+                                        class="far fa-trash-alt"></span></a>
+                                {{else}}
+                                {{#ifstatus ../user.id this.num_user}}
+                                <a class="" data-bs-toggle="modal" data-bs-target="#delete{{ this.num_comment }}"><span
+                                        class="far fa-trash-alt"></span></a>
+                                {{/ifstatus }}
+                                {{/if }}
                             </div>
                             <p>{{ this.contents }}</p>
+                            <div class="d-flex align-items-center justify-content-end">
+                                <small>{{commentDateFormat this.date }}</small>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            {{#if user.isAdmin}}
+            {{> modals/modal-delete data=this.num_comment path="/comment" }}
+            {{else}}
+            {{#ifstatus ../user.id this.num_user}}
+            {{> modals/modal-delete data=this.num_comment path="/comment" }}
+            {{/ifstatus }}
+            {{/if }}
             {{/each }}
             {{#ifstatus pageComment.total 1}}
             {{else}}

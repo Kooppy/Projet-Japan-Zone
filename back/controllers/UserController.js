@@ -76,3 +76,14 @@ exports.comment = async (req, res) => {
     }
 }
 
+exports.deleteComment = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const delComment = await db.query(`DELETE FROM comment WHERE num_comment=${id};`);
+        res.redirect('back');
+    } catch (err) {
+        throw err;
+    }
+}
+

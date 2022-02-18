@@ -1,18 +1,21 @@
 /*
  * Controller: Blog (Blog)
- * ************************ */ 
+ * ************************ */
 const {
     pagination
 } = require('../util/pagination');
 
 exports.blog = async (req, res) => {
-    const { id } = req.params
+    const {
+        id
+    } = req.params
 
-    let data = await pagination({
-        numItem: 5,
+    let pagiBlog = await pagination({
+        numItem: 6,
         page: req.query.page,
         table: 'blog'
     });
+    console.log(pagiBlog);
 
     try {
         const blog = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, blog.date, pictureBank.link_picture, category.name
@@ -20,15 +23,11 @@ exports.blog = async (req, res) => {
                                      INNER JOIN pictureBank ON pictureBank.num_blog = blog.num_blog
                                      INNER JOIN category ON category.num_blog = blog.num_blog
                                      ORDER BY blog.num_blog
-                                     DESC LIMIT ${data.limit};`);
+                                     DESC LIMIT ${pagiBlog.limit};`);
 
         res.render('blog', {
             blog,
-            page: {
-                current: data.page,
-                previous: data.page > 0 ? data.page - 1 : undefined,
-                next: data.page < data.numPages - 1 ? data.page + 1 : undefined
-            }
+            paginate: pagiBlog.page
         });
 
     } catch (err) {
@@ -37,12 +36,9 @@ exports.blog = async (req, res) => {
 }
 
 exports.blogID = async (req, res) => {
-    const { id } = req.params
-    let paginateComment = await pagination({
-        numItem: 5,
-        page: req.query.page,
-        table: 'comment'
-    });
+    const {
+        id
+    } = req.params;
 
     try {
         const blogId = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, blog.date, user.pseudo, pictureBank.link_picture, category.name
@@ -51,8 +47,14 @@ exports.blogID = async (req, res) => {
                                      INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%blog%' AND pictureBank.num_blog = blog.num_blog
                                      INNER JOIN category ON category.num_blog = blog.num_blog
                                      WHERE blog.title= '${id}';`);
-                
-        const comment = await db.query(`SELECT comment.contents, comment.date, user.pseudo , pictureBank.link_picture
+
+        let paginateComment = await pagination({
+            numItem: 5,
+            page: req.query.page,
+            table: `comment WHERE num_blog = ${blogId[0].num_blog}`
+        });
+
+        const comment = await db.query(`SELECT comment.num_comment, comment.contents, comment.date, comment.num_user, user.pseudo , pictureBank.link_picture
                                         FROM comment
                                         INNER JOIN user ON user.num_user = comment.num_user
                                         INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%user%' AND pictureBank.num_user = comment.num_user
