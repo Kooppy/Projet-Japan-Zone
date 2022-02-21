@@ -11,12 +11,13 @@ const assert = require('assert'),
 describe('MOCHA // CRUD // USER', () =>{
 
     connectDB.connect();
+    let user;
 
     beforeEach(async () => {
         const {email, pseudo, password} = {
-            email: 'testestestestssssssss@hotmail.fr',
-            pseudo: 'test1000000000000000',
-            password: 'ouilepasswordsssssssssss'
+            email: 'tsthressssssss@hotmail.fr',
+            pseudo: 'tetdrtg10000000000',
+            password: 'ouisetrhwordssssssssssss'
         }
         let hash = crypto.createHash('sha256');
         hash.update(password);
@@ -33,7 +34,9 @@ describe('MOCHA // CRUD // USER', () =>{
         assert.ok(user_avatar.insertId);
 
         const userID = await selectID('email, pseudo, password', 'user', 'num_user= :value', user_insert.insertId);    
-        
+
+        user = { ...userID};
+
         assert.strictEqual(userID.email, email);
         assert.strictEqual(userID.pseudo, pseudo);
         assert.strictEqual(userID.password, pass);
@@ -43,9 +46,9 @@ describe('MOCHA // CRUD // USER', () =>{
 
     it('POST // Customer', async ()=>{
         const {email, pseudo, password} = {
-            email: 'ouiouuuuuui@hotmail.fr',
-            pseudo: 'testyttttt100000',
-            password: 'ouilepassssssswordestgenial'
+            email: 'oiorthtruuui@hotmail.fr',
+            pseudo: 'tetyttttt150000',
+            password: 'ouilepeshhtrssswordeial'
         }
         let hash = crypto.createHash('sha256');
         hash.update(password);
