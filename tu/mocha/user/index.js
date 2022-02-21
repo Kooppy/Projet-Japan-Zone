@@ -1,5 +1,5 @@
 /*
- * Test Unitaire: Mocha (Admin)
+ * Test Unitaire: Mocha (User)
  * ************************ */
 
 const assert = require('assert'), 
