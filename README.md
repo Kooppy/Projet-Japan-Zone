@@ -15,4 +15,11 @@ npm i
 npm run dev
 ```
 
+# For tu User
+
+```
+npm i
+npm run tu-user
+```
+
 enjoy code !
