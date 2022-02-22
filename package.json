@@ -5,9 +5,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "dev": "nodemon server.js",
-    "tu-user": "mocha ./tu/mocha/user"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "tu-user": "mocha ./tu/mocha/user",
+    "tu-rBlog": "mocha ./tu/chai/route-blog"
   },
   "repository": {
     "type": "git",

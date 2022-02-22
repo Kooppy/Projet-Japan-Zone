@@ -14,6 +14,7 @@ const express = require('express'),
   methodOverride = require('method-override'),
   dbOption = require('./back/config/database/dbOption'),
   connectDB = require ('./back/config/database'),
+  ROUTER_API = require('./back/router-controller-api/'),
   ROUTER = require('./back/router.js'),
   expressSession = require('express-session'),
   MySQLStore = require("express-mysql-session")(expressSession),
@@ -65,6 +66,9 @@ app.use('*', (req, res, next) => {
   next();
 })
 
+// Router-api.js
+app.use('/api', ROUTER_API)
+
 // Router.js
 app.use('/', ROUTER);
 
@@ -76,3 +80,5 @@ app.use('*', (req, res) => {
 app.listen(port, function () {
   console.log('App disponible sur localhost:3000 !');
 });
+
+module.exports= { app };

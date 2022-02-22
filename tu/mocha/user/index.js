@@ -5,7 +5,6 @@
 const assert = require('assert'), 
       { selectID } = require('../../../back/util/select'),
       { hash } = require('../../../back/util/hash'),
-      crypto = require('crypto'),
       connectDB = require ('../../../back/config/database');
 
 describe('MOCHA // CRUD // USER', () =>{
@@ -371,5 +370,4 @@ describe('MOCHA // CRUD // USER', () =>{
         assert.strictEqual(userID[0].num, 0);
         assert.strictEqual(session.length, 0); 
     });
-
 });
