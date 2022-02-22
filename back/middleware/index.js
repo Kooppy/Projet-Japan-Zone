@@ -27,7 +27,7 @@ exports.validate = (config) => {
             modalRegister: errors.array()
           });
           break;
-
+          
         case `/blog/${req.params.id}`:
           res.status(422).render('item1', {
             commentFlash: errors.array()
@@ -37,7 +37,6 @@ exports.validate = (config) => {
         default:
           break;
       }
-
     }
   }
 }
