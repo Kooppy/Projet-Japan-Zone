@@ -168,6 +168,11 @@ describe('MOCHA // CRUD // USER', () =>{
         const user_address_update = await db.query(`UPDATE user_address SET name= :name, first_name= :first_name, address= :address, postal_code= :postal_code, city= :city, phone= :phone  WHERE num_user = :id ;`, {id: user.num_user, name, first_name, address, postal_code, city, phone});
         const user_profil_update = await db.query(`UPDATE user_profil SET civility= :civility, description= :description  WHERE num_user = :id ;`, {id: user.num_user, civility, description});
 
+        assert.ok(user_update)
+        assert.ok(user_avatar_update)
+        assert.ok(user_address_update)
+        assert.ok(user_profil_update)
+        
         const userID = await db.query(`SELECT user.num_user, user.email, user.pseudo, user.password, pictureBank.link_picture, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
                                        FROM user
                                           INNER JOIN pictureBank 
@@ -180,10 +185,7 @@ describe('MOCHA // CRUD // USER', () =>{
                                             ON user_profil.num_user = user.num_user
                                        WHERE user.num_user= :id;` , {id: user.num_user});
 
-        assert.ok(user_update)
-        assert.ok(user_avatar_update)
-        assert.ok(user_address_update)
-        assert.ok(user_profil_update)
+        assert.ok(userID)
 
         assert.strictEqual(userID[0].pseudo, pseudo);
         assert.strictEqual(userID[0].email, email);
@@ -209,40 +211,39 @@ describe('MOCHA // CRUD // USER', () =>{
             picture, 
             category
         } = { 
-            title: `${rand}`,
+            title: `lili`,
             description: `${rand}`,
             content: `${rand}`,
             picture: `69846_blog_${rand}`,
             category: `${rand}`
         };
-    
-        const blog = await db.query(`INSERT INTO blog SET title= :title, description= :description, contents= :content, date= NOW(), num_user= '${user.id}';`, {title, description, content});
-        const picture = await db.query(`INSERT INTO pictureBank SET link_picture= :picture, num_user= '${user.id}', num_blog= '${blog.insertId}';`, {picture});
-        const category = await db.query(`INSERT INTO category SET name= :categorie, num_blog= '${blog.insertId}', num_picture= '${picture.insertId}';`, {category});
+
+        const blog = await db.query(`INSERT INTO blog SET title= :title, description= :description, contents= :content, date= NOW(), num_user= '${user.num_user}';`, {title, description, content});
+        const picture_blog = await db.query(`INSERT INTO pictureBank SET link_picture= :picture, num_user= '${user.num_user}', num_blog= '${blog.insertId}';`, {picture});
+        const category_blog = await db.query(`INSERT INTO category SET name= :category, num_blog= '${blog.insertId}', num_picture= '${picture_blog.insertId}';`, {category});
         
         assert.ok(blog)
-        assert.ok(picture)
-        assert.ok(category)
+        assert.ok(picture_blog)
+        assert.ok(category_blog)
 
-        const selectBlog = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, blog.date, user.pseudo, pictureBank.link_picture, category.name
+        const selectBlog = await db.query(`SELECT blog.title, blog.description, blog.contents, pictureBank.link_picture, category.name
                                            FROM blog 
-                                             INNER JOIN user 
-                                               ON user.num_user = blog.num_user
                                              INNER JOIN pictureBank 
                                                ON pictureBank.link_picture LIKE '%blog%' AND pictureBank.num_blog = blog.num_blog
                                              INNER JOIN category 
                                                ON category.num_blog = blog.num_blog
-                                           WHERE blog.num_user= ${user.id};`);
+                                           WHERE blog.num_user= ${user.num_user};`);
 
         assert.strictEqual(selectBlog[0].title, title);
         assert.strictEqual(selectBlog[0].description, description);
-        assert.strictEqual(selectBlog[0].content, content);
-        assert.strictEqual(selectBlog[0].picture, picture);
-        assert.strictEqual(selectBlog[0].category, category);
+        assert.strictEqual(selectBlog[0].contents, content);
+        assert.strictEqual(selectBlog[0].link_picture, picture);
+        assert.strictEqual(selectBlog[0].name, category);
     });
 
     // PUT Id User For Verify Per User Or Per Admin 
     it('PUT ID VERIFY // User', async () => {
+        
         const user_verify = await db.query(`UPDATE user_role SET isVerify= true WHERE num_user = :id ;`, {id: user.num_user});
 
         const userID = await db.query(`SELECT isVerify FROM user_role WHERE num_user= :id`, {id: user.num_user});
@@ -253,17 +254,35 @@ describe('MOCHA // CRUD // USER', () =>{
 
     // Insert Comment Per User
     it('INSERT COMMENT // User', async () => {
-        const user_archiving = await db.query(`UPDATE user_role SET isArchiving= true WHERE num_user = :id ;`, {id: user.num_user});
-        
-        // Delete Session Manually When Administrator Archives User
-        const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${user.num_user}%';`);
+        const { message, title } = {
+            message : `${rand}`,
+            title : 'lili'
+        }
 
-        const userID = await db.query(`SELECT isArchiving FROM user_role WHERE num_user= :id`, {id: user.num_user});
+        const blogId = await selectID('num_blog', 'blog', 'title= :value', title);
+        const comment = await db.query(`INSERT INTO comment SET contents= :message, date= NOW(), num_user= '${user.num_user}', num_blog= '${blogId.num_blog}';`, {message})
+       
+        assert.ok(comment)
+
+        const commentId = await selectID('contents, num_blog, num_user', 'comment', 'num_comment= :value', comment.insertId);
+
+        assert.strictEqual(commentId.contents, message);
+        assert.strictEqual(commentId.num_blog, blogId.num_blog);
+        assert.strictEqual(commentId.num_user, user.num_user);
+    });
+
+    // Delete Comment Per User Or Admin
+    it('DELETE COMMENT // User', async () => {
+        const commentId = await selectID('num_comment', 'comment', 'num_user= :value', user.num_user-1);
+
+        const delComment = await db.query(`DELETE FROM comment WHERE num_comment=${commentId.num_comment};`);
+       
+        assert.ok(delComment)
+
+        const comment = await selectID('count(*) as num', 'comment', 'num_comment= :value', commentId.num_comment);
         
-        const session = await  db.query(`SELECT data FROM sessions WHERE data LIKE '%"id":${user.num_user}%';`);
-        assert.ok(userID)
-        assert.strictEqual(userID[0].isArchiving, 1);
-        assert.strictEqual(session.length, 0);
+        assert.ok(comment)
+        assert.strictEqual(comment.num, 0);
     });
 
     // PUT Id User For Ban Per Admin
@@ -271,10 +290,16 @@ describe('MOCHA // CRUD // USER', () =>{
         const user_ban = await db.query(`UPDATE user_role SET isBan= true WHERE num_user = :id ;`, {id: user.num_user});
         const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${user.num_user}%';`);
 
+        assert.ok(user_ban)
+        assert.ok(session_kill)
+
         const userID = await db.query(`SELECT isBan FROM user_role WHERE num_user= :id`, {id: user.num_user});
         
         const session = await  db.query(`SELECT data FROM sessions WHERE data LIKE '%"id":${user.num_user}%';`);
+        
         assert.ok(userID)
+        assert.ok(session)
+        
         assert.strictEqual(userID[0].isBan, 1);
         assert.strictEqual(session.length, 0);
     });
@@ -286,10 +311,16 @@ describe('MOCHA // CRUD // USER', () =>{
         // Delete Session Manually When Administrator Archives User
         const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${user.num_user}%';`);
 
+        assert.ok(user_archiving)
+        assert.ok(session_kill)
+
         const userID = await db.query(`SELECT isArchiving FROM user_role WHERE num_user= :id`, {id: user.num_user});
         
         const session = await  db.query(`SELECT data FROM sessions WHERE data LIKE '%"id":${user.num_user}%';`);
+        
         assert.ok(userID)
+        assert.ok(session)
+
         assert.strictEqual(userID[0].isArchiving, 1);
         assert.strictEqual(session.length, 0);
     });
@@ -304,10 +335,16 @@ describe('MOCHA // CRUD // USER', () =>{
         
         const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${user.num_user}%';`);
 
+        assert.ok(user_delete)
+        assert.ok(session_kill)
+
         const userID = await db.query(`SELECT count(*) as num FROM user WHERE num_user= :id`, {id: user.num_user});
         
         const session = await  db.query(`SELECT data FROM sessions WHERE data LIKE '%"id":${user.num_user}%';`);
+        
         assert.ok(userID)
+        assert.ok(session)
+
         assert.strictEqual(userID[0].num, 0);
         assert.strictEqual(session.length, 0);
     });
@@ -321,10 +358,16 @@ describe('MOCHA // CRUD // USER', () =>{
         
         const session_kill = await db.query(`DELETE FROM sessions;`);
 
+        assert.ok(user_delete)
+        assert.ok(session_kill)
+
         const userID = await db.query(`SELECT count(*) as num FROM user`);
         
         const session = await  db.query(`SELECT data FROM sessions WHERE data LIKE '%"id":${user.num_user}%';`);
+        
         assert.ok(userID)
+        assert.ok(userID)
+
         assert.strictEqual(userID[0].num, 0);
         assert.strictEqual(session.length, 0); 
     });
