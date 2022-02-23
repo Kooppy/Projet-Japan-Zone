@@ -6,16 +6,12 @@ const {
 } = require('../../util/pagination');
 
 exports.blog = async (req, res) => {
-    const {
-        id
-    } = req.params
 
     let pagiBlog = await pagination({
         numItem: 6,
         page: req.query.page,
         table: 'blog'
     });
-    console.log(pagiBlog);
 
     try {
         const blog = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, blog.date, pictureBank.link_picture, category.name
@@ -25,7 +21,7 @@ exports.blog = async (req, res) => {
                                      ORDER BY blog.num_blog
                                      DESC LIMIT ${pagiBlog.limit};`);
 
-        res.render('blog', {
+        res.json({
             blog,
             paginate: pagiBlog.page
         });
@@ -62,7 +58,7 @@ exports.blogID = async (req, res) => {
                                         ORDER BY comment.num_comment ASC
                                         LIMIT ${paginateComment.limit};`)
 
-        res.render('item1', {
+        res.json({
             blog: blogId[0],
             comment,
             pageComment: paginateComment.page

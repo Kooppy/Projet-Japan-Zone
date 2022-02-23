@@ -193,17 +193,19 @@ exports.addBlog = async (req, res) => {
         title,
         description,
         content,
-        categorie
+        category,
+        id
     } = req.body;
 
     try {
-        const blog = await db.query(`INSERT INTO blog SET title= :title, description= :description, contents= :content, date= NOW(), num_user= '${req.session.user.id}';`, {title, description, content});
-        const picture = await db.query(`INSERT INTO pictureBank SET link_picture= :path, num_user= '${req.session.user.id}', num_blog= '${blog.insertId}';`, {path: req.file.path});
-        const category = await db.query(`INSERT INTO category SET name= :categorie, num_blog= '${blog.insertId}', num_picture= '${picture.insertId}';`, {categorie})
+        const blog = await db.query(`INSERT INTO blog SET title= :title, description= :description, contents= :content, date= NOW(), num_user= '${id}';`, {title, description, content});
+        const picture = await db.query(`INSERT INTO pictureBank SET link_picture= :path, num_user= '${id}', num_blog= '${blog.insertId}';`, {path: req.file.path});
+        const category_blog = await db.query(`INSERT INTO category SET name= :category, num_blog= '${blog.insertId}', num_picture= '${picture.insertId}';`, {category})
+
+        res.json({msg: 'sucess'});
     } catch (err) {
         throw err;
     }
-    res.redirect('back');
 }
 
 exports.editBlog = async (req, res) => {
@@ -211,30 +213,33 @@ exports.editBlog = async (req, res) => {
         title,
         description,
         contents,
-        date,
-        pseudo,
-        link_picture,
-        name
+        category
     } = req.body;
 
-    try {
-        const selectBlog = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, blog.date, user.pseudo, pictureBank.link_picture, category.name
-                                     FROM blog 
-                                     INNER JOIN user ON user.num_user = blog.num_user
-                                     INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%blog%' AND pictureBank.num_blog = blog.num_blog
-                                     INNER JOIN category ON category.num_blog = blog.num_blog
-                                     WHERE num_blog= ${req.params.id} ;`);
+    const { id } = req.params;
 
+    try {
+        const selectBlog = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, pictureBank.link_picture, category.name
+                                           FROM blog 
+                                             INNER JOIN user 
+                                               ON user.num_user = blog.num_user
+                                             INNER JOIN pictureBank 
+                                               ON pictureBank.link_picture LIKE '%blog%' AND pictureBank.num_blog = blog.num_blog
+                                             INNER JOIN category 
+                                               ON category.num_blog = blog.num_blog
+                                           WHERE blog.num_blog= ${id};`);
+
+    
         title = !title ? selectBlog[0].title : title;
         description = !description ? selectBlog[0].description : description;
         contents = !contents ? selectBlog[0].contents : contents;
-        date = !date ? selectBlog[0].date : date;
-        pseudo = !pseudo ? selectBlog[0].pseudo : pseudo;
-        link_picture = !link_picture ? selectBlog[0].link_picture : link_picture;
-        name = !name ? selectBlog[0].name : name;
+        category = !category ? selectBlog[0].name : category;
+
+        const blog = await db.query(`UPDATE blog SET title= :title, description= :description, contents= :contents WHERE num_blog = '${selectBlog[0].num_blog}';`, {title, description, contents});
+        const picture = await db.query(`UPDATE pictureBank SET link_picture= :link WHERE num_blog = '${selectBlog[0].num_blog}';`, {link: req.file.path});
+        const category_blog = await db.query(`UPDATE category SET name= :category WHERE num_blog = '${selectBlog[0].num_blog}';`, {category});
         
-        // const blog = await db.query(`UPDATE user SET isBan = true WHERE num_user = '${req.params.id}';`);
-        res.redirect('back');
+        res.json({msg:'sucess'});
     } catch (err) {
         throw err;
     }
@@ -248,7 +253,7 @@ exports.deleteBlog = async (req, res) => {
     try {
         const category = await db.query(`UPDATE category INNER JOIN blog ON blog.num_blog = category.num_blog SET category.num_blog= NULL WHERE blog.num_blog = '${id}';`);
         const picture = await db.query(`UPDATE pictureBank INNER JOIN blog ON blog.num_blog = pictureBank.num_blog SET pictureBank.num_blog = NULL WHERE blog.num_blog = '${id}';`);
-        const blog = await db.query(`DELETE comment, blog FROM blog RIGHT JOIN comment ON comment.num_blog = blog.num_blog WHERE comment.num_blog= '${id}';`);
+        const blog = await db.query(`DELETE FROM blog WHERE num_blog= '${id}';`);
     } catch (err) {
         throw err;
     }
