@@ -1,0 +1,479 @@
+{
+    "definitions": {},
+    "info": {
+      "title": "html_sass_bootstrap",
+      "version": "1.0.0",
+      "license": {
+        "name": "ISC"
+      },
+      "description": "Specification JSONs: [v2](/api-spec/v2), [v3](/api-spec/v3)."
+    },
+    "paths": {
+      "/api/blog": {
+        "get": {
+          "summary": "/api/blog",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/api/blog/{id}": {
+        "get": {
+          "summary": "/api/blog/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/api/admin/blog": {
+        "post": {
+          "summary": "/api/admin/blog",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "tags": [],
+          "requestBody": {
+              "required": true,
+              "content": {
+                  "application/json": {
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "title": { "type":"String" },
+                              "description": { "type":"String" },
+                              "contents": { "type":"String" },
+                              "category": { "type":"String" },
+                              "picBlog": { "type":"String" }
+                          }
+                      }
+                  }
+              }
+          },
+          "responses": {
+            "200": {
+                "description": "create article response",
+                "schema": {
+                  "type": "object",
+                  "items": { "$ref": "/api/admin/blog" }
+                }
+              }
+          }
+        }
+      },
+      "/api/admin/blog/{id}": {
+        "put": {
+          "summary": "/api/admin/blog/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        },
+        "delete": {
+          "summary": "/api/admin/blog/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/": {
+        "get": {
+          "summary": "/",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/contact": {
+        "post": {
+          "summary": "/contact",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/register": {
+        "post": {
+          "summary": "/register",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/login": {
+        "post": {
+          "summary": "/login",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/profil/{id}": {
+        "get": {
+          "summary": "/profil/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        },
+        "post": {
+          "summary": "/profil/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        },
+        "put": {
+          "summary": "/profil/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/logout": {
+        "delete": {
+          "summary": "/logout",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/forgot": {
+        "post": {
+          "summary": "/forgot",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/resetPassword/{id}": {
+        "get": {
+          "summary": "/resetPassword/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        },
+        "post": {
+          "summary": "/resetPassword/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/blog": {
+        "get": {
+          "summary": "/blog",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/blog/{id}": {
+        "get": {
+          "summary": "/blog/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        },
+        "post": {
+          "summary": "/blog/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/comment/{id}": {
+        "delete": {
+          "summary": "/comment/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/admin": {
+        "get": {
+          "summary": "/admin",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/admin/user/{id}": {
+        "put": {
+          "summary": "/admin/user/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        },
+        "delete": {
+          "summary": "/admin/user/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/admin/user/ban/{id}": {
+        "put": {
+          "summary": "/admin/user/ban/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/admin/user/archiving/{id}": {
+        "put": {
+          "summary": "/admin/user/archiving/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/admin/blog": {
+        "post": {
+          "summary": "/admin/blog",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/admin/blog/{id}": {
+        "put": {
+          "summary": "/admin/blog/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        },
+        "delete": {
+          "summary": "/admin/blog/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/admin/gallery": {
+        "post": {
+          "summary": "/admin/gallery",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": []
+        }
+      },
+      "/admin/gallery/{id}": {
+        "put": {
+          "summary": "/admin/gallery/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        },
+        "delete": {
+          "summary": "/admin/gallery/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": []
+        }
+      }
+    },
+    "swagger": "2.0",
+    "tags": []
+  }

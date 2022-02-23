@@ -311,35 +311,3 @@ exports.deleteGallery = async (req, res) => {
         throw err;
     }
 }
-
-exports.addDiary = async (req, res) => {
-    const {
-        date,
-        contents
-    } = req.body;
-
-    try {
-        const diary = await db.query(`INSERT INTO diary SET date= '${date}', contents= '${contents}', num_user= '${req.session.user.id}';`);
-        res.redirect('back');
-    } catch (err) {
-        throw err;
-    }
-}
-
-exports.editDiary = async (req, res) => {
-
-}
-
-exports.deleteDiary = async (req, res) => {
-    const {
-        id
-    } = req.params;
-
-    try {
-        const diary = await db.query(`DELETE FROM diary WHERE num_diary= '${id}';`);
-        res.redirect('back');
-    } catch (err) {
-        throw err;
-    }
-
-}

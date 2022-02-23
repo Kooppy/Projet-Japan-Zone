@@ -1,5 +1,3 @@
-const { selectID } = require("../../../back/util/select");
-
 /*
  * Test Unitaire: Chai (Route)
  * ************************ */
@@ -10,6 +8,7 @@ const chai = require("chai"),
     connectDB = require('../../../back/config/database'),
     { app } = require("../../../index"),
     { hash } = require('../../../back/util/hash'),
+    { selectID } = require("../../../back/util/select"),
     path = require("path");
 
 chai.use(chaiHttp);
@@ -126,7 +125,6 @@ describe('CHAI // CONTROLLER // BLOG', async () => {
             .end((err, res) => {
                 if (err) return err;
                 res.should.have.status(200);
-                
             });
     });
 

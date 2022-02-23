@@ -67,27 +67,23 @@ router.route('/blog/:id').get(blogID).post(validate(configComment()), comment);
 
 router.route('/comment/:id').delete(deleteComment);
 
-router.use(auth.isAdmin)
+//router.use(auth.isAdmin)
 
-router.route('/admin').get(admin);
+router.route('/admin').get(auth.isAdmin, admin);
 
-router.route('/admin/user/:id').put(upload.single('picUser'), editUser).delete(deleteUser);
+router.route('/admin/user/:id').put(auth.isAdmin, upload.single('picUser'), editUser).delete(deleteUser);
 
-router.route('/admin/user/ban/:id').put(banUser);
+router.route('/admin/user/ban/:id').put(auth.isAdmin, banUser);
 
-router.route('/admin/user/archiving/:id').put(archivingUser);
+router.route('/admin/user/archiving/:id').put(auth.isAdmin, archivingUser);
 
-router.route('/admin/blog').post(upload.single('picBlog'), addBlog);
+router.route('/admin/blog').post(auth.isAdmin, upload.single('picBlog'), addBlog);
 
-router.route('/admin/blog/:id').put(upload.single('picBlog'), editBlog).delete(deleteBlog);
+router.route('/admin/blog/:id').put(auth.isAdmin, upload.single('picBlog'), editBlog).delete(auth.isAdmin, deleteBlog);
 
-router.route('/admin/gallery').post(upload.single('picGallery'), addGallery);
+router.route('/admin/gallery').post(auth.isAdmin, upload.single('picGallery'), addGallery);
 
-router.route('/admin/gallery/:id').put(upload.single('picGallery'), editGallery).delete(deleteGallery);
-
-router.route('/admin/diary').post(addDiary);
-
-router.route('/admin/diary/:id').put(editDiary).delete(deleteDiary);
+router.route('/admin/gallery/:id').put(auth.isAdmin, upload.single('picGallery'), editGallery).delete(auth.isAdmin, deleteGallery);
 
 // /Routes
 

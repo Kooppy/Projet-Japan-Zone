@@ -19,6 +19,8 @@ const express = require('express'),
   expressSession = require('express-session'),
   MySQLStore = require("express-mysql-session")(expressSession),
   handlebars = require('express-handlebars'),
+  swaggerUi = require('swagger-ui-express'),
+  swaggerDocument = require('./swagger-config/swagger.json'),
   { ifstatus, commentDateFormat } = require('./back/helper');
 
 // Method-Override
@@ -26,6 +28,13 @@ app.use(methodOverride('_method'));
 
 // Connexion DB
 connectDB.connect();
+
+// const expressOasGenerator = require('express-oas-generator');
+// expressOasGenerator.init(app, {});
+
+
+
+
 
 // Body-Parser, parser mes data d'une req
 app.use(bodyParser.json());
@@ -66,15 +75,18 @@ app.use('*', (req, res, next) => {
   next();
 })
 
+// Swagger-ui-express
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 // Router-api.js
 app.use('/api', ROUTER_API)
 
 // Router.js
 app.use('/', ROUTER);
 
-app.use('*', (req, res) => {
-  res.status(404).render('err404');
-});
+// app.use('*', (req, res) => {
+//   res.status(404).render('err404');
+// });
 
 // Lancement de l'application
 app.listen(port, function () {

@@ -127,7 +127,7 @@ exports.editUser = async (req, res) => {
         isBan = !isBan ? selectUser[0].isBan : isBan;
         isArchiving = !isArchiving ? selectUser[0].isArchiving : isArchiving;
 
-        console.log(pseudo);
+
         // const user = await db.query(`UPDATE user SET isBan = true WHERE num_user = '${req.params.id}';`);
         res.redirect('back');
     } catch (err) {
@@ -315,36 +315,4 @@ exports.deleteGallery = async (req, res) => {
     } catch (err) {
         throw err;
     }
-}
-
-exports.addDiary = async (req, res) => {
-    const {
-        date,
-        contents
-    } = req.body;
-
-    try {
-        const diary = await db.query(`INSERT INTO diary SET date= '${date}', contents= '${contents}', num_user= '${req.session.user.id}';`);
-        res.redirect('back');
-    } catch (err) {
-        throw err;
-    }
-}
-
-exports.editDiary = async (req, res) => {
-
-}
-
-exports.deleteDiary = async (req, res) => {
-    const {
-        id
-    } = req.params;
-
-    try {
-        const diary = await db.query(`DELETE FROM diary WHERE num_diary= '${id}';`);
-        res.redirect('back');
-    } catch (err) {
-        throw err;
-    }
-
 }
