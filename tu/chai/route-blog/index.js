@@ -5,7 +5,6 @@ const chai = require("chai"),
     chaiHttp = require("chai-http"),
     should = require("chai").should(),
     expect = chai.expect,
-    connectDB = require('../../../back/config/database'),
     { app } = require("../../../index"),
     { hash } = require('../../../back/util/hash'),
     { selectID } = require("../../../back/util/select"),
@@ -16,8 +15,6 @@ chai.use(chaiHttp);
 describe('CHAI // CONTROLLER // BLOG', async () => {
     let rand;
     let user;
-
-    connectDB.connect();
 
     before(async () => {
         rand = Math.floor(Math.random() * 10000000);
