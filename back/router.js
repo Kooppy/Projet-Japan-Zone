@@ -8,7 +8,8 @@ const express = require('express'),
       auth = require('./middleware/auth.js'),
       upload = require('./config/multer'),
       {  configRegister, configLogin, configForgot, configResetPassword, configComment } = require('./config/validator'),
-      { validate } = require('./middleware/index.js');
+      { validate } = require('./middleware/index.js'),
+      sharp = require('./config/sharp');
 
 
 // Import des modules dans les controllers
@@ -35,9 +36,6 @@ const {
       addGallery,
       editGallery,
       deleteGallery,
-      addDiary,
-      editDiary,
-      deleteDiary,
       sendMail,
       blog,
       blogID
@@ -77,7 +75,7 @@ router.route('/admin/user/ban/:id').put(auth.isAdmin, banUser);
 
 router.route('/admin/user/archiving/:id').put(auth.isAdmin, archivingUser);
 
-router.route('/admin/blog').post(auth.isAdmin, upload.single('picBlog'), addBlog);
+router.route('/admin/blog').post(auth.isAdmin, upload.single('picBlog'), sharp, addBlog);
 
 router.route('/admin/blog/:id').put(auth.isAdmin, upload.single('picBlog'), editBlog).delete(auth.isAdmin, deleteBlog);
 

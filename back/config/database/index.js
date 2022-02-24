@@ -32,10 +32,6 @@ exports.connect = () => {
             if (err) console.error('error connect:' + err.stack);
             console.log(result);
         });
-        db.query("SELECT * FROM sessions", function (err, result) {
-            if (err) console.error('error connect:' + err.stack);
-            console.log(result);
-        });
         console.log('connected' + db.threadId);
     });
 }

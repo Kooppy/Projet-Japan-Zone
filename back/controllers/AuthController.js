@@ -15,10 +15,11 @@ exports.createUser = async (req, res) => {
         const user_insert_role = await db.query(`INSERT INTO user_role SET num_user= '${user_insert.insertId}';`);
         const user_insert_address = await db.query(`INSERT INTO user_address SET num_user= '${user_insert.insertId}';`);
         const user_insert_profil = await db.query(`INSERT INTO user_profil SET num_user= '${user_insert.insertId}';`);
+        res.redirect('back');
     } catch (err) {
         throw err;
     }
-    res.redirect('back');
+   
 }
 
 exports.loginUser = async (req, res) => {
