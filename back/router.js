@@ -26,6 +26,7 @@ const {
       resetPassword, 
       reset,
       admin,
+      addUser,
       editUser,
       banUser,
       archivingUser,
@@ -51,7 +52,7 @@ router.route('/register').post(validate(configRegister()), createUser);
 
 router.route('/login').post(validate(configLogin()), loginUser);
 
-router.route('/profil/:id').get(auth.isVerify, profilID).post(comment).put(editProfil);
+router.route('/profil/:id').get(auth.isVerify, profilID).put(editProfil);
 
 router.route('/logout').delete(logOut);
 
@@ -68,6 +69,8 @@ router.route('/comment/:id').delete(deleteComment);
 //router.use(auth.isAdmin)
 
 router.route('/admin').get(auth.isAdmin, admin);
+
+router.route('/admin/user').post(auth.isAdmin, addUser);
 
 router.route('/admin/user/:id').put(auth.isAdmin, upload.single('picUser'), editUser).delete(deleteUser);
 

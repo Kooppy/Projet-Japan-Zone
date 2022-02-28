@@ -83,6 +83,17 @@ exports.admin = async (req, res) => {
     }
 }
 
+exports.addUser = async (req, res) => {
+    const { pseudo, email, password, isAdmin, isVerify } = req.body;
+
+    try{
+
+    } catch (err) {
+        throw err;
+    }
+    res.redirect('back');
+}
+
 exports.editUser = async (req, res) => {
     let {
         pseudo,
