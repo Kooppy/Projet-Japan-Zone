@@ -47,9 +47,7 @@ module.exports = {
                 min: 8
             })
             .withMessage('Doit faire 8 caractère minimum.'),
-            check('password').custom((value, {
-                req
-            }) => {
+            check('password').custom((value, { req }) => {
                 if (value !== req.body.cPassword) {
                     throw new Error('La confirmation de mot de passe est incorrecte !');
                 }

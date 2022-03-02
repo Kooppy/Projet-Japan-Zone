@@ -52,13 +52,13 @@ router.route('/register').post(validate(configRegister()), createUser);
 
 router.route('/login').post(validate(configLogin()), loginUser);
 
-router.route('/profil/:id').get(auth.isVerify, profilID).put(editProfil);
+router.route('/profil/:id').get(auth.isVerify, profilID).put(validate(configEditUser()), upload.single('picUser'), editProfil);
 
 router.route('/logout').delete(logOut);
 
 router.route('/forgot').post(validate(configForgot()), forgot);
 
-router.route('/resetPassword/:id').get(auth.isForgot, resetPassword).post(validate(configResetPassword()), reset);
+router.route('/resetPassword/:id').get(auth.isForgot, resetPassword).put(validate(configResetPassword()), reset);
 
 router.route('/blog').get(blog);
 
