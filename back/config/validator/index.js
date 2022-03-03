@@ -102,5 +102,51 @@ module.exports = {
             check('message').isLength({min: 10, max: 200})
             .withMessage('Votre message doit comporter au minimun 10 caractère et doit comporter 200 caractère max.')
         ]
+    },
+    configEditUser: () => {
+        return [check('pseudo')
+            .isLength({
+                min: 8
+            })
+            .withMessage('Votre pseudo doit faire 8 caractère mini.'),
+            check('pseudo').custom(async (value) => {
+                const userPseudo = await selectID('count(*) as num', 'user', 'pseudo= :value', value);
+               
+                if (userPseudo.num === 1) {
+                    throw new Error('Le pseudo est déjà prit !');
+                }
+                return true;
+            }),
+            check('email')
+            .isEmail()
+            .withMessage('Email invalide'),
+            check('email').custom(async (value) => {
+                const userEmail = await selectID('count(*) as num', 'user', 'email= :value', value);
+
+                if (userEmail.num === 1) {
+                    throw new Error('Un compte existe déjà avec cet email !');
+                }
+                return true;
+            }),
+            check('password')
+            .matches(/^(?=.*\d)[0-9a-zA-Z\%\@]{1,}$/)
+            .withMessage(' 1 Chiffre.')
+            .matches(/^(?=.*[a-z])[0-9a-zA-Z\%\@]{1,}$/)
+            .withMessage(' 1 caractère minuscule.')
+            .matches(/^(?=.*[\%\@])[0-9a-zA-Z\%\@]{1,}$/)
+            .withMessage(' 1 caractère spéciale.')
+            .matches(/^(?=.*[A-Z])[0-9a-zA-Z\%\@]{1,}$/)
+            .withMessage(' 1 Majuscule.')
+            .isLength({
+                min: 8
+            })
+            .withMessage('Doit faire 8 caractère minimum.'),
+            check('password').custom((value, { req }) => {
+                if (value !== req.body.cPassword) {
+                    throw new Error('La confirmation de mot de passe est incorrecte !');
+                }
+                return true;
+            })
+        ];
     }
 }

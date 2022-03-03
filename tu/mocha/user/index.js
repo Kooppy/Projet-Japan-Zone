@@ -9,7 +9,7 @@ const assert = require('assert'),
 
 describe('MOCHA // CRUD // USER', () =>{
 
-    connectDB.connect();
+
     let user;
     let rand;
 
@@ -52,7 +52,7 @@ describe('MOCHA // CRUD // USER', () =>{
 
 
     // Insert User
-    it('POST // Customer', async ()=>{
+    it('POST // User', async ()=>{
         rand = Math.floor(Math.random() * 100000);
         const {email, pseudo, password} = {
             email: `${rand}@hotmail.fr`,
@@ -330,7 +330,7 @@ describe('MOCHA // CRUD // USER', () =>{
                                             FROM user  
                                               RIGHT JOIN pictureBank 
                                                 ON pictureBank.link_picture LIKE '%user%' AND pictureBank.num_user = user.num_user 
-                                            WHERE user.num_user = :id ;`, {id: user.num_user});
+                                            WHERE pictureBank.num_user = :id ;`, {id: user.num_user});
         
         const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${user.num_user}%';`);
 

@@ -7,7 +7,7 @@ const express = require('express'),
       router = express.Router(),
       auth = require('./middleware/auth.js'),
       upload = require('./config/multer'),
-      {  configRegister, configLogin, configForgot, configResetPassword, configComment } = require('./config/validator'),
+      {  configRegister, configLogin, configForgot, configResetPassword, configComment, configEditUser } = require('./config/validator'),
       { validate } = require('./middleware/index.js'),
       sharp = require('./config/sharp');
 
