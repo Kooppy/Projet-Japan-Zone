@@ -3,7 +3,7 @@ const { home } = require("./HomeController"),
       { resetPassword, reset } = require("./ResetPassword"),
       { profilID, editProfil, comment, deleteComment } = require("./UserController"),
       { admin, addUser, editUser, banUser, archivingUser, deleteUser, addBlog, editBlog, deleteBlog, addGallery, editGallery, deleteGallery } = require("./AdminController"),
-      { sendMail } = require("./ContactController"),
+      { sendMessage } = require("./ContactController"),
       { blog, blogID } = require("./BlogController");
 
 module.exports = {
@@ -23,7 +23,7 @@ module.exports = {
     admin, addUser, editUser, banUser, archivingUser, deleteUser, addBlog, editBlog, deleteBlog, addGallery, editGallery, deleteGallery,
 
     //Contact
-    sendMail,
+    sendMessage,
 
     //Blog
     blog, blogID

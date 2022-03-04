@@ -1,6 +1,7 @@
 /*
  * Controller: Blog (Blog)
  * ************************ */
+
 const {
     pagination
 } = require('../util/pagination');
@@ -62,11 +63,17 @@ exports.blogID = async (req, res) => {
                                         ORDER BY comment.num_comment ASC
                                         LIMIT ${paginateComment.limit};`)
 
-        res.render('item1', {
-            blog: blogId[0],
-            comment,
-            pageComment: paginateComment.page
-        });
+
+        if (paginateComment.page.current <= paginateComment.page.total) {
+            res.render('item1', {
+                blog: blogId[0],
+                comment,
+                pageComment: paginateComment.page
+            });
+        } else {
+            res.redirect(`/blog/${id}`)
+        }
+
     } catch (err) {
         throw err;
     }

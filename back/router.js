@@ -7,7 +7,7 @@ const express = require('express'),
       router = express.Router(),
       auth = require('./middleware/auth.js'),
       upload = require('./config/multer'),
-      {  configRegister, configLogin, configForgot, configResetPassword, configComment, configEditUser } = require('./config/validator'),
+      {  configRegister, configLogin, configForgot, configResetPassword, configComment, configEditUser, configSendMessage } = require('./config/validator'),
       { validate } = require('./middleware/index.js'),
       sharp = require('./config/sharp');
 
@@ -37,7 +37,7 @@ const {
       addGallery,
       editGallery,
       deleteGallery,
-      sendMail,
+      sendMessage,
       blog,
       blogID
 } = require('./controllers'); 
@@ -46,7 +46,7 @@ const {
 
 router.route('/').get(home);
 
-router.route('/contact').post(sendMail);
+router.route('/contact').post(validate(configSendMessage()), sendMessage);
 
 router.route('/register').post(validate(configRegister()), createUser);
 

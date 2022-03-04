@@ -1,10 +1,6 @@
 /*
  * Controller: Admin (Admin)
  * ************************ */
-const {
-    pagination
-} = require('../../util/pagination');
-const { selectID } = require('../../util/select');
 
 exports.addBlog = async (req, res) => {
     const {
@@ -16,7 +12,8 @@ exports.addBlog = async (req, res) => {
     } = req.body;
 
     try {
-        const blog = await db.query(`INSERT INTO blog SET title= :title, description= :description, contents= :content, date= NOW(), num_user= '${id}';`, {title, description, content});
+        const blog = await db.query(`INSERT INTO blog 
+                                       SET title= :title, description= :description, contents= :content, date= NOW(), num_user= '${id}';`, {title, description, content});
         const picture = await db.query(`INSERT INTO pictureBank SET link_picture= :path, num_user= '${id}', num_blog= '${blog.insertId}';`, {path: req.file.path});
         const category_blog = await db.query(`INSERT INTO category SET name= :category, num_blog= '${blog.insertId}', num_picture= '${picture.insertId}';`, {category})
 

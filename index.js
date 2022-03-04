@@ -21,7 +21,6 @@ const express = require('express'),
   handlebars = require('express-handlebars'),
   swaggerUi = require('swagger-ui-express'),
   swaggerDocument = require('./swagger-config/swagger.json'),
-  facebookSdk = require('facebook-nodejs-business-sdk'),
   { ifstatus, commentDateFormat } = require('./back/helper');
 
 // Method-Override
@@ -32,24 +31,6 @@ connectDB.connect();
 
 // const expressOasGenerator = require('express-oas-generator');
 // expressOasGenerator.init(app, {});
-
-// api facebook
-// const api = facebookSdk.FacebookAdsApi.init(process.env.FACEBOOK_TOKEN);
-
-// const AdAccount = facebookSdk.Page;
-// const Campaign = facebookSdk.Campaign;
-
-// const account = new AdAccount(process.env.FACEBOOK_ACCOUNT_ID);
-// var campaigns;
-    
-// account.read([AdAccount.Fields.name])
-//   .then((account) =>{
-//     return account.getCampaigns([Campaign.Fields.name], { limit: 10 }) // fields array and params
-//   })
-//   .then((result) =>{
-//     campaigns = result
-//     campaigns.forEach((campaign) =>console.log(campaign.name))  
-//   }).catch(console.error);
 
 // Body-Parser, parser mes data d'une req
 app.use(bodyParser.json());
@@ -99,9 +80,9 @@ app.use('/api', ROUTER_API)
 // Router.js
 app.use('/', ROUTER);
 
-// app.use('*', (req, res) => {
-//   res.status(404).render('err404');
-// });
+app.use('*', (req, res) => {
+  res.status(404).render('err404');
+});
 
 // Lancement de l'application
 app.listen(port, function () {

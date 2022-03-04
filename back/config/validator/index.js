@@ -148,5 +148,21 @@ module.exports = {
                 return true;
             })
         ];
+    },
+    configSendMessage: () => {
+        return [check('email')
+            .isEmail()
+            .withMessage('Email invalide'),
+            check('subject')
+            .isLength({
+                min: 10
+            })
+            .withMessage('Votre objet doit faire 10 caractère minimum.'),
+            check('message')
+            .isLength({
+                min: 20
+            })
+            .withMessage('Votre message doit faire 20 caractère minimum.')
+        ];
     }
 }
