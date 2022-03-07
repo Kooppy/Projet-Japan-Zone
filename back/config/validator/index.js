@@ -150,7 +150,10 @@ module.exports = {
         ];
     },
     configSendMessage: () => {
-        return [check('email')
+        return [check('name')
+            .isEmpty()
+            .withMessage('Le nom ne peut être vide'),
+            check('email')
             .isEmail()
             .withMessage('Email invalide'),
             check('subject')

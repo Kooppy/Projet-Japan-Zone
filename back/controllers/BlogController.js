@@ -7,16 +7,12 @@ const {
 } = require('../util/pagination');
 
 exports.blog = async (req, res) => {
-    const {
-        id
-    } = req.params
 
     let pagiBlog = await pagination({
         numItem: 6,
         page: req.query.page,
         table: 'blog'
     });
-    console.log(pagiBlog);
 
     try {
         const blog = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, blog.date, pictureBank.link_picture, category.name

@@ -15,6 +15,9 @@ const express = require('express'),
 // Import des modules dans les controllers
 const {
       home,
+      sendMessage,
+      blog,
+      blogID,
       createUser,
       loginUser,
       forgot,
@@ -37,9 +40,9 @@ const {
       addGallery,
       editGallery,
       deleteGallery,
-      sendMessage,
-      blog,
-      blogID
+      messagery,
+      sendEmail,
+      deleteMessage
 } = require('./controllers'); 
 
 // Routes
@@ -47,6 +50,12 @@ const {
 router.route('/').get(home);
 
 router.route('/contact').post(validate(configSendMessage()), sendMessage);
+
+router.route('/blog').get(blog);
+
+router.route('/blog/:id').get(blogID).post(validate(configComment()), comment);
+
+router.route('/comment/:id').delete(deleteComment);
 
 router.route('/register').post(validate(configRegister()), createUser);
 
@@ -59,12 +68,6 @@ router.route('/logout').delete(logOut);
 router.route('/forgot').post(validate(configForgot()), forgot);
 
 router.route('/resetPassword/:id').get(auth.isForgot, resetPassword).put(validate(configResetPassword()), reset);
-
-router.route('/blog').get(blog);
-
-router.route('/blog/:id').get(blogID).post(validate(configComment()), comment);
-
-router.route('/comment/:id').delete(deleteComment);
 
 //router.use(auth.isAdmin)
 

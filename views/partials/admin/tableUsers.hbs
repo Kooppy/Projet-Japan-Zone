@@ -1,0 +1,41 @@
+
+<table class="table table-sm table-bordered">
+  {{! LEGENDE TABLEAU }}
+  <thead>
+    {{! TITRES ELEMENTS TABLEAU }}
+    <tr>
+      <th scope="col">Avatar</th>
+      <th scope="col">Pseudo</th>
+      <th scope="col">Email</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  {{! CONTENU TABLEAU }}
+  <tbody>
+    {{!-- listUser qui est déclaré dans le GET de adminController --}}
+    {{#each users}}
+
+      <tr>
+        {{! inc permet d'incrémenter l'id, si l'on supprime un utilisateurs,
+         les id vont automatiquement se réattribuer dans l'ordre. Ne touche pas au ID de l'user de la db }}
+        {{!--<th scope="row"> {{inc @index}} : {{ this.id }} </th>--}}
+        <td>{{ this.avatar }}</td>
+        <td>{{ this.pseudo }}</td>
+        <td>{{ this.email }}</td>
+        
+        <td class="d-flex justify-content-center">
+          <button type="button" name="id" class="btn btn-danger px-3" data-bs-toggle="modal" data-bs-target="#modalDelete{{ this.id }}"><i class="far fa-trash-alt"></i></button>
+          <button type="button" name="id" class="btn btn-success ms-2 ps-3" data-bs-toggle="modal" data-bs-target="#editUser{{ this.id }}"><i class="far fa-edit"></i></button>
+        </td>
+
+        <!-- MODAL DELETE ET EDIT -->
+
+        {{> modals/modal-delete data=this.num_user path="/admin/user" }}
+        {{!-- user=this correspond à  --}}
+
+        {{> modals/modal-viewUser user=this }}
+
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
