@@ -89,6 +89,10 @@ router.route('/admin/gallery').post(auth.isAdmin, upload.single('picGallery'), a
 
 router.route('/admin/gallery/:id').put(auth.isAdmin, upload.single('picGallery'), editGallery).delete(auth.isAdmin, deleteGallery);
 
+router.route('/messagery').get(auth.isAdmin, messagery).post(auth.isAdmin, validate(configSendMessage()), sendEmail)
+
+router.route('/messagery/:id').delete(auth.isAdmin, deleteMessage)
+
 // /Routes
 
 // Export de notre router

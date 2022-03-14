@@ -1,0 +1,51 @@
+{{!--
+Partial: Modal Login / Register
+--}}
+
+<!-- Modal Login / Register -->
+<div class="modal fade" id="forgot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Mot de passe oublier ?</h3>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- Tab Content Login / Register -->
+            <div class="modal-body">
+                <form method="post" action="/forgot">
+                    <!-- Email input :-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="contact-form">
+                                <input class="input-form" name="email" type="email" placeholder="Email">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Button Input -->
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <button class="btn btn-secondary">Envoyer</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- Modal Footer Social -->
+            <div class="modal-footer justify-content-center">
+                <p>Suivez-nous : </p>
+                <ul class="social-footer">
+                    <li><a class="social-footer-block social-facebook"
+                                href="https://www.facebook.com/evenementjapanzone" target="_blank"><span
+                                    class="fab fa-facebook-square"></span></a></li>
+                    <li><a class="social-footer-block social-twitter" href="https://twitter.com/Japanzone72"
+                                target="_blank"><span class="fab fa-twitter"></span></a></li>
+                    <li><a class="social-footer-block social-youtube"
+                                href="https://www.youtube.com/channel/UCXAKfJnDfiaNPykSMriiiDQ" target="_blank"><span
+                                    class="fab fa-youtube"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

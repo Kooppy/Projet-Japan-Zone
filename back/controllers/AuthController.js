@@ -65,7 +65,6 @@ exports.forgot = async (req, res) => {
     
         let result = await sendMail({toEmail: email, subject: 'Mot de passe oublié', message: `Voici votre lien pour réinitialiser votre mot de passe : http://${req.get('host')}/resetPassword/${token}`, validate: 'Si votre email existe, un email sera envoyer.'});
     
-        console.log(result.flash);
         res.render('index', {flash: result.flash});
     } catch (err) {
         throw err;

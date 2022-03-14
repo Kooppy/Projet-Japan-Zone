@@ -8,7 +8,8 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "tu-user": "mocha ./tu/mocha/user",
-    "tu-rBlog": "mocha ./tu/chai/route-blog"
+    "tu-rBlog": "mocha ./tu/chai/route-blog",
+    "sass": "sass --watch ./assets/sass/index.sass:./assets/css/style.css"
   },
   "repository": {
     "type": "git",

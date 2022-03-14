@@ -52,6 +52,17 @@ ul {
   width: 40px !important;
   height: 40px; }
 
+/**** Table Part ****/ 
+
+.table-border {
+    border: 3px solid #212121;
+}
+
+.table-header {
+    background: #3c3b3b;
+    color: #ffffff;
+}
+
 .bg-rgba-gradient-basic {
   background: linear-gradient(to bottom right, rgba(153, 255, 153, 0.5), rgba(153, 51, 255, 0.6)); }
 
@@ -146,7 +157,7 @@ ul {
 .head-title h1 span {
   font-weight: 700; }
 
-.btn {
+/*.btn {
   display: inline-block;
   padding: 10px 30px;
   text-decoration: none;
@@ -169,7 +180,7 @@ ul {
 
 .btn-ghost:hover {
   background-color: #6c757d;
-  color: #fff; }
+  color: #fff; }*/
 
 .carousel-item img {
   object-fit: cover;

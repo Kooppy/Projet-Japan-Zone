@@ -1,27 +1,28 @@
-
 <table class="table table-sm table-hover table-border">
   {{! LEGENDE TABLEAU }}
   <thead class="table-header">
     {{! TITRES ELEMENTS TABLEAU }}
     <tr>
-      <th scope="col" class="border-2 border-end">Avatar</th>
-      <th scope="col" class="border-2 border-end">Pseudo</th>
-      <th scope="col" class="border-2 border-end">Email</th>
+      <th scope="col" class="border-2 border-end">Image</th>
+      <th scope="col" class="border-2 border-end">Autheur</th>
+      <th scope="col" class="border-2 border-end">Titre</th>
+      <th scope="col" class="border-2 border-end">Description</th>
       <th scope="col" class="border-2 border-end">Action</th>
     </tr>
   </thead>
   {{! CONTENU TABLEAU }}
   <tbody>
     {{!-- listUser qui est déclaré dans le GET de adminController --}}
-    {{#each users}}
+    {{#each blog }}
       <tr>
         <td class="text-center">
-          <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.num_user }}">
+          <a class="" data-bs-toggle="modal" data-bs-target="">
             <img class="avatar" src="{{ this.link_picture }}">
           </a>
         </td>
         <td class="pt-3">{{ this.pseudo }}</td>
-        <td class="pt-3">{{ this.email }}</td>
+        <td class="pt-3">{{ this.title }}</td>
+        <td class="pt-3">{{ this.description }}</td>
         
         <td class="text-center pt-2">
           <button name="id" class="btn btn-danger px-3" data-bs-toggle="modal" data-bs-target="#modalDelete{{ this.id }}"><i class="far fa-trash-alt"></i></button>
@@ -37,34 +38,34 @@
 
       </tr>
     {{/each}}
-    {{#ifstatus pageUser.total 1}}
+    {{#ifstatus pageBlog.total 1}}
     {{else}}
       <tr>
-        <td colspan="4">
+        <td colspan="5">
           <nav aria-label="Page navigation example">
             <ul class="justify-content-center pagination mt-2 mb-2">
-              {{#ifstatus pageUser.current 1}}
+              {{#ifstatus pageBlog.current 1}}
               {{else}}
                 <li class="page-item">
-                  <a class="page-link" href="?user={{pageUser.previous}}" aria-label="Previous">
+                  <a class="page-link" href="?blog={{pageBlog.previous}}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                   </a>
                 </li>
                 <li class="page-item">
-                  <a class="page-link" href="?user={{pageUser.previous}}">{{pageUser.previous}}</a>
+                  <a class="page-link" href="?blog={{pageBlog.previous}}">{{pageBlog.previous}}</a>
                 </li>
               {{/ifstatus}}
               <li class="page-item active">
-                <a class="page-link" href="?user={{pageUser.current}}">{{pageUser.current}}</a>
+                <a class="page-link" href="?blog={{pageBlog.current}}">{{pageBlog.current}}</a>
               </li>
 
-              {{#ifstatus pageUser.next undefined}}
+              {{#ifstatus pageBlog.next undefined}}
               {{else}}
                 <li class="page-item">
-                  <a class="page-link" href="?user={{pageUser.next}}">{{pageUser.next}}</a>
+                  <a class="page-link" href="?blog={{pageBlog.next}}">{{pageBlog.next}}</a>
                 </li>
                 <li class="page-item">
-                  <a class="page-link" href="?user={{pageUser.next}}" aria-label="Next">
+                  <a class="page-link" href="?blog={{pageBlog.next}}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                   </a>
                 </li>

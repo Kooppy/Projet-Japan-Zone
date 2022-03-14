@@ -1,40 +1,44 @@
+{{!-- 
+    Partial: Messagery Admin 
+ --}}
+
+<section class="pt-3 container-fluid bg-light">
 
 <table class="table table-sm table-hover table-border">
   {{! LEGENDE TABLEAU }}
   <thead class="table-header">
     {{! TITRES ELEMENTS TABLEAU }}
     <tr>
-      <th scope="col" class="border-2 border-end">Avatar</th>
-      <th scope="col" class="border-2 border-end">Pseudo</th>
-      <th scope="col" class="border-2 border-end">Email</th>
+      <th scope="col" class="border-2 border-end">Nom</th>
+      <th scope="col" class="border-2 border-end">Objet</th>
+      <th scope="col" class="border-2 border-end">Description</th>
+      <th scope="col" class="border-2 border-end">Date</th>
       <th scope="col" class="border-2 border-end">Action</th>
     </tr>
   </thead>
   {{! CONTENU TABLEAU }}
   <tbody>
     {{!-- listUser qui est déclaré dans le GET de adminController --}}
-    {{#each users}}
+    {{#each messagery}}
       <tr>
-        <td class="text-center">
-          <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.num_user }}">
-            <img class="avatar" src="{{ this.link_picture }}">
-          </a>
-        </td>
-        <td class="pt-3">{{ this.pseudo }}</td>
-        <td class="pt-3">{{ this.email }}</td>
+        <td class="pt-3">{{ this.name }}</td>
+        <td class="pt-3">{{ this.subject }}</td>
+        <td class="pt-3">{{ this.message }}</td>
+        <td class="pt-3">{{ this.date }}</td>
         
         <td class="text-center pt-2">
           <button name="id" class="btn btn-danger px-3" data-bs-toggle="modal" data-bs-target="#modalDelete{{ this.id }}"><i class="far fa-trash-alt"></i></button>
           <button name="id" class="btn btn-success ms-2 ps-3" data-bs-toggle="modal" data-bs-target="#editUser{{ this.id }}"><i class="far fa-edit"></i></button>
         </td>
 
-        <!-- MODAL DELETE ET EDIT -->
-
-        {{> modals/modal-delete data=this.num_user path="/admin/user" }}
-        {{!-- user=this correspond à  --}}
-
+        <!-- MODAL VIEW MESSAGE -->
         {{> modals/modal-viewUser user=this }}
 
+        <!-- MODAL CREATE MESSAGE -->
+        {{> modals/modal-contact data=this path='/messagery' }}
+
+        {{!-- MODAL DELETE MESSAGE  --}}
+        {{> modals/modal-delete data=this.num_messagery path='/messagery' }}
       </tr>
     {{/each}}
     {{#ifstatus pageUser.total 1}}
@@ -76,3 +80,4 @@
     {{/ifstatus}}
   </tbody>
 </table>
+</section>

@@ -29,12 +29,12 @@ $(function(){
     // JQUERY
     // let position_top_raccourci = $("#nav").offset().top;
     // JS DOM 
-    let position_top_raccourci = document.getElementById("nav").offsetTop;
+    //let position_top_raccourci = document.getElementById("nav").offsetTop;
 
     //document.querySelector('#night').checked = true;
 
     window.addEventListener('scroll', function () {
-        if (window.scrollY > position_top_raccourci) {
+        if (window.scrollY > 50) {
             //JQUERY
             //$("#nav").addClass("fixed-top");
             // JS DOM Fixation Nav

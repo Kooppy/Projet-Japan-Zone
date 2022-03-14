@@ -7,23 +7,23 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Contactez-Nous</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Envoie d'Email</h3>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="{{ path }}" method="post">
                     <!-- Name & Email Input -->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="contact-form">
-                                <input class="input-form" type="text" placeholder="Nom">
+                                <input class="input-form" type="text" placeholder="Nom" value="Admin">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="contact-form">
-                                <input class="input-form" type="email" placeholder="Email">
+                                <input class="input-form" type="email" placeholder="Email" value="{{ this.email }}">
                             </div>
                         </div>
                     </div>
