@@ -7,6 +7,7 @@ const {
 const { selectID } = require('../util/select');
 
 exports.admin = async (req, res) => {
+
     let paginateUser = await pagination({
         numItem: 5,
         page: req.query.user,
@@ -18,12 +19,14 @@ exports.admin = async (req, res) => {
         page: req.query.blog,
         table: 'blog'
     });
-
+    
     let paginateGallery = await pagination({
         numItem: 5,
         page: req.query.gallery,
         table: 'pictureBank'
     });
+    let test = req.url.split(/(\d)/)
+    console.log(test[0].split('/admin?').join('').split('=').join(''));
 
     try {
         const users = await db.query(`SELECT user.num_user, user.email, user.pseudo, user.password, user.confirmation_date, pictureBank.link_picture, user_role.isVerify, user_role.isAdmin, user_role.isBan, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
@@ -60,7 +63,8 @@ exports.admin = async (req, res) => {
                 blog,
                 pageBlog: paginateBlog.page,
                 gallery,
-                pageGallery: paginateGallery.page
+                pageGallery: paginateGallery.page,
+                query: test[0].split('/admin?').join('').split('=').join('')
             });
         } else {
             res.redirect('/admin');

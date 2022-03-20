@@ -1,0 +1,312 @@
+{{!--
+Partial: Admin Main
+--}}
+
+<!-- Main Admin User & Blog & Gallery & Diary -->
+<section class="container my-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="accordion" id="accordion">
+                <!-- User Part -->
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="user">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseUser" aria-expanded="true"
+                            aria-controls="collapseUser">Utilisateur</button>
+                    </h3>
+                    <div id="collapseUser" class="accordion-collapse collapse show" aria-labelledby="user"
+                        data-bs-parent="#accordion">
+                        <div class="accordion-body text-center">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
+                                    class="fas fa-user-plus"></span>Créer un
+                                Utilisateur </button>
+                            {{#each users }}
+                            <div class="row user">
+                                <div class="col-md-2">
+                                    <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.num_user }}">
+                                        <img class="avatar" src="{{ this.link_picture }}">
+                                    </a>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>{{ this.pseudo }} </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p class="user-text">{{ this.email }}</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <a class="" data-bs-toggle="modal"
+                                        data-bs-target="#viewUser{{ this.num_user }}"><span
+                                            class="far fa-edit"></span></a>
+                                    <a class="" data-bs-toggle="modal"
+                                        data-bs-target="#viewUser{{ this.num_user }}"><span
+                                            class="far fa-envelope"></span></a>
+                                    <a class="" data-bs-toggle="modal" data-bs-target="#delete{{ this.num_user }}"><span
+                                            class="far fa-trash-alt"></span></a>
+                                </div>
+                            </div>
+                            {{> modals/modal-viewUser users=this }}
+                            {{> modals/modal-delete data=this.num_user path="/admin/user"}}
+                            {{/each}}
+                            {{#ifstatus pageUser.total 1}}
+                            {{else}}
+                            <nav aria-label="Page navigation example">
+                                <ul class="justify-content-center pagination">
+
+                                    {{#ifstatus pageUser.current 1}}
+                                    {{else}}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?user={{pageUser.previous}}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link"
+                                            href="?user={{pageUser.previous}}">{{pageUser.previous}}</a>
+                                    </li>
+                                    {{/ifstatus}}
+
+                                    <li class="page-item active"><a class="page-link"
+                                            href="?user={{pageUser.current}}">{{pageUser.current}}</a>
+                                    </li>
+
+                                    {{#ifstatus pageUser.next undefined}}
+                                    {{else}}
+                                    <li class="page-item"><a class="page-link"
+                                            href="?user={{pageUser.next}}">{{pageUser.next}}</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?user={{pageUser.next}}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                    {{/ifstatus}}
+                                </ul>
+                            </nav>
+                            {{/ifstatus}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- News Part -->
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="blog">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseBlog" aria-expanded="false" aria-controls="collapseBlog">Blog</button>
+                </h3>
+                <div id="collapseBlog" class="accordion-collapse collapse" aria-labelledby="blog"
+                    data-bs-parent="#accordion">
+                    <div class="accordion-body text-center">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
+                                class="fas fa-user-plus"></span>Créer un
+                            Article</button>
+                        {{#each blog }}
+                        <div class="row user">
+                            <div class="col-md-2">
+                                <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog{{ this.num_blog }}">
+                                    <img class="avatar"
+                                        src="{{ this.link_picture }}">
+                                </a>
+                            </div>
+                            <div class="col-md-2">
+                                <p>{{ this.pseudo }}</p>
+                            </div>
+                            <div class="col-md-2">
+                                <p>{{ this.title }}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>{{ this.description }}</p>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="" data-bs-toggle="modal" data-bs-target="#viewBlog"><span
+                                        class="far fa-edit"></span></a>
+                                <a class="" data-bs-toggle="modal" data-bs-target="#delete{{ this.num_blog }}"><span
+                                        class="far fa-trash-alt"></span></a>
+                            </div>
+                        </div>
+                        {{> modals/modal-delete data=this.num_blog path="/admin/blog"}}
+                        {{/each}}
+                        {{#ifstatus pageBlog.total 1}}
+                        {{else}}
+                        <nav aria-label="Page navigation example">
+                            <ul class="justify-content-center pagination">
+
+                                {{#ifstatus pageBlog.current 1}}
+                                {{else}}
+                                <li class="page-item">
+                                    <a class="page-link" href="?blog={{pageBlog.previous}}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link"
+                                        href="?blog={{pageBlog.previous}}">{{pageBlog.previous}}</a>
+                                </li>
+                                {{/ifstatus}}
+
+                                <li class="page-item active"><a class="page-link"
+                                        href="?blog={{pageBlog.current}}">{{pageBlog.current}}</a>
+                                </li>
+
+                                {{#ifstatus pageBlog.next undefined}}
+                                {{else}}
+                                <li class="page-item"><a class="page-link"
+                                        href="?blog={{pageBlog.next}}">{{pageBlog.next}}</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?blog={{pageBlog.next}}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                                {{/ifstatus}}
+                            </ul>
+                        </nav>
+                        {{/ifstatus}}
+                    </div>
+                </div>
+            </div>
+            <!-- Gallery Part -->
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="gallery">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseGallery" aria-expanded="false"
+                        aria-controls="collapseGallery">Galerie</button>
+                </h3>
+                <div id="collapseGallery" class="accordion-collapse collapse" aria-labelledby="gallery"
+                    data-bs-parent="#accordion">
+                    <div class="accordion-body text-center">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
+                                class="fas fa-user-plus"></span>Ajouter une image</button>
+                        {{#each gallery }}
+                        <div class="row user">
+                            <div class="col-md-2">
+                                <a class="" data-bs-toggle="modal" data-bs-target="#viewMessage">
+                                    <img class="avatar" src="{{this.link_picture}}">
+                                </a>
+                            </div>
+                            <div class="col-md-2">
+                                <p>{{ this.title }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{ this.description }}</p>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
+                                        class="far fa-edit"></span></a>
+                                <a class="" data-bs-toggle="modal" data-bs-target="#privateMessage"><span
+                                        class="far fa-envelope"></span></a>
+                                <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                        class="far fa-trash-alt"></span></a>
+                            </div>
+                        </div>
+                        {{> modals/modal-delete data=this.num_user path="/admin/user"}}
+                        {{/each}}
+                        {{#ifstatus pageGallery.total 1}}
+                        {{else}}
+                        <nav aria-label="Page navigation example">
+                            <ul class="justify-content-center pagination">
+
+                                {{#ifstatus pageGallery.current 1}}
+                                {{else}}
+                                <li class="page-item">
+                                    <a class="page-link" href="?gallery={{pageGallery.previous}}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link"
+                                        href="?gallery={{pageGallery.previous}}">{{pageGallery.previous}}</a>
+                                </li>
+                                {{/ifstatus}}
+
+                                <li class="page-item active"><a class="page-link"
+                                        href="?gallery={{pageGallery.current}}">{{pageGallery.current}}</a>
+                                </li>
+
+                                {{#ifstatus pageGallery.next undefined}}
+                                {{else}}
+                                <li class="page-item"><a class="page-link" href="?gallery={{pageGallery.next}}">{{pageGallery.next}}</a>
+                                </li>
+                                {{!-- <li class="page-item"><a class="page-link">...</a>
+                                </li> --}}
+                                <li class="page-item">
+                                    <a class="page-link" href="?gallery={{pageGallery.next}}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                                {{/ifstatus}}
+                            </ul>
+                        </nav>
+                        {{/ifstatus}}
+                    </div>
+                </div>
+            </div>
+            <!-- Gallery Part -->
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="diary">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseDiary" aria-expanded="false"
+                        aria-controls="collapseDiary">Agenda</button>
+                </h3>
+                <div id="collapseDiary" class="accordion-collapse collapse" aria-labelledby="diary"
+                    data-bs-parent="#accordion">
+                    <div class="accordion-body text-center">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"><span
+                                class="fas fa-user-plus"></span>Ajouter une date</button>
+                        {{#each diary }}
+                        <div class="row user">
+                            <div class="col-md-2">
+                                <a class="" data-bs-toggle="modal" data-bs-target="#viewUser">
+                                    <img class="avatar" src="assets/images/{{this.link_picture}}">
+                                </a>
+                            </div>
+                            <div class="col-md-2">
+                                <p>{{ this.title }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{ this.description }}</p>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="" data-bs-toggle="modal" data-bs-target="#editing"><span
+                                        class="far fa-edit"></span></a>
+                                <a class="" data-bs-toggle="modal" data-bs-target="#delete"><span
+                                        class="far fa-trash-alt"></span></a>
+                            </div>
+                        </div>
+                        {{/each}}
+                        {{#ifstatus pageDiary.total 1}}
+                        {{else}}
+                        <nav aria-label="Page navigation example">
+                            <ul class="justify-content-center pagination">
+
+                                {{#ifstatus pageDiary.current 1}}
+                                {{else}}
+                                <li class="page-item">
+                                    <a class="page-link" href="?diary={{pageDiary.previous}}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link"
+                                        href="?diary={{pageDiary.previous}}">{{pageDiary.previous}}</a>
+                                </li>
+                                {{/ifstatus}}
+
+                                <li class="page-item active"><a class="page-link"
+                                        href="?diary={{pageDiary.current}}">{{pageDiary.current}}</a>
+                                </li>
+
+                                {{#ifstatus pageDiary.next undefined}}
+                                {{else}}
+                                <li class="page-item"><a class="page-link" href="?diary={{pageDiary.next}}">{{pageDiary.next}}</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?diary={{pageDiary.next}}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                                {{/ifstatus}}
+                            </ul>
+                        </nav>
+                        {{/ifstatus}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{{> modals/modal-add }}

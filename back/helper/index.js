@@ -33,6 +33,8 @@ module.exports = {
 
       // Fonction permettant de faire une condition dans handlebars
       ifstatus: function(a, b, opts) {
+        console.log('uiuil', a);
+        console.log('ergerg',b);
         if (a === b) {
             return opts.fn(this);
         } else {

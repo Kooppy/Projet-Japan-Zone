@@ -4,23 +4,22 @@
     <tr>
       <th scope="col" class="border-2 border-end">Image</th>
       <th scope="col" class="border-2 border-end">Autheur</th>
-      <th scope="col" class="border-2 border-end">Titre</th>
+      <th scope="col" class="border-2 border-end">Title</th>
       <th scope="col" class="border-2 border-end">Description</th>
       <th scope="col" class="border-2 border-end">Action</th>
     </tr>
   </thead>
   {{! Table Content }}
   <tbody>
-    {{#each blog }}
+    {{#each users}}
       <tr>
         <td class="text-center">
-          <a class="" data-bs-toggle="modal" data-bs-target="">
+          <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.num_user }}">
             <img class="avatar" src="{{ this.link_picture }}">
           </a>
         </td>
         <td class="pt-3">{{ this.pseudo }}</td>
-        <td class="pt-3">{{ this.title }}</td>
-        <td class="pt-3">{{ this.description }}</td>
+        <td class="pt-3">{{ this.email }}</td>
         
         <td class="text-center pt-2">
           <button name="id" class="btn btn-danger px-3" data-bs-toggle="modal" data-bs-target="#modalDelete{{ this.id }}"><i class="far fa-trash-alt"></i></button>
@@ -28,13 +27,12 @@
         </td>
 
         <!-- MODAL DELETE ET EDIT -->
-
         {{> modals/modal-delete data=this.num_user path="/admin/user" }}
 
         {{> modals/modal-viewUser user=this }}
 
       </tr>
     {{/each}}
-    {{> paginate/paginate-admin data=pageBlog name='blog' colspan='5'}}
+    {{> paginate/paginate-admin data=pageGallery name='gallery' colspan='5' }}
   </tbody>
 </table>

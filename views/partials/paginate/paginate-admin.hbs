@@ -1,0 +1,37 @@
+{{#ifstatus data.total 1}}
+    {{else}}
+      <tr>
+        <td colspan="{{colspan}}">
+          <nav aria-label="Page navigation example">
+            <ul class="justify-content-center pagination mt-2 mb-2">
+              {{#ifstatus data.current 1}}
+              {{else}}
+                <li class="page-item">
+                  <a class="page-link" href="?{{name}}={{data.previous}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="?{{name}}={{data.previous}}">{{data.previous}}</a>
+                </li>
+              {{/ifstatus}}
+              <li class="page-item active">
+                <a class="page-link" href="?{{name}}={{data.current}}">{{data.current}}</a>
+              </li>
+
+              {{#ifstatus data.next undefined}}
+              {{else}}
+                <li class="page-item">
+                  <a class="page-link" href="?{{name}}={{data.next}}">{{data.next}}</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="?{{name}}={{data.next}}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+                {{/ifstatus}}
+            </ul>
+          </nav>
+        </td>
+      </tr>
+{{/ifstatus}}
