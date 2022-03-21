@@ -1,0 +1,82 @@
+{{!--
+Partial: Admin Modal Add User
+--}}
+
+<!-- Modal Add User  -->
+<div class="modal fade" id="add-user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ajouter</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/admin/user">
+                    <!-- Id & Avatar Input -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="contact-form">
+                                <input class="form-control" type="text" name="pseudo" placeholder="Pseudo">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="contact-form">
+                                <input class="form-control" type="email" name="email" placeholder="Email">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Password & Confirm Password Input -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="contact-form">
+                                <input class="form-control" type="password" name="password"
+                                    placeholder="Mot de passe">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="contact-form">
+                                <input class="form-control" type="password" name="cPassword"
+                                    placeholder="Confirmer le Mot de Passe">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Verify / Admin Check -->
+                    <div class="d-flex justify-content-center mb-3">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="inlineCheckboxVerify">
+                                Vérifier
+                            </label>
+                            <input class="form-check-input" type="checkbox" name="isVerify" id="inlineCheckboxVerify">
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="inlineCheckboxAdmin">
+                                Admin
+                            </label>
+                            <input class="form-check-input" type="checkbox" name="isAdmin" id="inlineCheckboxAdmin">
+                        </div>
+                    </div>
+                    <!-- Button Input-->
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <button class="btn btn-secondary">Envoyer</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- Modal Footer Social -->
+            <div class="modal-footer justify-content-center">
+                <p>Suivez-nous : </p>
+                <ul class="social-footer">
+                    <li><a class="social-footer-block social-facebook" href=""><span
+                                class="fab fa-facebook-square"></span></a></li>
+                    <li><a class="social-footer-block social-twitter" href=""><span
+                                class="fab fa-twitter"></span></a></li>
+                    <li><a class="social-footer-block social-youtube" href=""><span
+                                class="fab fa-youtube"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

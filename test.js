@@ -289,3 +289,39 @@
 // </script>
 
 // {{/if }} --}}
+// function editInfo() {
+//     let input = document.getElementsByTagName('input')
+//     for (let inpt of input) {
+//         if (inpt.type == "text") {
+//             inpt.disabled = false
+//             let btns = document.getElementById('btns').style.display = "block"
+//             let rest = document.getElementById('Form_edit').reset()
+//             let inpts = document.getElementById('new_mdp').style.display = "none";
+//         }
+//         else if(inpt.type == "password"){
+//             inpt.disabled = true
+//             inpt.required = false                
+//         }
+//         else if (inpt.type == "email") {
+//             inpt.disabled = true
+//         }
+//     }
+// }
+
+// function maskInfo() {
+//     var input = document.getElementsByTagName('input')
+//     for (var info of input) {
+//         if (info.type == "text") {
+//             info.disabled = true
+//         }
+//         if (info.type == "email") {
+//             info.disabled = true
+//         }
+//          if (info.type == "password") {
+//             info.disabled = true
+//         }
+//     }
+//     var btns = document.getElementById('btns').style.display = "none"
+//     document.getElementById('new_mdp').style.display = "none";
+//     document.getElementById('avatarChange').style.backgroundImage = `url('/assets/images/user/{{user.avatar}}')`
+// }

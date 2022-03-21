@@ -2,16 +2,14 @@
  * Helper
  * **************** */
   
-// Initialisation du module moment et de la timezone FR
 const moment = require('moment-timezone');
 const frLocal = require('moment/locale/fr')
 
 module.exports = {
-    // Fonction pour mettre la date dans le format EU/FR
-    formatDate: function(datetime, format) {
+    calendarDate: function(datetime, format) {
         if (moment) {
             moment.updateLocale('fr', frLocal);
-           let time1 = moment(datetime).tz("Europe/Paris").format(format)
+           let time1 = moment(datetime).tz("Europe/Paris").subtract(10, 'days').calendar()
            return time1
         }
         else {
@@ -19,7 +17,6 @@ module.exports = {
         }
       },
 
-    // Fonction donnant le temps passé entre les post et maintenant
     commentDateFormat: function(datetime, format) {
         if (moment) {
             moment.updateLocale('fr', frLocal);
@@ -31,10 +28,7 @@ module.exports = {
         }
       },
 
-      // Fonction permettant de faire une condition dans handlebars
       ifstatus: function(a, b, opts) {
-        console.log('uiuil', a);
-        console.log('ergerg',b);
         if (a === b) {
             return opts.fn(this);
         } else {

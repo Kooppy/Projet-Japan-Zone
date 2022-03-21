@@ -7,47 +7,35 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <!-- Nav Tabs -->
-                <ul class="nav nav-tabs" id="#myTab" role="tablist">
-                    <li class="nav-item" role="del">
-                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#del" aria-controls="del"
-                            aria-selected="true" type="button">Delete</button>
-                    </li>
-                </ul>
+                <h5 class="modal-title">Suppression</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!-- Tab Content Delete -->
-            <div class="tab-content" id="myTabContent">
-                <!-- Tab Panel Create User -->
-                <div class="tab-pane show active" id="del" role="tabpanel" aria-labelledby="delete-tab">
-                    <div class="modal-body text-center">
-                        <!-- Delete Button -->
-                        <p>Voulez-vous vraiment supprimer ?</p>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!--<a href="/admin/{{ user.num_user }}?_method=DELETE" class="btn btn-secondary">Oui</a>-->
-                                <form action="{{ path }}/{{ data }}?_method=DELETE" method="post">
-                                    <button type="submit" class="btn btn-secondary">Oui</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
-                                </form>
-                            </div>
-                        </div>
+            <div class="modal-body text-center">
+                 <!-- Delete Button -->
+                <p>Voulez-vous vraiment supprimer ?</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--<a href="/admin/{{ user.num_user }}?_method=DELETE" class="btn btn-secondary">Oui</a>-->
+                        <form action="{{ path }}/{{ data }}?_method=DELETE" method="post">
+                            <button type="submit" class="btn btn-secondary me-4">Oui</button>
+                            <a class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
+                        </form>
                     </div>
                 </div>
-                <!-- Modal Footer Social -->
-                <div class="modal-footer justify-content-center">
-                    <p>Suivez-nous : </p>
-                    <ul class="social-footer">
-                        <li><a class="social-footer-block social-facebook" href=""><span
-                                    class="fab fa-facebook-square"></span></a></li>
-                        <li><a class="social-footer-block social-twitter" href=""><span
-                                    class="fab fa-twitter"></span></a></li>
-                        <li><a class="social-footer-block social-youtube" href=""><span
-                                    class="fab fa-youtube"></span></a></li>
-                    </ul>
-                </div>
+            </div>
+            <!-- Modal Footer Social -->
+            <div class="modal-footer justify-content-center">
+                <p>Suivez-nous : </p>
+                <ul class="social-footer">
+                    <li><a class="social-footer-block social-facebook" href=""><span
+                                class="fab fa-facebook-square"></span></a></li>
+                    <li><a class="social-footer-block social-twitter" href=""><span
+                                class="fab fa-twitter"></span></a></li>
+                    <li><a class="social-footer-block social-youtube" href=""><span
+                                class="fab fa-youtube"></span></a></li>
+                </ul>
             </div>
         </div>
     </div>

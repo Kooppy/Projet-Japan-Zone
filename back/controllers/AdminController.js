@@ -4,6 +4,7 @@
 const {
     pagination
 } = require('../util/pagination');
+const { hash } =require('../util/hash')
 const { selectID } = require('../util/select');
 
 exports.admin = async (req, res) => {
@@ -25,11 +26,10 @@ exports.admin = async (req, res) => {
         page: req.query.gallery,
         table: 'pictureBank'
     });
-    let test = req.url.split(/(\d)/)
-    console.log(test[0].split('/admin?').join('').split('=').join(''));
+    let name = req.url.split(/(\d)/);
 
     try {
-        const users = await db.query(`SELECT user.num_user, user.email, user.pseudo, user.password, user.confirmation_date, pictureBank.link_picture, user_role.isVerify, user_role.isAdmin, user_role.isBan, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
+        const users = await db.query(`SELECT user.num_user, user.email, user.pseudo, user.password, user.confirmation_date, pictureBank.link_picture, user_role.isVerify, user_role.isAdmin, user_role.isBan, user_role.isArchiving, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
                                       FROM user
                                       INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%user%' AND pictureBank.num_user = user.num_user
                                       INNER JOIN user_role ON user_role.num_user = user.num_user
@@ -64,7 +64,7 @@ exports.admin = async (req, res) => {
                 pageBlog: paginateBlog.page,
                 gallery,
                 pageGallery: paginateGallery.page,
-                query: test[0].split('/admin?').join('').split('=').join('')
+                query: name[0].split('/admin?').join('').split('=').join('')
             });
         } else {
             res.redirect('/admin');
@@ -75,13 +75,13 @@ exports.admin = async (req, res) => {
 }
 
 exports.addUser = async (req, res) => {
-    const { pseudo, email, password, isVerify, isAdmin, isBan, isArchiving} = req.body;
+    let { pseudo, email, password, isVerify, isAdmin } = req.body;
 
     try{
 
-        const user_insert = await db.query(`INSERT INTO user SET email= :email, pseudo= :pseudo, password= :password;`, {email, pseudo, password: hash(password)});
+        const user_insert = await db.query(`INSERT INTO user SET email= :email, pseudo= :pseudo, password= :password, confirmation_date= NOW();`, {email, pseudo, password: hash(password)});
         const user_avatar = await db.query(`INSERT INTO pictureBank SET num_user= '${user_insert.insertId}';`)
-        const user_insert_role = await db.query(`INSERT INTO user_role SET num_user= '${user_insert.insertId}', isVerify= :isVerify, isAdmin= :isAdmin, isBan= :isBan, isArchiving= :isArchiving;`, {isVerify, isAdmin, isBan, isArchiving});
+        const user_insert_role = await db.query(`INSERT INTO user_role SET num_user= '${user_insert.insertId}', isVerify= :isVerify, isAdmin= :isAdmin;`, {isVerify: !isVerify ? false: true, isAdmin: !isAdmin ? false : true});
         const user_insert_address = await db.query(`INSERT INTO user_address SET num_user= '${user_insert.insertId}';`);
         const user_insert_profil = await db.query(`INSERT INTO user_profil SET num_user= '${user_insert.insertId}';`);
 

@@ -2,60 +2,74 @@
 
 <section class="pt-3 container-fluid bg-light">
 
-    {{! TABS ADMIN BOUTONS }}
+    {{! Admin Tabs }}
     <ul class="nav nav-tabs container pb-3 ps-3" id="adminTab" role="tablist">
-        {{!-- GESTION UTILISATEURS --}}
+        {{!-- User Gestion --}}
         <li class="nav-item ps-2 pe-2" role="presentation">
             <button class="nav-link border text-white bg-dark active" id="users-tab" data-bs-toggle="tab"
                 data-bs-target="#users" type="button" role="tab" aria-controls="users"
                 aria-selected="true">Utilisateurs</button>
         </li>
-        {{!-- GESTION DES ARTICLES --}}
+        {{!-- Blog Gestion --}}
         <li class="nav-item pe-2" role="presentation">
             <button class="nav-link bg-dark border text-white" id="blog-tab" data-bs-toggle="tab"
                 data-bs-target="#blog" type="button" role="tab" aria-controls="blog"
                 aria-selected="false">Blog</button>
         </li>
-        {{!-- GESTION DES IMAGES --}}
+        {{!-- Picture Gestion --}}
         <li class="nav-item pe-2" role="presentation">
             <button class="nav-link bg-dark border text-white" id="gallery-tab" data-bs-toggle="tab"
                 data-bs-target="#gallery" type="button" role="tab" aria-controls="gallery"
                 aria-selected="false">Galerie</button>
         </li>
     </ul>
-    {{! CONTENU DES TABS ADMIN }}
+    {{! Admin Tab Content }}
     <div class="tab-content container pt-3">
 
-        {{!-- GESTION DES UTILISATEURS --}}
+        {{!-- User Gestion --}}
         <div class="tab-pane active" id="users" role="tabpanel" aria-labelledby="users-tab">
+            <div class="text-end">
+                <button class="btn btn-primary mb-1" data-bs-toggle="modal" data-bs-target="#add-user"><span
+                    class="fas fa-user-plus"></span></button>
+            </div>
             {{> admin/tableUsers }}
         </div>
 
-        {{!-- GESTION DES ARTICLES --}}
+        {{!-- Blog Gestion --}}
         <div class="tab-pane container" id="blog" role="tabpanel" aria-labelledby="messages-tab">
+            <div class="text-end">
+                <button class="btn btn-primary mb-1" data-bs-toggle="modal" data-bs-target="#add-blog"><span
+                    class="fas fa-plus-square"></span></button>
+            </div>
             {{> admin/tableBlog }}
         </div>
 
-        {{!-- GESTION DES IMAGES --}}
+        {{!-- Picture Gestion --}}
         <div class=" tab-pane container" id="gallery" role="tabpanel" aria-labelledby="comments-tab">
-            
+            <div class="text-end">
+                <button class="btn btn-primary mb-1" data-bs-toggle="modal" data-bs-target="#add-gallery"><span
+                    class="fas fa-user-plus"></span></button>
+            </div>
+            {{> admin/tableGallery }}
         </div>
     </div>
 
 </section>
+{{> modals/modal-addUser-admin }}
+{{> modals/modal-addBlog-admin }}
+{{> modals/modal-addGallery-admin }}
 
-
-{{#ifstatus query "blog"}}
+{{!-- {{#ifstatus query "blog"}}
     <script>
         //var tabEl = document.querySelector('button[data-bs-toggle="#blog"]')
         //tabEl.addEventListener('shown.bs.tab', function (event) {
         //    event.target // newly activated tab
         //    event.relatedTarget // previous active tab
         //})
-        const tab = bootstrap.Tab.getOrCreateInstance(document.querySelector('#adminTab button[data-bs-target="#blog"]')).show();
-        tab.show();
+        //const tab = bootstrap.Tab.getOrCreateInstance(document.querySelector('#adminTab button[data-bs-target="#blog"]')).show();
+        //tab.show();
     </script>
-{{/ifstatus}}
+{{/ifstatus}} --}}
 
 
 

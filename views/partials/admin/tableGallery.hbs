@@ -12,7 +12,7 @@
   {{! Table Content }}
   <tbody>
     {{#each users}}
-      <tr>
+      <tr data-bs-toggle="modal" data-bs-target="#viewGallery{{ this.num_user }}">
         <td class="text-center">
           <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.num_user }}">
             <img class="avatar" src="{{ this.link_picture }}">
@@ -29,7 +29,7 @@
         <!-- MODAL DELETE ET EDIT -->
         {{> modals/modal-delete data=this.num_user path="/admin/user" }}
 
-        {{> modals/modal-viewUser user=this }}
+
 
       </tr>
     {{/each}}

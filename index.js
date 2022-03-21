@@ -21,7 +21,7 @@ const express = require('express'),
   handlebars = require('express-handlebars'),
   swaggerUi = require('swagger-ui-express'),
   swaggerDocument = require('./swagger-config/swagger.json'),
-  { ifstatus, commentDateFormat } = require('./back/helper');
+  { ifstatus, commentDateFormat, calendarDate } = require('./back/helper');
 
 // Method-Override
 app.use(methodOverride('_method'));
@@ -43,7 +43,8 @@ app.set('view engine', 'hbs');
 app.engine('hbs', handlebars.engine({
   helpers: {
     ifstatus,
-    commentDateFormat
+    commentDateFormat,
+    calendarDate
   },
   extname: 'hbs',
   defaultLayout: 'main'
