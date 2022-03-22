@@ -5,7 +5,7 @@ const { home } = require("./HomeController"),
       { createUser, loginUser, forgot, logOut } = require("./AuthController"),
       { resetPassword, reset } = require("./ResetPassword"),
       { profilID, editProfil, comment, deleteComment } = require("./UserController"),
-      { admin, addUser, editUser, banUser, archivingUser, deleteUser, addBlog, editBlog, deleteBlog, addGallery, editGallery, deleteGallery } = require("./AdminController");
+      { admin, addUser, editUser, banUser, archivingUser, unBanUser, unArchivingUser, deleteUser, addBlog, editBlog, deleteBlog, addGallery, resetPictureUser, resetPictureBlog, editGallery, deleteGallery } = require("./AdminController");
 
 module.exports = {
     // Home
@@ -27,7 +27,7 @@ module.exports = {
     profilID, editProfil, comment, deleteComment,
 
     //Admin
-    admin, addUser, editUser, banUser, archivingUser, deleteUser, addBlog, editBlog, deleteBlog, addGallery, editGallery, deleteGallery,
+    admin, addUser, editUser, banUser, archivingUser, unBanUser, unArchivingUser, deleteUser, addBlog, editBlog, deleteBlog, addGallery, resetPictureUser, resetPictureBlog, editGallery, deleteGallery,
 
     //Messagery
     messagery, sendEmail, deleteMessage

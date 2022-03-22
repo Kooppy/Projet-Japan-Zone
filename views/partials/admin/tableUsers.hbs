@@ -6,6 +6,7 @@
       <th scope="col" class="border-2 border-end">Avatar</th>
       <th scope="col" class="border-2 border-end">Pseudo</th>
       <th scope="col" class="border-2 border-end">Email</th>
+      <th scope="col" class="border-2 border-end">Status</th>
       <th scope="col" class="border-2 border-end">Action</th>
     </tr>
   </thead>
@@ -20,10 +21,53 @@
         </td>
         <td class="pt-3">{{ this.pseudo }}</td>
         <td class="pt-3">{{ this.email }}</td>
+
+        <td class="pt-3">
+          <div class="d-flex justify-content-center">
+            {{#ifstatus this.isVerify 1}}
+              <div class="mx-1 rounded-pill bg-success bg-gradient col-auto text-white">
+                <p class="m-0 ps-1 pe-1"><span class="text-white fas fa-check me-1"></span>Vérifier</p>
+              </div>
+            {{else }}
+              <div class="mx-1 rounded-pill bg-danger bg-gradient col-auto text-white">
+                <p class="m-0 ps-1 pe-1"><span class="text-white fas fa-times me-1"></span>Vérifier</p>
+              </div>
+            {{/ifstatus}}
+            {{#if this.isAdmin }}
+              <div class="mx-1 rounded-pill bg-dark bg-gradient col-auto text-white">
+                <p class="m-0 ps-1 pe-1"></span>Admin</p>
+              </div>
+            {{/if}}
+            {{#if this.isBan }}
+              <div class="mx-1 rounded-pill bg-danger bg-gradient col-auto text-white">
+                <p class="m-0 ps-1 pe-1"></span>Ban</p>
+              </div>
+            {{/if }}
+            {{#if this.isArchiving }}
+              <div class="mx-1 rounded-pill bg-warning bg-gradient col-auto text-white">
+                <p class="m-0 ps-1 pe-1"></span>Archiver</p>
+              </div>
+            {{/if }}
+          </div>
+
+        </td>
         
-        <td class="text-center pt-2">
-          <button name="id" class="btn btn-danger px-3" data-bs-toggle="modal" data-bs-target="#delete{{ this.num_user }}"><i class="far fa-trash-alt"></i></button>
-          <button name="id" class="btn btn-success ms-2 ps-3" data-bs-toggle="modal" data-bs-target="#editUser{{ this.num_user }}"><i class="far fa-edit"></i></button>
+        <td class="pt-3">
+          <div class="d-flex justify-content-center">
+            <a class="btn-danger me-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#deleteUser{{ this.num_user }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Supprimer"><i class="far fa-trash-alt"></i></a>
+            {{#if this.isBan}}
+              <a class="btn-success ms-1 me-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#unBanUser{{ this.num_user }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="UnBan"><i class="fas fa-check"></i></a>
+            {{else}}
+              <a class="btn-danger ms-1 me-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#banUser{{ this.num_user }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Bannir"><i class="fas fa-ban"></i></a>
+            {{/if}}
+            
+            {{#if this.isArchiving}}
+              <a class="btn-warning ms-1 me-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#unArchivingUser{{ this.num_user }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Désarchiver"><i class="fas fa-box-open"></i></a>
+            {{else}}
+              <a class="btn-warning ms-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#archivingUser{{ this.num_user }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Archiver"><i class="fas fa-archive"></i></a>
+            {{/if}}
+            <a class="btn-success ms-1 me-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#editUser{{ this.num_user }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Editer"><i class="far fa-edit"></i></a>
+          </div>
         </td>
 
         <!-- Modal Preview / Edit / Delete -->
@@ -31,10 +75,21 @@
 
         {{> modals/modal-editUser-admin user=this }}
 
-        {{> modals/modal-delete data=this.num_user path="/admin/user" }}
+        {{> modals/modal-yesNo-admin name='deleteUser' data=this.num_user title="Suppression" question="Voulez-vous vraiment supprimer l'utilisateur ?" path="/admin/user/" method="?_method=DELETE" }}
 
+        {{#if this.isBan}}
+          {{> modals/modal-yesNo-admin name='unBanUser' data=this.num_user title="UnBan" question="Voulez-vous vraiment unban l'utilisateur ?" path="/admin/user/unBan/" method="?_method=PUT" }}
+        {{else }}
+          {{> modals/modal-yesNo-admin name='banUser' data=this.num_user title="Bannir" question="Voulez-vous vraiment bannir l'utilisateur ?" path="/admin/user/ban/" method="?_method=PUT" }}
+        {{/if}}
+        
+        {{#if this.isArchiving}}
+          {{> modals/modal-yesNo-admin name='unArchivingUser' data=this.num_user title="Désarchiver" question="Voulez-vous vraiment désarchiver l'utilisateur ?" path="/admin/user/unArchiving/" method="?_method=PUT" }}
+        {{else }}
+          {{> modals/modal-yesNo-admin name='archivingUser' data=this.num_user title="Archiver" question="Voulez-vous vraiment archiver l'utilisateur ?" path="/admin/user/archiving/" method="?_method=PUT" }}
+        {{/if}}
       </tr>
     {{/each}}
-    {{> paginate/paginate-admin data=pageUser name='user' colspan='4' }}
+    {{> paginate/paginate-admin data=pageUser name='user' colspan='5' }}
   </tbody>
 </table>

@@ -1,7 +1,6 @@
 
 
 <section class="pt-3 container-fluid bg-light">
-
     {{! Admin Tabs }}
     <ul class="nav nav-tabs container pb-3 ps-3" id="adminTab" role="tablist">
         {{!-- User Gestion --}}
@@ -48,7 +47,7 @@
         <div class=" tab-pane container" id="gallery" role="tabpanel" aria-labelledby="comments-tab">
             <div class="text-end">
                 <button class="btn btn-primary mb-1" data-bs-toggle="modal" data-bs-target="#add-gallery"><span
-                    class="fas fa-user-plus"></span></button>
+                    class="fas fa-plus-square"></span></button>
             </div>
             {{> admin/tableGallery }}
         </div>
@@ -59,20 +58,6 @@
 {{> modals/modal-addBlog-admin }}
 {{> modals/modal-addGallery-admin }}
 
-{{!-- {{#ifstatus query "blog"}}
-    <script>
-        //var tabEl = document.querySelector('button[data-bs-toggle="#blog"]')
-        //tabEl.addEventListener('shown.bs.tab', function (event) {
-        //    event.target // newly activated tab
-        //    event.relatedTarget // previous active tab
-        //})
-        //const tab = bootstrap.Tab.getOrCreateInstance(document.querySelector('#adminTab button[data-bs-target="#blog"]')).show();
-        //tab.show();
-    </script>
-{{/ifstatus}} --}}
-
-
-
 <style>
     .nav-tabs > .nav-item > .nav-link:hover {
         background-color: rgb(92, 142, 185) !important;
@@ -80,7 +65,7 @@
     .nav-link.active {
         background-color: rgb(92, 142, 185) !important;
     }
-    @media only screen and (max-width: 760px),
+    @media only screen and (max-width: 770px),
     (min-device-width: 768px) and (max-device-width: 1024px) {
         /* Force table to not be like tables anymore */
         table,

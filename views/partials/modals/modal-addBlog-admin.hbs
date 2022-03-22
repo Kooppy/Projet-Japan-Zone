@@ -14,20 +14,20 @@ Partial: Admin Modal Add Blog
             </div>
             <div class="modal-body">
                 <form method="post" action="/admin/blog" enctype="multipart/form-data">
-                    <!-- Image Input -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="aaaa" class="rounded mx-auto d-block mb-3" style="height: 150px; width: 150px; background-image: url('../../assets/images/header/header1.png'); background-position:center; background-size:cover; ">
-                                <input id="bbbb" onclick='changeImgBlog()' name="blog" type="file"
-                                    style="opacity: 0.0; width: 100%; height:100%;" />
-                            </div>
-                        </div>
-                    </div>
                     <!-- Title Input -->
                     <div class="row">
                         <div class="col-md-12">
                             <div class="contact-form">
-                                <input class="form-control" type="text" name="title" placeholder="Title">
+                                <input class="form-control" type="text" name="title" placeholder="Titre">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Image Input -->
+                     <div class="row">
+                        <div class="col-md-12">
+                            <div id="aaaa" class="rounded mx-auto d-block mb-3" style="height: 150px; width: 250px; background-image: url('../../assets/images/header/header1.png'); background-position:center; background-size:cover; ">
+                                <input id="bbbb" onclick='changeImgBlog()' name="picBlog" type="file"
+                                    style="opacity: 0.0; width: 100%; height:100%;" />
                             </div>
                         </div>
                     </div>
@@ -39,25 +39,25 @@ Partial: Admin Modal Add Blog
                             </div>
                         </div>
                     </div>
-                    <!-- Content Input -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="contact-form">
-                                 <textarea class="form-control" name="description" placeholder="Contenue"></textarea>
-                            </div>
-                        </div>
-                    </div>
                     <!-- Category Input -->
                     <div class="row">
                         <div class="col-md-12">
                             <div class="contact-form">
                                 <input class="form-control" name="category" list="datalistOptions"
-                                    id="select-tags" placeholder="Selectionner...">
+                                    id="select-tags-blog" placeholder="Selectionner...">
                                 <datalist id="datalistOptions">
                                     <option value="site">
                                     <option value="cosplay">
                                     <option value="culture">
                                 </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Content Input -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="contact-form">
+                                 <textarea class="form-control" name="content" placeholder="Contenue"></textarea>
                             </div>
                         </div>
                     </div>

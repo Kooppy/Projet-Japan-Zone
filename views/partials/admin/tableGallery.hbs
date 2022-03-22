@@ -11,7 +11,7 @@
   </thead>
   {{! Table Content }}
   <tbody>
-    {{#each users}}
+    {{#each gallery}}
       <tr data-bs-toggle="modal" data-bs-target="#viewGallery{{ this.num_user }}">
         <td class="text-center">
           <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.num_user }}">
@@ -19,17 +19,32 @@
           </a>
         </td>
         <td class="pt-3">{{ this.pseudo }}</td>
-        <td class="pt-3">{{ this.email }}</td>
+
+        {{#if this.title }}
+          <td class="pt-3">{{ this.title }}</td>
+        {{else }}
+          <td class="pt-3">Pas de titre.</td>
+        {{/if }}
+
+        {{#if this.description }}
+          <td class="pt-3">{{ this.description }}</td>
+        {{else }}
+          <td class="pt-3">Pas de description.</td>
+        {{/if }}
         
-        <td class="text-center pt-2">
-          <button name="id" class="btn btn-danger px-3" data-bs-toggle="modal" data-bs-target="#modalDelete{{ this.id }}"><i class="far fa-trash-alt"></i></button>
-          <button name="id" class="btn btn-success ms-2 ps-3" data-bs-toggle="modal" data-bs-target="#editUser{{ this.id }}"><i class="far fa-edit"></i></button>
+        <td class="pt-3">
+          <div class="d-flex justify-content-center">
+            <a class="btn-danger me-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#deleteGallery{{ this.num_user }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Supprimer"><i class="far fa-trash-alt"></i></a>
+            <a class="btn-success ms-1 me-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#editGallery{{ this.num_user }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Editer"><i class="far fa-edit"></i></a>
+          </div>
         </td>
 
-        <!-- MODAL DELETE ET EDIT -->
-        {{> modals/modal-delete data=this.num_user path="/admin/user" }}
+        <!-- Modal Preview / Edit / Delete -->
+        {{> modals/modal-viewGallery-admin user=this }}
 
+        {{> modals/modal-editGallery-admin user=this }}
 
+        {{> modals/modal-yesNo-admin name='deleteGallery' data=this.num_user title="Suppression" question="Voulez-vous vraiment supprimer l'image ?" path="/admin/gallery/" method="?_method=DELETE" }}
 
       </tr>
     {{/each}}

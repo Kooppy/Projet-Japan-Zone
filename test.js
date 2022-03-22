@@ -325,3 +325,9 @@
 //     document.getElementById('new_mdp').style.display = "none";
 //     document.getElementById('avatarChange').style.backgroundImage = `url('/assets/images/user/{{user.avatar}}')`
 // }
+
+    // Selected
+    // const select{{ this.num_user }} = document.getElementById('selected{{ this.num_user }}')
+    // console.log(document.getElementById('selected{{ this.num_user }}'))
+    // const slt{{ this.num_user }} = {{ select }} 
+    // if ( slt{{ this.num_user }} === 'A' ) select{{ this.num_user }}.selected = true

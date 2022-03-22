@@ -12,7 +12,7 @@
   {{! Table Content }}
   <tbody>
     {{#each blog }}
-      <tr data-bs-toggle="modal" data-bs-target="#viewBlog{{ this.num_user }}">
+      <tr data-bs-toggle="modal" data-bs-target="#viewBlog{{ this.num_blog }}">
         <td class="text-center">
           <a class="" data-bs-toggle="modal" data-bs-target="">
             <img class="avatar" src="{{ this.link_picture }}">
@@ -22,16 +22,19 @@
         <td class="pt-3">{{ this.title }}</td>
         <td class="pt-3">{{ this.description }}</td>
         
-        <td class="text-center pt-2">
-          <button name="id" class="btn btn-danger px-3" data-bs-toggle="modal" data-bs-target="#modalDelete{{ this.id }}"><i class="far fa-trash-alt"></i></button>
-          <button name="id" class="btn btn-success ms-2 ps-3" data-bs-toggle="modal" data-bs-target="#editUser{{ this.id }}"><i class="far fa-edit"></i></button>
+        <td class="pt-3">
+          <div class="d-flex justify-content-center">
+            <a class="btn-danger me-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#deleteBlog{{ this.num_blog }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Supprimer"><i class="far fa-trash-alt"></i></a>
+            <a class="btn-success ms-1 me-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#editBlog{{ this.num_blog }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Editer"><i class="far fa-edit"></i></a>
+          </div>
         </td>
 
-        <!-- MODAL DELETE ET EDIT -->
+        <!-- Modal Preview / Edit / Delete -->
+        {{> modals/modal-viewBlog-admin blog=this }}
 
-        {{> modals/modal-delete data=this.num_user path="/admin/user" }}
+        {{> modals/modal-editBlog-admin blog=this }}
 
-        {{!-- {{> modals/modal-viewBlog-admin user=this }} --}}
+        {{> modals/modal-yesNo-admin name='deleteBlog' data=this.num_blog title="Suppression" question="Voulez-vous vraiment supprimer l'article ?" path="/admin/blog/" method="?_method=DELETE" }}
 
       </tr>
     {{/each}}

@@ -13,16 +13,7 @@ Partial: Admin Modal Add Gallery
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/admin/blog" enctype="multipart/form-data">
-                    <!-- Image Input -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="aaaa" class="rounded mx-auto d-block mb-3" style="height: 150px; width: 150px; background-image: url('../../assets/images/header/header1.png'); background-position:center; background-size:cover; ">
-                                <input id="bbbb" onclick='changeImgBlog()' name="blog" type="file"
-                                    style="opacity: 0.0; width: 100%; height:100%;" />
-                            </div>
-                        </div>
-                    </div>
+                <form method="post" action="/admin/gallery" enctype="multipart/form-data">
                     <!-- Title Input -->
                     <div class="row">
                         <div class="col-md-12">
@@ -31,11 +22,12 @@ Partial: Admin Modal Add Gallery
                             </div>
                         </div>
                     </div>
-                    <!-- Description Input -->
+                    <!-- Image Input -->
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="contact-form">
-                                 <textarea class="form-control" name="description" placeholder="Description"></textarea>
+                            <div id="aaaa" class="rounded mx-auto d-block mb-3" style="height: 150px; width: 250px; background-image: url('../../assets/images/header/header1.png'); background-position:center; background-size:cover; ">
+                                <input id="bbbb" onclick='changeImgBlog()' name="picGallery" type="file"
+                                    style="opacity: 0.0; width: 100%; height:100%;" />
                             </div>
                         </div>
                     </div>
@@ -44,12 +36,20 @@ Partial: Admin Modal Add Gallery
                         <div class="col-md-12">
                             <div class="contact-form">
                                 <input class="form-control" name="category" list="datalistOptions"
-                                    id="select-tags" placeholder="Selectionner...">
+                                    id="select-tags-gallery" placeholder="Selectionner...">
                                 <datalist id="datalistOptions">
                                     <option value="site">
                                     <option value="cosplay">
                                     <option value="culture">
                                 </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Description Input -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="contact-form">
+                                 <textarea class="form-control" name="description" placeholder="Description"></textarea>
                             </div>
                         </div>
                     </div>

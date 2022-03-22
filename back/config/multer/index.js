@@ -12,9 +12,9 @@ const storage = multer.diskStorage({
     destination: (req, file, callback) => {
         const { id } = req.params,
               { title, pseudo } = req.body;
-
+        console.log(file);
         let dir;
-
+        console.log(req.url);
         switch (req.url) {
             case `/admin/blog`:
                 dir = `./assets/images/blog/${title.split(' ').join('_')}`;
@@ -26,12 +26,12 @@ const storage = multer.diskStorage({
 
                 break;
 
-            case `/admin/user/${id}`:
+            case `/admin/user/${id}?_method=PUT`:
                 dir = `./assets/images/avatar/${pseudo.split(' ').join('_')}`;
 
                 break;
 
-            case `/admin/blog/${id}`:
+            case `/admin/blog/${id}?_method=PUT`:
                 dir = `./assets/images/blog/${title.split(' ').join('_')}`;
 
                 break;
@@ -62,12 +62,12 @@ const storage = multer.diskStorage({
 
                 break;
 
-            case `/admin/user/${id}`:
+            case `/admin/user/${id}?_method=PUT`:
                 completed = Date.now()+"_user_"+name
 
                 break;
 
-            case `/admin/blog/${id}`:
+            case `/admin/blog/${id}?_method=PUT`:
                 completed = Date.now()+"_blog_"+name
 
                 break;

@@ -7,6 +7,7 @@ const sharp = require('sharp'),
 
 module.exports = (req, res, next) => {
     if(req.file) {
+        const { id } = req.params;
         let pathSharp, quality, width, height, fit
 
         pathSharp = `${req.file.destination}/`;
@@ -27,7 +28,7 @@ module.exports = (req, res, next) => {
 
                 break;
 
-            case `/admin/user/${id}`:
+            case `/admin/user/${id}?_method=PUT`:
                 fit = sharp.fit.cover
                 height= 400
                 witdh= 400
@@ -35,7 +36,7 @@ module.exports = (req, res, next) => {
 
                 break;
 
-            case `/admin/blog/${id}`:
+            case `/admin/blog/${id}?_method=PUT`:
                 fit = sharp.fit.cover
                 height= 400
                 witdh= 400
@@ -53,8 +54,6 @@ module.exports = (req, res, next) => {
                             .webp({quality: quality})
                             .toFile(pathSharp + req.file.filename.split('.').slice(0, -1).join('.') + ".webp")
                             .then(() => {
-                                
-
                                 deleteFile(req.file.destination, req.file.filename);
                             })
 
@@ -62,6 +61,7 @@ module.exports = (req, res, next) => {
 
         next(); 
     } else {
+        req.file = false;
         next();
     }
 }

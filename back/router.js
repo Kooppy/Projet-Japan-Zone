@@ -32,12 +32,16 @@ const {
       addUser,
       editUser,
       banUser,
+      unBanUser,
       archivingUser,
+      unArchivingUser,
       deleteUser,
       addBlog,
       editBlog,
       deleteBlog,
       addGallery,
+      resetPictureUser,
+      resetPictureBlog,
       editGallery,
       deleteGallery,
       messagery,
@@ -75,17 +79,25 @@ router.route('/admin').get(auth.isAdmin, admin);
 
 router.route('/admin/user').post(auth.isAdmin, addUser);
 
-router.route('/admin/user/:id').put(auth.isAdmin, upload.single('picUser'), editUser).delete(deleteUser);
+router.route('/admin/user/:id').put(auth.isAdmin, upload.single('picUser'), sharp, editUser).delete(deleteUser);
 
 router.route('/admin/user/ban/:id').put(auth.isAdmin, banUser);
 
+router.route('/admin/user/unBan/:id').put(auth.isAdmin, unBanUser);
+
 router.route('/admin/user/archiving/:id').put(auth.isAdmin, archivingUser);
+
+router.route('/admin/user/unArchiving/:id').put(auth.isAdmin, unArchivingUser);
 
 router.route('/admin/blog').post(auth.isAdmin, upload.single('picBlog'), sharp, addBlog);
 
-router.route('/admin/blog/:id').put(auth.isAdmin, upload.single('picBlog'), editBlog).delete(auth.isAdmin, deleteBlog);
+router.route('/admin/blog/:id').put(auth.isAdmin, upload.single('picBlog'), sharp, editBlog).delete(auth.isAdmin, deleteBlog);
 
 router.route('/admin/gallery').post(auth.isAdmin, upload.single('picGallery'), addGallery);
+
+router.route('/admin/gallery/resetUser').put(auth.isAdmin, resetPictureUser);
+
+router.route('/admin/gallery/resetBlog').put(auth.isAdmin, resetPictureBlog);
 
 router.route('/admin/gallery/:id').put(auth.isAdmin, upload.single('picGallery'), editGallery).delete(auth.isAdmin, deleteGallery);
 

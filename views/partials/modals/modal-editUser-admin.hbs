@@ -16,22 +16,26 @@ Partial: Modal Admin Edit User
             <div class="modal-body">
                 <form method="post" action="/admin/user/{{ this.num_user }}?_method=PUT"
                     enctype="multipart/form-data" >
-                    <!-- Id & Avatar Input -->
+                    <!-- Pseudo Input -->
                     <div class="row">
                         <div class="col-md-12">
-                            <div id="avatar{{ this.num_user }}" class="rounded mx-auto d-block mb-3 " style="height: 150px; width: 150px; background-image: url('{{this.link_picture}}'); background-position:center; background-size:cover; ">
-                                <input id="change{{ this.num_user }}" onclick="changeImg()" name="avatar" type="file"
-                                    style="opacity: 0.0; width: 100%; height:100%;" />
-                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
                             <div class="contact-form">
                                 <input class="form-control" name="pseudo" type="text" placeholder="Pseudo" value="{{ this.pseudo }}">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                    </div>
+                    <!-- Avatar Input -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="avatar" class="rounded mx-auto d-block mb-3 " style="height: 125px; width: 125px; background-image: url('{{this.link_picture}}'); background-position:center; background-size:cover; ">
+                                <input id="change" onclick="changeImg()" name="picUser" type="file"
+                                    style="opacity: 0.0; width: 100%; height:100%;" />
+                             </div>
+                        </div>
+                    </div>
+                    <!-- Email Input -->
+                    <div class="row">
+                        <div class="col-md-12">
                             <div class="contact-form">
                                 <input class="form-control" name="email" type="email" placeholder="Email" value="{{ this.email }}">
                             </div>
@@ -85,11 +89,11 @@ Partial: Modal Admin Edit User
                     <div class="row">
                         <div class="col-md-12">
                             <div class="contact-form">
-                                <select class="form-select" name="civility" >
-                                    <option selected>Sélectionner...</option>
-                                    <option value="1">Mâle</option>
-                                    <option value="2">Femelle</option>
-                                    <option value="3">Autre</option>
+                                <select class="form-select" name="civility" id="selected{{ this.num_user }}">
+                                    <option value='' selected>Sélectionner...</option>
+                                    <option value="M">Mâle</option>
+                                    <option value="F">Femelle</option>
+                                    <option value="A">Autre</option>
                                 </select>
                             </div>
                         </div>
@@ -112,7 +116,7 @@ Partial: Modal Admin Edit User
                         </div>
                     </div>
                     <!-- Verify / Admin Check -->
-                    <div class="d-flex justify-content-center mb-3">
+                    <div class="d-flex justify-content-center mb-3 flex-wrap">
                         <div class="form-check form-check-inline">
                             <label class="form-check-label" for="inlineCheckboxVerify">
                                 Vérifier
@@ -165,13 +169,13 @@ Partial: Modal Admin Edit User
 <script>
 
     function changeImg() {
-        let input{{ this.num_user }} = document.getElementById('change{{ this.num_user }}')
+        let input = document.getElementById('change')
 
-        input{{ this.num_user }}.onchange = evt => {
+        input.onchange = evt => {
 
             const [file] = input.files
             if (file) {
-                document.getElementById('avatar{{ this.num_user }}').style.backgroundImage = `url('${URL.createObjectURL(file)}')`
+                document.getElementById('avatar').style.backgroundImage = `url('${URL.createObjectURL(file)}')`
             }
         }
     }

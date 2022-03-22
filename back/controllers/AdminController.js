@@ -133,12 +133,11 @@ exports.editUser = async (req, res) => {
         civility = !civility ? selectUser[0].civility : civility;
         description = !description ? selectUser[0].description : description;
         password = !password ? selectUser[0].password : password;
-        isVerify = !isVerify ? selectUser[0].isVerify : isVerify;
-        isAdmin = !isAdmin ? selectUser[0].isAdmin : isAdmin;
-        isBan = !isBan ? selectUser[0].isBan : isBan;
-        isArchiving = !isArchiving ? selectUser[0].isArchiving : isArchiving;
-
-
+        isVerify = !isVerify ? false : true;
+        isAdmin = !isAdmin ? false : true;
+        isBan = !isBan ? false : true;
+        isArchiving = !isArchiving ? false : true;
+        avatar = !req.file.path ? selectUser[0].link_picture : req.file.path;
 
         const user_update = await db.query(`UPDATE user SET pseudo= :pseudo, email= :email, password= :password  WHERE num_user = :id ;`, {id, pseudo, email, password});
         const user_avatar_update = await db.query(`UPDATE pictureBank SET link_picture= :avatar  WHERE num_user = :id ;`, {id, avatar});
@@ -159,7 +158,7 @@ exports.banUser = async (req, res) => {
 
     try {
 
-        const user_ban = await db.query(`UPDATE user_role SET isBan= true WHERE num_user = '${id}';`);
+        const user_ban = await db.query(`UPDATE user_role SET isBan= true WHERE num_user = :id;`, {id});
         const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${id}%';`);
 
         res.redirect('back');
@@ -175,7 +174,7 @@ exports.archivingUser = async (req, res) => {
 
     try {
 
-        const user_archiving = await db.query(`UPDATE user_role SET isArchiving = true WHERE num_user = '${id}';`);
+        const user_archiving = await db.query(`UPDATE user_role SET isArchiving = true WHERE num_user = :id;`, {id});
         const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${id}%';`);
 
         res.redirect('back');
@@ -183,6 +182,39 @@ exports.archivingUser = async (req, res) => {
         throw err;
     }
 }
+
+exports.unBanUser = async (req, res) => {
+    const {
+        id
+    } = req.params;
+
+    try {
+
+        const user_deBan = await db.query(`UPDATE user_role SET isBan= false WHERE num_user = :id;`, {id});
+        const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${id}%';`);
+
+        res.redirect('back');
+    } catch (err) {
+        throw err;
+    }
+}
+
+exports.unArchivingUser = async (req, res) => {
+    const {
+        id
+    } = req.params;
+
+    try {
+
+        const user_deArchiving = await db.query(`UPDATE user_role SET isArchiving = false WHERE num_user = :id;`, {id});
+        const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${id}%';`);
+
+        res.redirect('back');
+    } catch (err) {
+        throw err;
+    }
+}
+
 
 
 exports.deleteUser = async (req, res) => {
@@ -219,7 +251,7 @@ exports.addBlog = async (req, res) => {
         const picture = await db.query(`INSERT INTO pictureBank 
                                           SET link_picture= :path, num_user= '${req.session.user.id}', num_blog= '${blog.insertId}';`, {path: req.file.path});
 
-        const category_blog = await db.query(`INSERT INTO category SET name= :categorie, num_blog= '${blog.insertId}', num_picture= '${picture.insertId}';`, {category})
+        const category_blog = await db.query(`INSERT INTO category SET name= :category, num_blog= '${blog.insertId}', num_picture= '${picture.insertId}';`, {category})
     } catch (err) {
         throw err;
     }
@@ -298,6 +330,37 @@ exports.addGallery = async (req, res) => {
         throw err;
     }
     res.redirect('back');
+}
+
+exports.resetPictureUser = async (req, res) => {
+    const {
+        id
+    } = req.params;
+
+    try {
+
+        const resetPictureUser = await db.query(`UPDATE pictureBank SET link_picture = 'assets/images/avatar/1644325173801_user_avatar.jpg' WHERE link_picture LIKE '%user%' AND num_user = :id;`, {id});
+        const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${id}%';`);
+
+        res.redirect('back');
+    } catch (err) {
+        throw err;
+    }
+}
+
+exports.resetPictureBlog = async (req, res) => {
+    const {
+        id
+    } = req.params;
+
+    try {
+
+        const resetPictureBlog = await db.query(`UPDATE pictureBank SET link_picture = 'assets/images/avatar/1644325173801_user_avatar.jpg' WHERE link_picture LIKE '%blog%' AND num_blog = :id;`, {id});
+
+        res.redirect('back');
+    } catch (err) {
+        throw err;
+    }
 }
 
 exports.editGallery = async (req, res) => {

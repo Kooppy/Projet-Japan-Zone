@@ -1,0 +1,23 @@
+{{#ifstatus query "blog"}}
+    <script>
+        //var tabEl = document.querySelector('button[data-bs-toggle="#blog"]')
+        //tabEl.addEventListener('shown.bs.tab', function (event) {
+        //    event.target // newly activated tab
+        //    event.relatedTarget // previous active tab
+        //})
+        const tabo = bootstrap.Tab.getOrCreateInstance(document.querySelector('#adminTab button[data-bs-target="#blog"]')).show();
+        //tabo.show();
+    </script>
+{{/ifstatus}}
+
+{{#ifstatus query "gallery"}}
+    <script>
+        //var tabEl = document.querySelector('button[data-bs-toggle="#blog"]')
+        //tabEl.addEventListener('shown.bs.tab', function (event) {
+        //    event.target // newly activated tab
+        //    event.relatedTarget // previous active tab
+        //})
+        const tabo = bootstrap.Tab.getOrCreateInstance(document.querySelector('#adminTab button[data-bs-target="#gallery"]')).show();
+        //tabo.show();
+    </script>
+{{/ifstatus}}

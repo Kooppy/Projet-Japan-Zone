@@ -21,6 +21,7 @@ const express = require('express'),
   handlebars = require('express-handlebars'),
   swaggerUi = require('swagger-ui-express'),
   swaggerDocument = require('./swagger-config/swagger.json'),
+  helmet = require('helmet'),
   { ifstatus, commentDateFormat, calendarDate } = require('./back/helper');
 
 // Method-Override
@@ -55,6 +56,9 @@ app.engine('hbs', handlebars.engine({
  * d'utiliser le css/js/images 
 */
 app.use('/assets', express.static('assets'));
+
+app.disable('x-powered-by');
+// app.use(helmet());
 
 // Gestion de la session
 app.use(expressSession({
