@@ -1,3 +1,7 @@
+{{!-- 
+    Partial: Panel Admin - Table Blog
+ --}}
+
 <table class="table table-sm table-hover table-border">
   {{! Table Legend }}
   <thead class="table-header">
@@ -14,8 +18,8 @@
     {{#each blog }}
       <tr data-bs-toggle="modal" data-bs-target="#viewBlog{{ this.num_blog }}">
         <td class="text-center">
-          <a class="" data-bs-toggle="modal" data-bs-target="">
-            <img class="avatar" src="{{ this.link_picture }}">
+          <a class="">
+            <img class="avatar" src="{{ this.link_picture }}" alt="{{ this.name }}">
           </a>
         </td>
         <td class="pt-3">{{ this.pseudo }}</td>

@@ -25,8 +25,8 @@ Partial: Admin Modal Add Blog
                     <!-- Image Input -->
                      <div class="row">
                         <div class="col-md-12">
-                            <div id="aaaa" class="rounded mx-auto d-block mb-3" style="height: 150px; width: 250px; background-image: url('../../assets/images/header/header1.png'); background-position:center; background-size:cover; ">
-                                <input id="bbbb" onclick='changeImgBlog()' name="picBlog" type="file"
+                            <div id="picBlogCreate" class="rounded mx-auto d-block mb-3" style="height: 150px; width: 250px; background-image: url('../../assets/images/header/header1.png'); background-position:center; background-size:cover; ">
+                                <input id="changeBlogCreate" onclick='changePicBlogCreate()' name="picBlog" type="file"
                                     style="opacity: 0.0; width: 100%; height:100%;" />
                             </div>
                         </div>
@@ -86,13 +86,13 @@ Partial: Admin Modal Add Blog
 </div>
 
 <script>
-    function changeImgBlog() {
-        let input = document.getElementById(`bbbb`)
-        //console.log(name1)
+    function changePicBlogCreate() {
+        let input = document.getElementById(`changeBlogCreate`)
+
         input.onchange = evt => {
             const [file] = input.files
             if (file) {
-                document.getElementById(`aaaa`).style.backgroundImage = `url('${URL.createObjectURL(file)}')`
+                document.getElementById(`picBlogCreate`).style.backgroundImage = `url('${URL.createObjectURL(file)}')`
             }
         }
     }

@@ -27,8 +27,8 @@ Partial: Modal Admin Edit User
                     <!-- Avatar Input -->
                     <div class="row">
                         <div class="col-md-12">
-                            <div id="avatar" class="rounded mx-auto d-block mb-3 " style="height: 125px; width: 125px; background-image: url('{{this.link_picture}}'); background-position:center; background-size:cover; ">
-                                <input id="change" onclick="changeImg()" name="picUser" type="file"
+                            <div id="avatar{{ this.num_user }}" class="rounded mx-auto d-block mb-3 " style="height: 125px; width: 125px; background-image: url('{{this.link_picture}}'); background-position:center; background-size:cover; ">
+                                <input id="changeUser{{ this.num_user }}" onclick="changeImg{{ this.num_user }}()" name="picUser" type="file"
                                     style="opacity: 0.0; width: 100%; height:100%;" />
                              </div>
                         </div>
@@ -168,14 +168,14 @@ Partial: Modal Admin Edit User
 
 <script>
 
-    function changeImg() {
-        let input = document.getElementById('change')
+    function changeImg{{ this.num_user }}() {
+        let input = document.getElementById('changeUser{{ this.num_user }}')
 
         input.onchange = evt => {
 
             const [file] = input.files
             if (file) {
-                document.getElementById('avatar').style.backgroundImage = `url('${URL.createObjectURL(file)}')`
+                document.getElementById('avatar{{ this.num_user }}').style.backgroundImage = `url('${URL.createObjectURL(file)}')`
             }
         }
     }

@@ -2,82 +2,99 @@
     Partial: Messagery Admin 
  --}}
 
-<section class="pt-3 container-fluid bg-light">
+<section class="pt-3 container-fluid bg-light mb-5">
 
-<table class="table table-sm table-hover table-border">
-  {{! LEGENDE TABLEAU }}
-  <thead class="table-header">
-    {{! TITRES ELEMENTS TABLEAU }}
-    <tr>
-      <th scope="col" class="border-2 border-end">Nom</th>
-      <th scope="col" class="border-2 border-end">Objet</th>
-      <th scope="col" class="border-2 border-end">Description</th>
-      <th scope="col" class="border-2 border-end">Date</th>
-      <th scope="col" class="border-2 border-end">Action</th>
-    </tr>
-  </thead>
-  {{! CONTENU TABLEAU }}
-  <tbody>
-    {{!-- listUser qui est déclaré dans le GET de adminController --}}
-    {{#each messagery}}
-      <tr>
-        <td class="pt-3">{{ this.name }}</td>
-        <td class="pt-3">{{ this.subject }}</td>
-        <td class="pt-3">{{ this.message }}</td>
-        <td class="pt-3">{{ this.date }}</td>
-        
-        <td class="text-center pt-2">
-          <button name="id" class="btn btn-danger px-3" data-bs-toggle="modal" data-bs-target="#modalDelete{{ this.id }}"><i class="far fa-trash-alt"></i></button>
-          <button name="id" class="btn btn-success ms-2 ps-3" data-bs-toggle="modal" data-bs-target="#editUser{{ this.id }}"><i class="far fa-edit"></i></button>
-        </td>
+    {{! Admin Messagery }}
+    <div class="container pt-3">
+      {{!-- Messagery Gestion --}}
+      <table class="table table-sm table-hover table-border">
+        {{! Table Legend }}
+        <thead class="table-header">
+          <tr>
+            <th scope="col" class="border-2 border-end">Nom</th>
+            <th scope="col" class="border-2 border-end">Email</th>
+            <th scope="col" class="border-2 border-end">Objet</th>
+            <th scope="col" class="border-2 border-end">Message</th>
+            <th scope="col" class="border-2 border-end">Action</th>
+          </tr>
+        </thead>
+        {{! Table Content }}
+        <tbody>
+          {{#each messagery }}
+            <tr data-bs-toggle="modal" data-bs-target="#viewMessage{{ this.num_messagery }}">
+              <td class="pt-3">{{ this.name }}</td>
+              <td class="pt-3">{{ this.email }}</td>
+              <td class="pt-3">{{ this.subject }}</td>
+              <td class="pt-3">{{ this.message }}</td>
+              
+              <td class="pt-3">
+                <div class="d-flex justify-content-center">
+                  <a class="btn-danger me-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#deleteMessage{{ this.num_messagery }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Supprimer"><i class="far fa-trash-alt"></i></a>
+                  <a class="btn-success ms-1 me-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#sendEmail{{ this.num_messagery }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Répondre"><i class="fas fa-envelope"></i></a>
+                </div>
+              </td>
 
-        <!-- MODAL VIEW MESSAGE -->
-        {{> modals/modal-viewUser user=this }}
+              <!-- Modal Preview / Edit / Delete -->
+              {{> modals/modal-viewMessage-admin messagery=this }}
 
-        <!-- MODAL CREATE MESSAGE -->
-        {{> modals/modal-contact data=this path='/messagery' }}
+              {{> modals/modal-sendEmail-admin messagery=this }}
 
-        {{!-- MODAL DELETE MESSAGE  --}}
-        {{> modals/modal-delete data=this.num_messagery path='/messagery' }}
-      </tr>
-    {{/each}}
-    {{#ifstatus pageUser.total 1}}
-    {{else}}
-      <tr>
-        <td colspan="4">
-          <nav aria-label="Page navigation example">
-            <ul class="justify-content-center pagination mt-2 mb-2">
-              {{#ifstatus pageUser.current 1}}
-              {{else}}
-                <li class="page-item">
-                  <a class="page-link" href="?user={{pageUser.previous}}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="?user={{pageUser.previous}}">{{pageUser.previous}}</a>
-                </li>
-              {{/ifstatus}}
-              <li class="page-item active">
-                <a class="page-link" href="?user={{pageUser.current}}">{{pageUser.current}}</a>
-              </li>
+              {{> modals/modal-yesNo-admin name='deleteMessage' data=this.num_messagery title="Suppression" question="Voulez-vous vraiment supprimer le message ?" path="/admin/messagery/" method="?_method=DELETE" }}
 
-              {{#ifstatus pageUser.next undefined}}
-              {{else}}
-                <li class="page-item">
-                  <a class="page-link" href="?user={{pageUser.next}}">{{pageUser.next}}</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="?user={{pageUser.next}}" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-                {{/ifstatus}}
-            </ul>
-          </nav>
-        </td>
-      </tr>
-    {{/ifstatus}}
-  </tbody>
-</table>
+            </tr>
+          {{/each}}
+          {{> paginate/paginate-admin data=paginate name='messagery' colspan='5'}}
+        </tbody>
+      </table>
+
+    </div>
+
 </section>
+
+<style>
+    .nav-tabs > .nav-item > .nav-link:hover {
+        background-color: rgb(92, 142, 185) !important;
+    }
+    .nav-link.active {
+        background-color: rgb(92, 142, 185) !important;
+    }
+    @media only screen and (max-width: 770px),
+    (min-device-width: 768px) and (max-device-width: 1024px) {
+        /* Force table to not be like tables anymore */
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+            display: block;
+        }
+        /* Hide table headers (but not display: none;, for accessibility) */
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        tr {
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+        td {
+            /* Behave  like a "row" */
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+        }
+        td:before {
+            /* Now like a table header */
+            position: absolute;
+            /* Top/left values mimic padding */
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+        }
+    }
+</style>

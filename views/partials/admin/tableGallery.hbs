@@ -1,3 +1,8 @@
+{{!-- 
+    Partial: Panel Admin - Table Gallery
+ --}}
+
+
 <table class="table table-sm table-hover table-border">
   {{! Table Legend }}
   <thead class="table-header">
@@ -12,10 +17,10 @@
   {{! Table Content }}
   <tbody>
     {{#each gallery}}
-      <tr data-bs-toggle="modal" data-bs-target="#viewGallery{{ this.num_user }}">
+      <tr data-bs-toggle="modal" {{#if this.num_blog }} data-bs-target="#viewBlog{{ this.num_blog }}" {{else }} data-bs-target="#viewGallery{{ this.num_picture }}" {{/if }}>
         <td class="text-center">
-          <a class="" data-bs-toggle="modal" data-bs-target="#viewUser{{ this.num_user }}">
-            <img class="avatar" src="{{ this.link_picture }}">
+          <a class="">
+            <img class="avatar" src="{{ this.link_picture }}" alt="{{ this.name }}">
           </a>
         </td>
         <td class="pt-3">{{ this.pseudo }}</td>
@@ -32,19 +37,44 @@
           <td class="pt-3">Pas de description.</td>
         {{/if }}
         
-        <td class="pt-3">
-          <div class="d-flex justify-content-center">
-            <a class="btn-danger me-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#deleteGallery{{ this.num_user }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Supprimer"><i class="far fa-trash-alt"></i></a>
-            <a class="btn-success ms-1 me-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#editGallery{{ this.num_user }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Editer"><i class="far fa-edit"></i></a>
-          </div>
-        </td>
+        {{#if this.name }}
+          {{#if this.num_blog }}
+            <td class="pt-3">
+              <div class="d-flex justify-content-center">
+                <a class="btn-danger me-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#resetBlog{{ this.num_blog }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="ResetBlog"><i class="fas fa-undo"></i></a>
+              </div>
+            </td>
+          {{else }}
+            <td class="pt-3">
+              <div class="d-flex justify-content-center">
+                <a class="btn-danger me-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#deleteGallery{{ this.num_picture }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Supprimer"><i class="far fa-trash-alt"></i></a>
+                <a class="btn-success ms-1 me-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#editGallery{{ this.num_picture }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Editer"><i class="far fa-edit"></i></a>
+              </div>
+            </td>
+          {{/if }}
+        {{else }}
+          <td class="pt-3">
+            <div class="d-flex justify-content-center">
+              <a class="btn-danger me-1 pe-1 ps-1 rounded" data-bs-toggle="modal" data-bs-target="#resetUser{{ this.num_user }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="ResetUser"><i class="fas fa-undo"></i></a>
+            </div>
+          </td>
+        {{/if }}
 
         <!-- Modal Preview / Edit / Delete -->
-        {{> modals/modal-viewGallery-admin user=this }}
+        {{#if this.name }}
+          {{#if this.num_blog }}
+        {{!-- {{> modals/modal-viewBlog-admin  blog=blog }} --}}
+            {{> modals/modal-yesNo-admin name='resetBlog' data=this.num_blog title="Réinitialiser" question="Voulez-vous vraiment réinitialiser l'image de l'article ?" path="/admin/gallery/resetBlog/" method="?_method=PUT" }}
+          {{else }}
+            {{> modals/modal-viewGallery-admin gallery=this }}
 
-        {{> modals/modal-editGallery-admin user=this }}
+            {{> modals/modal-editGallery-admin gallery=this }}
 
-        {{> modals/modal-yesNo-admin name='deleteGallery' data=this.num_user title="Suppression" question="Voulez-vous vraiment supprimer l'image ?" path="/admin/gallery/" method="?_method=DELETE" }}
+            {{> modals/modal-yesNo-admin name='deleteGallery' data=this.num_picture title="Suppression" question="Voulez-vous vraiment supprimer l'image ?" path="/admin/gallery/" method="?_method=DELETE" }}
+          {{/if }}
+        {{else }}
+          {{> modals/modal-yesNo-admin name='resetUser' data=this.num_user title="Réinitialiser" question="Voulez-vous vraiment réinitialiser l'image de l'utilisateur ?" path="/admin/gallery/resetUser/" method="?_method=PUT" }}
+        {{/if }}
 
       </tr>
     {{/each}}

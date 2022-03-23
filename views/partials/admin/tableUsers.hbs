@@ -1,3 +1,7 @@
+{{!-- 
+    Partial: Panel Admin - Table User
+ --}}
+
 
 <table class="table table-sm table-hover table-border">
   {{! Table Legend}}
@@ -16,7 +20,7 @@
       <tr data-bs-toggle="modal" data-bs-target="#viewUser{{ this.num_user }}">
         <td class="text-center">
           <a class="">
-            <img class="avatar" src="{{ this.link_picture }}">
+            <img class="avatar" src="{{ this.link_picture }}" alt="{{ this.pseudo }}">
           </a>
         </td>
         <td class="pt-3">{{ this.pseudo }}</td>

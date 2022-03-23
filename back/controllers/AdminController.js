@@ -46,7 +46,7 @@ exports.admin = async (req, res) => {
                                      ORDER BY blog.num_blog
                                      DESC LIMIT ${paginateBlog.limit};`);
 
-        const gallery = await db.query(`SELECT pictureBank.num_picture, pictureBank.link_picture, pictureBank.title_picture, pictureBank.description_picture, user.pseudo, blog.title, category.name
+        const gallery = await db.query(`SELECT pictureBank.num_picture, pictureBank.link_picture, pictureBank.title_picture, pictureBank.description_picture, pictureBank.num_blog, pictureBank.num_user, user.pseudo, blog.title, category.name
                                         FROM pictureBank
                                         INNER JOIN user ON user.num_user = pictureBank.num_user
                                         LEFT JOIN blog ON blog.num_blog = pictureBank.num_blog
@@ -284,12 +284,13 @@ exports.editBlog = async (req, res) => {
         description = !description ? selectBlog[0].description : description;
         contents = !contents ? selectBlog[0].contents : contents;
         category = !category ? selectBlog[0].name : category;
+        pictureBlog = !req.file.path ? selectBlog[0].link_picture : req.file.path;
 
         const blog = await db.query(`UPDATE blog 
                                        SET title= :title, description= :description, contents= :contents 
                                      WHERE num_blog = '${selectBlog[0].num_blog}';`, {title, description, contents});
 
-        const picture = await db.query(`UPDATE pictureBank SET link_picture= :link WHERE num_blog = '${selectBlog[0].num_blog}';`, {link: req.file.path});
+        const picture = await db.query(`UPDATE pictureBank SET link_picture= :pictureBlog WHERE num_blog = '${selectBlog[0].num_blog}';`, {pictureBlog});
         const category_blog = await db.query(`UPDATE category SET name= :category WHERE num_blog = '${selectBlog[0].num_blog}';`, {category});
         
         res.redirect('back');
@@ -340,7 +341,6 @@ exports.resetPictureUser = async (req, res) => {
     try {
 
         const resetPictureUser = await db.query(`UPDATE pictureBank SET link_picture = 'assets/images/avatar/1644325173801_user_avatar.jpg' WHERE link_picture LIKE '%user%' AND num_user = :id;`, {id});
-        const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${id}%';`);
 
         res.redirect('back');
     } catch (err) {

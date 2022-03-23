@@ -2,7 +2,7 @@
 Partial: Modal Admin View User
 --}}
 
-<!-- Modal User & Create & Edit & Delete -->
+<!-- Modal View User -->
 <div class="modal fade" id="viewUser{{ this.num_user }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -14,37 +14,72 @@ Partial: Modal Admin View User
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col-md-4">
                         <div class="rounded mx-auto d-block img-thumbnail">
-                            <img src="{{this.link_picture}}" alt="Kooppy">
+                            <img src="{{this.link_picture}}" alt="{{this.category}}">
                         </div>
                     </div>
-                    <div class="col-md-8">
-                        <div class="">
-                            <p>Pseudo: {{ this.pseudo }}</p>
-                            <p>Email: {{ this.email }}</p>
-                            {{#if this.name }}
-                            <p>Nom: {{ this.name }} Prénom: {{ this.first_name }}</p>
-                            {{/if }}
-                            {{#if this.address }}
-                            <p>Adresse: {{ this.address }}</p>
-                            {{/if }}
-                            {{#if this.postal_code }}
-                            <p>Code Postale: {{ this.postal_code }} Ville: {{ this.city }}</p>
-                            {{/if }}
-                            {{#if this.phone }}
-                            <p>Téléphone: {{ this.phone }}</p>
-                            {{/if }}
-                            {{#if this.civility }}
-                            <p>Civilité: {{ this.civility }}</p>
-                            {{/if }}
-                            {{#if this.description }}
-                            <p>Description: {{ this.description }}</p>
-                            {{/if }}
-                            <p>Vérifier: {{ this.isVerify }}  Admin: {{ this.isAdmin }}  Ban: {{ this.isBan }}  Archiver: {{ this.isArchiving }}</p>
-                            <p>Date de Création de Compte : {{calendarDate this.confirmation_date }}</p>
+                    <div class="col-md-8 mt-3">
+                        <p><strong>Pseudo:</strong> {{ this.pseudo }}</p>
+                        <p><strong>Email:</strong> {{ this.email }}</p>
+                        {{#if this.name }}
+                        <div class="d-flex flex wrap justify-content-between">
+                            <div class="col-md-6">
+                                <p><strong>Nom:</strong> {{ this.name }}</p>    
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Prénom:</strong> {{ this.first_name }}</p>
+                            </div>
                         </div>
+                        {{/if }}
+
+                        {{#if this.address }}
+                        <p><strong>Adresse:</strong> {{ this.address }}</p>
+                        {{/if }}
+
+                        {{#if this.city }}
+                        <div class="d-flex flex wrap justify-content-between">
+                            <div class="col-md-6">
+                                <p><strong>Ville:</strong> {{ this.city }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Code Postale:</strong> {{ this.postal_code }}</p>    
+                            </div>
+                        </div>
+                        {{/if }}
+
+                        {{#if this.phone }}
+                        <div class="d-flex flex wrap justify-content-between">
+                            <div class="col-md-8">
+                                <p><strong>Téléphone:</strong> {{ this.phone }}</p>    
+                            </div>
+                            <div class="col-md-4">
+                                <p><strong>Civilité:</strong> {{ this.civility }}</p>
+                            </div>
+                        </div>
+                        {{/if }}
+
+                        {{#if this.description }}
+                        <p><strong>Description:</strong> {{ this.description }}</p>
+                        {{/if }}
+
+                        <div class="d-flex flex wrap justify-content-between">
+                            <div class="col-md-3">
+                                <p><strong>Vérifier:</strong> {{ this.isVerify }}</p>    
+                            </div>
+                            <div class="col-md-3">
+                                <p><strong>Admin:</strong> {{ this.isAdmin }}</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><strong>Ban:</strong> {{ this.isBan }}</p>    
+                            </div>
+                            <div class="col-md-3">
+                                <p><strong>Archiver:</strong> {{ this.isArchiving }}</p>
+                            </div>
+                        </div>
+
+                        <p><strong>Date de Création:</strong> {{calendarDate this.confirmation_date }}</p>
                     </div>
                 </div>
             </div>

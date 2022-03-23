@@ -151,6 +151,7 @@ module.exports = {
     },
     configSendMessage: () => {
         return [check('name')
+            .not()
             .isEmpty()
             .withMessage('Le nom ne peut être vide'),
             check('email')
@@ -158,14 +159,14 @@ module.exports = {
             .withMessage('Email invalide'),
             check('subject')
             .isLength({
-                min: 10
+                min: 5
             })
-            .withMessage('Votre objet doit faire 10 caractère minimum.'),
+            .withMessage('Votre objet doit faire 5 caractère minimum.'),
             check('message')
             .isLength({
-                min: 20
+                min: 10
             })
-            .withMessage('Votre message doit faire 20 caractère minimum.')
+            .withMessage('Votre message doit faire 10 caractère minimum.')
         ];
     }
 }

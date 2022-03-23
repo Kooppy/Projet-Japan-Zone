@@ -14,7 +14,7 @@ Partial: Nav - Admin Layout
                 <div class="navbar-nav ms-auto">
                     <a class="nav-item nav-link" href="/"><span class="fas fa-home"></span></a>
                     <a class="nav-item nav-link" href="/blog">Article</a>
-                    <a class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#contact">Contact</a>
+                    <a class="nav-item nav-link" href="/who">Qui Somme-Nous ?</a>
                     {{#if user }}
                         <div class="nav-item dropdown">
                             <a class="nav-item nav-link dropdown-toggle" href="" id="userDrop" role="button"
@@ -27,7 +27,7 @@ Partial: Nav - Admin Layout
                                 </li>
                                 <li><a href="" class="dropdown-item">Profils</a></li>
                                 {{#if user.isAdmin }}
-                                    <li><a href="" class="dropdown-item">Messagerie</a></li>
+                                    <li><a href="/admin/messagery" class="dropdown-item">Messagerie</a></li>
                                     <li><a href="/admin" class="dropdown-item">Panel Admin</a></li>
                                 {{/if }}
                                 <li>

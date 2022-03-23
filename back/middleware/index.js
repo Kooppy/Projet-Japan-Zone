@@ -10,7 +10,8 @@ exports.validate = (config) => {
   return async (req, res, next) => {
     await Promise.all(config.map(validation => validation.run(req)));
 
-    const errors = validationResult(req);
+    const errors = validationResult(req);;
+    console.log(errors);
     if (errors.isEmpty()) {
       next();
     } else {

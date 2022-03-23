@@ -1,9 +1,9 @@
 {{!--
-Partial: Modal Admin View Blog
+Partial: Modal Admin View Message
 --}}
 
 <!-- Modal View Blog -->
-<div class="modal fade" id="viewBlog{{ this.num_blog }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="viewMessage{{ this.num_messagery }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -14,24 +14,19 @@ Partial: Modal Admin View Blog
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row align-items-center">
-                    <div class="col-md-4">
-                        <div class="rounded mx-auto d-block img-thumbnail">
-                            <img src="{{this.link_picture}}" alt="{{ this.name }}">
-                        </div>
-                    </div>
-                    <div class="col-md-8 mt-3">
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="d-flex flex wrap justify-content-between">
                             <div class="col-md-6">
-                                <p><strong>Titre:</strong> {{ this.title }}</p>    
+                                <p><strong>Nom:</strong> {{ this.name }}</p>    
                             </div>
                             <div class="col-md-6">
-                                <p><strong>Catégorie:</strong> {{ this.name }}</p>
+                                <p><strong>Email:</strong> {{ this.email }}</p>
                             </div>
                         </div>
-                        <p><strong>Description:</strong> {{ this.description }}</p>
-                        <p><strong>Contenue:</strong> {{ this.contents }}</p>
-                        <p><strong>Date de Création:</strong> {{calendarDate this.date }}</p>
+                        <p><strong>Sujet:</strong> {{ this.subject }}</p>
+                        <p><strong>Message:</strong> {{ this.message }}</p>
+                        <p><strong>Date d'envoie:</strong> {{calendarDate this.date }}</p>
                     </div>
                 </div>
             </div>

@@ -14,72 +14,59 @@ Partial: Modal Admin Edit Blog
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/admin/user/{{ this.num_blog }}?_method=PUT"
+                <form method="post" action="/admin/blog/{{ this.num_blog }}?_method=PUT"
                     enctype="multipart/form-data" >
-                    <!-- Id & Avatar Input -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="avatar{{ this.num_blog }}" class="rounded mx-auto d-block mb-3 " style="height: 150px; width: 150px; background-image: url('{{this.link_picture}}'); background-position:center; background-size:cover; ">
-                                <input id="change{{ this.num_blog }}" onclick="changeImg()" name="avatar" type="file"
-                                    style="opacity: 0.0; width: 100%; height:100%;" />
-                             </div>
-                        </div>
-                    </div>
-                    <!-- Civility Input --> 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="contact-form">
-                                <select class="form-select" name="civility" >
-                                    <option selected>Sélectionner...</option>
-                                    <option value="1">Mâle</option>
-                                    <option value="2">Femelle</option>
-                                    <option value="3">Autre</option>
-                                </select>
+                    <div class="d-flex flex-wrap-reverse justify-content-center align-items-center">
+                        <div class='col-md-8 ps-2 pe-3'>
+                            <!-- title Input-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="contact-form">
+                                        <input class="form-control" type="text" name="title" placeholder="Titre" value="{{ this.title }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Category Input -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="contact-form">
+                                        <input class="form-control" name="category" list="datalistOptions"
+                                            id="select-tags-edit-blog{{ this.num_blog }}" placeholder="Selectionner...">
+                                        <datalist id="datalistOptions">
+                                            <option value="site">
+                                            <option value="cosplay">
+                                            <option value="culture">
+                                        </datalist>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Description Input -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="contact-form">
+                                        <textarea class="form-control" name="description" placeholder="Description">{{ this.description }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Content Input -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="contact-form">
+                                        <textarea class="form-control" name="content" placeholder="Contenue">{{ this.contents }}</textarea>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Description Input -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="contact-form">
-                                <textarea class="form-control" name="description" placeholder="Description">{{ this.description }}</textarea>
+                        <div class="col-md-4">
+                            <!-- Picture Input -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="pictureBlog{{ this.num_blog }}" class="rounded mx-auto d-block mb-3 " style="height: 150px; width: 150px; background-image: url('{{this.link_picture}}'); background-position:center; background-size:cover; ">
+                                        <input id="changeBlog{{ this.num_blog }}" onclick="changePictureBlog{{ this.num_blog }}()" name="picBlog" type="file"
+                                            style="opacity: 0.0; width: 100%; height:100%;" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- New Password Input -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="contact-form">
-                                <input class="form-control" name="password" type="password"
-                                    placeholder="Nouveau Mot de Passe">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Verify / Admin Check -->
-                    <div class="d-flex justify-content-center mb-3">
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label" for="inlineCheckboxVerify">
-                                Vérifier
-                            </label>
-                            <input class="form-check-input" type="checkbox" name="isVerify" id="isVerify{{ this.num_user }}">
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label" for="inlineCheckboxAdmin">
-                                Admin
-                            </label>
-                            <input class="form-check-input" type="checkbox" name="isAdmin" id="isAdmin{{ this.num_user }}">
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label" for="inlineCheckboxBan">
-                                Ban
-                            </label>
-                            <input class="form-check-input" type="checkbox" name="isBan" id="isBan{{ this.num_user }}">
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label" for="inlineCheckboxArchiving">
-                                Archiver
-                            </label>
-                            <input class="form-check-input" type="checkbox" name="isArchiving" id="isArchiving{{ this.num_user }}">
                         </div>
                     </div>
                     <!-- Button Input-->
@@ -108,34 +95,15 @@ Partial: Modal Admin Edit Blog
 
 <script>
 
-    function changeImg() {
-        let input{{ this.num_user }} = document.getElementById('change{{ this.num_user }}')
+    function changePictureBlog{{ this.num_blog }}() {
+        let input = document.getElementById('changeBlog{{ this.num_blog }}')
 
-        input{{ this.num_user }}.onchange = evt => {
+        input.onchange = evt => {
 
             const [file] = input.files
             if (file) {
-                document.getElementById('avatar{{ this.num_user }}').style.backgroundImage = `url('${URL.createObjectURL(file)}')`
+                document.getElementById('pictureBlog{{ this.num_blog }}').style.backgroundImage = `url('${URL.createObjectURL(file)}')`
             }
         }
     }
-    
-    // isAdmin
-    const isAdmin{{ this.num_user }} = document.getElementById('isAdmin{{ this.num_user }}')
-    const adm{{ this.num_user }} = {{ isAdmin }}
-    if ( adm{{ this.num_user }} === 1 ) isAdmin{{ this.num_user }}.checked = true
-    // isVerified 
-    const isVerify{{ this.num_user }} = document.getElementById('isVerify{{ this.num_user }}')
-    const vrf{{ this.num_user }} = {{ isVerify }} 
-    if ( vrf{{ this.num_user }} === 1 ) isVerify{{ this.num_user }}.checked = true
-    // isBan
-    const isBan{{ this.num_user }} = document.getElementById('isBan{{ this.num_user }}')
-    const ban{{ this.num_user }} = {{ isBan }} 
-    if ( ban{{ this.num_user }} === 1 ) isBan{{ this.num_user }}.checked = true
-    // isArchiving
-    const isArchiving{{ this.num_user }} = document.getElementById('isArchiving{{ this.num_user }}')
-    const archiving{{ this.num_user }} = {{ isArchiving }} 
-    if ( archiving{{ this.num_user }} === 1 ) isArchiving{{ this.num_user }}.checked = true
-
-
 </script> 

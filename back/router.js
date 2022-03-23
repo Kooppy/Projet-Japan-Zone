@@ -93,17 +93,17 @@ router.route('/admin/blog').post(auth.isAdmin, upload.single('picBlog'), sharp, 
 
 router.route('/admin/blog/:id').put(auth.isAdmin, upload.single('picBlog'), sharp, editBlog).delete(auth.isAdmin, deleteBlog);
 
-router.route('/admin/gallery').post(auth.isAdmin, upload.single('picGallery'), addGallery);
+router.route('/admin/gallery').post(auth.isAdmin, upload.single('picGallery'), sharp, addGallery);
 
-router.route('/admin/gallery/resetUser').put(auth.isAdmin, resetPictureUser);
+router.route('/admin/gallery/resetUser/:id').put(auth.isAdmin, resetPictureUser);
 
-router.route('/admin/gallery/resetBlog').put(auth.isAdmin, resetPictureBlog);
+router.route('/admin/gallery/resetBlog/:id').put(auth.isAdmin, resetPictureBlog);
 
-router.route('/admin/gallery/:id').put(auth.isAdmin, upload.single('picGallery'), editGallery).delete(auth.isAdmin, deleteGallery);
+router.route('/admin/gallery/:id').put(auth.isAdmin, upload.single('picGallery'), sharp, editGallery).delete(auth.isAdmin, deleteGallery);
 
-router.route('/messagery').get(auth.isAdmin, messagery).post(auth.isAdmin, validate(configSendMessage()), sendEmail)
+router.route('/admin/messagery').get(auth.isAdmin, messagery).post(auth.isAdmin, validate(configSendMessage()), sendEmail)
 
-router.route('/messagery/:id').delete(auth.isAdmin, deleteMessage)
+router.route('/admin/messagery/:id').delete(auth.isAdmin, deleteMessage)
 
 // /Routes
 

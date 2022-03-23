@@ -9,7 +9,7 @@ exports.sendMessage = async (req, res) => {
 
     try {
 
-        const send = await db.query('INSERT INTO messagery SET name= :name, email= :email, subject= :subject, message=:message;', {name, email, subject, message})
+        const send = await db.query('INSERT INTO messagery SET name= :name, email= :email, subject= :subject, message= :message, date= NOW();', {name, email, subject, message})
   
         res.redirect('back') 
     } catch (err) {
