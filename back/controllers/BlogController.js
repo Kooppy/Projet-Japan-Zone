@@ -59,22 +59,17 @@ exports.blogID = async (req, res) => {
                                         WHERE comment.num_blog = ${blogId[0].num_blog}
                                         ORDER BY comment.num_comment ASC
                                         LIMIT ${paginateComment.limit};`)
+        console.log(paginateComment);
 
-
-        // if (paginateComment.page.current <= paginateComment.page.total) {
-        //     res.render('item1', {
-        //         blog: blogId[0],
-        //         comment,
-        //         pageComment: paginateComment.page
-        //     });
-        // } else {
-        //     res.redirect(`/blog/${title}`)
-        // }
-        res.render('item1', {
-            blog: blogId[0],
-            comment,
-            pageComment: paginateComment.page
-        });
+        if (paginateComment.page.current <= paginateComment.page.total || paginateComment.page.current === 1) {
+            res.render('item1', {
+                blog: blogId[0],
+                comment,
+                pageComment: paginateComment.page
+            });
+        } else {
+            res.redirect(`/blog/${title}`)
+        }
 
     } catch (err) {
         throw err;
