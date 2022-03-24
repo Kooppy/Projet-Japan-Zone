@@ -8,14 +8,15 @@ exports.profilID = async (req, res) => {
     const { id } = req.params;
     
     try {
-        const profilUser = await db.query(`SELECT user.num_user, user.email, user.pseudo, user.password, user.confirmation_date, pictureBank.link_picture, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
+        const profilUser = await db.query(`SELECT user.num_user, user.email, user.pseudo, user.confirmation_date, pictureBank.link_picture, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
                                       FROM user
+                                      INNER JOIN pictureBank ON pictureBank.num_user = user.num_user
                                       INNER JOIN user_role ON user_role.num_user = user.num_user
                                       INNER JOIN user_address ON user_address.num_user = user.num_user
                                       INNER JOIN user_profil ON user_profil.num_user = user.num_user
-                                      WHERE num_user = ${id}; `);
+                                      WHERE user.pseudo= :id; `, {id});
 
-        res.render('profil', {profilUser})
+        res.render('profil', {profilUser: profilUser[0]})
     } catch (err) {
         throw err;
     }
@@ -36,13 +37,16 @@ exports.editProfil = async (req, res) => {
         password
     } = req.body;
 
+    const { id } = req.params
+
     try {
-        const selectUser = await db.query(`SELECT user.num_user, user.email, user.pseudo, user.password, pictureBank.link_picture, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
+        const selectUser = await db.query(`SELECT user.email, user.pseudo, user.password, pictureBank.link_picture, user_address.name, user_address.first_name, user_address.address, user_address.postal_code, user_address.city, user_address.phone, user_profil.civility, user_profil.description
                                            FROM user
                                            INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%user%' AND pictureBank.num_user = user.num_user
+                                           INNER JOIN user_role ON user_role.num_user = user.num_user
                                            INNER JOIN user_address ON user_address.num_user = user.num_user
                                            INNER JOIN user_profil ON user_profil.num_user = user.num_user
-                                           WHERE user.num_user = ${req.params.id};`)
+                                           WHERE user.num_user = :id;`, {id})
 
         pseudo = !pseudo ? selectUser[0].pseudo : pseudo;
         email = !email ? selectUser[0].email : email;
@@ -55,8 +59,13 @@ exports.editProfil = async (req, res) => {
         civility = !civility ? selectUser[0].civility : civility;
         description = !description ? selectUser[0].description : description;
         password = !password ? selectUser[0].password : password;
+        avatar = !req.file.path ? selectUser[0].link_picture : req.file.path;
 
-        // const user = await db.query(`UPDATE user SET isBan = true WHERE num_user = '${req.params.id}';`);
+        const user_update = await db.query(`UPDATE user SET pseudo= :pseudo, email= :email, password= :password  WHERE num_user = :id ;`, {id, pseudo, email, password});
+        const user_avatar_update = await db.query(`UPDATE pictureBank SET link_picture= :avatar  WHERE num_user = :id ;`, {id, avatar});
+        const user_address_update = await db.query(`UPDATE user_address SET name= :name, first_name= :first_name, address= :address, postal_code= :postal_code, city= :city, phone= :phone  WHERE num_user = :id ;`, {id, name, first_name, address, postal_code, city, phone});
+        const user_profil_update = await db.query(`UPDATE user_profil SET civility= :civility, description= :description  WHERE num_user = :id ;`, {id, civility, description});
+
         res.redirect('back');
     } catch (err) {
         throw err;
@@ -65,11 +74,11 @@ exports.editProfil = async (req, res) => {
 
 exports.comment = async (req, res) => {
     const { message } = req.body,
-          { id } = req.params;
+          { title } = req.params;
 
     try {
-        const blogId = await selectID('num_blog', 'blog', 'title= :value', id);
-        const comment = await db.query(`INSERT INTO comment SET contents= :message, date= NOW(), num_user= '${req.session.user.id}', num_blog= '${blogId.num_blog}';`, {message})
+        const blogId = await selectID('num_blog', 'blog', 'title= :value', title);
+        const comment = await db.query(`INSERT INTO comment SET contents= :message, date= NOW(), num_user= :sessId, num_blog= '${blogId.num_blog}';`, {message, sessId: req.session.user.id})
         res.redirect('back');
     } catch (err) {
         throw err;

@@ -355,7 +355,7 @@ exports.resetPictureBlog = async (req, res) => {
 
     try {
 
-        const resetPictureBlog = await db.query(`UPDATE pictureBank SET link_picture = 'assets/images/avatar/1644325173801_user_avatar.jpg' WHERE link_picture LIKE '%blog%' AND num_blog = :id;`, {id});
+        const resetPictureBlog = await db.query(`UPDATE pictureBank SET link_picture = 'assets/images/blog/1645616444163_blog_item1.png' WHERE link_picture LIKE '%blog%' AND num_blog = :id;`, {id});
 
         res.redirect('back');
     } catch (err) {

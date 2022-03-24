@@ -35,7 +35,7 @@ Partial: Blog (Item1) Main
                     <form action="/blog/{{ blog.title }}" method="post">
                         <div class="d-flex align-items-center text-center">
                             <div class="col-2">
-                                <img class="author" src="../{{ this.link_picture }}" alt="author">
+                                <img class="author" src="../{{ user.avatar }}" alt="author">
                             </div>
                             <!-- Message Comment -->
                             <div class="col-10">
@@ -44,26 +44,34 @@ Partial: Blog (Item1) Main
                             </div>
                         </div>
                         <!-- Button Comment -->
-                        <div class="d-flex justify-content-end">
-                            <div class="col-12">
-                                <button class="btn btn-full">Envoyer</button>
+                        <div class="row mt-2 mb-4">
+                            <div class="col-12 text-end">
+                                <button class="btn btn-secondary">Envoyer</button>
                             </div>
                         </div>
+                        {{!-- <div class="col-8 text-end">
+                                <button class="btn btn-secondary">Envoyer</button>
+                            </div>
+                        </div> --}}
+                        {{!-- <div class="d-flex justify-content-end">
+                            <div class="col-12">
+                                <button class="btn btn-secondary">Envoyer</button>
+                            </div>
+                        </div> --}}
                     </form>
                 </div>
             </div>
             {{/if }}
             {{#each comment}}
-            <div class="row">
+            <div class="row mt-4">
                 <div class="col-md-12">
-                    <div class="row border border-secondary align-items-center p-2 text-center m-1">
+                    <div class="row border border-2 border-secondary align-items-center p-2 text-center m-1">
                         <div class="col-2">
                             <img class="author" src="../{{ this.link_picture }}" alt="author">
+                            <p class="mb-0 mt-2"><strong>{{ this.pseudo }}</strong></p>
                         </div>
                         <div class="col-10 ">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <span>{{ this.pseudo }}</span>
-
+                            <div class="d-flex align-items-center justify-content-end">
                                 {{#if ../user.isAdmin}}
                                 <a class="" data-bs-toggle="modal" data-bs-target="#delete{{ this.num_comment }}"><span
                                         class="far fa-trash-alt"></span></a>

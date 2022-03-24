@@ -1,3 +1,35 @@
 {{!-- 
     Partial: Profil Main 
  --}}
+
+<section class="container mt-4 mb-5">
+    <div class="row flew-wrap border border-3 border-secondary  align-items-center p-2 text-center m-1 ">
+        <div class="col-12">
+            <div class="d-flex justify-content-end">
+                {{#if ../user.isAdmin}}
+                <a class="" data-bs-toggle="modal" data-bs-target="#editProfil{{ profilUser.num_user }}"><span
+                        class="fas fa-edit"></span></a>
+                {{else}}
+                {{#ifstatus ../user.id this.num_user}}
+                <a class="" data-bs-toggle="modal" data-bs-target="#editProfil{{ profilUser.num_user }}"><span
+                        class="fas fa-edit"></span></a>
+                {{/ifstatus }}
+                {{/if }}
+            </div>
+        </div>
+        <div class="col-12 col-md-3 mb-3">
+            <img class="rounded-2" src="../{{ profilUser.link_picture }}" alt="author" style="max-height: 150px; max-width: 150px;">
+            <p class="mb-0 mt-2"><strong>{{ profilUser.pseudo }}</strong></p>
+            <p class="m-0"><strong>{{calendarDate profilUser.confirmation_date }}</strong></p>
+        </div>
+        <div class="col-12 col-md-9 mb-3 ">
+            {{#if profilUser.description}}
+            <p >{{ profilUser.description }}</p>
+            {{else }}
+            <p>Cette personne n'a pas de description mais c'est sans doute une personne formidable et admirable</p>
+            {{/if}}
+        </div>
+    </div>
+</section>
+
+{{> modals/modal-editProfil data= profilUser }}

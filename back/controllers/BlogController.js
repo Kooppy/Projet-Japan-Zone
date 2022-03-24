@@ -34,17 +34,18 @@ exports.blog = async (req, res) => {
 
 exports.blogID = async (req, res) => {
     const {
-        id
+        title
     } = req.params;
 
     try {
+        console.log('oui');
         const blogId = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, blog.date, user.pseudo, pictureBank.link_picture, category.name
                                      FROM blog 
                                      INNER JOIN user ON user.num_user = blog.num_user
                                      INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%blog%' AND pictureBank.num_blog = blog.num_blog
                                      INNER JOIN category ON category.num_blog = blog.num_blog
-                                     WHERE blog.title= '${id}';`);
-
+                                     WHERE blog.title= :title;`, {title});
+        console.log("ergregre", blogId[0]);
         let paginateComment = await pagination({
             numItem: 5,
             page: req.query.page,
@@ -60,15 +61,20 @@ exports.blogID = async (req, res) => {
                                         LIMIT ${paginateComment.limit};`)
 
 
-        if (paginateComment.page.current <= paginateComment.page.total) {
-            res.render('item1', {
-                blog: blogId[0],
-                comment,
-                pageComment: paginateComment.page
-            });
-        } else {
-            res.redirect(`/blog/${id}`)
-        }
+        // if (paginateComment.page.current <= paginateComment.page.total) {
+        //     res.render('item1', {
+        //         blog: blogId[0],
+        //         comment,
+        //         pageComment: paginateComment.page
+        //     });
+        // } else {
+        //     res.redirect(`/blog/${title}`)
+        // }
+        res.render('item1', {
+            blog: blogId[0],
+            comment,
+            pageComment: paginateComment.page
+        });
 
     } catch (err) {
         throw err;

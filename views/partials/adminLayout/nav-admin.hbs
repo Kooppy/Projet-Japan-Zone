@@ -5,7 +5,7 @@ Partial: Nav - Admin Layout
 <header>
     <nav class="navbar navbar-expand-md navbar-light bg-light" id="nav">
         <div class="container">
-            <a class="navbar-brand" href="#"><img class="author" src="/assets/images/logo.png">Japan Zone</a>
+            <a class="navbar-brand" href="/"><img class="author" src="/assets/images/logo.png">Japan Zone</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#monmenu"
                 aria-controls="monmenu" aria-label="Menu pour mobile">
                 <span class="navbar-toggler-icon"></span>
@@ -25,7 +25,7 @@ Partial: Nav - Admin Layout
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a href="" class="dropdown-item">Profils</a></li>
+                                <li><a href="/profil/{{ user.pseudo }}" class="dropdown-item">Profils</a></li>
                                 {{#if user.isAdmin }}
                                     <li><a href="/admin/messagery" class="dropdown-item">Messagerie</a></li>
                                     <li><a href="/admin" class="dropdown-item">Panel Admin</a></li>
