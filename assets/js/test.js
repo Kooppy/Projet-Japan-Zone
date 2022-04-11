@@ -59,7 +59,12 @@ $(function(){
     //localStorage.clear();
     let html = document.querySelector('html');
 
-    $(".btn-check").on("click", setLocal);
+    
+    document.querySelector("#light").addEventListener('click', setLocal)
+    document.querySelector("#darkMod").addEventListener('click', setLocal)
+    document.querySelector("#japan").addEventListener('click', setLocal)
+
+    //$(".form-check-input").on("click", setLocal);
 
     // Local Part Verify
     if (localStorage.getItem('theme')) {
@@ -71,6 +76,7 @@ $(function(){
     
     // LocalStorage Create
     function setLocal() {
+
         let old = localStorage.getItem('theme');
         localStorage.setItem('theme', this.value);
 
@@ -81,9 +87,12 @@ $(function(){
     function updateLocal(old) {
         // theme Mod Update
         let theme = localStorage.getItem('theme');
+        console.log("test1",theme);
 
         if (localStorage.getItem('theme') && old === undefined || old === "") {
             html.classList.add(theme)
+            theme = theme === 'undefined' ? 'light' : theme;
+            document.getElementById(theme).checked = true
         } else if (localStorage.getItem('theme') == "") {
             html.classList.remove(old)
         } else if (old != undefined) {
@@ -99,4 +108,19 @@ $(function(){
     function deleteLocal() {
         localStorage.clear();
     }
+
+    document.querySelector("#loginButton").addEventListener('click', function () {
+
+        const tab = bootstrap.Tab.getOrCreateInstance(document.querySelector('#myTab button[data-bs-target="#login"]')).show();
+
+        tab.show();
+    })
+
+    document.querySelector("#registerButton").addEventListener('click', function () {
+
+        const tab = bootstrap.Tab.getOrCreateInstance(document.querySelector('#myTab button[data-bs-target="#register"]')).show();
+
+        tab.show();
+    })
+
 })();

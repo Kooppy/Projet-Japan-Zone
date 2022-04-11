@@ -52,6 +52,25 @@ ul {
   width: 40px !important;
   height: 40px; }
 
+
+.btn-outline-light {
+  background-color: #212121;
+  border: 2px solid #f8f9fa;
+} 
+
+.btn-outline-light:hover {
+  border: 2px solid #212121;
+} 
+
+.btn-outline-dark {
+  border: 2px solid #212529;
+}
+
+.btn-outline-dark:hover {
+  border: 2px solid #f8f9fa;
+} 
+
+
 /**** Table Part ****/ 
 
 .table-border {

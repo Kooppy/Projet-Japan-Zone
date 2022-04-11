@@ -18,8 +18,8 @@ exports.home = async (req, res) => {
                                         ORDER BY pictureBank.num_picture DESC
                                         LIMIT 4;`);
         
-        
-        res.render('index', {blog, gallery});
+
+        res.render('index', {blog, gallery, blogActive: blog[0]});
     } catch (err) {
         throw err;
     }   
