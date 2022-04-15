@@ -7,28 +7,14 @@
     <div class="row">
         <div class="col-md-8">
             <!-- Title Actu -->
-            <div class="row">
+            <div class="row ">
                 <div class="col-md-12">
                     <h2>Actualités</h2>
                 </div>
             </div>
             <!-- Filter -->
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="filter">
-                        <h4>Machin</h4>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="filter">
-                        <h4>Machin</h4>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="filter">
-                        <h4>Machin</h4>
-                    </div>
-                </div>
+            <div class="row justify-content-center mb-5" id="search">
+
             </div>
             <!-- Article View Main -->
             <div class="row">
@@ -44,7 +30,7 @@
                 </div>
             </div>
             <!-- Article List -->
-            <div class="row">
+            <div class="row" id="listCard">
                 {{#each blog }}
                     <div class="col-md-6">
                         <div class="actu-list">
@@ -53,7 +39,7 @@
                             <p>{{ this.description }} </p>
                             <div class="row justify-content-between">
                                 <div class="col-auto">
-                                    <a href="/blog/{{ this.title }}" class="btn-news-view">Lire</a>
+                                    <a href="/blog/{{ this.title }}" class="btn btn-outline-dark ms-2 me-2 mb-2">Lire la suite</a>
                                 </div>
                                 <div class="col-auto">
                                     <p class="mt-1"><span class="fas fa-calendar-day"></span> {{ commentDateFormat this.date }}
@@ -117,3 +103,34 @@
         {{> right-menu }}
     </div>
 </section>
+
+<script>
+        const actions = {
+    // Get data API
+        search(event) {
+            let valueInput, filterValue, listCard, card, h3, img, textValue, altValue;
+
+            valueInput = document.getElementById('inputSearch');
+
+            filterValue = valueInput.value.toLowerCase();
+
+            listCard = document.getElementById('listCard');
+            console.log('rtegrth',listCard)
+            card = listCard.children;
+            console.log(card)
+
+            for (let i = 0; i < card.length; i++) {
+                h3 = card[i].getElementsByTagName('h3')[0];
+                textValue = h3.childNodes[0].data
+
+                if (textValue.toLowerCase().indexOf(filterValue) > -1) {
+                    card[i].style.display = "";
+
+                } else {
+                    card[i].style.display = "none"
+                }
+                
+            }
+        },
+    };
+</script>

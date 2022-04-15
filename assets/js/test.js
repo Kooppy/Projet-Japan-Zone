@@ -87,7 +87,6 @@ $(function(){
     function updateLocal(old) {
         // theme Mod Update
         let theme = localStorage.getItem('theme');
-        console.log("test1",theme);
 
         if (localStorage.getItem('theme') && old === undefined || old === "") {
             html.classList.add(theme)
@@ -122,5 +121,117 @@ $(function(){
 
         tab.show();
     })
+
+    // ============================================================ //
+
+    // Import de notre balise html root (app)
+    const app = document.getElementById("app");
+
+    // ============================================================ //
+    // data plus persistante
+    const state = {
+    listCard: [],
+    };
+    // permet de muter (changer) la valeur de nos states
+    const mutations = {
+    setListCard(state, value) {
+        console.log("mutation", state, value);
+        state.listCard = value;
+    },
+    };
+    // fonction multiple
+    const actions = {
+    // Get data API
+        search(event) {
+            let valueInput, filterValue, listCard, card, h3, img, textValue, altValue;
+            console.log(event);
+            valueInput = document.getElementById('inputSearch');
+
+            filterValue = valueInput.value.toLowerCase();
+
+            listCard = document.getElementById('listCard');
+
+            card = document.getElementsByTagName('div');
+
+            for (i = 0; i < card.length; i++) {
+                h3 = card[i].getElementsByTagName('h3')[0];
+                textValue = h3.innerText
+
+                if (textValue.toLowerCase()) {
+                    card[i].style.display = "";
+
+                } else {
+                    card[i].style.display = "none"
+                }
+                
+            }
+        },
+    };
+
+    // ============================================================ //
+
+    // Build de notre input avant le get auto
+    async function buildInput() {
+        // app.setAttribute("style", "margin-top: 60px");
+        // // Création de la div container
+        // const container = document.createElement("div");
+        // container.setAttribute("class", "container fixed-top");
+
+        // // Création de la div row
+        // const row = document.createElement("div");
+        // row.setAttribute("class", "row");
+        // row.setAttribute("id", "listCard");
+        const searchDiv = document.getElementById("search");
+        // Création du form contenant le input
+        const formInput = document.createElement("form");
+        formInput.setAttribute("class", "col-md-6");
+
+
+        // // Création du span
+        // const spanInput = document.createElement("span");
+        // spanInput.setAttribute("class", "input-group-text");
+        // spanInput.innerText = "pixabay";
+
+        // Création du input
+        const input = document.createElement("input");
+        input.setAttribute("class", "form-control");
+        input.setAttribute("type", "text");
+        input.setAttribute("placeholder", "mot clef exemple: bitcoin");
+        input.setAttribute("aria-label", "Username");
+        input.setAttribute("aria-describedby", "addon-wrapping");
+        input.setAttribute("onkeyup", "actions.search(event)");
+        input.setAttribute("id", "inputSearch");
+
+        // Notre input en html
+        // <div class="input-group flex-nowrap">
+        //     <span class="input-group-text" id="addon-wrapping">@</span>
+        //     <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+        // </div>
+
+        // Intégration de notre container dans app
+        // app.appendChild(container);
+
+        // Intégration de notre divInput dans notre container
+        searchDiv.appendChild(formInput);
+
+        // Intégration de notre span + input dans notre divInput
+        // divInput.appendChild(spanInput);
+        formInput.appendChild(input);
+    }
+
+    // ============================================================ //
+
+    async function mountedComponent() {
+        console.log("Mounted");
+        // input
+        buildInput();
+    }
+
+    // au chargement de la page
+    mountedComponent();
+
+    console.log("end", state);
+
+    // ============================================================ //
 
 })();
