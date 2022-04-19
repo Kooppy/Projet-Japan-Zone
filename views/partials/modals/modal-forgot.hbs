@@ -15,6 +15,13 @@ Partial: Modal Lost Password
             </div>
             <div class="modal-body">
                 <form method="post" action="/forgot">
+                    {{#if modalForgot}}
+                        <div class="border border-3 border m-3">
+                            {{#each modalForgot}}
+                                <p class="pt-3 pb-3 m-0 text-center" style="font-size: 1rem; font-weight: 500;">{{ msg }}</p>
+                            {{/each}}
+                        </div>
+                    {{/if}}
                     <!-- Email input :-->
                     <div class="row">
                         <div class="col-md-12">

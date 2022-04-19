@@ -12,4 +12,10 @@ Layout: Main
 
 {{> mainLayout/end-js }}
 
-{{> flash/flash-modal }}
+{{#if modalLogin}}
+    {{> flash/flash-modal script='login-register'}}
+{{/if}}
+
+{{#if modalRegister}}
+    {{> flash/flash-modal script='login-register' tabSelect='register'}}
+{{/if}}

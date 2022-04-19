@@ -12,9 +12,9 @@ module.exports = {
     configRegister: () => {
         return [check('pseudo')
             .isLength({
-                min: 8
+                min: 4
             })
-            .withMessage('Votre pseudo doit faire 8 caractère mini.'),
+            .withMessage('Votre pseudo doit faire 4 caractère mini.'),
             check('pseudo').custom(async (value) => {
                 const userPseudo = await selectID('count(*) as num', 'user', 'pseudo= :value', value);
                
@@ -35,18 +35,20 @@ module.exports = {
                 return true;
             }),
             check('password')
-            .matches(/^(?=.*\d)[0-9a-zA-Z\%\@]{1,}$/)
-            .withMessage(' 1 Chiffre.')
-            .matches(/^(?=.*[a-z])[0-9a-zA-Z\%\@]{1,}$/)
-            .withMessage(' 1 caractère minuscule.')
-            .matches(/^(?=.*[\%\@])[0-9a-zA-Z\%\@]{1,}$/)
-            .withMessage(' 1 caractère spéciale.')
-            .matches(/^(?=.*[A-Z])[0-9a-zA-Z\%\@]{1,}$/)
-            .withMessage(' 1 Majuscule.')
-            .isLength({
-                min: 8
-            })
-            .withMessage('Doit faire 8 caractère minimum.'),
+            .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\%\@])[0-9a-zA-Z\%\@]{8,}$/)
+            .withMessage(' Votre mot de passe doit contenir 8 caractère minimums et possèder au moins 1 caractère minuscule, 1 caractère majuscule, 1 chiffre et 1 caractère spéciale (% ou @) '),
+            // .matches(/^(?=.*\d)[0-9a-zA-Z\%\@]{1,}$/)
+            // .withMessage(' 1 Chiffre.')
+            // .matches(/^(?=.*[a-z])[0-9a-zA-Z\%\@]{1,}$/)
+            // .withMessage(' 1 caractère minuscule.')
+            // .matches(/^(?=.*[\%\@])[0-9a-zA-Z\%\@]{1,}$/)
+            // .withMessage(' 1 caractère spéciale.')
+            // .matches(/^(?=.*[A-Z])[0-9a-zA-Z\%\@]{1,}$/)
+            // .withMessage(' 1 Majuscule.')
+            // .isLength({
+            //     min: 8
+            // })
+            // .withMessage('Doit faire 8 caractère minimum.'),
             check('password').custom((value, { req }) => {
                 if (value !== req.body.cPassword) {
                     throw new Error('La confirmation de mot de passe est incorrecte !');

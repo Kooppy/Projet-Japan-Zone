@@ -5,16 +5,16 @@ Partial: Nav - Admin Layout
 <header>
     <nav class="navbar navbar-expand-md navbar-light bg-light" id="nav">
         <div class="container">
-            <a class="navbar-brand" href="/"><img class="author" src="/assets/images/logo.png">Japan Zone</a>
+            <a class="navbar-brand" href="/"><img class="author" src="/assets/images/logo.png" alt="logo">Japan Zone</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#monmenu"
                 aria-controls="monmenu" aria-label="Menu pour mobile">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="monmenu">
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-item nav-link" href="/"><span class="fas fa-home"></span></a>
+                    <a class="nav-item nav-link" href="/"><span class="fas fa-home me-1"></span>Home</a>
                     <a class="nav-item nav-link" href="/blog">Article</a>
-                    <a class="nav-item nav-link" href="/who">Qui Somme-Nous ?</a>
+                    <a class="nav-item nav-link" href="/presenting">Qui Somme-Nous ?</a>
                     {{#if user }}
                         <div class="nav-item dropdown">
                             <a class="nav-item nav-link dropdown-toggle" href="" id="userDrop" role="button"
@@ -33,13 +33,13 @@ Partial: Nav - Admin Layout
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a href="" class="dropdown-item" data-bs-toggle="modal"
-                                        data-bs-target="#disconnect">Déconnexion</a></li>
+                                <li><button class="dropdown-item" data-bs-toggle="modal"
+                                        data-bs-target="#disconnect">Déconnexion</button></li>
                             </ul>
                         </div>
                     {{else }}
-                        <a class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#login-register">Connexion /
-                            Inscription</a>
+                        <button class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#login-register">Connexion /
+                            Inscription</button>
                     {{/if }}
                 </div>
             </div>

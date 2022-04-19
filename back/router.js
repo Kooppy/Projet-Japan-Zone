@@ -11,6 +11,8 @@ const express = require('express'),
       { validate } = require('./middleware/index.js'),
       sharp = require('./config/sharp');
 
+const AuthController = require('./controllers/AuthController')
+
 
 // Import des modules dans les controllers
 const {
@@ -18,14 +20,15 @@ const {
       sendMessage,
       blog,
       blogID,
-      createUser,
-      loginUser,
-      forgot,
+      presenting,
+      // createUser,
+      // loginUser,
+      // forgot,
       profilID,
       editProfil,
       comment,
       deleteComment,
-      logOut,
+      // logOut,
       resetPassword, 
       reset,
       admin,
@@ -61,15 +64,17 @@ router.route('/blog/:title').get(blogID).post(validate(configComment()), comment
 
 router.route('/comment/:id').delete(deleteComment);
 
-router.route('/register').post(validate(configRegister()), createUser);
+router.route('/presenting').get(presenting);
 
-router.route('/login').post(validate(configLogin()), loginUser);
+router.route('/register').post(validate(configRegister()), new AuthController().register);
+
+router.route('/login').post(validate(configLogin()), new AuthController().login);
 
 router.route('/profil/:id').get(auth.isVerify, profilID).put(validate(configEditUser()), upload.single('picUser'), sharp, editProfil);
 
-router.route('/logout').delete(logOut);
+router.route('/logout').delete(new AuthController().logOut);
 
-router.route('/forgot').post(validate(configForgot()), forgot);
+router.route('/forgot').post(validate(configForgot()), new AuthController().forgot);
 
 router.route('/resetPassword/:id').get(auth.isForgot, resetPassword).put(validate(configResetPassword()), reset);
 

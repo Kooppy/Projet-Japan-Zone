@@ -3,6 +3,13 @@
  * ************************ */
 
 exports.home = async (req, res) => {
+
+    const flash = req.session.reg_error;
+    const backURL = req.session.backURL;
+
+    req.session.backURL = '';
+    req.session.reg_error = '';
+    
     try {
         const blog = await db.query(`SELECT blog.title, blog.description, blog.contents, blog.date, pictureBank.link_picture, category.name
                                      FROM blog 
@@ -18,8 +25,28 @@ exports.home = async (req, res) => {
                                         ORDER BY pictureBank.num_picture DESC
                                         LIMIT 4;`);
         
+        switch (backURL) {
+            case '/login':
+                res.render('index', {blog, gallery, blogActive: blog[0], modalLogin: flash});
+                break;
 
-        res.render('index', {blog, gallery, blogActive: blog[0]});
+            case '/register':
+                res.render('index', {blog, gallery, blogActive: blog[0], modalRegister: flash});
+                break;
+            
+            case '/forgot':
+                res.render('index', {blog, gallery, blogActive: blog[0], modalForgot: flash});
+                break;
+
+            // case '/contact':
+            //     res.render('index', {blog, gallery, blogActive: blog[0], modalLogin: flash});
+            //     break;
+        
+            default:
+                res.render('index', {blog, gallery, blogActive: blog[0]});
+                break;
+        }
+        //res.render('index', {blog, gallery, blogActive: blog[0], modalLogin: flash});
     } catch (err) {
         throw err;
     }   
