@@ -15,6 +15,7 @@ module.exports = {
                 const numRows = await db.query(`SELECT count(*) as num FROM ${table};`);
 
                 let numPages = Math.ceil(numRows[0].num / numItem);
+                console.log(numPages);
 
                 resolve({
                     limit: limit,

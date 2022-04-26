@@ -8,6 +8,10 @@ Layout: Main
 
 {{{ body }}}
 
+{{#if flash}}
+    {{> flash/flash }}
+{{/if}}
+
 {{> mainLayout/footer }}
 
 {{> mainLayout/end-js }}

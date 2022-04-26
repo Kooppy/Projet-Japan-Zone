@@ -60,7 +60,7 @@ router.route('/contact').post(validate(configSendMessage()), sendMessage);
 
 router.route('/blog').get(blog);
 
-router.route('/blog/:title').get(blogID).post(validate(configComment()), comment);
+router.route('/blog/:title').get(auth.isBlogExists, blogID).post(validate(configComment()), comment);
 
 router.route('/comment/:id').delete(deleteComment);
 

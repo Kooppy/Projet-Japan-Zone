@@ -1,22 +1,22 @@
 
 {{#if flash }}
-<div class="position-fixed top-0 end-0 p-3" style="z-index: 9999">
-    <div id="po" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="width: auto;">
-        <div class="toast-header">
-            <strong class="me-auto">Message automatique</strong>
-            <small class="mx-2">A l'instant</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            {{ flash }}
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 9999">
+        <div id="po" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="width: auto;">
+            <div class="toast-header">
+                <strong class="me-auto">Message automatique</strong>
+                <small class="mx-2">A l'instant</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                {{ flash }}
+            </div>
         </div>
     </div>
-</div>
-<script>
-    var toastDiv = document.getElementById('po')
-    setTimeout(() => {
-        var toast = new bootstrap.Toast(toastDiv)
-        toast.show()
-    }, 0)
-</script>
+    <script>
+        var toastDiv = document.getElementById('po')
+        setTimeout(() => {
+            var toast = new bootstrap.Toast(toastDiv)
+            toast.show()
+        }, 0)
+    </script>
 {{/if }}

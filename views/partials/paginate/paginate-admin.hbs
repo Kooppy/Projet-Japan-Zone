@@ -1,7 +1,9 @@
-{{#ifstatus data.total 1}}
+{{#ifAnd data.total 0 data.total 1}}
     {{else}}
+    {{#if admin }}
       <tr>
         <td colspan="{{colspan}}">
+    {{/if }}
           <nav aria-label="Page navigation example">
             <ul class="justify-content-center pagination mt-2 mb-2">
               {{#ifstatus data.current 1}}
@@ -32,6 +34,8 @@
               {{/ifstatus}}
             </ul>
           </nav>
+      {{#if admin }}
         </td>
-      </tr>
-{{/ifstatus}}
+      </tr
+      {{/if }}
+{{/ifAnd }}

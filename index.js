@@ -22,7 +22,7 @@ const express = require('express'),
   swaggerUi = require('swagger-ui-express'),
   swaggerDocument = require('./swagger-config/swagger.json'),
   helmet = require('helmet'),
-  { ifstatus, commentDateFormat, calendarDate } = require('./back/helper');
+  { ifstatus, commentDateFormat, calendarDate, ifAnd } = require('./back/helper');
 
 // Method-Override
 app.use(methodOverride('_method'));
@@ -45,7 +45,8 @@ app.engine('hbs', handlebars.engine({
   helpers: {
     ifstatus,
     commentDateFormat,
-    calendarDate
+    calendarDate,
+    ifAnd
   },
   extname: 'hbs',
   defaultLayout: 'main'

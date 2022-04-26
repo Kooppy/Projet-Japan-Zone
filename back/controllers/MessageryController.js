@@ -31,6 +31,8 @@ exports.sendEmail = async (req, res) => {
 
     const { name, email, subject, message } = req.body;
 
+    console.log(email);
+
     try {
         let result = await sendMail({toEmail: email, subject, message: `${message} Cordialement, ${name}`, validate: 'Email, envoyer'});
 

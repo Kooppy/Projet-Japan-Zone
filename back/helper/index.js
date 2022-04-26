@@ -28,11 +28,20 @@ module.exports = {
         }
       },
 
-      ifstatus: function(a, b, opts) {
+    ifstatus: function(a, b, opts) {
         if (a === b) {
             return opts.fn(this);
         } else {
             return opts.inverse(this);
         }
-    }
+    },
+
+    ifAnd: function(a, b, c, d, opts) {
+      if (a === b || c === d ) {
+          return opts.fn(this);
+      } else {
+        console.log('oui');
+          return opts.inverse(this);
+      }
+  }
 }

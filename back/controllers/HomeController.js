@@ -27,15 +27,15 @@ exports.home = async (req, res) => {
         
         switch (backURL) {
             case '/login':
-                res.render('index', {blog, gallery, blogActive: blog[0], modalLogin: flash});
+                res.render('index', {blog, gallery, modalLogin: flash});
                 break;
 
             case '/register':
-                res.render('index', {blog, gallery, blogActive: blog[0], modalRegister: flash});
+                res.render('index', {blog, gallery, modalRegister: flash});
                 break;
             
             case '/forgot':
-                res.render('index', {blog, gallery, blogActive: blog[0], modalForgot: flash});
+                res.render('index', {blog, gallery, modalForgot: flash});
                 break;
 
             // case '/contact':

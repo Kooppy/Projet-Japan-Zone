@@ -25,6 +25,26 @@ Partial: Nav - Main Layout
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
+
+                                <li class="d-flex justify-content-evenly ">
+                                    <div class="form-check form-check-inline">
+                                        <input class="btn-check" type="radio" name="inlineRadioOptions" id="light" value="">
+                                        <label class="btn btn-outline-dark ms-2 me-2 mb-2" for="light"><i class="fas fa-sun"></i></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="btn-check" type="radio" name="inlineRadioOptions" id="darkMod" value="darkMod">
+                                        <label class="btn btn-outline-dark ms-2 me-2 mb-2" for="darkMod"><i class="fas fa-moon"></i></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="btn-check" type="radio" name="inlineRadioOptions" id="japan" value="japan">
+                                        <label class="btn btn-outline-dark ms-2 me-2 mb-2" for="japan"><i class="fas fa-star"></i></label>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+
                                 <li><a href="/profil/{{user.pseudo}}" class="dropdown-item">Profils</a></li>
                                 {{#if user.isAdmin }}
                                     <li><a href="/admin/messagery" class="dropdown-item">Messagerie</a></li>

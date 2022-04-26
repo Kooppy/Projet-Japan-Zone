@@ -320,12 +320,12 @@ exports.addGallery = async (req, res) => {
     const {
         title, 
         description,
-        name
+        category
     } = req.body;
 
     try {
         const picture = await db.query(`INSERT INTO pictureBank SET link_picture= :path, title_picture= :title, description_picture= :description, num_user= '${req.session.user.id}';`, {path: req.file.path, title, description});
-        const category = await db.query(`INSERT INTO category SET name= '${name}', num_picture= '${picture.insertId}';`);
+        await db.query(`INSERT INTO category SET name= :category, num_picture= '${picture.insertId}';`, {category});
         
     } catch (err) {
         throw err;
@@ -389,11 +389,12 @@ exports.editGallery = async (req, res) => {
         
         const picture = await db.query(`UPDATE pictureBank SET link_picture= :link, title_picture= :title_picture, description_picture= :description_picture WHERE num_picture= :id;`, {id, link: req.file.path, title_picture, description_picture});
         const category_picture = await db.query(`UPDATE category SET name= :category WHERE num_picture= :id;`, {id, category});
+
+        res.redirect('back');
         
     } catch (err) {
         throw err;
     }
-    res.redirect('back');
 }
 
 exports.deleteGallery = async (req, res) => {
@@ -404,8 +405,9 @@ exports.deleteGallery = async (req, res) => {
     try {
         const picture_category = await db.query(`DELETE category,pictureBank FROM category left join pictureBank ON category.num_picture = pictureBank.num_picture WHERE category.num_picture= '${id}';`);
         
+        res.redirect('back');
+
     } catch (err) {
         throw err;
     }
-    res.redirect('back');
 }

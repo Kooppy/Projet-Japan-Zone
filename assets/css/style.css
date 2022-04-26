@@ -319,7 +319,7 @@ ul {
   transition: background-color 0.5s, color 0.7s, border 0.8s; }
 
 .actu-list:hover {
-  background-color: #f1aeb5; }
+  background-color: #2121212d; }
 
 /**** Item Part *** */
 .author {

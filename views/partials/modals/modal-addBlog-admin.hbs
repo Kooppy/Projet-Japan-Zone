@@ -25,7 +25,7 @@ Partial: Admin Modal Add Blog
                     <!-- Image Input -->
                      <div class="row">
                         <div class="col-md-12">
-                            <div id="picBlogCreate" class="rounded mx-auto d-block mb-3" style="height: 150px; width: 250px; background-image: url('../../assets/images/header/header1.png'); background-position:center; background-size:cover; ">
+                            <div id="picBlogCreate" class="rounded mx-auto d-block mb-3" style="height: 150px; width: 250px; background-image: url('http://localhost:3000/assets/images/header/header1.webp'); background-position:center; background-size:cover; ">
                                 <input id="changeBlogCreate" onclick='changePicBlogCreate()' name="picBlog" type="file"
                                     style="opacity: 0.0; width: 100%; height:100%;" />
                             </div>
@@ -64,7 +64,7 @@ Partial: Admin Modal Add Blog
                     <!-- Button Input-->
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <button class="btn btn-secondary">Envoyer</button>
+                            <button class="btn btn-outline-dark ms-2 me-2 mb-2">Ajouter</button>
                         </div>
                     </div>
                 </form>
@@ -86,11 +86,15 @@ Partial: Admin Modal Add Blog
 </div>
 
 <script>
+    let input = document.getElementById(`changeBlogCreate`)
+    input.files = "http://localhost:3000/assets/images/header/header1.webp";
+
     function changePicBlogCreate() {
         let input = document.getElementById(`changeBlogCreate`)
 
         input.onchange = evt => {
             const [file] = input.files
+            console.log(input.files)
             if (file) {
                 document.getElementById(`picBlogCreate`).style.backgroundImage = `url('${URL.createObjectURL(file)}')`
             }

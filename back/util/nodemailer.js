@@ -21,8 +21,6 @@ exports.sendMail = (data) => {
             validate
         } = data;
 
-        console.log(data);
-
         let mailOptions = {
             from: process.env.MAILER_USER,
             to: toEmail,

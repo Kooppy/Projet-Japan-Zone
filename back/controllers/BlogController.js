@@ -38,16 +38,22 @@ exports.blogID = async (req, res) => {
     } = req.params;
 
     try {
-        console.log('oui');
+
         const blogId = await db.query(`SELECT blog.num_blog, blog.title, blog.description, blog.contents, blog.date, user.pseudo, pictureBank.link_picture, category.name
                                      FROM blog 
                                      INNER JOIN user ON user.num_user = blog.num_user
                                      INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%blog%' AND pictureBank.num_blog = blog.num_blog
                                      INNER JOIN category ON category.num_blog = blog.num_blog
                                      WHERE blog.title= :title;`, {title});
-        console.log("ergregre", blogId[0]);
+
+        const blogAuthor = await db.query(`SELECT user.pseudo, pictureBank.link_picture
+                                           FROM blog 
+                                             INNER JOIN user ON user.num_user = blog.num_user
+                                             INNER JOIN pictureBank ON pictureBank.link_picture LIKE '%user%' AND pictureBank.num_user = blog.num_user
+                                           WHERE blog.title= :title;`, {title})
+
         let paginateComment = await pagination({
-            numItem: 5,
+            numItem: 6,
             page: req.query.page,
             table: `comment WHERE num_blog = ${blogId[0].num_blog}`
         });
@@ -59,11 +65,11 @@ exports.blogID = async (req, res) => {
                                         WHERE comment.num_blog = ${blogId[0].num_blog}
                                         ORDER BY comment.num_comment ASC
                                         LIMIT ${paginateComment.limit};`)
-        console.log(paginateComment);
 
         if (paginateComment.page.current <= paginateComment.page.total || paginateComment.page.current === 1) {
             res.render('item1', {
                 blog: blogId[0],
+                author: blogAuthor[0],
                 comment,
                 pageComment: paginateComment.page
             });
