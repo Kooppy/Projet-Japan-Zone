@@ -30,12 +30,6 @@ Partial: Modal Login / Register
                     <div class="modal-body">
                         {{#if modalLogin}}
                             {{> flash/flash-modal data=modalLogin }}
-                            {{!-- <div class="border border-3 border-danger text-danger m-3">
-                                {{#each modalLogin}}
-                                    <p class="pt-3 pb-3 m-0 text-center" style="font-size: 1rem; font-weight: 500;">{{ msg }}</p>
-                                {{/each}}
-                            </div> --}}
-
                         {{/if}}
                         <form method="post" action="/login">
                             <!-- Username & Password Input :-->
@@ -55,7 +49,9 @@ Partial: Modal Login / Register
                             <!-- Forget Password -->
                             <div class="row">
                                 <div class="col-md-12 text-end mb-2">
-                                    <button type="button" class="btn btn-outline-light ms-2 me-2 mb-2" data-bs-toggle="modal" data-bs-target="#forgot">Mot de passe oublié ?</button>
+                                    <button type="button" class="btn btn-outline-light ms-2 me-2 mb-2" data-bs-toggle="modal" data-bs-target="#forgot">
+                                        Mot de passe oublié ?
+                                    </button>
                                 </div>
                             </div>
                             <!-- Button Input -->
