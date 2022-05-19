@@ -98,6 +98,8 @@ exports.editProfil = async (req, res) => {
             isAdmin: selectUser[0].isAdmin
         }
 
+        req.session.msg = 'Votre profil est bien modifier.';
+
         if (pseudo !== id) {
             res.redirect(`/profil/${pseudo}`);
         }else {

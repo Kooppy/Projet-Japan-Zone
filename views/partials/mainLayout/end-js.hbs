@@ -19,8 +19,10 @@
         {{> flash/flash-modal script='editProfil{{ profilUser.pseudo }}' }}
     {{/if}}
 
+{{log 'pseudo' profilUser.pseudo }}
     {{#if modalNewPassword}}
-        {{> flash/flash-modal script='newPassword{{profilUser.pseudo}}' }}
+        {{log 'pseudo' profilUser.pseudo }}
+        {{> flash/flash-modal script='newPassword' id=profilUser.pseudo }}
     {{/if}}
     
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v12.0"

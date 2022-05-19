@@ -31,6 +31,11 @@ const storage = multer.diskStorage({
 
                 break;
 
+            case `/admin/gallery/${id}?_method=PUT`:
+                dir = `./assets/images/gallery/${file.fieldname.split(' ').join('_')}`;
+
+                break;
+
             case `/admin/user/${id}?_method=PUT`:
                 console.log('je passe multer');
                 dir = `./assets/images/avatar/${pseudo.split(' ').join('_')}`;
@@ -41,6 +46,7 @@ const storage = multer.diskStorage({
                 dir = `./assets/images/blog/${title.split(' ').join('_')}`;
 
                 break;
+
             case `/admin/blog/${id}`:
                 dir = `./assets/images/blog/${title.split(' ').join('_')}`;
     
@@ -74,6 +80,11 @@ const storage = multer.diskStorage({
                 break;
 
             case `/admin/gallery`:
+                completed = Date.now()+"_gallery_"+name
+
+                break;
+
+            case `/admin/gallery/${id}?_method=PUT`:
                 completed = Date.now()+"_gallery_"+name
 
                 break;

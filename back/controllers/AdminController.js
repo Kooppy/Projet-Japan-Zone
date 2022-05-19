@@ -191,12 +191,13 @@ exports.addUser = async (req, res) => {
         const user_insert_address = await db.query(`INSERT INTO user_address SET num_user= '${user_insert.insertId}';`);
         const user_insert_profil = await db.query(`INSERT INTO user_profil SET num_user= '${user_insert.insertId}';`);
 
+        req.session.msg = 'Utilisateur ajouter.'
+        res.redirect('back');
 
     } catch (err) {
         throw err;
     }
-    req.session.msg = 'Utilisateur ajouter.'
-    res.redirect('back');
+
 }
 
 exports.editUser = async (req, res) => {
@@ -252,6 +253,7 @@ exports.editUser = async (req, res) => {
         const user_profil_update = await db.query(`UPDATE user_profil SET civility= :civility, description= :description  WHERE num_user = :id ;`, {id, civility, description});
         const user_role_update = await db.query(`UPDATE user_role SET isVerify= :isVerify, isAdmin= :isAdmin, isBan= :isBan, isArchiving= :isArchiving WHERE num_user = :id ;`, {id, isVerify, isAdmin, isBan, isArchiving});
 
+        req.session.msg = 'Utilisateur modifier.'
         res.redirect('back');
     } catch (err) {
         throw err;
@@ -268,6 +270,7 @@ exports.banUser = async (req, res) => {
         const user_ban = await db.query(`UPDATE user_role SET isBan= true WHERE num_user = :id;`, {id});
         const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${id}%';`);
 
+        req.session.msg = 'Utilisateur banni.'
         res.redirect('back');
     } catch (err) {
         throw err;
@@ -284,6 +287,7 @@ exports.archivingUser = async (req, res) => {
         const user_archiving = await db.query(`UPDATE user_role SET isArchiving = true WHERE num_user = :id;`, {id});
         const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${id}%';`);
 
+        req.session.msg = 'Utilisateur archiver.'
         res.redirect('back');
     } catch (err) {
         throw err;
@@ -300,6 +304,7 @@ exports.unBanUser = async (req, res) => {
         const user_deBan = await db.query(`UPDATE user_role SET isBan= false WHERE num_user = :id;`, {id});
         const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${id}%';`);
 
+        req.session.msg = 'Utilisateur deban.'
         res.redirect('back');
     } catch (err) {
         throw err;
@@ -316,6 +321,7 @@ exports.unArchivingUser = async (req, res) => {
         const user_deArchiving = await db.query(`UPDATE user_role SET isArchiving = false WHERE num_user = :id;`, {id});
         const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"id":${id}%';`);
 
+        req.session.msg = 'Utilisateur déarchivier.'
         res.redirect('back');
     } catch (err) {
         throw err;
@@ -336,33 +342,45 @@ exports.deleteUser = async (req, res) => {
                                                   ON pictureBank.link_picture LIKE '%user%' AND pictureBank.num_user = user.num_user 
                                               WHERE pictureBank.num_user = :id ;`, {id});
 
+        req.session.msg = 'Utilisateur supprimer.'
+        res.redirect('back');
+
     } catch (err) {
         throw err;
     }
-    res.redirect('back');
+
 }
 
 exports.addBlog = async (req, res) => {
-    const {
+    let {
         title,
         description,
         content,
         category
     } = req.body;
 
+    let pictureBlog;
+
     try {
+
+        pictureBlog = !req.file.path ? 'assets/images/blog/1645616444163_blog_item1.png' : req.file.path;
+        category = !category ? 'site' : category;
+
+
         const blog = await db.query(`INSERT INTO blog 
                                        SET title= :title, description= :description, contents= :content, date= NOW(), num_user= '${req.session.user.id}';`, 
                                     {title, description, content});
 
         const picture = await db.query(`INSERT INTO pictureBank 
-                                          SET link_picture= :path, num_user= '${req.session.user.id}', num_blog= '${blog.insertId}';`, {path: req.file.path});
+                                          SET link_picture= :pictureBlog, num_user= '${req.session.user.id}', num_blog= '${blog.insertId}';`, {pictureBlog});
 
         const category_blog = await db.query(`INSERT INTO category SET name= :category, num_blog= '${blog.insertId}', num_picture= '${picture.insertId}';`, {category})
+
+        req.session.msg = 'Article ajouter.'
+        res.redirect('back');
     } catch (err) {
         throw err;
     }
-    res.redirect('back');
 }
 
 exports.editBlog = async (req, res) => {
@@ -400,6 +418,7 @@ exports.editBlog = async (req, res) => {
         const picture = await db.query(`UPDATE pictureBank SET link_picture= :pictureBlog WHERE num_blog = '${selectBlog[0].num_blog}';`, {pictureBlog});
         const category_blog = await db.query(`UPDATE category SET name= :category WHERE num_blog = '${selectBlog[0].num_blog}';`, {category});
         
+        req.session.msg = 'Article modifier.'
         res.redirect('back');
     } catch (err) {
         throw err;
@@ -416,28 +435,38 @@ exports.deleteBlog = async (req, res) => {
         const category = await db.query(`UPDATE category INNER JOIN blog ON blog.num_blog = category.num_blog SET category.num_blog= NULL WHERE blog.num_blog = '${id}';`);
         const picture = await db.query(`UPDATE pictureBank INNER JOIN blog ON blog.num_blog = pictureBank.num_blog SET pictureBank.num_blog = NULL WHERE blog.num_blog = '${id}';`);
         const blog = await db.query(`DELETE FROM blog WHERE num_blog= '${id}';`);
+
+        req.session.msg = 'Article modifier.'
+        res.redirect('back');
     
     } catch (err) {
         throw err;
     }
-    res.redirect('back');
+
 }
 
 exports.addGallery = async (req, res) => {
-    const {
+    let {
         title, 
         description,
         category
     } = req.body;
 
     try {
-        const picture = await db.query(`INSERT INTO pictureBank SET link_picture= :path, title_picture= :title, description_picture= :description, num_user= '${req.session.user.id}';`, {path: req.file.path, title, description});
+
+        pictureGallery = !req.file.path ? 'assets/images/gallery/1645616444163_gallery_item1.png' : req.file.path;
+        category = !category ? 'site' : category;
+
+        const picture = await db.query(`INSERT INTO pictureBank SET link_picture= :pictureGallery, title_picture= :title, description_picture= :description, num_user= '${req.session.user.id}';`, {pictureGallery, title, description});
         await db.query(`INSERT INTO category SET name= :category, num_picture= '${picture.insertId}';`, {category});
+
+        req.session.msg = 'Image ajouter.'
+        res.redirect('back');
         
     } catch (err) {
         throw err;
     }
-    res.redirect('back');
+
 }
 
 exports.resetPictureUser = async (req, res) => {
@@ -449,6 +478,7 @@ exports.resetPictureUser = async (req, res) => {
 
         const resetPictureUser = await db.query(`UPDATE pictureBank SET link_picture = 'assets/images/avatar/1644325173801_user_avatar.jpg' WHERE link_picture LIKE '%user%' AND num_user = :id;`, {id});
 
+        req.session.msg = 'Image utilisateur réinitialiser.'
         res.redirect('back');
     } catch (err) {
         throw err;
@@ -464,6 +494,7 @@ exports.resetPictureBlog = async (req, res) => {
 
         const resetPictureBlog = await db.query(`UPDATE pictureBank SET link_picture = 'assets/images/blog/1645616444163_blog_item1.png' WHERE link_picture LIKE '%blog%' AND num_blog = :id;`, {id});
 
+        req.session.msg = 'Image article réinitialiser.'
         res.redirect('back');
     } catch (err) {
         throw err;
@@ -472,9 +503,8 @@ exports.resetPictureBlog = async (req, res) => {
 
 exports.editGallery = async (req, res) => {
     let {
-        link_picture,
-        title_picture,
-        description_picture,
+        title,
+        description,
         category
     } = req.body;
 
@@ -484,19 +514,18 @@ exports.editGallery = async (req, res) => {
         const selectGallery = await db.query(`SELECT pictureBank.link_picture, pictureBank.title_picture, pictureBank.description_picture, user.pseudo, category.name
                                         FROM pictureBank
                                         INNER JOIN user ON user.num_user = pictureBank.num_user
-                                        INNER JOIN blog ON blog.num_blog = pictureBank.num_blog
                                         INNER JOIN category ON category.num_picture = pictureBank.num_picture
-                                        WHERE num_picture= ${id}`);;
+                                        WHERE pictureBank.num_picture= :id;`, {id});
 
-        link_picture = !link_picture ? selectGallery[0].link_picture : link_picture;
-        title_picture = !title_picture ? selectGallery[0].title_picture : title_picture;
-        description_picture = !description_picture ? selectGallery[0].description_picture : description_picture;
+        pictureGallery = !req.file.path ? selectGallery[0].link_picture : req.file.path;
+        title = !title ? selectGallery[0].title_picture : title;
+        description = !description ? selectGallery[0].description_picture : description;
         category = !category ? selectGallery[0].name : category;
         
-        
-        const picture = await db.query(`UPDATE pictureBank SET link_picture= :link, title_picture= :title_picture, description_picture= :description_picture WHERE num_picture= :id;`, {id, link: req.file.path, title_picture, description_picture});
+        const picture = await db.query(`UPDATE pictureBank SET link_picture= :pictureGallery, title_picture= :title, description_picture= :description WHERE num_picture= :id;`, {id, pictureGallery, title, description});
         const category_picture = await db.query(`UPDATE category SET name= :category WHERE num_picture= :id;`, {id, category});
 
+        req.session.msg = 'Image modifier.'
         res.redirect('back');
         
     } catch (err) {
@@ -512,6 +541,7 @@ exports.deleteGallery = async (req, res) => {
     try {
         const picture_category = await db.query(`DELETE category,pictureBank FROM category left join pictureBank ON category.num_picture = pictureBank.num_picture WHERE category.num_picture= '${id}';`);
         
+        req.session.msg = 'Image supprimer.'
         res.redirect('back');
 
     } catch (err) {

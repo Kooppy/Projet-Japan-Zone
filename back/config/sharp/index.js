@@ -36,6 +36,14 @@ module.exports = (req, res, next) => {
 
                 break;
 
+            case `/admin/gallery/${id}?_method=PUT`:
+                fit = sharp.fit.cover
+                height= 400
+                witdh= 400
+                quality= 100
+
+                break;
+
             case `/admin/user/${id}?_method=PUT`:
                 fit = sharp.fit.cover
                 height= 400

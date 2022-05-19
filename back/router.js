@@ -79,7 +79,7 @@ router.route('/verify/').post(requestVerifyUpdate);
 
 router.route('/verify/:id').get(auth.isRequestVerify, verifyUpdate);
 
-router.route('/profil/:id').get(auth.isVerify, auth.isProfilExists, profilID).put(upload.single('picUser'), sharp, editProfil);
+router.route('/profil/:id').get(auth.isVerify, auth.isProfilExists, profilID).put(validate(configEditUser()), upload.single('picUser'), sharp, editProfil);
 
 router.route('/profil/newPassword/:id').put(validate(configEditNewPasswordProfil()), newPasswordProfil);
 

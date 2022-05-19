@@ -6,6 +6,11 @@ const { pagination } = require('../util/pagination'),
       { sendMail } =require('../util/nodemailer');
 
 exports.messagery = async (req, res) => {
+
+    const message = req.session.msg;
+
+    req.session.msg= '';
+
     let pagiMessagery = await pagination({
         numItem: 10,
         page: req.query.messagery,
@@ -21,7 +26,8 @@ exports.messagery = async (req, res) => {
             layout: 'adminLayout',
             namePage: 'Messagery',
             messagery,
-            paginate: pagiMessagery.page
+            paginate: pagiMessagery.page,
+            message
         });
     } catch (err) {
         throw err;
@@ -38,6 +44,7 @@ exports.sendEmail = async (req, res) => {
         let result = await sendMail({toEmail: email, subject, message: `${message} Cordialement, ${name}`, validate: 'Email, envoyer'});
 
         // res.render('messagery', {flash: result.flash});
+        req.session.msg = result.flash
         res.redirect('back');
     } catch (err) {
         throw err;
@@ -51,6 +58,7 @@ exports.deleteMessage = async (req, res) => {
     try {
         const deleteMessage = await db.query('DELETE FROM messagery WHERE num_messagery= :id;', {id});
         
+        req.session.msg = 'Message supprimer'
         res.redirect('back');
     } catch (err) {
         throw err;
