@@ -1,3 +1,175 @@
 {{!-- 
     Partial: Presenting Main 
  --}}
+
+ <style>
+     .icon-blockquote {
+        display: table;
+        margin-bottom: 20px;
+     }
+
+    .icon-blockquote::before {
+        width: 50px;
+        min-width: 50px;
+    }
+
+    .icon-blockquote>span {
+        display: table-cell;
+        height: 0;
+        padding-right: 25px;
+        font-size: 96px;
+        font-weight: 600;
+        line-height: 0;
+        color: #f205cb94;
+        vertical-align: top;
+        cursor: default;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .icon-blockquote::after {
+        content: "";
+        display: table-cell;
+        width: 100%;
+        vertical-align: top;
+        border-bottom: 2px solid #af3939;
+        -webkit-transform: translateY(-18px);
+        -ms-transform: translateY(-18px);
+        transform: translateY(-18px);
+    }
+
+    .author-blockquote {
+        margin-top: 25px;
+        text-align: right;
+    }
+
+    .author-blockquote::before {
+        content: "";
+        display: table-cell;
+        width: 100%;
+        border-bottom: 2px solid #8C4D4D;
+        -webkit-transform: translateY(-10px);
+        -ms-transform: translateY(-10px);
+        transform: translateY(-10px);
+    }
+
+    .author-blockquote>span {
+        display: table-cell;
+        padding-right: 30px;
+        padding-left: 30px;
+        font-size: .95rem;
+        font-weight: 600;
+        color: #f205cb94;
+        white-space: nowrap;
+    }
+
+    .author-blockquote::after {
+        content: "";
+        display: table-cell;
+        width: 100%;
+        border-bottom: 2px solid #8C4D4D;
+        -webkit-transform: translateY(-10px);
+        -ms-transform: translateY(-10px);
+        transform: translateY(-10px);
+    }
+
+    .border-secondary {
+        border-color: #8C4D4D !important;
+    }
+
+ </style>
+
+<section class="container mt-5 mb-3">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Présentation</h2>
+        </div>
+    </div>
+    <div class="row flew-wrap align-items-center p-2 text-center m-1 mt-3 ">
+        <div class="col-12">
+            <blockquote style="position: relative; margin: 20px 0; margin-top: 33px; font-style: italic; z-index: 1;">
+                <div class="icon-blockquote">
+                    <span>"</span>
+                </div>
+
+                <div class="">
+                    <p class="text-center"> Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. </p>
+                </div>
+
+                <div class="author-blockquote">
+                    <span>Kévin M., Président J.Z.</span>
+                </div>
+            </blockquote>
+        </div>
+    </div>
+</section>
+
+<section class="container mt-3 mb-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 style="font-size: 243%;">Membres Administratifs</h2>
+        </div>
+    </div>
+    <div class="row flew-wrap border border-3 border-secondary  align-items-center p-2 text-center m-1 mt-3 ">
+        <div class="col-12 col-md-3 mb-3">
+            <img class="rounded-2" src="../assets/images/presenting/avatar_male.webp" alt="author" style="max-height: 150px; max-width: 150px;">
+            <p class="mb-0 mt-2"><strong>Kévin Mezerette</strong></p>
+            <p class="m-0"><strong>Rôle: </strong>Président</p>
+        </div>
+        <div class="col-12 col-md-9 mb-3 ">
+            <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>
+        </div>
+    </div>
+    <div class="row flex-row-reverse flew-wrap border border-3 border-secondary  align-items-center p-2 text-center m-1 mt-5 ">
+        <div class="col-12 col-md-3 mb-3">
+            <img class="rounded-2" src="../assets/images/presenting/avatar_male.webp" alt="author" style="max-height: 150px; max-width: 150px;">
+            <p class="mb-0 mt-2"><strong>Skylios</strong></p>
+            <p class="m-0"><strong>Rôle: </strong>Trésorier</p>
+        </div>
+        <div class="col-12 col-md-9 mb-3 ">
+            <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>
+        </div>
+    </div>
+    <div class="row flew-wrap border border-3 border-secondary  align-items-center p-2 text-center m-1 mt-5 ">
+        <div class="col-12 col-md-3 mb-3">
+            <img class="rounded-2" src="../assets/images/presenting/avatar_female.webp" alt="author" style="max-height: 150px; max-width: 150px;">
+            <p class="mb-0 mt-2"><strong>Matsuka</strong></p>
+            <p class="m-0"><strong>Rôle: </strong>Vice-Présidente</p>
+        </div>
+        <div class="col-12 col-md-9 mb-3 ">
+            <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>
+        </div>
+    </div>
+    <div class="row flex-row-reverse flew-wrap border border-3 border-secondary  align-items-center p-2 text-center m-1 mt-5 ">
+        <div class="col-12 col-md-3 mb-3">
+            <img class="rounded-2" src="../assets/images/presenting/avatar_male.webp" alt="author" style="max-height: 150px; max-width: 150px;">
+            <p class="mb-0 mt-2"><strong>Jo'</strong></p>
+            <p class="m-0"><strong>Rôle: </strong>Vice-Président</p>
+        </div>
+        <div class="col-12 col-md-9 mb-3 ">
+            <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>
+        </div>
+    </div>
+    <div class="row flew-wrap border border-3 border-secondary  align-items-center p-2 text-center m-1 mt-5 ">
+        <div class="col-12 col-md-3 mb-3">
+            <img class="rounded-2" src="../assets/images/presenting/avatar_female.webp" alt="author" style="max-height: 150px; max-width: 150px;">
+            <p class="mb-0 mt-2"><strong>Takara</strong></p>
+            <p class="m-0"><strong>Rôle: </strong>Responsable Com'</p>
+        </div>
+        <div class="col-12 col-md-9 mb-3 ">
+            <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>
+        </div>
+    </div>
+    <div class="row flex-row-reverse flew-wrap border border-3 border-secondary  align-items-center p-2 text-center m-1 mt-5 mb-5 ">
+        <div class="col-12 col-md-3 mb-3">
+            <img class="rounded-2" src="../assets/images/presenting/avatar_male.webp" alt="author" style="max-height: 150px; max-width: 150px;">
+            <p class="mb-0 mt-2"><strong>Melvin Mezerette</strong></p>
+            <p class="m-0"><strong>Rôle: </strong>Technicien</p>
+        </div>
+        <div class="col-12 col-md-9 mb-3 ">
+            <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.</p>
+        </div>
+    </div>
+</section>

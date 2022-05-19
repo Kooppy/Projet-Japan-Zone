@@ -55,7 +55,7 @@ describe('CHAI // CONTROLLER // BLOG', async () => {
 
     //Test Route Post Blog
     it("ChaiRouter // POST // Blog", (done) => {
-        rand = Math.floor(Math.random() * 1000);
+        rand = Math.floor(Math.random() * 100000);
         chai
             .request(app)
             .post("/api/admin/blog")
@@ -65,11 +65,13 @@ describe('CHAI // CONTROLLER // BLOG', async () => {
             .field('description', `${rand}`)
             .field('content', `${rand}`)
             .field('category', `${rand}`)
-            .field('id', user.num_user)
+            .field('id', 2)
             .attach("picBlog", path.resolve(__dirname, "./th.jpeg"))
             .end((err, res) => {
                 if (err) return done(err);
                 res.should.have.status(200);
+                res.body.selectBlogId.should.be.a("array");
+                res.body.selectBlogId[0].should.be.a("object");
                 done();
             });
     });
@@ -108,7 +110,7 @@ describe('CHAI // CONTROLLER // BLOG', async () => {
         const blog = await selectID('num_blog', 'blog', 'title= :value', rand);
         id= blog.num_blog;
 
-        rand = Math.floor(Math.random() * 1000);
+        rand = Math.floor(Math.random() * 100000000);
         chai
             .request(app)
             .put(`/api/admin/blog/${id}`)
@@ -122,6 +124,8 @@ describe('CHAI // CONTROLLER // BLOG', async () => {
             .end((err, res) => {
                 if (err) return err;
                 res.should.have.status(200);
+                res.body.selectBlogId.should.be.a("array");
+                res.body.selectBlogId[0].should.be.a("object");
             });
     });
 
@@ -134,6 +138,8 @@ describe('CHAI // CONTROLLER // BLOG', async () => {
             .end((err, res) => {
                 if (err) return done(err);
                 res.should.have.status(200);
+                res.body.blog.should.be.a("array");
+                res.body.blog[0].should.be.a("object");
                 done();
             });
     });

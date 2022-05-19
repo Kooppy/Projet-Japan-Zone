@@ -68,17 +68,9 @@ Partial: Modal Login / Register
                     <div class="modal-body">
                         {{#if modalRegister}}
                             {{> flash/flash-modal data=modalRegister }}
-                            {{!-- <div class="border border-3 border-danger text-danger m-3">
-                                <p class="p-2" style="font-size: 1.25rem; font-weight: 500;">Problème lors de l'enregistrement :</p>
-                                <ul class="ps-4">
-                                    {{#each modalRegister}}
-                                        <li class="pb-2">- {{ msg }}</li>
-                                    {{/each}}
-                                </ul>
-                            </div> --}}
                         {{/if}}
                         <form method="post" action="/register">
-                            <!-- Id & Email Input -->
+                            <!-- Email Input -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="contact-form">

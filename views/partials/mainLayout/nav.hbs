@@ -2,10 +2,23 @@
 Partial: Nav - Main Layout
 --}}
 
+<style>
+    .pic {
+        width: 150px;
+    }
+
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        .pic {
+            width: 60px
+        }
+    }
+
+</style>
+
 <header>
     <nav class="navbar navbar-expand-md navbar-light bg-light" id="nav">
         <div class="container">
-            <a class="navbar-brand" href="/"><img class="author" src="/assets/images/logo.png" alt="logo">Japan Zone</a>
+            <a class="navbar-brand" href="/"><img class="pic" src="/assets/images/logo_fusion.webp" alt="logo"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#monmenu"
                 aria-controls="monmenu" aria-label="Menu pour mobile">
                 <span class="navbar-toggler-icon"></span>
@@ -44,6 +57,15 @@ Partial: Nav - Main Layout
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
+                                {{#if user.isVerify }}
+                                    {{else }}
+                                        <li><button class="dropdown-item" data-bs-toggle="modal"
+                                                data-bs-target="#requestVerify">Vérifier</button></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+
+                                {{/if }}
 
                                 <li><a href="/profil/{{user.pseudo}}" class="dropdown-item">Profils</a></li>
                                 {{#if user.isAdmin }}
@@ -58,8 +80,8 @@ Partial: Nav - Main Layout
                             </ul>
                         </div>
                     {{else }}
-                        <button class="btn btn-outline-light ms-2 me-2 mb-2" data-bs-toggle="modal" data-bs-target="#login-register" id="loginButton">Connexion</button>
-                        <button class="btn btn-outline-dark ms-2 me-2 mb-2" data-bs-toggle="modal" data-bs-target="#login-register" id="registerButton" >Inscription</button>
+                        <button class="btn btn-outline-light ms-1 me-1 mb-2" data-bs-toggle="modal" data-bs-target="#login-register" id="loginButton">Connexion</button>
+                        <button class="btn btn-outline-dark ms-1 me-1 mb-2" data-bs-toggle="modal" data-bs-target="#login-register" id="registerButton" >Inscription</button>
                         <div class="nav-item dropdown">
                             <a class="nav-item nav-link dropdown-toggle" href="" id="userDrop" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user-secret me-1"></i>Visiteur</a>
@@ -94,6 +116,7 @@ Partial: Nav - Main Layout
 </header>
 
 {{#if user }}
+{{> modals/modal-yesNo-admin name='requestVerify' data="" title="Demande de Vérification" question="Voulez-vous vraiment obtenir une demande de vérification ?" path="/verify" method="" }}
 {{> modals/modal-disconnect }}
 {{else }}
 {{> modals/modal-lr }}

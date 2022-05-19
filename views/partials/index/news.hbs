@@ -3,6 +3,19 @@
  --}}
 
 <!-- Main News -->
+
+<style>
+    .news-items:hover {
+        background-color: #0f0f0f15;
+    }
+
+    .darkMod .news-items:hover {
+        background-color: #4c4c4c87;
+    }
+
+
+</style>
+
 <section class="container shadow-lg my-5" id="news">
     <!-- Title Main News -->
     <div class="row">
@@ -17,7 +30,7 @@
             <div class="scrollspy-list-news">
                 {{#each blog }}
                     <!-- List News -->
-                    <div class="row me-0 p-1" onclick="selectItem(event)">
+                    <div class="row me-0 p-1 news-items" onclick="selectItem(event)">
                         <div class="col-6 col-md-5 col-sm-4">
                             <img class="rounded" src="{{ this.link_picture }}" alt="{{ this.name }}">
                         </div>
@@ -46,7 +59,7 @@
     let itemList = document.querySelector('.scrollspy-list-news').children[0];
     let viewBlog = document.getElementById('viewBlog');
 
-    itemList.style.backgroundColor ='#21212115'
+    itemList.style.backgroundColor ='#4c4c4c87'
 
     viewBlog.childNodes[0].nextSibling.setAttribute('alt', itemList.childNodes[0].nextSibling.childNodes[1].getAttribute('alt'))
     viewBlog.childNodes[0].nextSibling.setAttribute('src', itemList.childNodes[0].nextSibling.childNodes[1].getAttribute('src'))
@@ -62,7 +75,7 @@
 
         itemList.removeAttribute("style")
 //rgb(45 53 64);
-        event.currentTarget.style.backgroundColor ='#21212115'
+        event.currentTarget.style.backgroundColor ='#4c4c4c87'
 
         itemList = event.currentTarget;
 

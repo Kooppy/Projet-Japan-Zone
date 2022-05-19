@@ -5,7 +5,7 @@
 <!-- Scroll Top -->
 <div class="scrollTop"><span class="far fa-caret-square-up iconScrollTop" ></span></div>
 <!-- Footer -->
-<footer>
+<footer class="mt-auto" id="contact">
     <div class="container">
         <!-- Contact & Google Map -->
         <div class="row align-items-center">
@@ -24,12 +24,27 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="contact-form">
-                                <input class="form-control" name="name" type="text" placeholder="Nom">
+                                
+                                <input class="form-control" name="name" type="text" placeholder="Nom" {{#each contact}} {{#ifstatus param 'name' }} style="border: 2px solid #dc3545;" {{/ifstatus }} {{/each }}>
+                                {{#each contact}}
+                                    {{#ifstatus param 'name'}}
+                                        <div class="text-danger">
+                                            <p class="m-0 mt-1" style="font-size: 1rem; font-weight: 500;">* {{ msg }}</p>
+                                        </div>
+                                    {{/ifstatus }}
+                                {{/each }}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="contact-form">
-                                <input class="form-control" name="email" type="email" placeholder="Email">
+                                <input class="form-control" name="email" type="email" placeholder="Email" {{#each contact}} {{#ifstatus param 'email' }} style="border: 2px solid #dc3545;" {{/ifstatus }} {{/each }}>
+                                {{#each contact}}
+                                {{#ifstatus param 'email'}}
+                                    <div class="text-danger">
+                                        <p class="m-0 mt-1" style="font-size: 1rem; font-weight: 500;">* {{ msg }}</p>
+                                    </div>
+                                {{/ifstatus }}
+                                {{/each }}
                             </div>
                         </div>
                     </div>
@@ -37,7 +52,14 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="contact-form">
-                                <input class="form-control" name="subject" type="text" placeholder="sujet">
+                                <input class="form-control" name="subject" type="text" placeholder="sujet" {{#each contact}} {{#ifstatus param 'subject' }} style="border: 2px solid #dc3545;" {{/ifstatus }} {{/each }}>
+                                {{#each contact}}
+                                {{#ifstatus param 'subject'}}
+                                    <div class="text-danger">
+                                        <p class="m-0 mt-1" style="font-size: 1rem; font-weight: 500;">* {{ msg }}</p>
+                                    </div>
+                                {{/ifstatus }}
+                                {{/each }}
                             </div>
                         </div>
                     </div>
@@ -45,7 +67,14 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="contact-form">
-                                <textarea class="form-control" name="message" placeholder="Message"></textarea>
+                                <textarea class="form-control" name="message" placeholder="Message" {{#each contact}} {{#ifstatus param 'message' }} style="border: 2px solid #dc3545;" {{/ifstatus }} {{/each }}></textarea>
+                                {{#each contact}}
+                                {{#ifstatus param 'message'}}
+                                    <div class="text-danger">
+                                        <p class="m-0 mt-1" style="font-size: 1rem; font-weight: 500;">* {{ msg }}</p>
+                                    </div>
+                                {{/ifstatus }}
+                                {{/each }}
                             </div>
                         </div>
                     </div>
@@ -70,6 +99,17 @@
     </div>
     <!-- Copyright -->
     <div class="copyright">
-        <p>Tout Droit réserver à Japan Zone - 2021. <a href="#" class="text-white">Mentions Légale</a></p>
+        <p>Tout Droit réserver à Japan Zone - 2021. <a href="/mention-legales" class="text-white">Mentions Légale</a></p>
     </div>
 </footer>
+
+{{#if contact}}
+    <script>
+
+        function pageScroll() {
+            window.scrollBy(0,10000);
+        }
+        setTimeout('pageScroll()', 2000); 
+
+    </script>
+{{/if }}

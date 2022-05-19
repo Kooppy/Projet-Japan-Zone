@@ -13,6 +13,9 @@ Partial: Admin Modal Add Blog
                 </button>
             </div>
             <div class="modal-body">
+                {{#if modalAddBlog}}
+                    {{> flash/flash-modal data=modalAddBlog }}
+                {{/if}}
                 <form method="post" action="/admin/blog" enctype="multipart/form-data">
                     <!-- Title Input -->
                     <div class="row">
@@ -25,9 +28,9 @@ Partial: Admin Modal Add Blog
                     <!-- Image Input -->
                      <div class="row">
                         <div class="col-md-12">
-                            <div id="picBlogCreate" class="rounded mx-auto d-block mb-3" style="height: 150px; width: 250px; background-image: url('../../assets/images/header/header1.webp'); background-position:center; background-size:cover; ">
+                            <div id="picBlogCreate" class="rounded mx-auto d-block mb-3" style="height: 150px; width: 250px; background-image: url('../../assets/images/blog/1645616444163_blog_item1.png'); background-position:center; background-size:cover; ">
                                 <input id="changeBlogCreate" onclick='changePicBlogCreate()' name="picBlog" type="file"
-                                    style="opacity: 0.0; width: 100%; height:100%;" />
+                                    style="opacity: 0.0; width: 100%; height:100%; cursor:pointer;" />
                             </div>
                         </div>
                     </div>

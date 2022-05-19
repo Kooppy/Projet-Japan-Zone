@@ -9,6 +9,17 @@ const { selectID } = require('../util/select');
 
 exports.admin = async (req, res) => {
 
+    const flash = req.session.reg_error;
+    const backURL = req.session.backURL;
+    const message = req.session.msg;
+    const id = req.session.id;
+
+
+    req.session.backURL = '';
+    req.session.reg_error = '';
+    req.session.id = '';
+    req.session.msg= '';
+
     let paginateUser = await pagination({
         numItem: 5,
         page: req.query.user,
@@ -56,16 +67,111 @@ exports.admin = async (req, res) => {
 
 
         if (paginateUser.page.current <= paginateUser.page.total || paginateBlog.page.current <= paginateBlog.page.total || paginateGallery.page.current <= paginateGallery.page.total) {
-            res.render('admin', {
-                layout: 'adminLayout',
-                users,
-                pageUser: paginateUser.page,
-                blog,
-                pageBlog: paginateBlog.page,
-                gallery,
-                pageGallery: paginateGallery.page,
-                query: name[0].split('/admin?').join('').split('=').join('')
-            });
+            switch (backURL) {
+                case `/admin/user`:
+                    res.render('admin', {
+                        layout: 'adminLayout',
+                        namePage: 'Admin Panel',
+                        users,
+                        pageUser: paginateUser.page,
+                        blog,
+                        pageBlog: paginateBlog.page,
+                        gallery,
+                        pageGallery: paginateGallery.page,
+                        query: name[0].split('/admin?').join('').split('=').join(''),
+                        modalAddUser: flash,
+                    });
+                    break;
+    
+                case `/admin/user/${id}?_method=PUT`:
+                    res.render('admin', {
+                        layout: 'adminLayout',
+                        namePage: 'Admin Panel',
+                        users,
+                        pageUser: paginateUser.page,
+                        blog,
+                        pageBlog: paginateBlog.page,
+                        gallery,
+                        pageGallery: paginateGallery.page,
+                        query: name[0].split('/admin?').join('').split('=').join(''),
+                        modalEditUser: flash,
+                    });
+                    break;
+                case `/admin/blog`:
+                    res.render('admin', {
+                        layout: 'adminLayout',
+                        namePage: 'Admin Panel',
+                        users,
+                        pageUser: paginateUser.page,
+                        blog,
+                        pageBlog: paginateBlog.page,
+                        gallery,
+                        pageGallery: paginateGallery.page,
+                        query: name[0].split('/admin?').join('').split('=').join(''),
+                        modalAddBlog: flash,
+                    });
+                    break;
+    
+                case `/admin/blog/${id}?_method=PUT`:
+                    res.render('admin', {
+                        layout: 'adminLayout',
+                        namePage: 'Admin Panel',
+                        users,
+                        pageUser: paginateUser.page,
+                        blog,
+                        pageBlog: paginateBlog.page,
+                        gallery,
+                        pageGallery: paginateGallery.page,
+                        query: name[0].split('/admin?').join('').split('=').join(''),
+                        modalEditBlog: flash,
+                    });
+                    break;
+
+                case `/admin/gallery`:
+                    res.render('admin', {
+                        layout: 'adminLayout',
+                        namePage: 'Admin Panel',
+                        users,
+                        pageUser: paginateUser.page,
+                        blog,
+                        pageBlog: paginateBlog.page,
+                        gallery,
+                        pageGallery: paginateGallery.page,
+                        query: name[0].split('/admin?').join('').split('=').join(''),
+                        modalAddGallery: flash,
+                    });
+                    break;
+    
+                case `/admin/gallery/${id}?_method=PUT`:
+                    res.render('admin', {
+                        layout: 'adminLayout',
+                        namePage: 'Admin Panel',
+                        users,
+                        pageUser: paginateUser.page,
+                        blog,
+                        pageBlog: paginateBlog.page,
+                        gallery,
+                        pageGallery: paginateGallery.page,
+                        query: name[0].split('/admin?').join('').split('=').join(''),
+                        modalEditGallery: flash,
+                    });
+                    break;
+            
+                default:
+                    res.render('admin', {
+                        layout: 'adminLayout',
+                        namePage: 'Admin Panel',
+                        users,
+                        pageUser: paginateUser.page,
+                        blog,
+                        pageBlog: paginateBlog.page,
+                        gallery,
+                        pageGallery: paginateGallery.page,
+                        query: name[0].split('/admin?').join('').split('=').join(''),
+                        message
+                    });
+                    break;
+            }
         } else {
             res.redirect('/admin');
         }
@@ -89,6 +195,7 @@ exports.addUser = async (req, res) => {
     } catch (err) {
         throw err;
     }
+    req.session.msg = 'Utilisateur ajouter.'
     res.redirect('back');
 }
 

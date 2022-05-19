@@ -1,8 +1,15 @@
 {{!-- 
     Partial: Panel Admin 
  --}}
+ {{!-- <style>
+    html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    }
+</style> --}}
 
-<section class="pt-3 container-fluid bg-light mb-5">
+<section class="pt-3 container-fluid mb-5">
     {{! Admin Tabs }}
     <ul class="nav nav-tabs container pb-3 ps-3" id="adminTab" role="tablist">
         {{!-- User Gestion --}}
@@ -61,6 +68,18 @@
 {{> modals/modal-addGallery-admin }}
 
 <style>
+    .darkMod td{
+        color:white !important; 
+    }
+
+    .darkMod tr:hover{
+        color:white ;
+        background-color: rgb(61, 61, 61); 
+    }
+
+    .darkMod .table-border{
+        border: 3px solid white;
+    }
     .nav-tabs > .nav-item > .nav-link:hover {
         background-color: rgb(92, 142, 185) !important;
     }

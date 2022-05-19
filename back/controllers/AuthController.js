@@ -8,9 +8,9 @@ const { sendMail } = require('../util/nodemailer'),
 class AuthController {
 
     async login(req, res) {
-        const { pseudo } = req.body;
+        const { pseudo, password } = req.body;
         try {
-            const user = new AuthModel({ pseudo });
+            const user = new AuthModel({ pseudo, password });
             user.postLogin().then((data) => {
                 req.session.user = { 
                     id: data.num_user, 
@@ -33,8 +33,22 @@ class AuthController {
         const { email, pseudo, password } = req.body;
         try {
             const register = new AuthModel({ email, pseudo, password });
-            register.postRegister().then((data) => {
-                //req.session.quelquechose = data;
+            register.postRegister().then(async(data) => {
+
+                const token = Math.floor(Math.random() * 10000000);
+
+                req.session.verify = { token: token, mangue: data };
+            
+                let result = await sendMail(
+                    { 
+                        toEmail: email, 
+                        subject: 'Valider votre compte', 
+                        message: `Voici votre lien pour valider votre compte : http://${req.get('host')}/verify/${token}`, 
+                        validate: 'Compte enregistrer, penser à regarder votre email pour le valider.'
+                    });
+                
+                req.session.msg = result.flash;
+
                 return res.redirect('/')
             })
             
@@ -53,9 +67,15 @@ class AuthController {
 
                 req.session.forgot = { token: token, kiwi: data.num_user };
             
-                let result = await sendMail({toEmail: email, subject: 'Mot de passe oublié', message: `Voici votre lien pour réinitialiser votre mot de passe : http://${req.get('host')}/resetPassword/${token}`, validate: 'Si votre email existe, un email sera envoyer.'});
+                let result = await sendMail(
+                    { 
+                        toEmail: email, 
+                        subject: 'Mot de passe oublié', 
+                        message: `Voici votre lien pour réinitialiser votre mot de passe : http://${req.get('host')}/resetPassword/${token}`, 
+                        validate: 'Si votre email existe, un email sera envoyer.'
+                    });
 
-                req.session.quelquechose = result.flash;
+                req.session.msg = result.flash;
 
                 return res.redirect('/')
             })

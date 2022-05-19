@@ -6,9 +6,11 @@ exports.home = async (req, res) => {
 
     const flash = req.session.reg_error;
     const backURL = req.session.backURL;
+    const message = req.session.msg;
 
     req.session.backURL = '';
     req.session.reg_error = '';
+    req.session.msg = '';
     
     try {
         const blog = await db.query(`SELECT blog.title, blog.description, blog.contents, blog.date, pictureBank.link_picture, category.name
@@ -27,26 +29,27 @@ exports.home = async (req, res) => {
         
         switch (backURL) {
             case '/login':
-                res.render('index', {blog, gallery, modalLogin: flash});
+                res.render('index', {namePage: 'Home', blog, gallery, modalLogin: flash});
                 break;
 
             case '/register':
-                res.render('index', {blog, gallery, modalRegister: flash});
+                res.render('index', {namePage: 'Home', blog, gallery, modalRegister: flash});
                 break;
             
             case '/forgot':
-                res.render('index', {blog, gallery, modalForgot: flash});
+                res.render('index', {namePage: 'Home', blog, gallery, modalForgot: flash});
                 break;
 
-            // case '/contact':
-            //     res.render('index', {blog, gallery, blogActive: blog[0], modalLogin: flash});
-            //     break;
+            case '/contact':
+                console.log('contact');
+                res.render('index', {namePage: 'Home', blog, gallery, contact: flash});
+                break;
         
             default:
-                res.render('index', {blog, gallery, blogActive: blog[0]});
+                res.render('index', {namePage: 'Home', blog, gallery, message});
                 break;
         }
-        //res.render('index', {blog, gallery, blogActive: blog[0], modalLogin: flash});
+
     } catch (err) {
         throw err;
     }   

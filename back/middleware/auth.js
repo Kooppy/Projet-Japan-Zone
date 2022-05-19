@@ -23,10 +23,6 @@ exports.isAdmin = async (req, res, next) => {
     // !req.session.user ? res.status(404).render('err404') : isAdminExists.isAdmin === req.session.user.isAdmin ? next() : res.redirect('/') ;
 }
 
-exports.isBan = (req, res, next) => {
-    !req.session.user ? res.redirect('/') : req.session.user.isBan === 0 ? res.redirect('/') : next() ;
-} 
-
 exports.isVerify = (req, res, next) => {
     !req.session.user ? res.redirect('/') : req.session.user.isVerify === 0 ? res.redirect('/') : next() ;
 } 
@@ -35,8 +31,18 @@ exports.isForgot = (req, res, next) => {
     !req.session.forgot ? res.redirect('/') : next() ;
 } 
 
+exports.isRequestVerify = (req, res, next) => {
+    !req.session.verify ? res.redirect('/') : next() ;
+} 
+
 exports.isBlogExists = async (req, res, next) => {
     const isBlogExists = await selectID('count(*) as num', 'blog', 'title= :value', req.params.title);
 
     isBlogExists.num === 0 ? res.status(404).render('err404') : next() ;
+} 
+
+exports.isProfilExists = async (req, res, next) => {
+    const isProfilExists = await selectID('count(*) as num', 'user', 'pseudo= :value', req.params.id);
+
+    isProfilExists.num === 0 ? res.status(404).render('err404') : next() ;
 } 

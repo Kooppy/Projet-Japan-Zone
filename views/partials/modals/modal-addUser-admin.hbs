@@ -13,6 +13,9 @@ Partial: Admin Modal Add User
                 </button>
             </div>
             <div class="modal-body">
+                {{#if modalAddUser}}
+                    {{> flash/flash-modal data=modalAddUser }}
+                {{/if}}
                 <form method="post" action="/admin/user">
                     <!-- Id & Avatar Input -->
                     <div class="row">

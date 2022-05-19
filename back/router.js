@@ -7,7 +7,7 @@ const express = require('express'),
       router = express.Router(),
       auth = require('./middleware/auth.js'),
       upload = require('./config/multer'),
-      {  configRegister, configLogin, configForgot, configResetPassword, configComment, configEditUser, configSendMessage } = require('./config/validator'),
+      {  configRegister, configLogin, configForgot, configResetPassword, configComment, configEditUser, configSendMessage, configEditNewPasswordProfil, configBlog } = require('./config/validator'),
       { validate } = require('./middleware/index.js'),
       sharp = require('./config/sharp');
 
@@ -26,11 +26,16 @@ const {
       // forgot,
       profilID,
       editProfil,
+      newPasswordProfil,
+      archivingProfil,
+      requestVerifyUpdate,
       comment,
       deleteComment,
+      verifyUpdate,
       // logOut,
       resetPassword, 
       reset,
+      mention,
       admin,
       addUser,
       editUser,
@@ -70,7 +75,15 @@ router.route('/register').post(validate(configRegister()), new AuthController().
 
 router.route('/login').post(validate(configLogin()), new AuthController().login);
 
-router.route('/profil/:id').get(auth.isVerify, profilID).put(validate(configEditUser()), upload.single('picUser'), sharp, editProfil);
+router.route('/verify/').post(requestVerifyUpdate);
+
+router.route('/verify/:id').get(auth.isRequestVerify, verifyUpdate);
+
+router.route('/profil/:id').get(auth.isVerify, auth.isProfilExists, profilID).put(upload.single('picUser'), sharp, editProfil);
+
+router.route('/profil/newPassword/:id').put(validate(configEditNewPasswordProfil()), newPasswordProfil);
+
+router.route('/profil/archiving/:id').put(archivingProfil);
 
 router.route('/logout').delete(new AuthController().logOut);
 
@@ -78,11 +91,13 @@ router.route('/forgot').post(validate(configForgot()), new AuthController().forg
 
 router.route('/resetPassword/:id').get(auth.isForgot, resetPassword).put(validate(configResetPassword()), reset);
 
+router.route('/mention-legales').get(mention);
+
 //router.use(auth.isAdmin)
 
 router.route('/admin').get(auth.isAdmin, admin);
 
-router.route('/admin/user').post(auth.isAdmin, addUser);
+router.route('/admin/user').post(auth.isAdmin, validate(configRegister()), addUser);
 
 router.route('/admin/user/:id').put(auth.isAdmin, upload.single('picUser'), sharp, editUser).delete(deleteUser);
 

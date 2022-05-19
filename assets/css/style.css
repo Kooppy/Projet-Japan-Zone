@@ -1,5 +1,16 @@
 /* Sass Perso
  * ********** */
+  
+  body{
+  
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+  
+  }
+  
+  
+
 /************************************* */
 /**************INITIALIZER************ */
 /************************************* */
@@ -107,6 +118,8 @@ ul {
 /************************************* */
 /***************THEME MOD************* */
 /************************************* */
+
+/***************DARK MOD************** */
 .darkMod {
   background-color: #171e26;
   color: white;
@@ -118,6 +131,24 @@ ul {
 
 .darkMod #news {
   background-color: rgba(32, 40, 51, 0.8);
+  transition: all 1s; }
+
+.darkMod .modal-content {
+  color: black;
+}
+
+/***************JAPAN MOD************** */
+.japan nav {
+  background-color: #d904049c !important;
+  transition: all 1s; }
+
+.japan .nav-item {
+  color: white !important;
+  transition: all 1s; }
+  
+
+.japan .navbar-brand {
+  color: white !important;
   transition: all 1s; }
 
 /****************************************************** */
@@ -385,7 +416,7 @@ ul {
 footer {
   background-color: #6c757d;
   color: #fff;
-  text-align: center; }
+}
 
 .copyright {
   display: flex;

@@ -6,7 +6,7 @@ const {
 } = require('../util/hash');
 
 exports.resetPassword = (req, res) => {
-    res.render('resetPassword');
+    res.render('resetPassword', {namePage: 'Reset Password', });
 }
 
 exports.reset = async (req, res) => {
@@ -21,10 +21,9 @@ exports.reset = async (req, res) => {
 
         //const session_kill = await db.query(`DELETE FROM sessions WHERE data LIKE '%"token":${req.session.forgot.token}%';`);
 
-        req.session.destroy(() => {
-            res.clearCookie('sessionID');
-            res.redirect('/');
-        })
+        req.session.msg = 'Votre mot de passe est bien modifier.';
+
+        res.redirect('/');
     } catch (err) {
         throw err;
     }

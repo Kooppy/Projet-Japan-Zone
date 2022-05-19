@@ -19,6 +19,7 @@ exports.messagery = async (req, res) => {
         
         res.render('messagery', {
             layout: 'adminLayout',
+            namePage: 'Messagery',
             messagery,
             paginate: pagiMessagery.page
         });

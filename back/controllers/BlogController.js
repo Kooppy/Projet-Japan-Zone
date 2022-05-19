@@ -24,6 +24,7 @@ exports.blog = async (req, res) => {
 
         res.render('blog', {
             blog,
+            namePage: 'Blog',
             paginate: pagiBlog.page
         });
 
@@ -33,9 +34,19 @@ exports.blog = async (req, res) => {
 }
 
 exports.blogID = async (req, res) => {
-    const {
+    let {
         title
     } = req.params;
+
+    const flash = req.session.reg_error;
+    const backURL = req.session.backURL;
+
+    console.log(backURL);
+
+    console.log('erreur blog',flash);
+
+    req.session.backURL = '';
+    req.session.reg_error = '';
 
     try {
 
@@ -66,13 +77,32 @@ exports.blogID = async (req, res) => {
                                         ORDER BY comment.num_comment ASC
                                         LIMIT ${paginateComment.limit};`)
 
+        title = title === undefined ? null : title.split(' ').join('%20');
+
         if (paginateComment.page.current <= paginateComment.page.total || paginateComment.page.current === 1) {
-            res.render('item1', {
-                blog: blogId[0],
-                author: blogAuthor[0],
-                comment,
-                pageComment: paginateComment.page
-            });
+            switch (backURL) {
+                case `/blog/${title}`:
+                    console.log('erreur ergger erhgeh');
+                    res.render('item1', {
+                        blog: blogId[0],
+                        namePage: 'Item Blog',
+                        author: blogAuthor[0],
+                        comment,
+                        pageComment: paginateComment.page,
+                        commentError: flash
+                    });
+                    break;
+            
+                default:
+                    res.render('item1', {
+                        blog: blogId[0],
+                        namePage: 'Item Blog',
+                        author: blogAuthor[0],
+                        comment,
+                        pageComment: paginateComment.page
+                    });
+                    break;
+            }
         } else {
             res.redirect(`/blog/${title}`)
         }

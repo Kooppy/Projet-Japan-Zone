@@ -12,6 +12,14 @@ module.exports = (req, res, next) => {
 
         pathSharp = `${req.file.destination}/`;
         switch (req.url) {
+            case `/profil/${id}?_method=PUT`:
+                fit = sharp.fit.cover
+                height= 400
+                witdh= 400
+                quality= 100
+
+                break;
+
             case `/admin/blog`:
                 fit = sharp.fit.cover
                 height= 400
@@ -47,8 +55,6 @@ module.exports = (req, res, next) => {
             default:
                 break;
         }
-
-        console.log(req.file.filename);
 
         sharp(req.file.path).resize({ fit: fit, height: height, width: width})
                             .webp({quality: quality})

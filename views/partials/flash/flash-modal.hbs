@@ -2,27 +2,6 @@
     Partial: Script Flash Modal - Main Layout
  --}}
 
-{{!-- {{#if modalLogin}}
-    <script>
-        const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('login-register')).show();
-
-        modal.show();
-    </script>
-{{/if}}
-
-{{#if modalRegister}}
-    <script>
-
-        const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('login-register')).show();
-
-        const tab = bootstrap.Tab.getOrCreateInstance(document.querySelector('#myTab button[data-bs-target="#register"]')).show();
-
-        modal.show();
-        tab.show();
-
-    </script>
-{{/if}} --}}
-
 {{#if data}}
     <div class="border border-3 border-danger text-danger m-3">
         {{#each data}}

@@ -8,7 +8,7 @@ Layout: Main
 
 {{{ body }}}
 
-{{#if flash}}
+{{#if message}}
     {{> flash/flash }}
 {{/if}}
 
@@ -16,10 +16,10 @@ Layout: Main
 
 {{> mainLayout/end-js }}
 
-{{#if modalLogin}}
+{{!-- {{#if modalLogin}}
     {{> flash/flash-modal script='login-register'}}
 {{/if}}
 
 {{#if modalRegister}}
     {{> flash/flash-modal script='login-register' tabSelect='register'}}
-{{/if}}
+{{/if}} --}}

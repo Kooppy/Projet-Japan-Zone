@@ -3,6 +3,17 @@
  --}}
 
 <!-- Main Actu & Right Menu -->
+<style>
+    .news-items:hover {
+        background-color: #0f0f0f15;
+    }
+
+    .darkMod .news-items:hover {
+        background-color: #4c4c4c87;
+    }
+
+
+</style>
 <section class="container my-5">
     <div class="row">
         <div class="col-md-8">
@@ -38,7 +49,7 @@
             <div class="row" id="listCard">
                 {{#each blog }}
                     <div class="col-md-6">
-                        <div class="actu-list" onclick="actions.selectItem(event)">
+                        <div class="actu-list news-items" onclick="actions.selectItem(event)">
                             <img class="actu-view-img" src="{{ this.link_picture }}" alt="{{ this.name }}">
                             <h3 class="mt-3">{{ this.title }}</h3>
                             <p class="mb-1">{{ this.description }} </p>
@@ -60,18 +71,14 @@
     let itemList = document.querySelector('#listCard').children[0].children[0];
     let viewBlog = document.getElementById('viewBlog');
 
-    itemList.style.backgroundColor ='#2121212d'
-
-    console.log('itemlist', itemList.childNodes)
-
-    console.log('viewBlog', viewBlog.childNodes)
+    itemList.style.backgroundColor ='#4c4c4c87'
 
     viewBlog.childNodes[0].nextSibling.setAttribute('alt', itemList.childNodes[1].getAttribute('alt'))
     viewBlog.childNodes[0].nextSibling.setAttribute('src', itemList.childNodes[1].getAttribute('src'))
 
     viewBlog.childNodes[3].childNodes[0].data = itemList.childNodes[3].childNodes[0].data
     viewBlog.childNodes[5].childNodes[0].data = itemList.childNodes[5].childNodes[0].data
-    viewBlog.childNodes[7].setAttribute('href', '/blog/' + itemList.childNodes[3].childNodes[0].data)
+    viewBlog.childNodes[7].childNodes[1].setAttribute('href', '/blog/' + itemList.childNodes[3].childNodes[0].data)
 
     viewBlog.childNodes[7].childNodes[3].childNodes[0].data = itemList.childNodes[7].innerText
     const actions = {
@@ -105,7 +112,7 @@
         selectItem(event) {
             itemList.removeAttribute("style")
 
-            event.currentTarget.style.backgroundColor ='#21212115'
+            event.currentTarget.style.backgroundColor ='#4c4c4c87'
 
             itemList = event.currentTarget;
 
@@ -114,7 +121,7 @@
 
             viewBlog.childNodes[3].childNodes[0].data = itemList.childNodes[3].childNodes[0].data
             viewBlog.childNodes[5].childNodes[0].data = itemList.childNodes[5].childNodes[0].data
-            viewBlog.childNodes[7].setAttribute('href', '/blog/' + itemList.childNodes[3].childNodes[0].data)
+            viewBlog.childNodes[7].childNodes[1].setAttribute('href', '/blog/' + itemList.childNodes[3].childNodes[0].data)
             viewBlog.childNodes[7].childNodes[3].childNodes[0].data = itemList.childNodes[7].childNodes[2].data
         }
     };

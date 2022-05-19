@@ -1,19 +1,27 @@
 {{!-- 
     Partial: Profil Main 
  --}}
+<style>
+    html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    }
+</style>
 
-<section class="container mt-4 mb-5">
-    <div class="row flew-wrap border border-3 border-secondary  align-items-center p-2 text-center m-1 ">
+<section class="container mt-5 mb-5">
+    <div class="row flew-wrap border border-3 border-secondary  align-items-center p-2 text-center m-1 mt-3 ">
         <div class="col-12">
             <div class="d-flex justify-content-end">
                 {{#if ../user.isAdmin}}
-                <a class="" data-bs-toggle="modal" data-bs-target="#editProfil{{ profilUser.num_user }}"><span
+                <a class="" data-bs-toggle="modal" data-bs-target="#editProfil{{ profilUser.pseudo }}"><span
                         class="fas fa-edit"></span></a>
                 {{else}}
-                {{#ifstatus ../user.id this.num_user}}
-                <a class="" data-bs-toggle="modal" data-bs-target="#editProfil{{ profilUser.num_user }}"><span
-                        class="fas fa-edit"></span></a>
-                {{/ifstatus }}
+                {{log user.id this.num_user}}
+                    {{#ifstatus user.id profilUser.num_user}}
+                    <a class="" data-bs-toggle="modal" data-bs-target="#editProfil{{ profilUser.pseudo }}"><span
+                            class="fas fa-edit"></span></a>
+                    {{/ifstatus }}
                 {{/if }}
             </div>
         </div>
@@ -29,7 +37,30 @@
             <p>Cette personne n'a pas de description mais c'est sans doute une personne formidable et admirable</p>
             {{/if}}
         </div>
+        <div class="col-12">
+            <div class="d-flex justify-content-end">
+                {{#if ../user.isAdmin}}
+                    <a class="btn btn-outline-dark ms-2 me-2 mb-2" data-bs-toggle="modal" data-bs-target="#archivingUser{{ profilUser.num_user }}">Archiver</a>
+                    <a class="btn btn-outline-dark ms-2 me-2 mb-2" data-bs-toggle="modal" data-bs-target="#newPassword{{ profilUser.pseudo }}">New Password</a>
+                {{else}}
+                    {{#ifstatus user.id profilUser.num_user}}
+                        <a class="btn btn-outline-dark ms-2 me-2 mb-2" data-bs-toggle="modal" data-bs-target="#archivingUser{{ profilUser.num_user }}">Archiver</a>
+                        <a class="btn btn-outline-dark ms-2 me-2 mb-2" data-bs-toggle="modal" data-bs-target="#newPassword{{ profilUser.pseudo }}">New Password</a>
+                    {{/ifstatus }}
+                {{/if }}
+            </div>
+        </div>
     </div>
 </section>
 
-{{> modals/modal-editProfil data= profilUser }}
+{{#if ../user.isAdmin}}
+    {{> modals/modal-editProfil data= profilUser }}
+    {{> modals/modal-new-password data= profilUser }}
+    {{> modals/modal-yesNo-admin name='archivingUser' data=profilUser.num_user title="Archiver" question="Voulez-vous vraiment vous archiver ?" path="/profil/archiving/" method="?_method=PUT" }}
+{{else}}
+    {{#ifstatus user.id profilUser.num_user}}
+        {{> modals/modal-editProfil data= profilUser }}
+        {{> modals/modal-new-password data= profilUser }}
+        {{> modals/modal-yesNo-admin name='archivingUser' data=profilUser.num_user title="Archiver" question="Voulez-vous vraiment vous archiver ?" path="/profil/archiving/" method="?_method=PUT" }}
+    {{/ifstatus }}
+{{/if }}

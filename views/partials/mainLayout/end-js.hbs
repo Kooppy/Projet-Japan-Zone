@@ -3,12 +3,30 @@
  --}}    
     
     <!-- JS -->
-    {{!-- <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script> --}}
     <script src="../../assets/js/test.js"></script>
-    {{!-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> --}}
+
     <script src="../../assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    {{#if modalLogin}}
+        {{> flash/flash-modal script='login-register'}}
+    {{/if}}
+
+    {{#if modalRegister}}
+        {{> flash/flash-modal script='login-register' tabSelect='register'}}
+    {{/if}}
+
+    {{#if modalEditProfil}}
+        {{> flash/flash-modal script='editProfil{{ profilUser.pseudo }}' }}
+    {{/if}}
+
+    {{#if modalNewPassword}}
+        {{> flash/flash-modal script='newPassword{{profilUser.pseudo}}' }}
+    {{/if}}
+    
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v12.0"
         nonce="WKbwgctE"></script>
+
+
 </body>
 
 </html>

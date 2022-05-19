@@ -6,8 +6,7 @@
 const express = require('express'),
       router = express.Router(),
       upload = require('../config/multer'),
-      { configComment } = require('../config/validator'),
-      { validate } = require('../middleware/index.js');
+      sharp = require('../config/sharp');
 
 
 // Import des modules dans les controllers
@@ -25,9 +24,9 @@ router.route('/blog').get(blog);
 
 router.route('/blog/:id').get(blogID)
 
-router.route('/admin/blog').post(upload.single('picBlog'), addBlog);
+router.route('/admin/blog').post(upload.single('picBlog'), sharp, addBlog);
 
-router.route('/admin/blog/:id').put(upload.single('picBlog'), editBlog).delete(deleteBlog);
+router.route('/admin/blog/:id').put(upload.single('picBlog'), sharp, editBlog).delete(deleteBlog);
 
 // /Routes
 

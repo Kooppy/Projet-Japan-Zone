@@ -4,5 +4,5 @@
 
 exports.presenting = (req, res) => {
 
-    res.render('presenting')
+    res.render('presenting', {namePage: 'Présentations', })
 }
